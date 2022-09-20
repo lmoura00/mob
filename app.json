@@ -1,13 +1,21 @@
 {
   "expo": {
-    "name": "mob",
+    "name": "MobTimon",
     "slug": "mob",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ]
+    ],
+    "icon": "./src/images/modelo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./src/images/modelo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -22,12 +30,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./src/images/modelo.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.lsm_00.mob"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "../src/images/modelo.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c97f74f5-04ff-4412-844a-cab1750c8309"
+      }
     }
   }
 }
