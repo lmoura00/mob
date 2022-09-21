@@ -44,7 +44,6 @@ export function CadastroMot1(){
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        alignItems:'center',
         backgroundColor:"#334A58",
         padding:5
     },
@@ -69,7 +68,7 @@ const styles = StyleSheet.create({
     },
     input:{
         backgroundColor:'#D9D9D9',
-        width:'56%',
+    
         height:35,
         borderRadius:7,
         borderWidth:1,
@@ -83,7 +82,8 @@ const styles = StyleSheet.create({
         padding:5,
         margin:12,
         borderRadius:15,
-        borderWidth:1
+        borderWidth:1,
+        alignSelf:'center'
     },
     botao2:{
         backgroundColor:'#FF3030',
@@ -92,7 +92,8 @@ const styles = StyleSheet.create({
         padding:5,
         margin:12,
         borderRadius:15,
-        borderWidth:1
+        borderWidth:1,
+        alignSelf:'center'
     },
     textBotao:{
         fontSize:15,

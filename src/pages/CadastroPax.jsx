@@ -1,11 +1,12 @@
-import React from "react";
-import {View, Text, StyleSheet, TextInput, TouchableOpacity, Alert} from 'react-native'
+import React, { useState } from "react";
+import {View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, Image} from 'react-native'
+
 import * as ImagePicker from 'expo-image-picker';
 import {useNavigation} from '@react-navigation/native'
 
 export function CadastroPax(){
-
-const navigation = useNavigation()
+    const [image, SetImage] = useState(null)
+    const navigation = useNavigation()
 
     let openImagePickerAsync = async () => {
         let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -16,7 +17,9 @@ const navigation = useNavigation()
         }
     
         let pickerResult = await ImagePicker.launchImageLibraryAsync();
-        console.log(pickerResult);
+        console.log(pickerResult.uri);
+        SetImage(pickerResult.uri);
+
       }
 
     return(
@@ -26,19 +29,22 @@ const navigation = useNavigation()
             <TextInput style={styles.input} placeholder='Nome completo'></TextInput>
 
             <Text style={styles.title}>DATA DE NASCIMENTO</Text>
-            <TextInput style={styles.input} keyboardType="numbers-and-punctuation"></TextInput>
+            <TextInput style={styles.input} keyboardType="numbers-and-punctuation" maxLength={8}></TextInput>
 
 
             <Text style={styles.title}>CPF</Text>
-            <TextInput style={styles.input} keyboardType="numbers-and-punctuation"></TextInput>
+            <TextInput style={styles.input} keyboardType="numbers-and-punctuation" maxLength={11}></TextInput>
 
             <Text style={styles.title}>E-MAIL</Text>
             <TextInput style={styles.input} keyboardType="email-address"></TextInput>
 
             <Text style={styles.title}>TELEFONE</Text>
-            <TextInput style={styles.input} keyboardType="phone-pad"></TextInput>
+            <TextInput style={styles.input} keyboardType="phone-pad" maxLength={11}></TextInput>
 
             <Text style={{fontSize:19, color:'#fff', fontWeight:'350', marginTop: 25}}>SELECIONE A SUA FOTO:</Text>
+
+            {image && (<Image source={{uri:image}} style={{height:80, width:80}}/>)}
+
             <TouchableOpacity onPress={openImagePickerAsync} style={styles.botao3}>
                 <Text style={styles.textBotao}>Selecione a sua foto</Text>
             </TouchableOpacity>
@@ -97,7 +103,8 @@ const styles = StyleSheet.create({
         margin:12,
         borderRadius:15,
         borderWidth:1,
-        marginTop:55
+        marginTop:55,
+        alignSelf:'center'
     },
     botao2:{
         backgroundColor:'#FF3030',
@@ -106,7 +113,8 @@ const styles = StyleSheet.create({
         padding:5,
         margin:12,
         borderRadius:15,
-        borderWidth:1
+        borderWidth:1,
+        alignSelf:'center'
     },
     textBotao:{
         fontSize:15,
@@ -125,6 +133,7 @@ const styles = StyleSheet.create({
         borderRadius:7,
         borderWidth:1,
         marginBottom:5,
-        marginTop:5      
+        marginTop:5,
+        alignSelf:'center'   
     }
 })

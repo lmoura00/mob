@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
+import {View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 
 export function CadastroMot2(){
@@ -7,36 +7,39 @@ export function CadastroMot2(){
     const navigation = useNavigation();
 
     return(
-        <View style={styles.container}>
-            <Text style={styles.line1}>-----------------------------------------------------</Text>
-            <Text style={styles.title1}>CADASTRAR MOTORISTA: PARTE 2</Text>
-            <Text style={styles.line2}>-----------------------------------------------------</Text>
+        <ScrollView style={styles.container}>
+                <View style={{alignSelf:'center'}}>
+                    <Text style={styles.line1}>-----------------------------------------------------</Text>
+                    <Text style={styles.title1}>CADASTRAR MOTORISTA: PARTE 2</Text>
+                    <Text style={styles.line2}>-----------------------------------------------------</Text>
+                </View>
+
+                <Text style={styles.title}>TIPO DE VEICULO</Text>
+                <TextInput style={styles.input}></TextInput>
+
+                <Text style={styles.title}>PLACA</Text>
+                <TextInput style={styles.input}></TextInput>
+
+                <Text style={styles.title}>CRVL</Text>
+                <TextInput style={styles.input}></TextInput>
+
+
+                <TouchableOpacity style={styles.botao1} onPress={()=>navigation.navigate('CadastroMot3')}>
+                    <Text style={styles.textBotao}>PRÓXIMO</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.botao2}>
+                    <Text style={styles.textBotao}>CANCELAR</Text>
+                </TouchableOpacity>
             
-            <Text style={styles.title}>TIPO DE VEICULO</Text>
-            <TextInput style={styles.input}></TextInput>
 
-            <Text style={styles.title}>PLACA</Text>
-            <TextInput style={styles.input}></TextInput>
-
-            <Text style={styles.title}>CRVL</Text>
-            <TextInput style={styles.input}></TextInput>
-
-
-            <TouchableOpacity style={styles.botao1} onPress={()=>navigation.navigate('CadastroMot3')}>
-                <Text style={styles.textBotao}>PRÓXIMO</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.botao2}>
-                <Text style={styles.textBotao}>CANCELAR</Text>
-            </TouchableOpacity>
-        </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        alignItems:'center',
         backgroundColor:"#334A58",
         padding:5
     },
@@ -57,7 +60,8 @@ const styles = StyleSheet.create({
     title1:{
         fontSize:20,
         color:'#fff',
-        fontWeight:'500'
+        fontWeight:'500',
+    
     },
     input:{
         backgroundColor:'#D9D9D9',
