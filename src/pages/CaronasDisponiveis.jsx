@@ -1,111 +1,133 @@
 import React from "react";
-import {View, Text, StyleSheet, Image, SafeAreaView, TouchableOpacity, ScrollView} from 'react-native'
+import {View, Text, StyleSheet, Image,RefreshControl, SafeAreaView, TouchableOpacity, ScrollView} from 'react-native'
 import { SimpleLineIcons } from '@expo/vector-icons'; 
 import { EvilIcons } from '@expo/vector-icons';
 import {useNavigation} from '@react-navigation/native'
 
-
+import LottieView from 'lottie-react-native'
 
 export function CaronasDisponiveis(){
 
 const navigation = useNavigation()
 
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
+  
+const [refreshing, setRefreshing] = React.useState(false);
+
+const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+
     return(
-        <ScrollView style={styles.container}>
-           
-            <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Yuri')}>
-                <SimpleLineIcons name="people" size={24} color="black"  />
-                <View style={{flexDirection:'column'}}>
-                    <Text style={styles.nome}>YURI</Text>
-                    <Text >PLACA: PIT-7854</Text>
-                
-                </View>
+        <SafeAreaView style={styles.container}>
 
-                <View style={{flexDirection:'column'}}>
-                    <Text>PARTIDA: 19:00 Hrs</Text>
-                    <Text>17/08/2022</Text>
-                </View>
-                <EvilIcons name="arrow-right" size={24} color="black" />
-            </TouchableOpacity>
+            <ScrollView
+                contentContainerStyle={styles.scrollView}
+                refreshControl={
+            <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+          />
+        }
+      >
 
-            <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Jose')}>
-                <SimpleLineIcons name="people" size={24} color="black"  />
-                <View style={{flexDirection:'column'}}>
-                    <Text style={styles.nome}>JOSÉ V.</Text>
-                    <Text >PLACA: HUT-5694</Text>
-                
-                </View>
+                <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Yuri')}>
+                    <SimpleLineIcons name="people" size={24} color="black"  />
+                    <View style={{flexDirection:'column'}}>
+                        <Text style={styles.nome}>YURI</Text>
+                        <Text >PLACA: PIT-7854</Text>
+                    
+                    </View>
 
-                <View style={{flexDirection:'column'}}>
-                    <Text>PARTIDA: 15:00 Hrs</Text>
-                    <Text>18/08/2022</Text>
-                </View>
-                <EvilIcons name="arrow-right" size={24} color="black" />
-            </TouchableOpacity>
+                    <View style={{flexDirection:'column', marginRight:30}}>
+                        <Text>PARTIDA: 19:00 Hrs</Text>
+                        <Text>17/08/2022</Text>
+                    </View>
+                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} style={{marginLeft:160}}/>
+                </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Vitoria')}>
-                <SimpleLineIcons name="people" size={24} color="black"/>
-                <View style={{flexDirection:'column'}}>
-                    <Text style={styles.nome}>VITORIA EV.</Text>
-                    <Text >PLACA: ABC-4196</Text>
-                
-                </View>
+                <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Jose')}>
+                    <SimpleLineIcons name="people" size={24} color="black"  />
+                    <View style={{flexDirection:'column'}}>
+                        <Text style={styles.nome}>JOSÉ V.</Text>
+                        <Text >PLACA: HUT-5694</Text>
+                    
+                    </View>
 
-                <View style={{flexDirection:'column'}}>
-                    <Text>PARTIDA: 12:00 Hrs</Text>
-                    <Text>18/08/2022</Text>
-                </View>
-                <EvilIcons name="arrow-right" size={24} color="black" />
-            </TouchableOpacity>
+                    <View style={{flexDirection:'column', marginRight:30}}>
+                        <Text>PARTIDA: 15:00 Hrs</Text>
+                        <Text>18/08/2022</Text>
+                    </View>
+                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} style={{marginLeft:160}}/>
+                </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Thaiane')}>
-                <SimpleLineIcons name="people" size={24} color="black"  />
-                <View style={{flexDirection:'column'}}>
-                    <Text style={styles.nome}>THAIANE</Text>
-                    <Text >PLACA: PIX-4571</Text>
-                
-                </View>
+                <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Vitoria')}>
+                    <SimpleLineIcons name="people" size={24} color="black"/>
+                    <View style={{flexDirection:'column'}}>
+                        <Text style={styles.nome}>VITORIA EV.</Text>
+                        <Text >PLACA: ABC-4196</Text>
+                    
+                    </View>
 
-                <View style={{flexDirection:'column'}}>
-                    <Text>PARTIDA: 12:00 Hrs</Text>
-                    <Text>18/08/2022</Text>
-                </View>
-                <EvilIcons name="arrow-right" size={24} color="black" />
-            </TouchableOpacity>
+                    <View style={{flexDirection:'column', marginRight:30}}>
+                        <Text>PARTIDA: 12:00 Hrs</Text>
+                        <Text>18/08/2022</Text>
+                    </View>
+                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} style={{marginLeft:160}}/>
+                </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Odaleia')}>
-                <SimpleLineIcons name="people" size={24} color="black" />
-                <View style={{flexDirection:'column'}}>
-                    <Text style={styles.nome}>ODALEIA</Text>
-                    <Text >PLACA: PRO-1243</Text>
-                
-                </View>
+                <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Thaiane')}>
+                    <SimpleLineIcons name="people" size={24} color="black"  />
+                    <View style={{flexDirection:'column'}}>
+                        <Text style={styles.nome}>THAIANE</Text>
+                        <Text >PLACA: PIX-4571</Text>
+                    
+                    </View>
 
-                <View style={{flexDirection:'column'}}>
-                    <Text>PARTIDA: 18:45 Hrs</Text>
-                    <Text>17/08/2022</Text>
-                </View>
-                <EvilIcons name="arrow-right" size={24} color="black" />
-            </TouchableOpacity>
+                    <View style={{flexDirection:'column', marginRight:30}}>
+                        <Text>PARTIDA: 12:00 Hrs</Text>
+                        <Text>18/08/2022</Text>
+                    </View>
+                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} style={{marginLeft:160}}/>
+                </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Mariana')}>
-                <SimpleLineIcons name="people" size={24} color="black" />
-                <View style={{flexDirection:'column'}}>
-                    <Text style={styles.nome}>MARIANA</Text>
-                    <Text >PLACA:PAP-5678</Text>
-                
-                </View>
+                <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Odaleia')}>
+                    <SimpleLineIcons name="people" size={24} color="black" />
+                    <View style={{flexDirection:'column'}}>
+                        <Text style={styles.nome}>ODALEIA</Text>
+                        <Text >PLACA: PRO-1243</Text>
+                    
+                    </View>
 
-                <View style={{flexDirection:'column'}}>
-                    <Text>PARTIDA: 15:30 Hrs</Text>
-                    <Text>14/09/2022</Text>
-                </View>
-                <EvilIcons name="arrow-right" size={24} color="black" />
-            </TouchableOpacity>
+                    <View style={{flexDirection:'column', marginRight:30}}>
+                        <Text>PARTIDA: 18:45 Hrs</Text>
+                        <Text>17/08/2022</Text>
+                    </View>
+                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} style={{marginLeft:160}}/>
+                </TouchableOpacity>
 
-        
-         
-        </ScrollView>
+                <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Mariana')}>
+                    <SimpleLineIcons name="people" size={24} color="black" />
+                    <View style={{flexDirection:'column'}}>
+                        <Text style={styles.nome}>MARIANA</Text>
+                        <Text >PLACA:PAP-5678</Text>
+                    
+                    </View>
+
+                    <View style={{flexDirection:'column', marginRight:30}}>
+                        <Text>PARTIDA: 15:30 Hrs</Text>
+                        <Text>14/09/2022</Text>
+                    </View>
+                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} style={{marginLeft:160}}/>
+                </TouchableOpacity>
+
+            
+            
+            </ScrollView>
+        </SafeAreaView>
     )
 }
 

@@ -2,13 +2,13 @@
   "expo": {
     "name": "MobTimon",
     "slug": "mob",
-    "version": "1.0.0",
+    "version": "teste",
     "orientation": "portrait",
     "plugins": [
       [
         "expo-image-picker",
         {
-          "photosPermission": "The app accesses your photos to let you share them with your friends."
+          "photosPermission": "O aplicativo precisa de sua permissão para acessar a galeria"
         }
       ]
     ],
@@ -33,7 +33,7 @@
         "foregroundImage": "./src/images/modelo.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.lsm_00.mob"
+      "package": "com.mobtimon.teste"
     },
     "web": {
       "favicon": "../src/images/modelo.png"

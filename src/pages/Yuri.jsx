@@ -3,6 +3,8 @@ import {View, Text, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, S
 
 import pessoa from '../images/pessoa.png'
 
+import LottieView from 'lottie-react-native'
+
 import {useNavigation} from '@react-navigation/native'
 
 

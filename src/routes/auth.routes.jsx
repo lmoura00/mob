@@ -35,6 +35,7 @@ import { RotaAlice } from '../pages/RotaAlice';
 import { RotaCocais } from '../pages/RotaCocais';
 import { RotaJericoroa } from '../pages/RotaJericoroa';
 
+import LottieView from 'lottie-react-native'
 
 function AuthRoutesTabBar(){
    
@@ -46,19 +47,19 @@ function AuthRoutesTabBar(){
                 tabBarIcon:({focused, color, size}) => {
                     if(route.name === "CaronasDisponiveis") {
                         return focused ? (
-                            <Entypo name="home" size={size} color={color} />
+                            <LottieView source={require('../Assets/home-icon.json')} autoPlay={true} loop={true}></LottieView>
                         ) : (
                             <AntDesign name="home" size={size} color={color} />
                         );
                     } else if (route.name === "PtsTur"){
                         return focused ? (
-                            <FontAwesome name="picture-o" size={size} color={size} />
+                            <LottieView source={require('../Assets/image-picture.json')} autoPlay={true} loop={true}></LottieView>
                         )  : (
                             <AntDesign name="picture" size={size} color={size} />
                         )
                     } else if (route.name === "Perfil"){
                         return focused ? (
-                            <FontAwesome name="gear" size={size} color={size} />
+                            <LottieView source={require('../Assets/gears.json')} autoPlay={true} loop={true}></LottieView>
                         ) : (
                             <EvilIcons name="gear" size={size} color={size} />
                         )
@@ -69,11 +70,62 @@ function AuthRoutesTabBar(){
                 tabBarInactiveTintColor: 'grey',
                 
             })}>
-                    <Screen name='CaronasDisponiveis' component={CaronasDisponiveis} options={{headerShown:true, statusBarStyle:'dark', tabBarLabel:"INICIAL.", headerTitleAlign:'center', headerTitle:'CARONAS DISPONÍVEIS', headerRight:()=>(<TouchableOpacity onPress={()=>setUser(null)} style={{marginRight:10}}><Ionicons name="exit-outline" size={24} color="black" /></TouchableOpacity>)}}/>
+                    <Screen name='CaronasDisponiveis' 
+                        component={CaronasDisponiveis} 
+                        options={{
+                            headerShown:true, 
+                            statusBarStyle:'dark', 
+                            tabBarLabel:"INICIAL.", 
+                            headerTitleAlign:'center', 
+                            headerTitle:'CARONAS DISPONÍVEIS', 
+                            headerRight:()=>(
+                                <TouchableOpacity 
+                                    onPress={()=>setUser(null)} 
+                                    style={{marginRight:10}}> 
+                                <Ionicons 
+                                    name="exit-outline" 
+                                    size={24} 
+                                    color="black" />
+                                </TouchableOpacity>
+                                )
+                            }}/>
                     
-                    <Screen name='PtsTur' component={PtsTur} options={{headerShown:true  ,tabBarLabel:"PONTOS TUR.", headerTitleAlign:'center', headerTitle:'PONTOS TURISTICOS', headerRight:()=>(<TouchableOpacity onPress={()=>setUser(null)} style={{marginRight:10}}><Ionicons name="exit-outline" size={24} color="black" /></TouchableOpacity>) }}/>
+                    <Screen name='PtsTur' 
+                        component={PtsTur} 
+                        options={{
+                            headerShown:true  ,
+                            tabBarLabel:"PONTOS TUR.", 
+                            headerTitleAlign:'center', 
+                            headerTitle:'PONTOS TURISTICOS', 
+                            headerRight:()=>(
+                            <TouchableOpacity 
+                                onPress={()=>setUser(null)} 
+                                style={{marginRight:10}}>
+                            <Ionicons 
+                                name="exit-outline" 
+                                size={24} 
+                                color="black" />
+                            </TouchableOpacity>
+                            ) 
+                        }}/>
                     
-                    <Screen name='Perfil' component={Perfil} options={{tabBarLabel:"PERFIL", headerTitleAlign:'center', headerTitle:'PERFIL', headerRight:()=>(<TouchableOpacity onPress={()=>setUser(null)} style={{marginRight:10}}><Ionicons name="exit-outline" size={24} color="black" /></TouchableOpacity>)}}/>
+                    <Screen name='Perfil' 
+                        component={Perfil} 
+                        options={{
+                            tabBarLabel:"PERFIL", 
+                            headerTitleAlign:'center', 
+                            headerTitle:'PERFIL', 
+                            headerRight:()=>(
+                            <TouchableOpacity 
+                                onPress={()=>setUser(null)} 
+                                style={{marginRight:10}}>
+                            <Ionicons 
+                                name="exit-outline" 
+                                size={24} 
+                                color="black" />
+                            </TouchableOpacity>
+                            )
+                        }}/>
             </Navigator>
         )
 }

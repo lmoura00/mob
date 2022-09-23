@@ -6,6 +6,7 @@ import logo from '../images/logo.jpg'
 import {useNavigation} from '@react-navigation/native'
 import {useAuth} from "../Hooks/Auth"
 
+import LottieView from 'lottie-react-native'
 
 
 export function Login(){
@@ -36,13 +37,13 @@ export function Login(){
             Animated.spring(offset.y, 
               {toValue:0,
                 speed:3, 
-                bounciness:25,
-                useNativeDriver: true
+                bounciness:20,
+                useNativeDriver: false
               }),
             Animated.timing(opacity,{
               toValue:1,
               duration:700,
-              useNativeDriver: true
+              useNativeDriver: false
             })
           ]).start()
     
@@ -54,13 +55,13 @@ export function Login(){
         Animated.timing(logotipo.x,{
           toValue:100,
           duration:50,
-          useNativeDriver: true
+          useNativeDriver: false
           
         }),
         Animated.timing(logotipo.y,{
           toValue:100,
           duration:50,
-          useNativeDriver: true
+          useNativeDriver: false
         }),
       ]).start()
     }
@@ -70,12 +71,12 @@ export function Login(){
         Animated.timing(logotipo.x,{
           toValue:200,
           duration:100,
-          useNativeDriver: true
+          useNativeDriver: false
         }),
         Animated.timing(logotipo.y,{
           toValue:200,
           duration:100,
-          useNativeDriver: true
+          useNativeDriver: false
         }),
       ]).start()
     }
@@ -110,7 +111,7 @@ export function Login(){
                 >
 
                 <View style={{flexDirection:'row'}}>
-                    <AntDesign name="mail" size={35} color="black" style={{marginRight:10, marginTop:8}}/>
+                    <LottieView source={require('../Assets/68036-mail.json')} autoPlay={true} loop={true} style={{marginRight:115}}/>
                     <TextInput 
                     placeholder="E-MAIL" 
                     keyboardType="email-address" 
@@ -119,20 +120,28 @@ export function Login(){
                     style={styles.EmailInput}></TextInput>
                 </View>
 
-                <View style={{flexDirection:'row', alignItems:'center'}}>
-                    <Ionicons name="key-outline" size={35} color="black" style={{marginRight:10}} />
+                <View style={{flexDirection:'row'}}>
+                    <LottieView 
+                        source={require('../Assets/56212-key-car.json')} 
+                        autoPlay={true} 
+                        loop={true} 
+                        style={{marginRight:115}}/>
                     <TextInput 
-                    placeholder="SENHA" 
-                    keyboardType='default'
-                    value={password}
-                    onChangeText={setPassword} 
-                    maxLength={8} 
-                    secureTextEntry={true} 
-                    style={styles.SenhaInput} ></TextInput>
+                        placeholder="SENHA" 
+                        keyboardType='default'
+                        value={password}
+                        onChangeText={setPassword} 
+                        maxLength={8} 
+                        secureTextEntry={true} 
+                        style={styles.SenhaInput} >
+                    </TextInput>
                 </View>
 
                 <View >
-                    <TouchableOpacity style={styles.botaoEntrar} onPress={()=> setUser('lucas')}>
+                    <TouchableOpacity 
+                        style={styles.botaoEntrar} 
+                        onPress={()=> setUser('lucas')}>
+                            
                         <Text style={styles.titleBotao}>ENTRAR</Text>
                     </TouchableOpacity>
 
@@ -180,11 +189,11 @@ const styles = StyleSheet.create({
         justifyContent:'center', 
         alignItems:'center',  
         backgroundColor:'#334A58',
-        marginTop:25
+        marginTop:35
     },
     TextSwitch:{
         fontSize:18,
-        padding:8,
+        padding:5,
         fontWeight:'600',
         color:'#fff'
     },
@@ -197,7 +206,9 @@ const styles = StyleSheet.create({
         fontSize:18,
         fontWeight:'500',
         borderWidth:1,
-        marginBottom:10
+        marginBottom:10,
+        marginLeft:85,
+        opacity:0.6
     },
     SenhaInput:{
         backgroundColor:'#D9D9D9',
@@ -208,7 +219,8 @@ const styles = StyleSheet.create({
         borderWidth:1,
         width:'56%',
         height:45,
-        
+        marginLeft:85,
+        opacity:0.6
     },
     botaoEntrar:{
         backgroundColor:'#fff',

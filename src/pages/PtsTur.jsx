@@ -13,6 +13,7 @@ import alice from  '../images/alice.jpg'
 import jericoroa from '../images/jericoroa.jpg'
 
 
+
 export function PtsTur(){
 
 const navigation = useNavigation()
