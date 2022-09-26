@@ -37,7 +37,7 @@ export function Login(){
             Animated.spring(offset.y, 
               {toValue:0,
                 speed:3, 
-                bounciness:20,
+                bounciness:23,
                 useNativeDriver: false
               }),
             Animated.timing(opacity,{

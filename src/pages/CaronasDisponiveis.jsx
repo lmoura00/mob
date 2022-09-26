@@ -43,7 +43,7 @@ const onRefresh = React.useCallback(() => {
                     </View>
 
                     <View style={{flexDirection:'column', marginRight:30}}>
-                        <Text>PARTIDA: 19:00 Hrs</Text>
+                        <Text>PARTIDA: 19:00 h</Text>
                         <Text>17/08/2022</Text>
                     </View>
                     <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} style={{marginLeft:160}}/>
@@ -58,7 +58,7 @@ const onRefresh = React.useCallback(() => {
                     </View>
 
                     <View style={{flexDirection:'column', marginRight:30}}>
-                        <Text>PARTIDA: 15:00 Hrs</Text>
+                        <Text>PARTIDA: 15:00 h</Text>
                         <Text>18/08/2022</Text>
                     </View>
                     <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} style={{marginLeft:160}}/>
@@ -73,7 +73,7 @@ const onRefresh = React.useCallback(() => {
                     </View>
 
                     <View style={{flexDirection:'column', marginRight:30}}>
-                        <Text>PARTIDA: 12:00 Hrs</Text>
+                        <Text>PARTIDA: 12:00 h</Text>
                         <Text>18/08/2022</Text>
                     </View>
                     <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} style={{marginLeft:160}}/>
@@ -88,7 +88,7 @@ const onRefresh = React.useCallback(() => {
                     </View>
 
                     <View style={{flexDirection:'column', marginRight:30}}>
-                        <Text>PARTIDA: 12:00 Hrs</Text>
+                        <Text>PARTIDA: 12:00 h</Text>
                         <Text>18/08/2022</Text>
                     </View>
                     <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} style={{marginLeft:160}}/>
@@ -103,7 +103,7 @@ const onRefresh = React.useCallback(() => {
                     </View>
 
                     <View style={{flexDirection:'column', marginRight:30}}>
-                        <Text>PARTIDA: 18:45 Hrs</Text>
+                        <Text>PARTIDA: 18:45 h</Text>
                         <Text>17/08/2022</Text>
                     </View>
                     <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} style={{marginLeft:160}}/>
@@ -118,7 +118,7 @@ const onRefresh = React.useCallback(() => {
                     </View>
 
                     <View style={{flexDirection:'column', marginRight:30}}>
-                        <Text>PARTIDA: 15:30 Hrs</Text>
+                        <Text>PARTIDA: 15:30 h</Text>
                         <Text>14/09/2022</Text>
                     </View>
                     <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} style={{marginLeft:160}}/>

@@ -23,11 +23,12 @@ export function CadastroPax(){
         if (permissionResult.granted === false) {
           alert("A permissão para acessar a galeria é necessária.");
           return;
+        } else {
+            let pickerResult = await ImagePicker.launchImageLibraryAsync();
+            SetImage(pickerResult.uri);
+
         }
     
-        let pickerResult = await ImagePicker.launchImageLibraryAsync();
-        console.log(pickerResult.uri);
-        SetImage(pickerResult.uri);
 
       }
 
