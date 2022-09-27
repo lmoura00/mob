@@ -13,8 +13,8 @@ import alice from  '../images/alice.jpg'
 import jericoroa from '../images/jericoroa.jpg'
 import portalsol from '../images/PortalSol.jpg'
 import portalamazonia from '../images/PortalAmazonia.png'
-
-
+import roncador from '../images/roncador.jpg'
+import saoJose from '../images/saoJose.jpg'
 
 export function PtsTur(){
 
@@ -58,15 +58,15 @@ const navigation = useNavigation()
                     <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Jericoroa')}>
-                    <Image source={jericoroa} style={styles.imageSmaw}></Image>
-                    <Text style={styles.title1}>"JERICOROA"</Text>
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Roncador')}>
+                    <Image source={roncador} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>RONCADOR</Text>
                     <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Jericoroa')}>
-                    <Image source={jericoroa} style={styles.imageSmaw}></Image>
-                    <Text style={styles.title1}>"JERICOROA"</Text>
+            <TouchableOpacity style={styles.tagLast} onPress={()=>navigation.navigate('PracaSaoJose')}>
+                    <Image source={saoJose} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>PRAÇA SÃO JOSÉ</Text>
                     <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
             </TouchableOpacity>
 
@@ -97,6 +97,17 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         borderWidth:1,
         margin:5
+    },
+    tagLast:{
+        backgroundColor:'#fff',
+        width:'100%',
+        alignItems:'center',
+        height:75,
+        flexDirection:'row',
+        justifyContent:'space-between',
+        borderWidth:1,
+        margin:5,
+        marginBottom:20
     },
     imageSmaw:{
         height:55,

@@ -11,12 +11,12 @@ const {width} = Dimensions.get('window');
 const height = width * 0.9;
 
 const imagens = [
-    'https://scontent.fthe18-1.fna.fbcdn.net/v/t39.30808-6/278695134_3853860404839185_5681433844277651096_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=a26aad&_nc_eui2=AeE3lPNzVvUbRQTVPC-dsUMw68E1YstQpBvrwTViy1CkGxjpGXr5GU3_z0VabTYH680q6s1BPZRl2rITOYHSVUV4&_nc_ohc=WGv39jxMYXAAX_TLyGw&tn=3WG5uJQzW1OH0zMc&_nc_ht=scontent.fthe18-1.fna&oh=00_AT9x4lGDsBIH37lPdSc-yTD1vCuiCUGZDrhUH-mDM3Wf0w&oe=632C82BF',
-    'https://scontent.fthe18-1.fna.fbcdn.net/v/t39.30808-6/275427590_3820077871550772_427425882123022243_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=a26aad&_nc_eui2=AeF0k5EHVQ2DDf-vyMbNM3WFpK8KivQZMWOkrwqK9BkxY4Jc-8HT-lB6CFm1UTEY4qjIWLJrpUp059_wcl7KiFs_&_nc_ohc=BLsqedNs2d0AX9SkpoY&_nc_ht=scontent.fthe18-1.fna&oh=00_AT_RcWV7hcOZyPG3KCdAlq_ylGIX2QmtIL7TwB8DakPB9A&oe=632C81DF',
-    'https://scontent.fthe18-1.fna.fbcdn.net/v/t39.30808-6/275057678_3815775091981050_8095819324610582418_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=a26aad&_nc_eui2=AeE5Lm4UjgL-b9uRHsIk8yNz-ioleX2okPb6KiV5faiQ9u55asiRs4OUP64yxJKEn9PD6MSZrUqDTl08er8LJB9J&_nc_ohc=UbnkIq-O-toAX_Z71UM&_nc_ht=scontent.fthe18-1.fna&oh=00_AT9jGOqmwk-GB0ybDdCMu9WbGiQbLAIsTRXcIInnMcnnWg&oe=632CA08C',
-    'https://scontent.fthe18-1.fna.fbcdn.net/v/t39.30808-6/272742542_3785533725005187_7835177954822781913_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=a26aad&_nc_eui2=AeGfGfc9tjRDv0oSD4-fNZYTxHvTs9huwbnEe9Oz2G7BueRVrKJ15nNucoZrePwS-IWLLqGicA6_Av-mXPNaRjmW&_nc_ohc=VZzYt83YvjwAX8HWC7b&tn=3WG5uJQzW1OH0zMc&_nc_ht=scontent.fthe18-1.fna&oh=00_AT-PCjKrU8WjwYW4zqVQLIrPDOCnE7YPo3Nn0aZ10jwn5A&oe=632B5D57',
-    'https://scontent.fthe18-1.fna.fbcdn.net/v/t39.30808-6/242838077_3680246605533900_592178864906160309_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=9267fe&_nc_eui2=AeEO1Bqdy2vz0dFxvz-svp3ePDp_fb88wKQ8On99vzzApPqm4DMo3GtiG7kqf30S4G1IMnSFUyFCr6AE86yQwT_R&_nc_ohc=fAHswl2g7yMAX8BaaBW&tn=3WG5uJQzW1OH0zMc&_nc_ht=scontent.fthe18-1.fna&oh=00_AT80Iiiwx22mSvMeHjrc08pjticCk7dTAPiXOBHhz_OrXg&oe=632BCEAD',
-    'https://www.google.com/maps/uv?pb=!1s0x78e3779c66bdba9%3A0x402c62268c09fa9e!3m1!7e115!4shttps%3A%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipPq-T0w9KZJUHjpBUcaiLR1FVh7TUwluMixtrBL%3Dw266-h200-k-no!5scocais%20shopping%20-%20Pesquisa%20Google!15sCgIgAQ&imagekey=!1e10!2sAF1QipPq-T0w9KZJUHjpBUcaiLR1FVh7TUwluMixtrBL&hl=pt-BR&sa=X&ved=2ahUKEwjZ4cve1Z76AhXpu5UCHYEFChsQoip6BAhbEAM#',
+    'https://scontent.fthe18-1.fna.fbcdn.net/v/t39.30808-6/236140194_3638820706343157_3332179418089233558_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=730e14&_nc_ohc=zoXX1LTBvukAX-C4lNg&_nc_ht=scontent.fthe18-1.fna&oh=00_AT8wkzONoXPh9ZXOOakc6Atn9jT1lPeQBnKb6MNo1_J8eg&oe=63375D8E',
+    'https://scontent.fthe18-1.fna.fbcdn.net/v/t39.30808-6/236134346_3638820916343136_6617464504367045824_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=730e14&_nc_ohc=0wsy2onnlEUAX9H3Dlo&_nc_ht=scontent.fthe18-1.fna&oh=00_AT_lNKk5UZHFrPvWF8LNg1df8ZrefLKUyd6C8U_Npy3puQ&oe=63389E44',
+    'https://scontent.fthe18-1.fna.fbcdn.net/v/t39.30808-6/232227671_3632462176979010_7943349495669474497_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=9267fe&_nc_ohc=Gc4Q57dMHVYAX8a2Upi&_nc_ht=scontent.fthe18-1.fna&oh=00_AT89jmVX9i0EXt6oNimR6NRi5zeQsDKuYofAB0BHcpNQvA&oe=6337CDE0',
+    'https://scontent.fthe18-1.fna.fbcdn.net/v/t39.30808-6/226317193_3627293067495921_2281683838395337478_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=9267fe&_nc_ohc=uyr25btN88UAX8YKUXE&tn=3WG5uJQzW1OH0zMc&_nc_ht=scontent.fthe18-1.fna&oh=00_AT9DGTECv11-LW_VsGPLQiQIYNPjdsWHh50toXM4nwPX0Q&oe=63375040',
+    'https://scontent.fthe18-1.fna.fbcdn.net/v/t39.30808-6/222612883_3624703867754841_8072811870761076313_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9267fe&_nc_ohc=mJr3u-KbCtEAX_3P_F5&_nc_ht=scontent.fthe18-1.fna&oh=00_AT_hPSgt_2g01qleuK-NaOPSa1hg-bVEFnofhl1_c5iqow&oe=6338F316',
+    'https://scontent.fthe18-1.fna.fbcdn.net/v/t39.30808-6/221885033_3622027104689184_8969564766641471899_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=9267fe&_nc_ohc=2HiV9YkPawIAX_8S0Rt&tn=3WG5uJQzW1OH0zMc&_nc_ht=scontent.fthe18-1.fna&oh=00_AT9LGehNXoOTpEus7FrElOnOxb2e7IG9_CE6kLP_iLBQhQ&oe=6338FC9D',
    
     
 
@@ -40,6 +40,7 @@ export function Cocais(){
                             >
                                 <View style={styles.modal}>
                                     <Text style={styles.titleModal}>SOBRE</Text>
+                                    <Text style={{fontSize:19, textAlign:'center'}}>Inspirado no modelo aberto dos mais nobres shoppings de Miami, o Cocais Shopping oferece um espaço seguro, confortável e acolhedor para os habitantes de Timon e Teresina passearem, encontrarem serviços e fazerem suas compras, tendo experiências positivas e memoráveis. E para os lojistas, além de charme, segurança e conforto, possui custo administrativo menor, favorecendo bons negócios.</Text>
                                     <TouchableOpacity 
                                         onPress={()=>setVisible(false)} 
                                         style={styles.botaoModal1}>
@@ -251,7 +252,7 @@ const styles = StyleSheet.create({
         alignSelf:'center',
         margin:5,
         elevation:10,
-        marginVertical:480
+        marginVertical:120
     },
     titleModal:{
         textAlign:'center',

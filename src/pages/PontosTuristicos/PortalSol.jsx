@@ -124,7 +124,7 @@ export function PortalSol(){
                            <Text style={styles.textoBotao}>SOBRE</Text>
                        </TouchableOpacity>
 
-                       <TouchableOpacity style={styles.verRota} onPress={()=>navigation.navigate('RotaCocais')}>
+                       <TouchableOpacity style={styles.verRota} onPress={()=>navigation.navigate('RotaPortalSol')}>
                            <Text style={styles.textoBotao}>VER ROTA</Text>
                        </TouchableOpacity>
 

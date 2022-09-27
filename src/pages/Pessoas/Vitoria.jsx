@@ -10,7 +10,7 @@ import LottieView from 'lottie-react-native'
 export function Vitoria(){
     const [visible, setVisible] = useState(false)
     const navigation = useNavigation()
-
+    const [visible1, setVisible1] = useState(false)
     return(
         <ScrollView style={{backgroundColor:"#334A58",}}>
             <View style={styles.container}>
@@ -26,7 +26,7 @@ export function Vitoria(){
                             <Text style={styles.titleModal}>ESSA É A CARONA QUE VOCÊ DESEJA?</Text>
                             <View style={{flexDirection:'row', padding:5, justifyContent:'center', marginTop:40}}>
                                 <TouchableOpacity 
-                                    onPress={()=>setVisible(false)}
+                                    onPress={()=>setVisible1(true)}
                                     style={styles.botaoModal2}>
                                         <Text style={styles.textBotao}>SIM!</Text>
                                 </TouchableOpacity>
@@ -39,6 +39,37 @@ export function Vitoria(){
                         </View>
                     
                 </Modal>
+
+                <Modal
+                    animationType="fade"
+                    visible={visible1}
+                    statusBarTranslucent={false}
+                    transparent={true}
+                    style={{}}
+                    >
+                        <View style={styles.modal2}>
+                            <Text style={styles.titleModal}>AGUARDE O MOTORISTA</Text>
+                            
+                            <LottieView 
+                                source={require('../../Assets/92893-man-waiting-car.json')} 
+                                autoPlay={true} 
+                                loop={true} 
+                                style={{
+                                    height:'72%',
+                                    width:'70%',
+                                    alignSelf:'center'
+                                }}
+                            />
+                                <TouchableOpacity 
+                                    onPress={()=>setVisible1(false)===setVisible(false)} 
+                                    style={styles.botaoModal1}>
+                                        <Text style={styles.textBotao}>FECHAR</Text>
+                                </TouchableOpacity>
+                            
+                        </View>
+                    
+                </Modal>
+
 
                 <LottieView source={require('../../Assets/95740-profile-person.json')} autoPlay={true} loop={true} style={{marginBottom:300}}/>
                 <View style={{marginTop:180, alignItems:'center', justifyContent:'center'}}>
@@ -225,5 +256,15 @@ const styles = StyleSheet.create({
         fontSize:15,
         fontWeight:'600',
         textAlign:'center'
+    },
+    modal2:{
+        alignSelf: 'center',
+        backgroundColor:'#f9f9f9',
+        padding:20,
+        elevation:10,
+        borderRadius:20,
+        marginVertical:280,
+        width:"80%",
+        height:"50%",
     },
 })

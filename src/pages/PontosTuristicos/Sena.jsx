@@ -41,6 +41,8 @@ export function Sena(){
                             >
                                 <View style={styles.modal}>
                                     <Text style={styles.titleModal}>SOBRE</Text>
+                                    <Text style={{fontSize:18, textAlign:'center'}}>Balneario tradicional de Timon, fundado pelo Sr. Sena, e que hoje é administrado pelo filho.</Text>
+                                    <Text style={{fontSize:18, textAlign:'center'}}>Com água corrente geladinha, um local agradável para estar com a familia e amigos para uma tarde relaxante.</Text>
                                     <TouchableOpacity 
                                         onPress={()=>setVisible(false)} 
                                         style={styles.botaoModal1}>
@@ -246,7 +248,7 @@ const styles = StyleSheet.create({
         alignSelf:'center',
         margin:5,
         elevation:10,
-        marginVertical:480
+        marginVertical:280
     },
     titleModal:{
         textAlign:'center',

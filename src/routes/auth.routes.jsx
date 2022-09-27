@@ -21,6 +21,10 @@ import {Chico} from '../pages/PontosTuristicos/Chico'
 import {Cocais} from '../pages/PontosTuristicos/Cocais'
 import {Jericoroa} from '../pages/PontosTuristicos/Jericoroa'
 import {Sena} from '../pages/PontosTuristicos/Sena'
+import { PortalAmazonia } from '../pages/PontosTuristicos/PortalAmazonia';
+import { PortalSol } from '../pages/PontosTuristicos/PortalSol';
+import { PracaSaoJose } from '../pages/PontosTuristicos/PracaSaojose';
+import { Roncador } from '../pages/PontosTuristicos/Roncador';
 
 import {Jose} from '../pages/Pessoas/JoseV'
 import {Mariana} from '../pages/Pessoas/Mariana'
@@ -50,8 +54,6 @@ import { RotaYuri } from '../pages/Rotas/RotaYuri';
 
 import {useAuth} from "../Hooks/Auth"
 import LottieView from 'lottie-react-native'
-import { PortalAmazonia } from '../pages/PontosTuristicos/PortalAmazonia';
-import { PortalSol } from '../pages/PontosTuristicos/PortalSol';
 
 
 
@@ -416,6 +418,24 @@ export function AuthRoutes(){
             <Screen 
                 name='PortalSol' 
                 component={PortalSol} 
+                options={{
+                    headerTitle:'DETALHES', 
+                    headerTitleAlign:'center',
+                    statusBarStyle:'dark'
+                }}
+            />
+            <Screen 
+                name='PracaSaoJose' 
+                component={PracaSaoJose} 
+                options={{
+                    headerTitle:'DETALHES', 
+                    headerTitleAlign:'center',
+                    statusBarStyle:'dark'
+                }}
+            />
+            <Screen 
+                name='Roncador' 
+                component={Roncador} 
                 options={{
                     headerTitle:'DETALHES', 
                     headerTitleAlign:'center',
