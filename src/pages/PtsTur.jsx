@@ -11,6 +11,8 @@ import cocais from '../images/cocais.jpg'
 import chico from '../images/chico.jpg'
 import alice from  '../images/alice.jpg'
 import jericoroa from '../images/jericoroa.jpg'
+import portalsol from '../images/PortalSol.jpg'
+import portalamazonia from '../images/PortalAmazonia.png'
 
 
 
@@ -44,11 +46,30 @@ const navigation = useNavigation()
                     <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}}/>
             </TouchableOpacity>
 
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('PortalAmazonia')}>
+                    <Image source={portalamazonia} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>PORTAL DA AMAZÔNIA</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('PortalSol')}>
+                    <Image source={portalsol} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>BALNEÁRIO PORTAL DO SOL</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
             <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Jericoroa')}>
                     <Image source={jericoroa} style={styles.imageSmaw}></Image>
                     <Text style={styles.title1}>"JERICOROA"</Text>
                     <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
             </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Jericoroa')}>
+                    <Image source={jericoroa} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>"JERICOROA"</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
         </ScrollView>
     )
 }

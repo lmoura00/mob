@@ -2,9 +2,9 @@ import React, {useState, useEffect} from "react";
 import {View, Text, Switch, StyleSheet, Image, Keyboard, TouchableOpacity, Animated, TextInput, KeyboardAvoidingView, TurboModuleRegistry, Alert} from 'react-native'
 import { Ionicons } from '@expo/vector-icons'; 
 import { AntDesign } from '@expo/vector-icons'; 
-import logo from '../images/logo.jpg'
+import logo from '../../images/logo.jpg'
 import {useNavigation} from '@react-navigation/native'
-import {useAuth} from "../Hooks/Auth"
+import {useAuth} from "../../Hooks/Auth"
 
 import LottieView from 'lottie-react-native'
 
@@ -111,7 +111,7 @@ export function Login(){
                 >
 
                 <View style={{flexDirection:'row'}}>
-                    <LottieView source={require('../Assets/68036-mail.json')} autoPlay={true} loop={true} style={{marginRight:115}}/>
+                    <LottieView source={require('../../Assets/68036-mail.json')} autoPlay={true} loop={true} style={{marginRight:115}}/>
                     <TextInput 
                     placeholder="E-MAIL" 
                     keyboardType="email-address" 
@@ -122,7 +122,7 @@ export function Login(){
 
                 <View style={{flexDirection:'row'}}>
                     <LottieView 
-                        source={require('../Assets/56212-key-car.json')} 
+                        source={require('../../Assets/56212-key-car.json')} 
                         autoPlay={true} 
                         loop={true} 
                         style={{marginRight:115}}/>

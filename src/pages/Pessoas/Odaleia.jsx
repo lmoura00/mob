@@ -1,21 +1,53 @@
-import React from "react";
-import {View, Text, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, ScrollView} from 'react-native'
+import React, {useState} from "react";
+import {View, Text, Modal, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, ScrollView} from 'react-native'
 
-import pessoa from '../images/pessoa.png'
+import pessoa from '../../images/pessoa.png'
 
 import {useNavigation} from '@react-navigation/native'
+import LottieView from 'lottie-react-native'
+
 
 export function Odaleia(){
-
-const navigation = useNavigation()
+    const [visible, setVisible] = useState(false)
+    const navigation = useNavigation()
 
     return(
         <ScrollView style={{backgroundColor:"#334A58",}}>
             <View style={styles.container}>
-                <Image source={pessoa} style={styles.imagem}/>
-                <Text style={styles.title}>ODALEIA</Text>
-                <Text style={styles.texto}>VW FOX</Text>
-                <Text style={styles.texto}>COR: BRANCO </Text>
+
+            <Modal
+                    animationType="fade"
+                    visible={visible}
+                    statusBarTranslucent={false}
+                    transparent={true}
+                    style={{}}
+                    >
+                        <View style={styles.modal}>
+                            <Text style={styles.titleModal}>ESSA É A CARONA QUE VOCÊ DESEJA?</Text>
+                            <View style={{flexDirection:'row', padding:5, justifyContent:'center', marginTop:40}}>
+                                <TouchableOpacity 
+                                    onPress={()=>setVisible(false)}
+                                    style={styles.botaoModal2}>
+                                        <Text style={styles.textBotao}>SIM!</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity 
+                                    onPress={()=>setVisible(false)} 
+                                    style={styles.botaoModal1}>
+                                        <Text style={styles.textBotao}>NÃO</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    
+                </Modal>
+
+
+                <LottieView source={require('../../Assets/95740-profile-person.json')} autoPlay={true} loop={true} style={{marginBottom:300}}/>
+
+                <View style={{marginTop:180, alignItems:'center', justifyContent:'center'}}>
+                    <Text style={styles.title}>ODALEIA</Text>
+                    <Text style={styles.texto}>VW FOX</Text>
+                    <Text style={styles.texto}>COR: BRANCO </Text>
+                </View>
                 <Image source={{uri:'https://cdn.autopapo.com.br/carro/volkswagen/fox-16-msi-comfortline-imotion-flex-2017/destaque-v1.png'}} style={{width:150, height:90, margin:7}}/>
                 <Text style={styles.texto}>PLACA: PRO - 1243</Text>
                 <Text style={styles.texto}>CONTATO: 86 9 0000 0000</Text>
@@ -35,11 +67,11 @@ const navigation = useNavigation()
                     <Text style={styles.DestinoLugar}>IFMA Campus Timon</Text>
                 </KeyboardAvoidingView>
 
-                <TouchableOpacity style={styles.botaoVerRota} >
+                <TouchableOpacity style={styles.botaoVerRota} onPress={()=>navigation.navigate('RotaOdaleia')}>
                     <Text style={styles.titleBotao}>VER ROTA</Text>
                 </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botaoQueroACarona}>
+            <TouchableOpacity style={styles.botaoQueroACarona} onPress={()=>setVisible(true)}>
                     <Text style={styles.titleBotao}>QUERO A CARONA</Text>
                 </TouchableOpacity>
 
@@ -126,7 +158,7 @@ const styles = StyleSheet.create({
         marginTop:10,
         borderRadius:8,
         borderWidth:1,
-        
+        elevation:10,
     },
     botaoNaoEParaMim:{
         backgroundColor:'#FF3030',
@@ -136,6 +168,7 @@ const styles = StyleSheet.create({
         borderRadius:8,
         borderWidth:1,
         marginBottom:30,
+        elevation:10,
     },
     botaoVerRota:{
         backgroundColor:'#14BC9C',
@@ -144,6 +177,7 @@ const styles = StyleSheet.create({
         marginTop:10,
         borderRadius:8,
         borderWidth:1,
+        elevation:10
     },
     titleBotao:{
         fontSize:18,
@@ -151,5 +185,47 @@ const styles = StyleSheet.create({
         fontWeight:'600',
         color:'black',
         textAlign:'center'
-    }
+    },
+    modal:{
+        alignSelf: 'center',
+        backgroundColor:'#f9f9f9',
+        padding:20,
+        elevation:10,
+        borderRadius:20,
+        marginVertical:280,
+        width:"80%",
+        height:"25%",
+    },
+    botaoModal1:{
+        backgroundColor:'#FF3030',
+        height: 35,
+        width:"40%",
+        padding:5,
+        borderRadius:15,
+        borderWidth:1,
+        alignSelf:'center',
+        margin:5,
+        elevation:10,
+        
+    },
+    botaoModal2:{
+        backgroundColor:'#fff',
+        height: 35,
+        width:"40%",
+        padding:5,
+        borderRadius:15,
+        borderWidth:1,
+        alignSelf:'center',
+        elevation:10,
+        marginRight:10
+    },
+    titleModal:{
+        textAlign:'center',
+        fontSize:17
+    },
+    textBotao:{
+        fontSize:15,
+        fontWeight:'600',
+        textAlign:'center'
+    },
 })

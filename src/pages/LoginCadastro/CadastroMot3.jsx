@@ -1,68 +1,83 @@
 import React, {useState} from "react";
 import {Image, View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, Modal, ScrollView} from 'react-native'
 import {useNavigation} from '@react-navigation/native'
+
 import * as ImagePicker from 'expo-image-picker';
 
 
 export function CadastroMot3(){
 
-    let selfie = async () => {
-        let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    const pickImage1 = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [7, 6],
+          quality: 1,
+        });
     
-        if (permissionResult.granted === false) {
-          alert("A permissão para acessar a galeria é necessária.");
-          return;
+        console.log(result);
+    
+        if (!result.cancelled) {
+          SetImage1(result.uri);
         }
-    
-        let pickerResult = await ImagePicker.launchImageLibraryAsync();
-        setImage(pickerResult.uri);
       };
 
     
-      let selfie1 = async () => {
-        let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      const pickImage2 = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [7, 6],
+          quality: 1,
+        });
     
-        if (permissionResult.granted === false) {
-          alert("A permissão para acessar a galeria é necessária.");
-          return;
+        console.log(result);
+    
+        if (!result.cancelled) {
+          SetImage2(result.uri);
         }
+      };
+      
+      const pickImage3 = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [7, 6],
+          quality: 1,
+        });
     
-        let pickerResult = await ImagePicker.launchImageLibraryAsync();
-        setImage1(pickerResult.uri);
+        console.log(result);
+    
+        if (!result.cancelled) {
+          SetImage3(result.uri);
+        }
       };
 
-      let cnhImage = async () => {
-        let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      const pickImage4 = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [7, 6],
+          quality: 1,
+        });
     
-        if (permissionResult.granted === false) {
-          alert("A permissão para acessar a galeria é necessária.");
-          return;
+        console.log(result);
+    
+        if (!result.cancelled) {
+          SetImage4(result.uri);
         }
-    
-        let pickerResult = await ImagePicker.launchImageLibraryAsync();
-        setCnh(pickerResult.uri);
-      };
-
-      let crvlImage = async () => {
-        let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    
-        if (permissionResult.granted === false) {
-          alert("A permissão para acessar a galeria é necessária.");
-          return;
-        }
-    
-        let pickerResult = await ImagePicker.launchImageLibraryAsync();
-        setCrvl(pickerResult.uri);
       };
     
 
     const [visible, setVisible] = useState(false);
     const navigation = useNavigation()
 
-    const [image1, setImage1] = useState(null)
-    const [image, setImage] = useState(null)
-    const [cnh, setCnh] = useState(null)
-    const [crvl, setCrvl] = useState(null)
+    const [Image1, SetImage1] = useState(null)
+    const [Image2, SetImage2] = useState(null)
+    const [Image3, SetImage3] = useState(null)
+    const [Image4, SetImage4] = useState(null)
+
+
     return(
         <ScrollView>
 
@@ -91,53 +106,57 @@ export function CadastroMot3(){
                     
                 </Modal>
 
-                <Text style={styles.line1}>-----------------------------------------------------</Text>
+                <Text style={styles.line1}>------------------------------------------------</Text>
                 <Text style={styles.title1}>CADASTRAR MOTORISTA: ANEXOS</Text>
-                <Text style={styles.line2}>-----------------------------------------------------</Text>
+                <Text style={styles.line2}>------------------------------------------------</Text>
                 
                 <Text style={styles.title}>SELFIE + DOCUMENTO</Text>
-                {image && (<Image source={{uri:image}} style={styles.image}/>)}
-                <TouchableOpacity onPress={selfie} style={styles.botao3}>
+                {Image1 && <Image source={{ uri: Image1 }} style={styles.imagem} />}
+                <TouchableOpacity onPress={pickImage1} style={styles.botao3}>
                     <Text style={styles.textBotao}>Selecione a sua foto</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={()=>setImage(null)} style={styles.botao4}>
+                <TouchableOpacity onPress={()=>SetImage1(null)} style={styles.botao4}>
                     <Text style={styles.textBotao}>Apagar foto</Text>
                 </TouchableOpacity>
 
                 <Text style={styles.title}>CNH</Text>
-                {cnh && (<Image source={{uri:cnh}} style={styles.image}/>)}
-                <TouchableOpacity onPress={cnhImage} style={styles.botao3}>
+                {Image2 && <Image source={{ uri: Image2 }} style={styles.imagem} />}
+                <TouchableOpacity onPress={pickImage2} style={styles.botao3}>
                     <Text style={styles.textBotao}>Selecione a sua foto</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={()=>setCnh(null)} style={styles.botao4}>
+                <TouchableOpacity onPress={()=>SetImage2(null)} style={styles.botao4}>
                     <Text style={styles.textBotao}>Apagar foto</Text>
                 </TouchableOpacity>
 
                 <Text style={styles.title}>CRVL</Text>
-                {crvl && (<Image source={{uri:crvl}} style={styles.image}/>)}
-                <TouchableOpacity onPress={crvlImage} style={styles.botao3}>
+                {Image3 && <Image source={{ uri: Image3 }} style={styles.imagem} />}
+                <TouchableOpacity onPress={pickImage3} style={styles.botao3}>
                     <Text style={styles.textBotao}>Selecione a sua foto</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={()=>setCrvl(null)} style={styles.botao4}>
+                <TouchableOpacity onPress={()=>SetImage3(null)} style={styles.botao4}>
                     <Text style={styles.textBotao}>Apagar foto</Text>
                 </TouchableOpacity>
 
                 <Text style={{fontSize:19, color:'#fff', fontWeight:'350', marginTop: 25}}>SELECIONE A SUA FOTO:</Text>
-                {image1 && (<Image source={{uri:image1}} style={styles.image}/>)}
-                <TouchableOpacity onPress={selfie1} style={styles.botao3}>
+
+                {Image4 && <Image source={{ uri: Image4 }} style={styles.imagem} />}
+                <TouchableOpacity onPress={pickImage4} style={styles.botao3}>
                     <Text style={styles.textBotao}>Selecione a sua foto</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={()=>setImage1(null)} style={styles.botao4}>
+                <TouchableOpacity onPress={()=>SetImage4(null)} style={styles.botao4}>
                     <Text style={styles.textBotao}>Apagar foto</Text>
                 </TouchableOpacity>
 
+                
                 <TouchableOpacity style={styles.botao1} onPress={()=>Alert.alert("Seu dados foram enviados com sucesso")}>
                     <Text style={styles.textBotao}>SALVAR</Text>
                 </TouchableOpacity>
+
+
 
                 <TouchableOpacity style={styles.botao2} onPress={()=>setVisible(true)}>
                     <Text style={styles.textBotao}>CANCELAR</Text>
@@ -201,12 +220,6 @@ const styles = StyleSheet.create({
         borderRadius:15,
         borderWidth:1
     },
-    textBotao:{
-        fontSize:15,
-        fontWeight:'600',
-        textAlign:'center',
-    
-    },
     botao3:{
         backgroundColor:'#D9D9D9',
         width:'56%',
@@ -225,15 +238,20 @@ const styles = StyleSheet.create({
         marginBottom:5,
         marginTop:5      
     },
-    image:{
-        height:80, 
-        width:80,
-        alignSelf:'center',
-        borderRadius:45,
+    imagem:{
+        width: 200,
+        height: 200, 
+        alignSelf:'center', 
+        marginBottom:20, 
+        marginTop:20,
         borderWidth:2,
         borderColor:'#f9f9f9',
-        marginBottom:15,
-        marginTop:15,
+    },
+    textBotao:{
+        fontSize:15,
+        fontWeight:'600',
+        textAlign:'center',
+    
     },
     modal:{
         alignSelf: 'center',

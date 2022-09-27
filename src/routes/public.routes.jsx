@@ -1,10 +1,10 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 
-import { Login } from '../pages/Login'
-import {CadastroPax} from '../pages/CadastroPax'
-import {CadastroMot1} from '../pages/CadastroMot1'
-import {CadastroMot2} from '../pages/CadastroMot2'
-import {CadastroMot3} from '../pages/CadastroMot3'
+import { Login } from '../pages/LoginCadastro/Login'
+import {CadastroPax} from '../pages/LoginCadastro/CadastroPax'
+import {CadastroMot1} from '../pages/LoginCadastro/CadastroMot1'
+import {CadastroMot2} from '../pages/LoginCadastro/CadastroMot2'
+import {CadastroMot3} from '../pages/LoginCadastro/CadastroMot3'
 
 
 export function PublicRoutes(){

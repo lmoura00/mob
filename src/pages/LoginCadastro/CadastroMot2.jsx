@@ -34,9 +34,9 @@ export function CadastroMot2(){
 
 
                 <View style={{alignItems:'center'}}>
-                    <Text style={styles.line1}>-----------------------------------------------------</Text>
+                    <Text style={styles.line1}>------------------------------------------------</Text>
                     <Text style={styles.title1}>CADASTRAR MOTORISTA: PARTE 2</Text>
-                    <Text style={styles.line2}>-----------------------------------------------------</Text>
+                    <Text style={styles.line2}>------------------------------------------------</Text>
                 </View>
 
                 <Text style={styles.title}>TIPO DE VEICULO</Text>

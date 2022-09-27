@@ -17,20 +17,20 @@ export function CadastroPax(){
     const [image, SetImage] = useState(null)
     const navigation = useNavigation()
 
-    let openImagePickerAsync = async () => {
-        let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
     
-        if (permissionResult.granted === false) {
-          alert("A permissão para acessar a galeria é necessária.");
-          return;
-        } else {
-            let pickerResult = await ImagePicker.launchImageLibraryAsync();
-            SetImage(pickerResult.uri);
-
+        console.log(result);
+    
+        if (!result.cancelled) {
+          SetImage(result.uri);
         }
-    
-
-      }
+      };
 
 
       const [visible, setVisible] = useState(false)
@@ -78,11 +78,16 @@ export function CadastroPax(){
 
             <Text style={{fontSize:19, color:'#fff', fontWeight:'350', marginTop: 25}}>SELECIONE A SUA FOTO:</Text>
 
-            {image && (<Image source={{uri:image}} style={styles.image}/>)}
+            {image && <Image source={{ uri: image }} style={{ width: 200, height: 200, alignSelf:'center', marginBottom:20, marginTop:20, }} />}
 
-            <TouchableOpacity onPress={openImagePickerAsync} style={styles.botao3}>
+            <TouchableOpacity onPress={pickImage} style={styles.botao3}>
                 <Text style={styles.textBotao}>Selecione a sua foto</Text>
             </TouchableOpacity>
+
+            <TouchableOpacity onPress={()=>SetImage(null)} style={styles.botao3}>
+                <Text style={styles.textBotao}>Apagar foto selecionada</Text>
+            </TouchableOpacity>
+        
 
             <TouchableOpacity style={styles.botao1} onPress={()=>Alert.alert("Seu cadastro foi efetivado com sucesso.")}>
                 <Text style={styles.textBotao}>SALVAR</Text>

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {View, Text, TouchableOpacity, StyleSheet, Image, ScrollView, Dimensions, Web} from 'react-native'
+import {View, Text, TouchableOpacity, StyleSheet, Image, ScrollView, Dimensions, Modal} from 'react-native'
 import {Linking} from 'react-native'
 
 import { Entypo } from '@expo/vector-icons'; 
@@ -24,11 +24,31 @@ const imagens = [
 
 export function Chico(){
 
-const navigation = useNavigation()
-
+    const navigation = useNavigation()
+    const [visible, setVisible] = useState(false);
     return(
            <View style={{backgroundColor:'#334A58'}}>
                <ScrollView style={{backgroundColor:'#fff', marginBottom:15,}}>
+
+                        <Modal
+                            animationType="fade"
+                            visible={visible}
+                            statusBarTranslucent={false}
+                            transparent={true}
+                            style={{}}
+                            >
+                                <View style={styles.modal}>
+                                    <Text style={styles.titleModal}>SOBRE</Text>
+                                    <TouchableOpacity 
+                                        onPress={()=>setVisible(false)} 
+                                        style={styles.botaoModal1}>
+                                            <Text style={styles.textBotao}>FECHAR</Text>
+                                    </TouchableOpacity>
+                                    
+                                </View>
+                            
+                        </Modal>
+
                    <View style={styles.containerImages}>
                        <ScrollView 
                        pagingEnabled 
@@ -82,7 +102,7 @@ const navigation = useNavigation()
                        <Text style={styles.taxa}>TAXA PARA ENTRAR:</Text>
                        <Text style={styles.taxa1}>R$ 20 REAIS POR PESSOA</Text>
 
-                       <TouchableOpacity style={styles.sobre}>
+                       <TouchableOpacity style={styles.sobre} onPress={()=>setVisible(true)}>
                            <Text style={styles.textoBotao}>SOBRE</Text>
                        </TouchableOpacity>
 
@@ -201,5 +221,40 @@ const styles = StyleSheet.create({
         fontWeight:'600',
         color:'black',
         textAlign:'center'
-    }
+    },
+    modal:{
+        alignSelf: 'center',
+        backgroundColor:'#f9f9f9',
+        padding:15,
+        elevation:15,
+        borderRadius:20,
+        marginVertical:80,
+        width:"80%",
+        height:"80%",
+    },
+    botaoModal1:{
+        backgroundColor:'#FF3030',
+        height: 35,
+        width:"65%",
+        padding:5,
+        borderRadius:15,
+        borderWidth:1,
+        alignSelf:'center',
+        margin:5,
+        elevation:10,
+        marginVertical:480
+    },
+    titleModal:{
+        textAlign:'center',
+        fontSize:20,
+        backgroundColor:'#fff',
+        
+        
+    },
+    textBotao:{
+        fontSize:15,
+        fontWeight:'600',
+        textAlign:'center',
+    
+    },
 })

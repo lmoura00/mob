@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {View, Text, TouchableOpacity, StyleSheet, Image, ScrollView, Dimensions, ImageStore} from 'react-native'
+import {View, Text, TouchableOpacity, StyleSheet, Image, ScrollView, Dimensions, Modal} from 'react-native'
 
 import {Linking} from 'react-native'
 
@@ -11,8 +11,8 @@ const {width} = Dimensions.get('window');
 const height = width * 0.9;
 
 const imagens = [
-    'https://scontent.fthe18-1.fna.fbcdn.net/v/t39.30808-6/291966220_464438312355010_1995833858411629636_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=e3f864&_nc_eui2=AeHKjUo3cWuVnl_aC9p5pJ3rM8LtgcI9f4czwu2Bwj1_h_0HrlBQfwz4kumZzkAxsdbmqvoxx6bb10dqorVveiuw&_nc_ohc=b0jJ6UepU4cAX-BwHV7&_nc_oc=AQkZkfzZ-qwTQYL0mTQBwSpxinQllwKKvAHC2A74UHg2ysuVhkAq7PKLZEpnhE-RrQwvW2AhHcE8UjUnfIhwF-Yd&_nc_ht=scontent.fthe18-1.fna&oh=00_AT92A6NhZKzIIrM6M6RY5b8j7AZmVvlfpReH-ruYNzICPw&oe=63292261',
-    'https://scontent.fthe18-1.fna.fbcdn.net/v/t39.30808-6/292199280_464438315688343_4903387904887053176_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeH3w8tW8NV8HsTfPaHXFIh-8qBnbvhBIqHyoGdu-EEiofJMx-h7WYXIGXJc3WWPeVZWYFh2QRGTdkZ_s5sG95na&_nc_ohc=VU1EEWxvoxYAX9SLpXj&tn=3WG5uJQzW1OH0zMc&_nc_ht=scontent.fthe18-1.fna&oh=00_AT9sA006RdVJLmNT_Jjt5y4goNFztLCDcC1YOwuBcusCjw&oe=63293EB5',
+    'https://scontent.fthe18-1.fna.fbcdn.net/v/t39.30808-6/291966220_464438312355010_1995833858411629636_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=e3f864&_nc_ohc=iuwEhwtMVv0AX8jSPG6&_nc_oc=AQkjlYN6S1nV54yApXYRbXFKooqsPvFk5DhMjlGFxGTsPr7w1sB-4XOouSBIt2d0SAajz1n21iDVtyL5ajUGYCLb&_nc_ht=scontent.fthe18-1.fna&oh=00_AT-T8XpHEN-LA3P9ftXseXbPlyfzJrfLK7Iwh99hr1R--w&oe=6336FA21',
+    'https://scontent.fthe18-1.fna.fbcdn.net/v/t39.30808-6/292199280_464438315688343_4903387904887053176_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=BW-W2h7UHiMAX8crCtf&_nc_ht=scontent.fthe18-1.fna&oh=00_AT8mwMyS8PzxBtOv6z_AHTjiifkWl5MGVOrKIKf7bsGgDg&oe=63371675',
     'https://scontent.fthe18-1.fna.fbcdn.net/v/t1.6435-9/52259297_2158083440897464_8501675857335549952_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=9267fe&_nc_eui2=AeF_GDhvU5HCuyzxH2fOsIzIP0OMEzXc5Lw_Q4wTNdzkvIt46pV_ovSWaVs6Q36V-ExhMq8hatOkGS79flWBJl_a&_nc_ohc=SGTKX3kjeWsAX8lxKpu&_nc_ht=scontent.fthe18-1.fna&oh=00_AT_WqK-EBvVCBh_eCxWiw9YXf9L0a8Nb8sSy8uEGw_rwwA&oe=634A6E45',
     'https://scontent.fthe18-1.fna.fbcdn.net/v/t31.18172-8/27356286_1666496590056154_7191896113182433501_o.jpg?_nc_cat=102&ccb=1-7&_nc_sid=8bfeb9&_nc_eui2=AeEubHUBVA0zo_qJKNovi7fFICQ2UqiYrBkgJDZSqJisGcS_KVqVovhTGFQ1Skf0N0-YREO4COBpj6EiTAg2MCHG&_nc_ohc=pYFymSOZwEIAX-1mm8X&_nc_ht=scontent.fthe18-1.fna&oh=00_AT9Z5RSTJkJVbF7GaFxwvVKxyvEA5jjsWgfd7LCLyfGoxg&oe=634B3D6E',
     'https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/26229628_1641677735871373_6660569954311734036_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=8bfeb9&_nc_eui2=AeHjjuoctuuHBRMwciqmTjjPPNvlIIcvXlc82-Ughy9eV8G1_obanH1BaJs5440p1DCoZKGF9tWbbU7FwCYJZaGK&_nc_ohc=Ya5SuOXaRW0AX_OVplt&_nc_ht=scontent.fthe18-1.fna&oh=00_AT9S3LZGu-y-dfNNQgn3v5sj4WB4YWtTUfGpWxtxXqzVqQ&oe=634A73D5',
@@ -25,11 +25,33 @@ const imagens = [
 
 export function Sena(){
 
-const navigation = useNavigation()
+    const navigation = useNavigation()
+    const [visible, setVisible] = useState(false);
 
     return(
            <View style={{backgroundColor:'#334A58'}}>
                <ScrollView style={{backgroundColor:'#fff', marginBottom:15,}}>
+
+                       <Modal
+                            animationType="fade"
+                            visible={visible}
+                            statusBarTranslucent={false}
+                            transparent={true}
+                            style={{}}
+                            >
+                                <View style={styles.modal}>
+                                    <Text style={styles.titleModal}>SOBRE</Text>
+                                    <TouchableOpacity 
+                                        onPress={()=>setVisible(false)} 
+                                        style={styles.botaoModal1}>
+                                            <Text style={styles.textBotao}>FECHAR</Text>
+                                    </TouchableOpacity>
+                                    
+                                </View>
+                            
+                        </Modal>
+
+
                    <View style={styles.containerImages}>
                        <ScrollView 
                        pagingEnabled 
@@ -84,7 +106,7 @@ const navigation = useNavigation()
                        <Text style={styles.taxa}>TAXA PARA ENTRAR:</Text>
                        <Text style={styles.taxa1}>R$ 20 REAIS POR PESSOA</Text>
 
-                       <TouchableOpacity style={styles.sobre}>
+                       <TouchableOpacity style={styles.sobre} onPress={()=>setVisible(true)}>
                            <Text style={styles.textoBotao}>SOBRE</Text>
                        </TouchableOpacity>
 
@@ -203,5 +225,40 @@ const styles = StyleSheet.create({
         fontWeight:'600',
         color:'black',
         textAlign:'center'
-    }
+    },
+    modal:{
+        alignSelf: 'center',
+        backgroundColor:'#f9f9f9',
+        padding:15,
+        elevation:15,
+        borderRadius:20,
+        marginVertical:80,
+        width:"80%",
+        height:"80%",
+    },
+    botaoModal1:{
+        backgroundColor:'#FF3030',
+        height: 35,
+        width:"65%",
+        padding:5,
+        borderRadius:15,
+        borderWidth:1,
+        alignSelf:'center',
+        margin:5,
+        elevation:10,
+        marginVertical:480
+    },
+    titleModal:{
+        textAlign:'center',
+        fontSize:20,
+        backgroundColor:'#fff',
+        
+        
+    },
+    textBotao:{
+        fontSize:15,
+        fontWeight:'600',
+        textAlign:'center',
+    
+    },
 })

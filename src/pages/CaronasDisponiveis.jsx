@@ -35,8 +35,8 @@ const onRefresh = React.useCallback(() => {
       >
 
                 <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Yuri')}>
-                    <SimpleLineIcons name="people" size={24} color="black"  />
-                    <View style={{flexDirection:'column'}}>
+                    <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{marginRight:150}}/>
+                    <View style={{flexDirection:'column', marginLeft:50}}>
                         <Text style={styles.nome}>YURI</Text>
                         <Text >PLACA: PIT-7854</Text>
                     
@@ -50,8 +50,8 @@ const onRefresh = React.useCallback(() => {
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Jose')}>
-                    <SimpleLineIcons name="people" size={24} color="black"  />
-                    <View style={{flexDirection:'column'}}>
+                    <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{marginRight:150}}/>
+                    <View style={{flexDirection:'column', marginLeft:50}}>
                         <Text style={styles.nome}>JOSÉ V.</Text>
                         <Text >PLACA: HUT-5694</Text>
                     
@@ -65,8 +65,8 @@ const onRefresh = React.useCallback(() => {
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Vitoria')}>
-                    <SimpleLineIcons name="people" size={24} color="black"/>
-                    <View style={{flexDirection:'column'}}>
+                <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{marginRight:150}}/>
+                    <View style={{flexDirection:'column', marginLeft:50}}>
                         <Text style={styles.nome}>VITORIA EV.</Text>
                         <Text >PLACA: ABC-4196</Text>
                     
@@ -80,8 +80,8 @@ const onRefresh = React.useCallback(() => {
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Thaiane')}>
-                    <SimpleLineIcons name="people" size={24} color="black"  />
-                    <View style={{flexDirection:'column'}}>
+                    <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{marginRight:150}}/>
+                    <View style={{flexDirection:'column', marginLeft:50}}>
                         <Text style={styles.nome}>THAIANE</Text>
                         <Text >PLACA: PIX-4571</Text>
                     
@@ -95,8 +95,8 @@ const onRefresh = React.useCallback(() => {
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Odaleia')}>
-                    <SimpleLineIcons name="people" size={24} color="black" />
-                    <View style={{flexDirection:'column'}}>
+                    <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{marginRight:150}}/>
+                    <View style={{flexDirection:'column', marginLeft:50}}>
                         <Text style={styles.nome}>ODALEIA</Text>
                         <Text >PLACA: PRO-1243</Text>
                     
@@ -110,8 +110,8 @@ const onRefresh = React.useCallback(() => {
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Mariana')}>
-                    <SimpleLineIcons name="people" size={24} color="black" />
-                    <View style={{flexDirection:'column'}}>
+                    <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{marginRight:150}}/>
+                    <View style={{flexDirection:'column',marginLeft:50}}>
                         <Text style={styles.nome}>MARIANA</Text>
                         <Text >PLACA:PAP-5678</Text>
                     
