@@ -15,7 +15,7 @@
     "icon": "./src/images/modelo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/images/modelo.png",
+      "image": "./src/images/LogoMobSplash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -34,13 +34,15 @@
         "foregroundImage": "./src/images/modelo.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.mobtimon.teste",
+      "package": "com.lsm_00.mobtimon",
       "permissions": [
         "android.permission.RECORD_AUDIO",
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.CAMERA",
         "android.permission.LOCATION",
-        "android.permission.ACCESS_FINE_LOCATION"
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_BACKGROUND_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION"
 
       ]
     },

@@ -16,7 +16,7 @@ export function RotaThaiane(){
     const partida = {latitude: -5.111598176123656,    longitude:  -42.8537928876194,};
     const [distance, SetDistance] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
-    const GOOGLE_MAPS_APIKEY = 'AIzaSyD1IMn7vdiHTYU0XhW8ajSa0SWmaru2aTk';
+    const GOOGLE_MAPS_APIKEY = config.googleApi;
     useEffect(() => {
       (async () => {
         

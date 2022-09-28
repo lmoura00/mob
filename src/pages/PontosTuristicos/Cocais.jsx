@@ -40,7 +40,7 @@ export function Cocais(){
                             >
                                 <View style={styles.modal}>
                                     <Text style={styles.titleModal}>SOBRE</Text>
-                                    <Text style={{fontSize:19, textAlign:'center'}}>Inspirado no modelo aberto dos mais nobres shoppings de Miami, o Cocais Shopping oferece um espaço seguro, confortável e acolhedor para os habitantes de Timon e Teresina passearem, encontrarem serviços e fazerem suas compras, tendo experiências positivas e memoráveis. E para os lojistas, além de charme, segurança e conforto, possui custo administrativo menor, favorecendo bons negócios.</Text>
+                                    <Text style={styles.textoModal}>Inspirado no modelo aberto dos mais nobres shoppings de Miami, o Cocais Shopping oferece um espaço seguro, confortável e acolhedor para os habitantes de Timon e Teresina passearem, encontrarem serviços e fazerem suas compras, tendo experiências positivas e memoráveis. E para os lojistas, além de charme, segurança e conforto, possui custo administrativo menor, favorecendo bons negócios.</Text>
                                     <TouchableOpacity 
                                         onPress={()=>setVisible(false)} 
                                         style={styles.botaoModal1}>
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
         alignSelf:'center',
         margin:5,
         elevation:10,
-        marginVertical:120
+        marginVertical:110
     },
     titleModal:{
         textAlign:'center',
@@ -266,5 +266,10 @@ const styles = StyleSheet.create({
         fontWeight:'600',
         textAlign:'center',
     
+    },
+    textoModal:{
+        fontSize:20,
+        textAlign:'center',
+        padding:5
     },
 })

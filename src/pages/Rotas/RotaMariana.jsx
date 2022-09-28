@@ -16,7 +16,7 @@ export function RotaMariana(){
     const destination = {latitude: -5.105774416078441,    longitude:  -42.75391901772511 };
     const [distance, SetDistance] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
-    const GOOGLE_MAPS_APIKEY = 'AIzaSyD1IMn7vdiHTYU0XhW8ajSa0SWmaru2aTk';
+    const GOOGLE_MAPS_APIKEY = config.googleApi;
     useEffect(() => {
       (async () => {
         

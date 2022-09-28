@@ -15,7 +15,7 @@ export function RotaCocais(){
     const destination = {latitude: -5.091682590432839, longitude: -42.824027336998554};
     const [distance, SetDistance] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
-    const GOOGLE_MAPS_APIKEY = 'AIzaSyD1IMn7vdiHTYU0XhW8ajSa0SWmaru2aTk';
+    const GOOGLE_MAPS_APIKEY = config.googleApi;
     useEffect(() => {
       (async () => {
         

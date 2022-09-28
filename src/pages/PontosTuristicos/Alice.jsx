@@ -43,6 +43,17 @@ export function Alice(){
                             >
                                 <View style={styles.modal}>
                                     <Text style={styles.titleModal}>SOBRE</Text>
+                                    <ScrollView>
+                                        <Text style={styles.textoModal}>Sítio banhado com riachos e minas naturais de águas cristalinas. 
+                                            Disponível para festas e eventos com agradável paisagem verde da região, 
+                                            aliada à tranquilidade e exuberância do ambiente de pleno contato com a natureza.
+                                        </Text>
+                                        <Text style={styles.textoModal}>
+                                        3 Chalés com alto padrão de conforto e requinte, equipados com: 
+                                        dois aparelhos de ar condicionado, uma Cama de casal, duas Camas de solteiro, espaço para Redes, Televisor, DVD e Frigobar. 
+                                        Acomodação de até 10 pessoas por chalé.
+                                        </Text>
+                                    </ScrollView>
                                     <TouchableOpacity 
                                         onPress={()=>setVisible(false)} 
                                         style={styles.botaoModal1}>
@@ -247,7 +258,7 @@ const styles = StyleSheet.create({
         alignSelf:'center',
         margin:5,
         elevation:10,
-        marginVertical:480
+        marginVertical:40
     },
     titleModal:{
         textAlign:'center',
@@ -261,5 +272,10 @@ const styles = StyleSheet.create({
         fontWeight:'600',
         textAlign:'center',
     
+    },
+    textoModal:{
+        fontSize:20,
+        textAlign:'center',
+        padding:5
     },
 })

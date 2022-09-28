@@ -15,7 +15,7 @@ export function RotaRoncador(){
     const destination = {latitude: -5.095095838704937,  longitude:  -42.95901965301087};
     const [distance, SetDistance] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
-    const GOOGLE_MAPS_APIKEY = 'AIzaSyD1IMn7vdiHTYU0XhW8ajSa0SWmaru2aTk';
+    const GOOGLE_MAPS_APIKEY = config.googleApi;
     useEffect(() => {
       (async () => {
         

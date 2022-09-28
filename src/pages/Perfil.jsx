@@ -56,20 +56,20 @@ export function Perfil(){
                 </Modal>
 
                 <Text style={styles.title}>NOME COMPLETO</Text>
-                <TextInput style={styles.input}></TextInput>
+                <TextInput style={styles.input} placeholder='Nome completo'></TextInput>
 
                 <Text style={styles.title}>DATA DE NASCIMENTO</Text>
-                <TextInput style={styles.input} keyboardType="numbers-and-punctuation"></TextInput>
+                <TextInput style={styles.input} keyboardType="numbers-and-punctuation" placeholder="Data de nascimento"></TextInput>
 
 
                 <Text style={styles.title}>CPF</Text>
-                <TextInput style={styles.input} keyboardType="numbers-and-punctuation"></TextInput>
+                <TextInput style={styles.input} keyboardType="numbers-and-punctuation" placeholder="CPF"></TextInput>
 
                 <Text style={styles.title}>E-MAIL</Text>
-                <TextInput style={styles.input} keyboardType="email-address"></TextInput>
+                <TextInput style={styles.input} keyboardType="email-address" placeholder="E-mail"></TextInput>
 
                 <Text style={styles.title}>TELEFONE</Text>
-                <TextInput style={styles.input} keyboardType="phone-pad"></TextInput>
+                <TextInput style={styles.input} keyboardType="phone-pad" placeholder="Número de telefone"></TextInput>
 
                 <Text style={{fontSize:19, color:'#fff', fontWeight:'350', marginTop: 25}}>SELECIONE A SUA FOTO:</Text>
                 {image && <Image source={{ uri: image }} style={{ width: 200, height: 200, alignSelf:'center', marginBottom:20, marginTop:20, }} />}
@@ -97,7 +97,7 @@ export function Perfil(){
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        alignItems:'center',
+        
         backgroundColor:"#334A58",
         padding:5
     },
@@ -123,12 +123,13 @@ const styles = StyleSheet.create({
     },
     input:{
         backgroundColor:'#D9D9D9',
-        width:'56%',
+        width:'100%',
         height:35,
         borderRadius:7,
         borderWidth:1,
         marginBottom:5,
-        marginTop:5      
+        marginTop:5,
+        paddingHorizontal:5     
     },
     botao1:{
         backgroundColor:'#fff',
@@ -140,6 +141,7 @@ const styles = StyleSheet.create({
         borderWidth:1,
         margin:12,
         elevation:10,
+        alignSelf:'center'
     },
     botao2:{
         backgroundColor:'#FF3030',
@@ -150,6 +152,7 @@ const styles = StyleSheet.create({
         borderRadius:15,
         borderWidth:1,
         elevation:10,
+        alignSelf:'center',
     },
     textBotao:{
         fontSize:15,
@@ -169,7 +172,8 @@ const styles = StyleSheet.create({
         borderWidth:1,
         marginBottom:5,
         marginTop:5,
-        elevation:10,      
+        elevation:10,
+        alignSelf:'center'  
     },
     botao4:{
         backgroundColor:'#D9D9D9',
@@ -179,7 +183,8 @@ const styles = StyleSheet.create({
         borderWidth:1,
         marginBottom:15,
         marginTop:5,
-        elevation:10,   
+        elevation:10,
+        alignSelf:'center'
     },
     image:{
         height:80, 

@@ -15,7 +15,7 @@ export function RotaJericoroa(){
     const destination = {latitude: -5.093659589787663,    longitude:   -42.82192448531958};
     const [distance, SetDistance] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
-    const GOOGLE_MAPS_APIKEY = 'AIzaSyD1IMn7vdiHTYU0XhW8ajSa0SWmaru2aTk';
+    const GOOGLE_MAPS_APIKEY = config.googleApi;
     useEffect(() => {
       (async () => {
         

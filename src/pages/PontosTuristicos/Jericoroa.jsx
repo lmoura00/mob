@@ -233,4 +233,9 @@ const styles = StyleSheet.create({
         textAlign:'center',
     
     },
+    textoModal:{
+        fontSize:20,
+        textAlign:'center',
+        padding:5
+    },
 })

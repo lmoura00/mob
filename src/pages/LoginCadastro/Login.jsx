@@ -5,6 +5,9 @@ import { AntDesign } from '@expo/vector-icons';
 import logo from '../../images/logo.jpg'
 import {useNavigation} from '@react-navigation/native'
 import {useAuth} from "../../Hooks/Auth"
+import fapema from '../../images/fapema.png'
+import ifma from '../../images/ifma.png'
+
 
 import LottieView from 'lottie-react-native'
 
@@ -20,14 +23,18 @@ export function Login(){
     const [logotipo] = useState(new Animated.ValueXY({x:200, y:200})) 
 
     const [isEnabled, setIsEnabled] = useState(false);
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState, Alert.alert("Você agora está entrando como motorista."));
+    const [EntrarProfessor, SetEntrarProfessor] = useState(
+    )
+    const [EntrarPax, SetEntrarPax] = useState(null)
 
-    const ativado = () => {
-        if (setIsEnabled(true)){
-            setIsEnabled(previousState => !previousState);
-            alert('está ativado')
-        }
+
+    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    if (isEnabled){
+        Alert.alert('motorista')
+    } else { 
+        Alert.alert('passageiro')
     }
+
 
 
     useEffect(()=> {
@@ -137,7 +144,7 @@ export function Login(){
                     </TextInput>
                 </View>
 
-                <View >
+                <KeyboardAvoidingView >
                     <TouchableOpacity 
                         style={styles.botaoEntrar} 
                         onPress={()=> setUser('lucas')}>
@@ -152,7 +159,9 @@ export function Login(){
                     <TouchableOpacity style={styles.botaoCadPax} onPress={()=>navigation.navigate("CadastroPax")}>
                         <Text style={styles.titleBotao}>CADASTRAR PASSAGEIRO</Text>
                     </TouchableOpacity>
-                </View>
+                    
+                </KeyboardAvoidingView>
+
 
             </Animated.View>
             
@@ -245,6 +254,7 @@ const styles = StyleSheet.create({
         height:45,
         width: 270,
         marginTop:10,
+        marginBottom:10,
         borderRadius:8,
         borderWidth:1,
         
@@ -255,5 +265,15 @@ const styles = StyleSheet.create({
         fontWeight:'600',
         color:'black',
         textAlign:'center'
-    }
+    },
+    ifma:{
+        width:100,
+        height:90,
+        marginBottom:40,
+        marginRight:15
+    },
+    fapema:{
+        width:160,
+        height:60,
+    },
 })

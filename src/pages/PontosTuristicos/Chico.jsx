@@ -39,6 +39,7 @@ export function Chico(){
                             >
                                 <View style={styles.modal}>
                                     <Text style={styles.titleModal}>SOBRE</Text>
+                                    <Text style={styles.textoModal}>Lazer com uma boa comida, bebidas piscinas pra melhor conforto, sempre aberto para você ter sua diversão</Text>
                                     <TouchableOpacity 
                                         onPress={()=>setVisible(false)} 
                                         style={styles.botaoModal1}>
@@ -242,7 +243,7 @@ const styles = StyleSheet.create({
         alignSelf:'center',
         margin:5,
         elevation:10,
-        marginVertical:480
+        marginVertical:350
     },
     titleModal:{
         textAlign:'center',
@@ -256,5 +257,10 @@ const styles = StyleSheet.create({
         fontWeight:'600',
         textAlign:'center',
     
+    },
+    textoModal:{
+        fontSize:20,
+        textAlign:'center',
+        padding:5
     },
 })
