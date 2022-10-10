@@ -25,15 +25,17 @@ export function Login(){
 
     const [isEnabled, setIsEnabled] = useState(false);
 
-
+    
 
     const toggleSwitch = () => setIsEnabled(previousState => !previousState) ;
-    
-    if(isEnabled === false){
-       ()=> setUser('lucas')
-    }   else{
-        ()=>setUser(null)
-    }
+    useEffect(()=>{
+        if(isEnabled === false){
+           ()=>setUser('lucas')
+        }   else{
+            ()=>setUser(null)
+        }
+
+    })
 
 
     useEffect(()=> {
@@ -135,7 +137,7 @@ export function Login(){
 
                 <View style={{flexDirection:'row'}}>
                     <LottieView 
-                        source={require('../../Assets/56212-key-car.json')} 
+                        source={require('../../Assets/76732-locked-icon.json')} 
                         autoPlay={true} 
                         loop={true} 
                         style={{marginRight:125}}
@@ -159,7 +161,7 @@ export function Login(){
                 <KeyboardAvoidingView >
                     <TouchableOpacity 
                         style={styles.botaoEntrar} 
-                        onPress={()=> setUser('lucas') || console.log(isEnabled)}>
+                        onPress={()=> {isEnabled}}>
                             
                         <Text style={styles.titleBotao}>ENTRAR</Text>
                     </TouchableOpacity>
