@@ -7,7 +7,8 @@ import {useNavigation} from '@react-navigation/native'
 import LottieView from 'lottie-react-native'
 
 
-export function Odaleia(){
+
+export function HistoricoMariana1(){
     const [alerta, setAlerta] = useState(false)
     const [visible1, setVisible1] = useState(false)
     const [visible, setVisible] = useState(false)
@@ -16,61 +17,6 @@ export function Odaleia(){
     return(
         <ScrollView style={{backgroundColor:"#334A58",}}>
             <View style={styles.container}>
-
-            <Modal
-                    animationType="fade"
-                    visible={visible}
-                    statusBarTranslucent={false}
-                    transparent={true}
-                    style={{}}
-                    >
-                        <View style={styles.modal}>
-                            <Text style={styles.titleModal}>ESSA É A CARONA QUE VOCÊ DESEJA?</Text>
-                            <View style={{flexDirection:'row', padding:5, justifyContent:'center', marginTop:40}}>
-                                <TouchableOpacity 
-                                    onPress={()=>setVisible1(true)}
-                                    style={styles.botaoModal2}>
-                                        <Text style={styles.textBotao}>SIM!</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity 
-                                    onPress={()=>setVisible(false)} 
-                                    style={styles.botaoModal1}>
-                                        <Text style={styles.textBotao}>NÃO</Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    
-                </Modal>
-
-                <Modal
-                    animationType="fade"
-                    visible={visible1}
-                    statusBarTranslucent={false}
-                    transparent={true}
-                    style={{}}
-                    >
-                        <View style={styles.modal2}>
-                            <Text style={styles.titleModal}>AGUARDE O MOTORISTA</Text>
-                            
-                            <LottieView 
-                                source={require('../../Assets/92893-man-waiting-car.json')} 
-                                autoPlay={true} 
-                                loop={true} 
-                                style={{
-                                    height:'72%',
-                                    width:'70%',
-                                    alignSelf:'center'
-                                }}
-                            />
-                                <TouchableOpacity 
-                                    onPress={()=>setVisible1(false)===setVisible(false)} 
-                                    style={styles.botaoModal1}>
-                                        <Text style={styles.textBotao}>FECHAR</Text>
-                                </TouchableOpacity>
-                            
-                        </View>
-                    
-                </Modal>
 
                 <Modal
                     animationType="fade"
@@ -84,7 +30,7 @@ export function Odaleia(){
                                 <Text style={{fontSize:15, textAlign:'center', marginTop:15}}>Mob Timon coleta dados de local para ativar trajetos, localização, mesmo quando o app está fechado ou não está em uso.</Text>
                         
                                 <TouchableOpacity 
-                                    onPress={()=>navigation.navigate('RotaOdaleia') || setAlerta(false)} 
+                                    onPress={()=>navigation.navigate('RotaMariana1') || setAlerta(false)} 
                                     style={styles.botaoModalAlerta}>
                                         <Text style={styles.textBotao}>CONTINUAR</Text>
                                 </TouchableOpacity>
@@ -94,43 +40,35 @@ export function Odaleia(){
                 </Modal>
 
 
-
-                <LottieView source={require('../../Assets/95740-profile-person.json')} autoPlay={true} loop={true} style={{marginBottom:300}}/>
+            <LottieView source={require('../../Assets/95740-profile-person.json')} autoPlay={true} loop={true} style={{marginBottom:240}}/>
 
                 <View style={{marginTop:180, alignItems:'center', justifyContent:'center'}}>
-                    <Text style={styles.title}>ODALEIA</Text>
-                    <Text style={styles.texto}>VW FOX</Text>
-                    <Text style={styles.texto}>COR: BRANCO </Text>
+                    <Text style={styles.title}>MARIANA</Text>
+                    <Text style={styles.texto}>AUDI Q3</Text>
+                    <Text style={styles.texto}>COR: PRATA </Text>
                 </View>
-                <Image source={{uri:'https://cdn.autopapo.com.br/carro/volkswagen/fox-16-msi-comfortline-imotion-flex-2017/destaque-v1.png'}} style={{width:150, height:90, margin:7}}/>
-                <Text style={styles.texto}>PLACA: PRO - 1243</Text>
+                <Image source={{uri:'https://cdn.autopapo.com.br/carro/audi/q3-14-tfsi-attraction-plus-s-tronic-flex-2017/destaque-v1.png'}} style={{width:150, height:90, margin:7}}/>
+                <Text style={styles.texto}>PLACA: PAP - 5678</Text>
                 <Text style={styles.texto}>CONTATO: 86 9 0000 0000</Text>
 
-                <KeyboardAvoidingView style={{flexDirection:'row'}}>
-                    <Text style={styles.vagas}>VAGAS DISPONÍVEIS:</Text>
-                    <Text style={styles.vagasNumero}>4</Text>
-                </KeyboardAvoidingView>
+
 
                 <KeyboardAvoidingView style={{flexDirection:'row'}}>
-                    <Text style={styles.inicioNome}>INÍCIO:</Text>
-                    <Text style={styles.inicioLugar}>Mateuzinho 18:45 h</Text>
+                    <Text style={styles.inicioNome}>PARTIDA:</Text>
+                    <Text style={styles.inicioLugar}>Campo do totó - 15:00 h</Text>
                 </KeyboardAvoidingView>
 
                 <KeyboardAvoidingView style={{flexDirection:'row'}}>
                     <Text style={styles.DestinoNome}>DESTINO:</Text>
-                    <Text style={styles.DestinoLugar}>IFMA Campus Timon</Text>
+                    <Text style={styles.DestinoLugar}>IFMA Campus Timon - 15:30 h</Text>
                 </KeyboardAvoidingView>
 
-                <TouchableOpacity style={styles.botaoVerRota} onPress={()=>setAlerta(true)}>
+                <TouchableOpacity style={styles.botaoVerRota} onPress={()=>setAlerta(true)} >
                     <Text style={styles.titleBotao}>VER ROTA</Text>
                 </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botaoQueroACarona} onPress={()=>setVisible(true)}>
-                    <Text style={styles.titleBotao}>QUERO A CARONA</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.botaoNaoEParaMim} onPress={()=>navigation.navigate('CaronasDisponiveis')}>
-                    <Text style={styles.titleBotao}>NÃO É PARA MIM</Text>
+                <TouchableOpacity style={styles.botaoNaoEParaMim} onPress={()=>navigation.navigate('Historico')}>
+                    <Text style={styles.titleBotao}>VOLTAR</Text>
                 </TouchableOpacity>
 
 
@@ -213,6 +151,7 @@ const styles = StyleSheet.create({
         borderRadius:8,
         borderWidth:1,
         elevation:10,
+        
     },
     botaoNaoEParaMim:{
         backgroundColor:'#FF3030',
@@ -231,7 +170,7 @@ const styles = StyleSheet.create({
         marginTop:10,
         borderRadius:8,
         borderWidth:1,
-        elevation:10
+        elevation:10,
     },
     titleBotao:{
         fontSize:18,

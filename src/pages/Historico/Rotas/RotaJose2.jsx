@@ -4,14 +4,14 @@ import {View, Text, StyleSheet} from 'react-native'
 import MapView from 'react-native-maps';
 import *  as Location from 'expo-location'
 import * as Permission from 'expo-permissions'
-import config from '../../../config/index.json'
+import config from '../../../../config/index.json'
 import MapViewDirections from 'react-native-maps-directions';
 
 
 
-export function RotaYuri(){
+export function RotaJose2(){
     const mapEl = useRef(null)
-    const partida = {latitude: -5.129109831652621, longitude: -42.8272030722766, latitudeDelta: 0.0922, longitudeDelta: 0.0421,}
+    const partida = {latitude: -5.105027333120451, longitude: -42.82922775091872, latitudeDelta: 0.0922, longitudeDelta: 0.0421,}
     const [location, setLocation] = useState(null);
     const destination = {latitude: -5.111598176123656,    longitude:  -42.8537928876194,};
     const [distance, SetDistance] = useState(null);

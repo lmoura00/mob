@@ -11,7 +11,7 @@ import MapViewDirections from 'react-native-maps-directions';
 
 export function RotaVitoria(){
     const mapEl = useRef(null)
-    const partida = {latitude: -5.092015644567642, longitude: -42.84517819532646}
+    const partida = {latitude: -5.092015644567642, longitude: -42.84517819532646, latitudeDelta: 0.0922, longitudeDelta: 0.0421,}
     const [location, setLocation] = useState(null);
     const destination = {latitude: -5.111598176123656,    longitude:  -42.8537928876194,};
     const [distance, SetDistance] = useState(null);
@@ -44,7 +44,7 @@ export function RotaVitoria(){
         <View style={styles.container}>
         <MapView 
             style={styles.map}
-            initialRegion={location}
+            initialRegion={partida}
             showsUserLocation={true}
             ref={mapEl}
         >

@@ -10,6 +10,7 @@ import {useNavigation} from '@react-navigation/native'
 
 
 export function Yuri(){
+    const [alerta, setAlerta] = useState(false)
     const [visible, setVisible] = useState(false)
     const [visible1, setVisible1] = useState(false)
     const navigation = useNavigation()
@@ -73,6 +74,27 @@ export function Yuri(){
                         </View>
                     
                 </Modal>
+
+                <Modal
+                    animationType="fade"
+                    visible={alerta}
+                    statusBarTranslucent={false}
+                    transparent={true}
+                    style={{}}
+                    >
+                        <View style={styles.modal2}>
+                            <Text style={styles.titleModal}>ALERTA</Text>
+                                <Text style={{fontSize:15, textAlign:'center', marginTop:15}}>Mob Timon coleta dados de local para ativar trajetos, localização, mesmo quando o app está fechado ou não está em uso.</Text>
+                        
+                                <TouchableOpacity 
+                                    onPress={()=>navigation.navigate('RotaYuri') || setAlerta(false)} 
+                                    style={styles.botaoModalAlerta}>
+                                        <Text style={styles.textBotao}>CONTINUAR</Text>
+                                </TouchableOpacity>
+                            
+                        </View>
+                    
+                </Modal>
                 
                 <LottieView source={require('../../Assets/95740-profile-person.json')} autoPlay={true} loop={true} style={{marginBottom:280}}/>
                 
@@ -97,7 +119,7 @@ export function Yuri(){
 
                 <KeyboardAvoidingView style={{flexDirection:'row'}}>
                     <Text style={styles.inicioNome}>INÍCIO:</Text>
-                    <Text style={styles.inicioLugar}>Parque Alvorada 19:00 hrs</Text>
+                    <Text style={styles.inicioLugar}>Parque Alvorada 19:00 h</Text>
                 </KeyboardAvoidingView>
 
                 <KeyboardAvoidingView style={{flexDirection:'row'}}>
@@ -105,7 +127,7 @@ export function Yuri(){
                     <Text style={styles.DestinoLugar}>IFMA Campus Timon</Text>
                 </KeyboardAvoidingView>
 
-                <TouchableOpacity style={styles.botaoVerRota}  onPress={()=>navigation.navigate('RotaYuri')}>
+                <TouchableOpacity style={styles.botaoVerRota}  onPress={()=>setAlerta(true)}>
                     <Text style={styles.titleBotao}>VER ROTA</Text>
                 </TouchableOpacity>
 
@@ -273,11 +295,25 @@ const styles = StyleSheet.create({
     },
     titleModal:{
         textAlign:'center',
-        fontSize:17
+        fontSize:17,
+        fontWeight:'bold'
     },
     textBotao:{
         fontSize:15,
         fontWeight:'600',
         textAlign:'center'
+    },
+    botaoModalAlerta:{
+        backgroundColor:'#14BC9C',
+        height: 35,
+        width:"40%",
+        padding:5,
+        borderRadius:15,
+        borderWidth:1,
+        alignSelf:'center',
+        margin:5,
+        elevation:10,
+        marginTop:170
+        
     },
 })

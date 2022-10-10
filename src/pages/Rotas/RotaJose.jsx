@@ -11,7 +11,7 @@ import MapViewDirections from 'react-native-maps-directions';
 
 export function RotaJose(){
     const mapEl = useRef(null)
-    const partida = {latitude: -5.117517200852349, longitude: -42.83394512280961}
+    const partida = {latitude: -5.117517200852349, longitude: -42.83394512280961, latitudeDelta: 0.0922, longitudeDelta: 0.0421,}
     const [location, setLocation] = useState(null);
     const destination = {latitude: -5.111598176123656,    longitude:  -42.8537928876194,};
     const [distance, SetDistance] = useState(null);
@@ -44,7 +44,7 @@ export function RotaJose(){
         <View style={styles.container}>
         <MapView 
             style={styles.map}
-            initialRegion={location}
+            initialRegion={partida}
             showsUserLocation={true}
             ref={mapEl}
         >

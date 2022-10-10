@@ -7,7 +7,7 @@ import {useNavigation} from '@react-navigation/native'
 import LottieView from 'lottie-react-native'
 
 
-export function Odaleia(){
+export function HistoricoOdaleia(){
     const [alerta, setAlerta] = useState(false)
     const [visible1, setVisible1] = useState(false)
     const [visible, setVisible] = useState(false)
@@ -16,61 +16,6 @@ export function Odaleia(){
     return(
         <ScrollView style={{backgroundColor:"#334A58",}}>
             <View style={styles.container}>
-
-            <Modal
-                    animationType="fade"
-                    visible={visible}
-                    statusBarTranslucent={false}
-                    transparent={true}
-                    style={{}}
-                    >
-                        <View style={styles.modal}>
-                            <Text style={styles.titleModal}>ESSA É A CARONA QUE VOCÊ DESEJA?</Text>
-                            <View style={{flexDirection:'row', padding:5, justifyContent:'center', marginTop:40}}>
-                                <TouchableOpacity 
-                                    onPress={()=>setVisible1(true)}
-                                    style={styles.botaoModal2}>
-                                        <Text style={styles.textBotao}>SIM!</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity 
-                                    onPress={()=>setVisible(false)} 
-                                    style={styles.botaoModal1}>
-                                        <Text style={styles.textBotao}>NÃO</Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    
-                </Modal>
-
-                <Modal
-                    animationType="fade"
-                    visible={visible1}
-                    statusBarTranslucent={false}
-                    transparent={true}
-                    style={{}}
-                    >
-                        <View style={styles.modal2}>
-                            <Text style={styles.titleModal}>AGUARDE O MOTORISTA</Text>
-                            
-                            <LottieView 
-                                source={require('../../Assets/92893-man-waiting-car.json')} 
-                                autoPlay={true} 
-                                loop={true} 
-                                style={{
-                                    height:'72%',
-                                    width:'70%',
-                                    alignSelf:'center'
-                                }}
-                            />
-                                <TouchableOpacity 
-                                    onPress={()=>setVisible1(false)===setVisible(false)} 
-                                    style={styles.botaoModal1}>
-                                        <Text style={styles.textBotao}>FECHAR</Text>
-                                </TouchableOpacity>
-                            
-                        </View>
-                    
-                </Modal>
 
                 <Modal
                     animationType="fade"
@@ -86,7 +31,7 @@ export function Odaleia(){
                                 <TouchableOpacity 
                                     onPress={()=>navigation.navigate('RotaOdaleia') || setAlerta(false)} 
                                     style={styles.botaoModalAlerta}>
-                                        <Text style={styles.textBotao}>CONTINUAR</Text>
+                                        <Text style={styles.textBotao}>FECHAR</Text>
                                 </TouchableOpacity>
                             
                         </View>
@@ -95,7 +40,7 @@ export function Odaleia(){
 
 
 
-                <LottieView source={require('../../Assets/95740-profile-person.json')} autoPlay={true} loop={true} style={{marginBottom:300}}/>
+                <LottieView source={require('../../Assets/95740-profile-person.json')} autoPlay={true} loop={true} style={{marginBottom:240}}/>
 
                 <View style={{marginTop:180, alignItems:'center', justifyContent:'center'}}>
                     <Text style={styles.title}>ODALEIA</Text>
@@ -106,31 +51,24 @@ export function Odaleia(){
                 <Text style={styles.texto}>PLACA: PRO - 1243</Text>
                 <Text style={styles.texto}>CONTATO: 86 9 0000 0000</Text>
 
-                <KeyboardAvoidingView style={{flexDirection:'row'}}>
-                    <Text style={styles.vagas}>VAGAS DISPONÍVEIS:</Text>
-                    <Text style={styles.vagasNumero}>4</Text>
-                </KeyboardAvoidingView>
+ 
 
                 <KeyboardAvoidingView style={{flexDirection:'row'}}>
-                    <Text style={styles.inicioNome}>INÍCIO:</Text>
-                    <Text style={styles.inicioLugar}>Mateuzinho 18:45 h</Text>
+                    <Text style={styles.inicioNome}>PARTIDA:</Text>
+                    <Text style={styles.inicioLugar}>Mateuzinho 18:45 hrs</Text>
                 </KeyboardAvoidingView>
 
                 <KeyboardAvoidingView style={{flexDirection:'row'}}>
                     <Text style={styles.DestinoNome}>DESTINO:</Text>
-                    <Text style={styles.DestinoLugar}>IFMA Campus Timon</Text>
+                    <Text style={styles.DestinoLugar}>IFMA Campus Timon 19:05</Text>
                 </KeyboardAvoidingView>
 
                 <TouchableOpacity style={styles.botaoVerRota} onPress={()=>setAlerta(true)}>
                     <Text style={styles.titleBotao}>VER ROTA</Text>
                 </TouchableOpacity>
 
-            <TouchableOpacity style={styles.botaoQueroACarona} onPress={()=>setVisible(true)}>
-                    <Text style={styles.titleBotao}>QUERO A CARONA</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.botaoNaoEParaMim} onPress={()=>navigation.navigate('CaronasDisponiveis')}>
-                    <Text style={styles.titleBotao}>NÃO É PARA MIM</Text>
+                <TouchableOpacity style={styles.botaoNaoEParaMim} onPress={()=>navigation.navigate('Historico')}>
+                    <Text style={styles.titleBotao}>VOLTAR</Text>
                 </TouchableOpacity>
 
 

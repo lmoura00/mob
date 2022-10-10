@@ -5,79 +5,9 @@ import {useNavigation} from '@react-navigation/native'
 import * as ImagePicker from 'expo-image-picker';
 
 
-export function CadastroMot3(){
-
-    const pickImage1 = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.All,
-          allowsEditing: true,
-          aspect: [7, 6],
-          quality: 1,
-        });
-    
-        console.log(result);
-    
-        if (!result.cancelled) {
-          SetImage1(result.uri);
-        }
-      };
-
-    
-      const pickImage2 = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.All,
-          allowsEditing: true,
-          aspect: [7, 6],
-          quality: 1,
-        });
-    
-        console.log(result);
-    
-        if (!result.cancelled) {
-          SetImage2(result.uri);
-        }
-      };
-      
-      const pickImage3 = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.All,
-          allowsEditing: true,
-          aspect: [7, 6],
-          quality: 1,
-        });
-    
-        console.log(result);
-    
-        if (!result.cancelled) {
-          SetImage3(result.uri);
-        }
-      };
-
-      const pickImage4 = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.All,
-          allowsEditing: true,
-          aspect: [7, 6],
-          quality: 1,
-        });
-    
-        console.log(result);
-    
-        if (!result.cancelled) {
-          SetImage4(result.uri);
-        }
-      };
-    
-
-    const [visible, setVisible] = useState(false);
+export function CadastroMot4(){
     const navigation = useNavigation()
-
-    const [Image1, SetImage1] = useState(null)
-    const [Image2, SetImage2] = useState(null)
-    const [Image3, SetImage3] = useState(null)
-    const [Image4, SetImage4] = useState(null)
-
-
+    const [visible, setVisible] = useState(false)
     return(
         <ScrollView>
 
@@ -106,54 +36,17 @@ export function CadastroMot3(){
                     
                 </Modal>
 
-               
+                
                 <Text style={styles.title1}>CADASTRAR MOTORISTA: ANEXOS</Text>
-               
+
+                <TextInput placeholder="SOBRE VOCÊ..." style={{height:345, width:'70%', backgroundColor:'#f9f9f9', marginTop:55, borderRadius:8, paddingHorizontal:10}}></TextInput>
                 
-                <Text style={styles.title}>SELFIE + DOCUMENTO</Text>
-                {Image1 && <Image source={{ uri: Image1 }} style={styles.imagem} />}
-                <TouchableOpacity onPress={pickImage1} style={styles.botao3}>
-                    <Text style={styles.textBotao}>Selecione a sua foto</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={()=>SetImage1(null)} style={styles.botao4}>
-                    <Text style={styles.textBotao}>Apagar foto</Text>
-                </TouchableOpacity>
-
-                <Text style={styles.title}>CNH</Text>
-                {Image2 && <Image source={{ uri: Image2 }} style={styles.imagem} />}
-                <TouchableOpacity onPress={pickImage2} style={styles.botao3}>
-                    <Text style={styles.textBotao}>Selecione a sua foto</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={()=>SetImage2(null)} style={styles.botao4}>
-                    <Text style={styles.textBotao}>Apagar foto</Text>
-                </TouchableOpacity>
-
-                <Text style={styles.title}>CRVL</Text>
-                {Image3 && <Image source={{ uri: Image3 }} style={styles.imagem} />}
-                <TouchableOpacity onPress={pickImage3} style={styles.botao3}>
-                    <Text style={styles.textBotao}>Selecione a sua foto</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={()=>SetImage3(null)} style={styles.botao4}>
-                    <Text style={styles.textBotao}>Apagar foto</Text>
-                </TouchableOpacity>
-
-                <Text style={{fontSize:19, color:'#fff', fontWeight:'350', marginTop: 25}}>SELECIONE A SUA FOTO:</Text>
-
-                {Image4 && <Image source={{ uri: Image4 }} style={styles.imagem} />}
-                <TouchableOpacity onPress={pickImage4} style={styles.botao3}>
-                    <Text style={styles.textBotao}>Selecione a sua foto</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={()=>SetImage4(null)} style={styles.botao4}>
-                    <Text style={styles.textBotao}>Apagar foto</Text>
-                </TouchableOpacity>
+                
+                
 
                 
-                <TouchableOpacity style={styles.botao1} onPress={()=>navigation.navigate("CadastroMot4")}>
-                    <Text style={styles.textBotao}>PRÓXIMO</Text>
+                <TouchableOpacity style={styles.botao1} onPress={()=>Alert.alert("Seu dados foram enviados com sucesso")}>
+                    <Text style={styles.textBotao}>SALVAR</Text>
                 </TouchableOpacity>
 
 
@@ -193,8 +86,7 @@ const styles = StyleSheet.create({
         fontWeight:'500',
         textAlign:'center',
         marginTop:10,
-        textDecorationLine:'underline',
-        marginBottom:10,
+        textDecorationLine:'underline'
     },
     input:{
         backgroundColor:'#D9D9D9',

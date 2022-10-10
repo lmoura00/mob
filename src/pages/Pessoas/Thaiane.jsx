@@ -8,6 +8,7 @@ import LottieView from 'lottie-react-native'
 
 
 export function Thaiane(){
+    const [alerta, setAlerta] = useState(false)
     const [visible, setVisible] = useState(false)
     const navigation = useNavigation()
     const [visible1, setVisible1] = useState(false)
@@ -66,6 +67,27 @@ export function Thaiane(){
                                 <TouchableOpacity 
                                     onPress={()=>setVisible1(false)===setVisible(false)} 
                                     style={styles.botaoModal1}>
+                                        <Text style={styles.textBotao}>CONTINUAR</Text>
+                                </TouchableOpacity>
+                            
+                        </View>
+                    
+                </Modal>
+
+                <Modal
+                    animationType="fade"
+                    visible={alerta}
+                    statusBarTranslucent={false}
+                    transparent={true}
+                    style={{}}
+                    >
+                        <View style={styles.modal2}>
+                            <Text style={styles.titleModal}>ALERTA</Text>
+                                <Text style={{fontSize:15, textAlign:'center', marginTop:15}}>Mob Timon coleta dados de local para ativar trajetos, localização, mesmo quando o app está fechado ou não está em uso.</Text>
+                        
+                                <TouchableOpacity 
+                                    onPress={()=>navigation.navigate('RotaThaiane') || setAlerta(false)} 
+                                    style={styles.botaoModalAlerta}>
                                         <Text style={styles.textBotao}>FECHAR</Text>
                                 </TouchableOpacity>
                             
@@ -93,7 +115,7 @@ export function Thaiane(){
 
                 <KeyboardAvoidingView style={{flexDirection:'row'}}>
                     <Text style={styles.inicioNome}>INÍCIO:</Text>
-                    <Text style={styles.inicioLugar}>IFMA Campus Timon 12Hrs</Text>
+                    <Text style={styles.inicioLugar}>IFMA Campus Timon 12H</Text>
                 </KeyboardAvoidingView>
 
                 <KeyboardAvoidingView style={{flexDirection:'row'}}>
@@ -101,7 +123,7 @@ export function Thaiane(){
                     <Text style={styles.DestinoLugar}>Centro - Timon</Text>
                 </KeyboardAvoidingView>
 
-                <TouchableOpacity style={styles.botaoVerRota} onPress={()=>navigation.navigate('RotaThaiane')}>
+                <TouchableOpacity style={styles.botaoVerRota} onPress={()=>setAlerta(true)}>
                     <Text style={styles.titleBotao}>VER ROTA</Text>
                 </TouchableOpacity>
 
@@ -256,7 +278,8 @@ const styles = StyleSheet.create({
     },
     titleModal:{
         textAlign:'center',
-        fontSize:17
+        fontSize:17,
+        fontWeight:'bold'
     },
     textBotao:{
         fontSize:15,
@@ -272,5 +295,18 @@ const styles = StyleSheet.create({
         marginVertical:280,
         width:"80%",
         height:"50%",
+    },
+    botaoModalAlerta:{
+        backgroundColor:'#14BC9C',
+        height: 35,
+        width:"40%",
+        padding:5,
+        borderRadius:15,
+        borderWidth:1,
+        alignSelf:'center',
+        margin:5,
+        elevation:10,
+        marginTop:170
+        
     },
 })

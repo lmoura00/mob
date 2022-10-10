@@ -12,7 +12,7 @@ import MapViewDirections from 'react-native-maps-directions';
 export function RotaMariana(){
     const mapEl = useRef(null)
     const [location, setLocation] = useState(null);
-    const partida = {latitude: -5.111598176123656,    longitude:  -42.8537928876194,};
+    const partida = {latitude: -5.111598176123656,    longitude:  -42.8537928876194, latitudeDelta: 0.0922, longitudeDelta: 0.0421,};
     const destination = {latitude: -5.105774416078441,    longitude:  -42.75391901772511 };
     const [distance, SetDistance] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
@@ -44,7 +44,7 @@ export function RotaMariana(){
         <View style={styles.container}>
         <MapView 
             style={styles.map}
-            initialRegion={location}
+            initialRegion={partida}
             showsUserLocation={true}
             ref={mapEl}
         >

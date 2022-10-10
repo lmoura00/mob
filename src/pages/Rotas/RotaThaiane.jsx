@@ -13,7 +13,7 @@ export function RotaThaiane(){
     const mapEl = useRef(null)
     const [location, setLocation] = useState(null);
     const destination = {latitude: -5.098413188572681,  longitude:  -42.824040775420784 };
-    const partida = {latitude: -5.111598176123656,    longitude:  -42.8537928876194,};
+    const partida = {latitude: -5.111598176123656,    longitude:  -42.8537928876194, latitudeDelta: 0.0922, longitudeDelta: 0.0421,};
     const [distance, SetDistance] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const GOOGLE_MAPS_APIKEY = config.googleApi;
@@ -44,7 +44,7 @@ export function RotaThaiane(){
         <View style={styles.container}>
         <MapView 
             style={styles.map}
-            initialRegion={location}
+            initialRegion={partida}
             showsUserLocation={true}
             ref={mapEl}
         >

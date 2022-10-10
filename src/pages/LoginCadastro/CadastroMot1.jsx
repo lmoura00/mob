@@ -35,9 +35,9 @@ export function CadastroMot1(){
             </Modal>
 
             <View style={{alignItems:'center'}}>
-                <Text style={styles.line1}>------------------------------------------------</Text>
+                
                 <Text style={styles.title1}>CADASTRAR MOTORISTA: PARTE 1</Text>
-                <Text style={styles.line2}>------------------------------------------------</Text>
+                
             </View>
             
             <Text style={styles.title}>NOME COMPLETO</Text>
@@ -92,7 +92,11 @@ const styles = StyleSheet.create({
     title1:{
         fontSize:20,
         color:'#fff',
-        fontWeight:'500'
+        fontWeight:'500',
+        textAlign:'center',
+        marginTop:10,
+        textDecorationLine:'underline',
+        marginBottom:10,
     },
     input:{
         backgroundColor:'#D9D9D9',

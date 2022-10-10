@@ -4456,6 +4456,11 @@ lottie-react-native@5.1.3:
     invariant "^2.2.2"
     react-native-safe-modules "^1.0.3"
 
+lottie-web@^5.5.7:
+  version "5.9.6"
+  resolved "https://registry.yarnpkg.com/lottie-web/-/lottie-web-5.9.6.tgz#62ae68563355d3e04aa75d53dec3dd4bea0e57c9"
+  integrity sha512-JFs7KsHwflugH5qIXBpB4905yC1Sub2MZWtl/elvO/QC6qj1ApqbUZJyjzJseJUtVpgiDaXQLjBlIJGS7UUUXA==
+
 lru-cache@^6.0.0:
   version "6.0.0"
   resolved "https://registry.npmjs.org/lru-cache/-/lru-cache-6.0.0.tgz"
@@ -5466,7 +5471,7 @@ prompts@^2.3.2, prompts@^2.4.0:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@*, prop-types@^15.6.0, prop-types@^15.6.1:
+prop-types@*, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -5583,6 +5588,13 @@ react-native-codegen@^0.69.2:
     flow-parser "^0.121.0"
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
+
+react-native-date-picker@^4.2.5:
+  version "4.2.5"
+  resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-4.2.5.tgz#d2e3ff6c8616313bdd75c48ac56a84a57d8a27a3"
+  integrity sha512-YjwiMpZEnVVS+ymLvmJDicVZ3pSR+nJHgtAhctMl6fO8f7iRNcYhY427gemlTBf2Ji+XIAK0Agyl255DhaemFw==
+  dependencies:
+    prop-types "^15.8.1"
 
 react-native-datepicker@^1.7.2:
   version "1.7.2"
@@ -5709,6 +5721,13 @@ react-shallow-renderer@16.15.0:
   dependencies:
     object-assign "^4.1.1"
     react-is "^16.12.0 || ^17.0.0 || ^18.0.0"
+
+react-useanimations@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/react-useanimations/-/react-useanimations-2.0.8.tgz#29ebfe4deda414b9dd2e6c8513d3d3972a2efa39"
+  integrity sha512-pjA5M8qA2NF3kvvu8yuBToOt79fdqXpx3Ba32ci8uG9zSv5XHz1d4OmDqqWARwaFWLIRS1Jan3HllpsqUWiKjw==
+  dependencies:
+    lottie-web "^5.5.7"
 
 react@18.0.0:
   version "18.0.0"

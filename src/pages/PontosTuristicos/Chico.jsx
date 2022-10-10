@@ -23,8 +23,8 @@ const imagens = [
 ]   
 
 export function Chico(){
-
     const navigation = useNavigation()
+    const [alerta, setAlerta] = useState(false)
     const [visible, setVisible] = useState(false);
     return(
            <View style={{backgroundColor:'#334A58'}}>
@@ -48,6 +48,29 @@ export function Chico(){
                                     
                                 </View>
                             
+                        </Modal>
+
+
+
+                        <Modal
+                            animationType="fade"
+                            visible={alerta}
+                            statusBarTranslucent={false}
+                            transparent={true}
+                            style={{}}
+                            >
+                                <View style={styles.modal2}>
+                                    <Text style={styles.titleModal}>ALERTA</Text>
+                                        <Text style={{fontSize:15, textAlign:'center', marginTop:15}}>Mob Timon coleta dados de local para ativar trajetos, localização, mesmo quando o app está fechado ou não está em uso.</Text>
+                                
+                                        <TouchableOpacity 
+                                            onPress={()=>navigation.navigate('RotaChico') || setAlerta(false)} 
+                                            style={styles.botaoModalAlerta}>
+                                                <Text style={styles.textBotao}>CONTINUAR</Text>
+                                        </TouchableOpacity>
+                            
+                                </View>
+                    
                         </Modal>
 
                    <View style={styles.containerImages}>
@@ -107,7 +130,7 @@ export function Chico(){
                            <Text style={styles.textoBotao}>SOBRE</Text>
                        </TouchableOpacity>
 
-                       <TouchableOpacity style={styles.verRota} onPress={()=>navigation.navigate('RotaChico')}>
+                       <TouchableOpacity style={styles.verRota} onPress={()=>setAlerta(true)}>
                            <Text style={styles.textoBotao}>VER ROTA</Text>
                        </TouchableOpacity>
 
@@ -262,5 +285,28 @@ const styles = StyleSheet.create({
         fontSize:20,
         textAlign:'center',
         padding:5
+    },    
+    botaoModalAlerta:{
+        backgroundColor:'#FF3030',
+        height: 35,
+        width:"40%",
+        padding:5,
+        borderRadius:15,
+        borderWidth:1,
+        alignSelf:'center',
+        margin:5,
+        elevation:10,
+        marginTop:170
+        
+    },
+    modal2:{
+        alignSelf: 'center',
+        backgroundColor:'#f9f9f9',
+        padding:20,
+        elevation:10,
+        borderRadius:20,
+        marginVertical:280,
+        width:"80%",
+        height:"50%",
     },
 })

@@ -4,16 +4,16 @@ import {View, Text, StyleSheet} from 'react-native'
 import MapView from 'react-native-maps';
 import *  as Location from 'expo-location'
 import * as Permission from 'expo-permissions'
-import config from '../../../config/index.json'
+import config from '../../../../config/index.json'
 import MapViewDirections from 'react-native-maps-directions';
 
 
 
-export function RotaYuri(){
+export function RotaMariana2(){
     const mapEl = useRef(null)
-    const partida = {latitude: -5.129109831652621, longitude: -42.8272030722766, latitudeDelta: 0.0922, longitudeDelta: 0.0421,}
     const [location, setLocation] = useState(null);
-    const destination = {latitude: -5.111598176123656,    longitude:  -42.8537928876194,};
+    const partida = {latitude: -5.118836807167505,     longitude:  -42.82463727556615 , latitudeDelta: 0.0922, longitudeDelta: 0.0421,};
+    const destination = {latitude: -5.105774416078441,    longitude:  -42.75391901772511 };
     const [distance, SetDistance] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const GOOGLE_MAPS_APIKEY = config.googleApi;
@@ -70,9 +70,9 @@ export function RotaYuri(){
             />
 
         </MapView>
-            <View style={{backgroundColor:'#fff', width:'100%', height:100, alignSelf:'center', alignItems:'center'}}>
+            <View style={{backgroundColor:'#fff', width:'80%', height:20, marginBottom:15, alignSelf:'center', alignItems:'center'}}>
                 {distance && 
-                    <Text style={{fontSize:18}}>Distância: {distance} m</Text>
+                    <Text style={{fontSize:18,}}>Distância: {distance} m</Text>
                 }
             </View>
 

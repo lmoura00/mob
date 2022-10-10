@@ -15,6 +15,7 @@ import LottieView from 'lottie-react-native'
 export function Login(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [PasswordVisible, setPasswordVisible] = useState(true)
 
     const {setUser} = useAuth()
     const navigation = useNavigation()
@@ -23,18 +24,16 @@ export function Login(){
     const [logotipo] = useState(new Animated.ValueXY({x:200, y:200})) 
 
     const [isEnabled, setIsEnabled] = useState(false);
-    const [EntrarProfessor, SetEntrarProfessor] = useState(
-    )
-    const [EntrarPax, SetEntrarPax] = useState(null)
 
 
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-    if (isEnabled){
-        Alert.alert('motorista')
-    } else { 
-        Alert.alert('passageiro')
+
+    const toggleSwitch = () => setIsEnabled(previousState => !previousState) ;
+    
+    if(isEnabled === false){
+       ()=> setUser('lucas')
+    }   else{
+        ()=>setUser(null)
     }
-
 
 
     useEffect(()=> {
@@ -118,13 +117,20 @@ export function Login(){
                 >
 
                 <View style={{flexDirection:'row'}}>
-                    <LottieView source={require('../../Assets/68036-mail.json')} autoPlay={true} loop={true} style={{marginRight:115}}/>
+                    <LottieView 
+                        source={require('../../Assets/68036-mail.json')} 
+                        autoPlay={true} 
+                        loop={true} 
+                        style={{marginRight:125}}
+                    />
+            
                     <TextInput 
-                    placeholder="E-MAIL" 
-                    keyboardType="email-address" 
-                    value={email}
-                    onChangeText={setEmail} 
-                    style={styles.EmailInput}></TextInput>
+                        placeholder="E-MAIL" 
+                        keyboardType="email-address" 
+                        value={email}
+                        onChangeText={setEmail} 
+                        style={styles.EmailInput}
+                    />
                 </View>
 
                 <View style={{flexDirection:'row'}}>
@@ -132,22 +138,28 @@ export function Login(){
                         source={require('../../Assets/56212-key-car.json')} 
                         autoPlay={true} 
                         loop={true} 
-                        style={{marginRight:115}}/>
-                    <TextInput 
-                        placeholder="SENHA" 
-                        keyboardType='default'
-                        value={password}
-                        onChangeText={setPassword} 
-                        maxLength={8} 
-                        secureTextEntry={true} 
-                        style={styles.SenhaInput} >
-                    </TextInput>
+                        style={{marginRight:125}}
+                    />
+                    <View style={styles.SenhaInputContainer}>
+                        <TextInput 
+                            placeholder="SENHA" 
+                            keyboardType='default'
+                            value={password}
+                            onChangeText={setPassword} 
+                            maxLength={8} 
+                            secureTextEntry={PasswordVisible} 
+                            style={styles.SenhaInput}
+                        />
+                        <TouchableOpacity onPress={()=>setPasswordVisible(!PasswordVisible)} style={{marginLeft:25 }}>
+                            <Ionicons name="eye" size={25} style={{}}/>
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
                 <KeyboardAvoidingView >
                     <TouchableOpacity 
                         style={styles.botaoEntrar} 
-                        onPress={()=> setUser('lucas')}>
+                        onPress={()=> setUser('lucas') || console.log(isEnabled)}>
                             
                         <Text style={styles.titleBotao}>ENTRAR</Text>
                     </TouchableOpacity>
@@ -208,7 +220,7 @@ const styles = StyleSheet.create({
     },
     EmailInput:{
         backgroundColor:'#D9D9D9',
-        width:'56%',
+        width:'65%',
         height:45,
         borderRadius:15,
         textAlign:'center',
@@ -220,16 +232,25 @@ const styles = StyleSheet.create({
         opacity:0.6
     },
     SenhaInput:{
-        backgroundColor:'#D9D9D9',
-        borderRadius:15,
         textAlign:'center',
         fontSize:18,
         fontWeight:'500',
+        width:'55%',
+        height:50,
+        marginLeft:40
+    },
+    SenhaInputContainer:{
+        backgroundColor:'#D9D9D9',
+        borderRadius:15,
         borderWidth:1,
-        width:'56%',
+        width:'65%',
         height:45,
         marginLeft:85,
-        opacity:0.6
+        opacity:0.6,
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'center',
+        alignSelf:'center'
     },
     botaoEntrar:{
         backgroundColor:'#fff',

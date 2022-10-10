@@ -11,7 +11,7 @@ import MapViewDirections from 'react-native-maps-directions';
 
 export function RotaOdaleia(){
     const mapEl = useRef(null)
-    const partida = {latitude: -5.108007511247214, longitude: -42.8221779624311}
+    const partida = {latitude: -5.108007511247214, longitude: -42.8221779624311, latitudeDelta: 0.0922, longitudeDelta: 0.0421,}
     const [location, setLocation] = useState(null);
     const destination = {latitude: -5.111598176123656,    longitude:  -42.8537928876194,};
     const [distance, SetDistance] = useState(null);
@@ -44,7 +44,7 @@ export function RotaOdaleia(){
         <View style={styles.container}>
         <MapView 
             style={styles.map}
-            initialRegion={location}
+            initialRegion={partida}
             showsUserLocation={true}
             ref={mapEl}
         >
