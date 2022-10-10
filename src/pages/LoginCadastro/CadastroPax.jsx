@@ -89,7 +89,7 @@ export function CadastroPax(){
             </TouchableOpacity>
         
 
-            <TouchableOpacity style={styles.botao1} onPress={()=>Alert.alert("Seu cadastro foi efetivado com sucesso.")}>
+            <TouchableOpacity style={styles.botao1} onPress={()=>Alert.alert("Seu cadastro foi efetivado com sucesso.") || navigation.navigate('Login')}>
                 <Text style={styles.textBotao}>SALVAR</Text>
             </TouchableOpacity>
 

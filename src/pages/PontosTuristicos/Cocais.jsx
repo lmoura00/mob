@@ -49,15 +49,17 @@ export function Cocais() {
         >
           <View style={styles.modal}>
             <View
-              style={{ flexDirection: "row", justifyContent: "space-evenly" }}
+              style={{ flexDirection: "row", justifyContent: "center", alignItems:'center', backgroundColor: "#fff",elevation:10}}
             >
-              <Text style={styles.titleModal}>SOBRE</Text>
+              <Text style={styles.titleModal}>SOBRE:</Text>
+              <TouchableOpacity onPress={()=>setVisible(false)}>
               <LottieView
                 source={require("../../Assets/28566-to-x.json")}
                 autoPlay={true}
                 loop={true}
-                style={{ width: 30, height: 30 }}
+                style={{ width: 50, height: 50, marginLeft:30 }}
               />
+              </TouchableOpacity>
             </View>
 
             <Text style={styles.textoModal}>
@@ -86,7 +88,19 @@ export function Cocais() {
           style={{}}
         >
           <View style={styles.modal2}>
-            <Text style={styles.titleModal}>ALERTA</Text>
+            <View
+                style={{ flexDirection: "row", justifyContent: "center", alignItems:'center', backgroundColor: "#fff",elevation:10}}
+                >
+                <Text style={styles.titleModal}>ALERTA:</Text>
+                <TouchableOpacity onPress={()=>setAlerta(false)}>
+                <LottieView
+                    source={require("../../Assets/28566-to-x.json")}
+                    autoPlay={true}
+                    loop={true}
+                    style={{ width: 50, height: 50, marginLeft:30 }}
+                />
+                </TouchableOpacity>
+            </View>
             <Text style={{ fontSize: 15, textAlign: "center", marginTop: 15 }}>
               Mob Timon coleta dados de local para ativar trajetos, localização,
               mesmo quando o app está fechado ou não está em uso.
@@ -316,6 +330,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 8,
     borderWidth: 1,
+    elevation:10,
   },
   verRota: {
     backgroundColor: "#14BC9C",
@@ -324,6 +339,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 8,
     borderWidth: 1,
+    elevation:10,
   },
   voltar: {
     backgroundColor: "#FF3030",
@@ -333,6 +349,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     marginBottom: 30,
+    elevation:10,
   },
   textoBotao: {
     fontSize: 18,
@@ -366,8 +383,9 @@ const styles = StyleSheet.create({
   titleModal: {
     textAlign: "center",
     fontSize: 20,
-    backgroundColor: "#fff",
-    marginLeft: 25,
+    marginLeft: 60,
+    fontWeight:'bold',
+    textDecorationLine:'underline'
   },
   textBotao: {
     fontSize: 15,

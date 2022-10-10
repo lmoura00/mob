@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Image, View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, Modal, ScrollView} from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 
-import * as ImagePicker from 'expo-image-picker';
+
 
 
 export function CadastroMot4(){
@@ -45,7 +45,7 @@ export function CadastroMot4(){
                 
 
                 
-                <TouchableOpacity style={styles.botao1} onPress={()=>Alert.alert("Seu dados foram enviados com sucesso")}>
+                <TouchableOpacity style={styles.botao1} onPress={()=>Alert.alert("Seu dados foram enviados com sucesso") || navigation.navigate('Login')}>
                     <Text style={styles.textBotao}>SALVAR</Text>
                 </TouchableOpacity>
 

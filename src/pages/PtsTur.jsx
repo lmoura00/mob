@@ -58,6 +58,12 @@ const navigation = useNavigation()
                     <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
             </TouchableOpacity>
 
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Jericoroa')}>
+                    <Image source={jericoroa} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>"JERICOROA"</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
             <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Roncador')}>
                     <Image source={roncador} style={styles.imageSmaw}></Image>
                     <Text style={styles.title1}>RONCADOR</Text>
