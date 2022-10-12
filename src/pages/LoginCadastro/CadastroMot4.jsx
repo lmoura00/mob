@@ -45,7 +45,7 @@ export function CadastroMot4(){
                 
 
                 
-                <TouchableOpacity style={styles.botao1} onPress={()=>Alert.alert("Seu dados foram enviados com sucesso") || navigation.navigate('Login')}>
+                <TouchableOpacity style={styles.botao1} onPress={()=>Alert.alert("Seu dados foram enviados com sucesso") && navigation.navigate('Login')}>
                     <Text style={styles.textBotao}>SALVAR</Text>
                 </TouchableOpacity>
 

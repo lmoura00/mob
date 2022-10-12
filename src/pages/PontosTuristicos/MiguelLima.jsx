@@ -20,19 +20,15 @@ const { width } = Dimensions.get("window");
 const height = width * 0.9;
 
 const imagens = [
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22449868_1957084384514617_8316780327499194748_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeHZLaDWgp3dSVQBiA2hTSoXkV6Krd_RilyRXoqt39GKXLizqhRMvvKjTtRcRBSQ2gxFwRJX5EYfLgyakrfm6lp9&_nc_ohc=w0XWli1CO18AX8KBWYl&_nc_ht=scontent.fthe18-1.fna&oh=00_AT_wM5AZgaUW5Agoz-pXbLofWLzPJX4iqbUy3xLUPA9UDQ&oe=634E69F9",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22449896_1957084364514619_7551983529861275600_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeGpFi8E1ZeIiznij2diZuW8s_5YREWY2cKz_lhERZjZwpQW0ok3kaXFSLMksREIduPPRJTq3DY5AmeQUuywIdQi&_nc_ohc=6LhcdKcebqgAX_I2SQ8&tn=3WG5uJQzW1OH0zMc&_nc_ht=scontent.fthe18-1.fna&oh=00_AT_M-MxLkthu9zRyNX-RVnIxwfVTA5aEaDi6Spv4xEcaTw&oe=634B79EF",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22449724_1957084361181286_2237347879569093642_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeHlhaXMct3Fr4wxhIdhI4ul2oIs7DOyxkfagizsM7LGR5_BNTrBarIw9MpWQ_I_iUNQz0fhN6szzxBvZzUXjBLv&_nc_ohc=qwdKXDzvOtgAX8MFf8y&_nc_ht=scontent.fthe18-1.fna&oh=00_AT9_cFOQ2oPY888zdSxivKy1K5B2eChM1uPH_RdKb9s88w&oe=634C2988",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22448564_1957084341181288_8606313369812939067_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeHOICdm6ORPjJzVLRmsdI5vmSuAm8Jh0ZCZK4CbwmHRkH4QDE4jKcPIerOhKzWorw7CuMyTPrh5kyr2PRV_nzjS&_nc_ohc=_XzFgZBddXsAX8fiVMY&tn=3WG5uJQzW1OH0zMc&_nc_ht=scontent.fthe18-1.fna&oh=00_AT-NVFycYkcBDDugDIU3E3cHCGLkNs7wy50FgTTEmBIMOQ&oe=634D0DEE",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22448621_1957084281181294_5160790516998986076_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeG6PfdfvsiMxgJnI36MBYDD0RmfVQ7XjiLRGZ9VDteOIshnwLKrwSXo6aIasqurwP8mp2AqAIeSqN85QTUhdxbO&_nc_ohc=GWoIQ7eGKeAAX82YSzj&tn=3WG5uJQzW1OH0zMc&_nc_ht=scontent.fthe18-1.fna&oh=00_AT_wvcUTGdLL9qjhJxeR0VfgHmZCxRdmam5vkA_b3XwVDA&oe=634DD673",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22519613_1957084277847961_7661633805960970105_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeElv5foNfnK6R99qDRzef0MZSxDwkJszzhlLEPCQmzPOKDwmLNMomkm3f6mQip179_2dk2yKyY4LfpW59NlMArU&_nc_ohc=ZVSMUfLKPBsAX_2f0UH&_nc_ht=scontent.fthe18-1.fna&oh=00_AT-4tsFDOpoCgsMMEvSOUJCSsg_c3e4ju5z0gq3TuQwMsA&oe=634EA8B8",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22552321_1957084231181299_5073876818718488883_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeFaj_Ms03dHq6EwJtTqzVTdElxkKzmMTCQSXGQrOYxMJPpa-UOzET4mgx0rSmB4zG543pFP4pySpBZId6aqcTxH&_nc_ohc=NUesrM70A_QAX8h5Hqs&_nc_ht=scontent.fthe18-1.fna&oh=00_AT9lisFyd6btAvpm1mo1caKpuNqebO490Biq4wnkej9L4A&oe=634BE3C3",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t31.18172-8/1500964_1459732130916514_893422592_o.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9267fe&_nc_eui2=AeGtH1H1JWFyJFw7KTCsCDO3MUJZI1kTSAsxQlkjWRNICxOYrdEfVZBvUsXR0Vk4lk9fYsWUkP82OAhnl3Fhw3n-&_nc_ohc=Dk2pzfOr_McAX-DXgEd&_nc_ht=scontent.fthe18-1.fna&oh=00_AT-aHYy3ku-v0PVecGy-zhifQpY28fY37TAeMdLbkJBtTQ&oe=634E817B",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t31.18172-8/1492642_1452968164926244_106881821_o.jpg?_nc_cat=102&ccb=1-7&_nc_sid=9267fe&_nc_eui2=AeFqwypEhHIiwp4buEmtbZx6gN_T_jmD8LeA39P-OYPwtw-kmZRq7I3X87WFCjP3_BicFxH4j_ogAiqbZ8h0d85r&_nc_ohc=Q7qsU1iirDsAX8e0_YF&_nc_oc=AQnCvBahnSNrEsZ-SN6cy3gIl_ONpeAM9EMefoQcoeX4535uu3pFgvcAYst3xkqWC4GHtOuCJT3CFAmGcvAzVpzI&_nc_ht=scontent.fthe18-1.fna&oh=00_AT_Amn2vtxRWmzcHwWvYMhHTs_xn0iDl916j1-ebndQMAw&oe=634B3A48",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t31.18172-8/860399_1432655040290890_1464674184_o.jpg?_nc_cat=108&ccb=1-7&_nc_sid=9267fe&_nc_eui2=AeGKN_4rcNY9e_5jNOcj1mliwIbye0SX7bDAhvJ7RJftsO3jq7XTwVSRF_TFQMAnzv709DAE0xmTxZAiCBUUfX_H&_nc_ohc=MBaCDHjFO6EAX8pt_qr&_nc_ht=scontent.fthe18-1.fna&oh=00_AT8wsMPfhSAXFzA_k0Dboex7jIOKuBgulaumdz5SXflDjw&oe=634BC394",
+  "https://lh3.googleusercontent.com/6xg2kAGYbp3N5XjZlO1ylZPk0woOOLcoOHnRrm9eDqVgIQhB3E2DNczrlJKGoqP12imQiFzNyNm_f58lonoJmg0BHS_XU0CWaLJ8AyJ9Q91otSZhOx0Gtm0CiBVGG65wA6BMTv3sY-7Y06tuOhrdkVcPhShcMUhP2ZRfk9LfSaNgaNAbZRRO8uKvmX-b9XVZX19R8BgGQgxPyh_JSeSYTi-IQ8yQbf-7C4qxfDN6n7bVcKuXFtFLPTux0Jj2_kzSgybVdptduvjshexyamOfZ3pGoZ8CTsdrKYgtq6cS2H0Oayrk_-OgvjQ7DCnupo8seLhE6I2nN0PTvUmlKHEEu-9GYcCiFkpTaovtbFy6H2gbImwwDnEXnPOiy0XlNYM1bql8Lk7cZmgGFgwbHhdo30mDZb6TkQslh9aPw2QVnJCcbQc1SHaanHygrFAni5Umm-obcJ4jFRnwmctzPZ3VDhb4S4dcfV7e3Hrs-BFWUdw7anfzxp-wcpH5nQF5wmZ3W9jp1wcYez7vfrVQ8Gar0RsUJBSDnK9-8Xsrr24b_3eUaa8KFtJ9YcTQ31M3PGUrjy4mN556T2ERjjb4H1T460Xt1ywfx0vwo4TmO66qVynUqKIQOBF-fsnVg1X-hJeEmo5QcSM2riGiDOY2TA1pzx7XlFM0gz0cUDf2fkz2Q1autG7L31yqFOMIBQUJjnAqKM5cfh55MrzmBk0yhhGW6vXqw0RLM505PaUYVnJrFzfeFf27mdQKVeQhwxjC_CFxDkApW0mZpZrx5aZKmhP4TNz_ASLVG3R1gNIw5_hdAsT0N6WQqXd3fUxjm8IiP5NwKV61nPRBSoygPWW28VBEO_70km49bNJ8WBBW-xyReuGAoc8lz4UlBX4Cz-liM8FoAWIGPmGNVHrnjAM6TsK1vpXkedBTDtpmL__iwEq0-exkm4On0usvKxQcNd42PHhjy4nD3u1Yg0MRj23k4AqPkLzrFduvsfCammKvYJlMKTKpFw=w507-h337-no?authuser=1",
+  "https://lh3.googleusercontent.com/YWyd5LomPfrZA9lg812bPpwvBmRg2teyja4ktNzMv4PsF---52vlk9YZceltYjkdC1z85axZS4dZmfh16RSmBORhvBEyhFNwOKokZBAndVZ_aBAkLAZ7p00MJgLZQOSGLLIkFaS3mJUEpCZIzLveZ8Tju3rgZU1fia8-hO5KNmgJ9xmhgbBdvIlTzBR40IqGX2BqR_W6v1Me9dpHte5ckLmrUy3qzlsYydGeMRlHoDGVzdNYW1YkIU1XVAI5pEBxL3wBla90gQuQUX0WzH4uYColxvUsNVhvz4l1NlbkY13mgyjdG7C0zV0ikClkQAqYwCoYd4xN8cBGpdvnDV3H8pc8jyfS8IzqS0Q_KqVUkKi9byOzqxPfSZppZWKVD8_yoEVoTiNOkRSJbbgwBNf2LOtvPfPHkiWDqirzOQnTySt5WrmBEq_NTmWxg2cNqYFQsogS-r93zcINoNocJGX6T41JlZLLNxTolybxa2D-jelOSNiBYvvP_PuZhEy2BqC_jPnqIT-pCW-4MU7CdahkQ4xmEvOFyetm0bgS9ee8e9-rVS-o8JM73K4qopH2gTGiDV-q6Yht4hjXI5-ldricJzVxRJA1tv74t3Sa7XXeqP6ElqYK2vS0_K9fd0Sfo1R0YMlbeaGGsclaAlovE7iSxSeV_Jela1uC_rLwq7Ldldr_zyWJsS5j0pkfos0ocdXcWcvVYloWWYwy36BegWvaeW7j6Gu6UjB1lgYvIdXSkGIouhnfWV7DaSyzXSIrNW5pj-6BADUTYq7kHOe-dxMGkZKtHUyxJgWKVNs8Ov6OZaeQclCzvYH0xui6_YuWyIh7-MWVzk9rQaJY80FIDAqJbnKwECibEasP9wvPzR5s7ZfiI9CaU-0eX46BptLFCZmbXKUTchTF2VBuLOh7ynGi2oeriLvdJ0Pcod1A1YMlM-IgEmYXJKI8NmhbCDfjj4OUm_gW4YpOPaxy97lGLdBUZw4f9IOTCAbgk_iAIgbYD9tTDw=w404-h296-no?authuser=1",
+  "https://lh3.googleusercontent.com/O-IhcoFTOFJqeyGydu4Hc1ee2ENL5XDwg1Vzh9IHjiPnToQ5-L64oDlfDCMQ0uqnCJugkY7ylfpqvRrGboIoCAf_5WZiFJ7sFpf82qW2lwmPIjr1gLHla7UCWf2hLVYAEJPxc2DJ_5LjUumscZl18Yy1l37p36xCvZXge-jTYEXfcf87Ic1pIn3CqmCbwjdeFLRdQFKk4gXYyA55ZahLjAgKGvtUNwKQzPpe6gjBqoQnzTEa6IYxiDwzW75AFtBPBWz2XRgPz4jlyTIwsa_ZXDdee61ATywHyRZXcPVJOzQRaqyJ4ViAQKoeQSrdsqarwdPrRju2j0S0ojg-dJ0pJG_sUxeb_Fi-JcJ0u1oBZ-5WYt5HsGif8YxEJ5rTefMENTgL4qEhZ6yJQmV86XlK_Wrl_eDiSPO2Vm4h04m6TnuZuUgSbpso8kr146pklmZINYLZabbd9HlJarC_AG7GrY2nhWWw_8LMU1iLRzM42t2KXnn1KDKMy1MrFJeXH0YuYSea5zxASq4N10Zjc0I8HyqvJhMNig1Dqeiwkfk8K-mBapBbJKXhmmz75AM3d7i3LGCRQXo3v5F3cvQvy6ZOlJVH50Ua8MsN4XQKS5gYWKs8EYXKWx4DdgUG9uRwP5bS3d1M3lyv0xL3cg4fp36l37P3VjGttViCG_w7E8ck2NGrGpIYV6iWtLl2-ldKlz-Wb-aPERVln88b0X4bDZwI7sJP_wHaVAl534EejDnEjlc-ddwTs6G39UYvmL8gLDTwht4LpgE5n2PxpVc8UhpF2lvbye1VA4CIPYR4B-AVRib2MnIkXjAwWB13hKyi3OHi3EMAWr4SGgC3At3K6OPDMZCPrDCAe0sa-hfhC3H_eZVh826S2IkwvJ7m9c-cCV0Axxn6YPwr2tGHyKqJK6_y91sJLOCU5DvmIwNzKOBKWJ9VNjyzR560tBCFHlADdZwaeUMOx323jsviY9KpfXmFurI62EaPVDDrcKCWpFvny0T1VA=w403-h292-no?authuser=1",
+  "https://lh3.googleusercontent.com/_vCeWUArK9FVIcrQBt04SsxXlRf_S67oA0qt8pgsqJ-WeXMk9THUHLvcKluGfsM03W-rNTyv6Bld2zyaLZ3-atf-UiGdZtHdmTJNXpLNpwmnHMRgELigFn-G6v1RKi-wPUT7Usc1Y3mYfYKQtc7jBp0lodKxhxBRMjl78jRzBuODs-amTSHKY52VspTWS3mFUec-8t-OUmlnmisxGyKpsb7E4oeeVlxHmPzSoqvkLzcb3GerXJcxxvp8QsvP7aOW8pzXpr-W6dYWCVCQCMDM_u4yLGO3-a3VHwn6TqRUDs5ijtbls43OZ3XkFxUYNRPlcF0QQ5BxUs1vdSnxd7rsLEh5DVVa2lWI7Vt_AUzlG7AVUO3QMgF0ecgP0SVLA44l5TNG9LJQJkQ86eLUWguzTXnryjj3LIwjWCjKCWVMtT19hj-OeBLeKLCeavWK8ESyM46cHhNNYYWdMLrXqz1A9RRjop-hQ2q335oY27EsnL6p4l1DoX1FIME_Q-5wBWa4xgwcapyg_mEjNvFI-ezZUX_eohFd-AmKixWoU_DKt6XeFmmoQj3Qw91unBkt76gsGXo1EGK7rJHfSUrCba0ChrX15GvsOwwsCTQaRE3DfGQ-NDhe5BNm3AYGE13gpwwW7wxgDOQOY0ntNWPi7l7LgUe9WCvs6NwXF2c3wPZoKkNtTjIWNVTeizfnomeb_3iPXB5s_F3M02o625ZUujRUvFpyxEVzTgieBS_WOEqff08W3DgxQkOXeWRLd0t9FEQRX7pslkI85teLkynWvdFBgpWJVe-OQCEWoySbrPuMOVlbfgq2XrTVgcOQRhRgDLH9wemjzYP4CshqaBkQuHxFtPEvbp4yPq78VMIAnBXem4Sb-GM86j_lIszBpRu9q5p3iinxZqpLVgKBzA4AyLql7OK83Ah_vq7KLBPbOQpsiA33_HV25v7R_5sZKJdc64oQAftVaMWOo51vvLZ4fD2ro9XPcj439Q3m_5u6ZTSypM1-NpE=w300-h200-no?authuser=1",
+  "https://lh3.googleusercontent.com/rjSfAIgppOrx5UQ_DkzxKwqRtcfHHAr2FvpOO04JyRJIW2EyMFlwonKTLhGyisaROSj3I995jUPpBkFwtBYB95FgnPwIkr0cUU6MXoc8T8zbwCgVx1u_lGs1o6M26GnYdvbJpYR_pSDbVOfP5JXx9bn2w2gaO8xU2zN6xrtg_xTmwR6rg8qGhyNvWocFnbClaDhCvAZpER0nmsJPo4E8LsgAYnppJzpmzBxCsxcfPdKDKMa9oYuMR1iJS_XJvaF9yP9Ha096FFToaWuYwgKfAYMeLTrLgpok_KplF3GwIs-j83Ez72yqNDmjEENkxCy7bChHymJHix-GCUiGcG5AH3GE8gAStIYzNN5ju4VgCuI62kDTkVR88XN6JGHsJFGt0lqvy1qDU26cSKQ2jrgyiLGtGbXKXBk9DQ8ckzotIZS8WB6btCTU6e6sQl6t-5pTdoJ1xbbWioFkxWq0P1Pvx0bUBgFnEJrky9TRtlekSpBbnAvl9swnBcnySFhTZGTgA7HNoYuOKl4l_-uF1VixhWQsgqR5dkuBp7sWscRmFiVHVNdqaqZ3agr5xA-sp61V8u5CBCVD3zNp38_SAiGX2Gg8wuCGloM7RnGdjeDOCBHIEJsBEkBGt_DqgzDsYwVGoAkDhHwauT21kGxOh6HTfq1dO6DfilxNtNpGSQZ8yL2Jf_vzsGxPTDUZWscnxYcwMGv3UEXaErCdZUS1gtd-iREbjLnCGYxVDUcPAPN9Wxk24go6rLYsAs6wfjfJ8kPpj0tuQuJ1gAmjrm4nPLKVmOL-dXvZagfjt06-P8fLsNYHtYvrLU9K5QjmzqwrxqQQd1gedWu4GWkMdHPurAA4ZVDV9B_zoZXjG1hZuEj-EuBxGidcPSsd5SWHMCXFGOSZaAhCS2zvWmQO47AR3rXoKZRnmb6IJl9zzdhWF27EQBoyg1LFHXI4Dn9ptYH3XMeu5SqkrJqytjryY2iqCfKtiAnOvj7bvZq2M4rjMikTSvh4WeU=w924-h693-no?authuser=1",
+
 ];
 
-export function Alice() {
+export function MiguelLima() {
   const navigation = useNavigation();
   const [alerta, setAlerta] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -69,18 +65,21 @@ export function Alice() {
             </View>
             <ScrollView>
               <Text style={styles.textoModal}>
-                Sítio banhado com riachos e minas naturais de águas cristalinas.
-                Disponível para festas e eventos com agradável paisagem verde da
-                região, aliada à tranquilidade e exuberância do ambiente de
-                pleno contato com a natureza.
+                O Estádio Miguel Lima é um centro de esportes localizado em Timon, no estado brasileiro do Maranhão.
               </Text>
               <Text style={styles.textoModal}>
-                3 Chalés com alto padrão de conforto e requinte, equipados com:
-                dois aparelhos de ar condicionado, uma Cama de casal, duas Camas
-                de solteiro, espaço para Redes, Televisor, DVD e Frigobar.
-                Acomodação de até 10 pessoas por chalé.
+                Com capacidade para 500 pessoas, abriga ainda quadra de esportes, piscina, etc. O público recorde no estádio foi de 700 pessoas.
+              </Text>
+              <Text style={styles.textoModal}>
+                Pertence à prefeitura e é usado para os jogos do time local, o Timon Esporte Clube. Outros clubes locais também sediam seus jogos no "Miguel Lima": o Dependência, o Milan, o São Paulo, etc.
+              </Text>
+              <Text style={styles.textoModal}>
+               Eventualmente, a prefeitura permite a realização de shows no estádio, como o da banda Calcinha Preta, em 2006.
               </Text>
             </ScrollView>
+
+
+             
             <TouchableOpacity
               onPress={() => setVisible(false)}
               style={styles.botaoModal1}
@@ -124,7 +123,7 @@ export function Alice() {
 
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("RotaAlice") || setAlerta(false)
+                navigation.navigate("RotaMiguelLima") || setAlerta(false)
               }
               style={styles.botaoModalAlerta}
             >
@@ -158,63 +157,17 @@ export function Alice() {
         </View>
 
         <View style={styles.containerInfor}>
-          <Text style={styles.title}>SÍTIO</Text>
-          <Text style={styles.title1}>ALICE</Text>
+          <Text style={styles.title}>COMPLEXO ESPORTIVO</Text>
+          <Text style={styles.title1}>MIGUEL LIMA</Text>
 
           <View>
-            <Text style={styles.middle}>⬤ Aluguel de espaço;</Text>
-            <Text style={styles.middle}>⬤ Riacho;</Text>
-            <Text style={styles.middle}>⬤ Possui três chalés;</Text>
-
-            <View
-              style={{
-                flexDirection: "row",
-                marginTop: 15,
-                alignItems: "center",
-              }}
-            >
-              <Entypo
-                name="instagram"
-                size={24}
-                color="black"
-                style={{ marginRight: 10 }}
-              />
-              <TouchableOpacity
-                onPress={() =>
-                  Linking.openURL("https://www.instagram.com/sitioalice/")
-                }
-              >
-                <Text style={styles.link}>@sitioalice</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View
-              style={{
-                flexDirection: "row",
-                marginTop: 15,
-                alignItems: "center",
-              }}
-            >
-              <Entypo
-                name="facebook"
-                size={24}
-                color="black"
-                style={{ marginRight: 10 }}
-              />
-              <TouchableOpacity
-                onPress={() =>
-                  Linking.openURL(
-                    "https://www.facebook.com/S%C3%ADtio-Alice-1428728514016876/"
-                  )
-                }
-              >
-                <Text style={styles.link}>Sítio Alice</Text>
-              </TouchableOpacity>
-            </View>
+            <Text style={styles.middle}>⬤ Capacidade para 500 pessoas;</Text>
+            <Text style={styles.middle}>⬤ Abriga ainda quadra de esportes, piscina, etc.;</Text>
+            <Text style={styles.middle}>⬤ Pertence à prefeitura;</Text>
           </View>
 
-          <Text style={styles.taxa}>DIARIA PARA ALUGUEL</Text>
-          <Text style={styles.taxa1}>R$ 1.700,00 </Text>
+          <Text style={styles.taxa}>ENTRADA</Text>
+          <Text style={styles.taxa1}>GRATUITA </Text>
 
           <TouchableOpacity
             style={styles.sobre}

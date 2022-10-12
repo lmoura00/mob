@@ -15,24 +15,19 @@ import { Linking } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import LottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/native";
-
+import {MaterialCommunityIcons} from '@expo/vector-icons'
 const { width } = Dimensions.get("window");
 const height = width * 0.9;
 
 const imagens = [
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22449868_1957084384514617_8316780327499194748_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeHZLaDWgp3dSVQBiA2hTSoXkV6Krd_RilyRXoqt39GKXLizqhRMvvKjTtRcRBSQ2gxFwRJX5EYfLgyakrfm6lp9&_nc_ohc=w0XWli1CO18AX8KBWYl&_nc_ht=scontent.fthe18-1.fna&oh=00_AT_wM5AZgaUW5Agoz-pXbLofWLzPJX4iqbUy3xLUPA9UDQ&oe=634E69F9",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22449896_1957084364514619_7551983529861275600_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeGpFi8E1ZeIiznij2diZuW8s_5YREWY2cKz_lhERZjZwpQW0ok3kaXFSLMksREIduPPRJTq3DY5AmeQUuywIdQi&_nc_ohc=6LhcdKcebqgAX_I2SQ8&tn=3WG5uJQzW1OH0zMc&_nc_ht=scontent.fthe18-1.fna&oh=00_AT_M-MxLkthu9zRyNX-RVnIxwfVTA5aEaDi6Spv4xEcaTw&oe=634B79EF",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22449724_1957084361181286_2237347879569093642_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeHlhaXMct3Fr4wxhIdhI4ul2oIs7DOyxkfagizsM7LGR5_BNTrBarIw9MpWQ_I_iUNQz0fhN6szzxBvZzUXjBLv&_nc_ohc=qwdKXDzvOtgAX8MFf8y&_nc_ht=scontent.fthe18-1.fna&oh=00_AT9_cFOQ2oPY888zdSxivKy1K5B2eChM1uPH_RdKb9s88w&oe=634C2988",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22448564_1957084341181288_8606313369812939067_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeHOICdm6ORPjJzVLRmsdI5vmSuAm8Jh0ZCZK4CbwmHRkH4QDE4jKcPIerOhKzWorw7CuMyTPrh5kyr2PRV_nzjS&_nc_ohc=_XzFgZBddXsAX8fiVMY&tn=3WG5uJQzW1OH0zMc&_nc_ht=scontent.fthe18-1.fna&oh=00_AT-NVFycYkcBDDugDIU3E3cHCGLkNs7wy50FgTTEmBIMOQ&oe=634D0DEE",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22448621_1957084281181294_5160790516998986076_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeG6PfdfvsiMxgJnI36MBYDD0RmfVQ7XjiLRGZ9VDteOIshnwLKrwSXo6aIasqurwP8mp2AqAIeSqN85QTUhdxbO&_nc_ohc=GWoIQ7eGKeAAX82YSzj&tn=3WG5uJQzW1OH0zMc&_nc_ht=scontent.fthe18-1.fna&oh=00_AT_wvcUTGdLL9qjhJxeR0VfgHmZCxRdmam5vkA_b3XwVDA&oe=634DD673",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22519613_1957084277847961_7661633805960970105_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeElv5foNfnK6R99qDRzef0MZSxDwkJszzhlLEPCQmzPOKDwmLNMomkm3f6mQip179_2dk2yKyY4LfpW59NlMArU&_nc_ohc=ZVSMUfLKPBsAX_2f0UH&_nc_ht=scontent.fthe18-1.fna&oh=00_AT-4tsFDOpoCgsMMEvSOUJCSsg_c3e4ju5z0gq3TuQwMsA&oe=634EA8B8",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22552321_1957084231181299_5073876818718488883_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeFaj_Ms03dHq6EwJtTqzVTdElxkKzmMTCQSXGQrOYxMJPpa-UOzET4mgx0rSmB4zG543pFP4pySpBZId6aqcTxH&_nc_ohc=NUesrM70A_QAX8h5Hqs&_nc_ht=scontent.fthe18-1.fna&oh=00_AT9lisFyd6btAvpm1mo1caKpuNqebO490Biq4wnkej9L4A&oe=634BE3C3",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t31.18172-8/1500964_1459732130916514_893422592_o.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9267fe&_nc_eui2=AeGtH1H1JWFyJFw7KTCsCDO3MUJZI1kTSAsxQlkjWRNICxOYrdEfVZBvUsXR0Vk4lk9fYsWUkP82OAhnl3Fhw3n-&_nc_ohc=Dk2pzfOr_McAX-DXgEd&_nc_ht=scontent.fthe18-1.fna&oh=00_AT-aHYy3ku-v0PVecGy-zhifQpY28fY37TAeMdLbkJBtTQ&oe=634E817B",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t31.18172-8/1492642_1452968164926244_106881821_o.jpg?_nc_cat=102&ccb=1-7&_nc_sid=9267fe&_nc_eui2=AeFqwypEhHIiwp4buEmtbZx6gN_T_jmD8LeA39P-OYPwtw-kmZRq7I3X87WFCjP3_BicFxH4j_ogAiqbZ8h0d85r&_nc_ohc=Q7qsU1iirDsAX8e0_YF&_nc_oc=AQnCvBahnSNrEsZ-SN6cy3gIl_ONpeAM9EMefoQcoeX4535uu3pFgvcAYst3xkqWC4GHtOuCJT3CFAmGcvAzVpzI&_nc_ht=scontent.fthe18-1.fna&oh=00_AT_Amn2vtxRWmzcHwWvYMhHTs_xn0iDl916j1-ebndQMAw&oe=634B3A48",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t31.18172-8/860399_1432655040290890_1464674184_o.jpg?_nc_cat=108&ccb=1-7&_nc_sid=9267fe&_nc_eui2=AeGKN_4rcNY9e_5jNOcj1mliwIbye0SX7bDAhvJ7RJftsO3jq7XTwVSRF_TFQMAnzv709DAE0xmTxZAiCBUUfX_H&_nc_ohc=MBaCDHjFO6EAX8pt_qr&_nc_ht=scontent.fthe18-1.fna&oh=00_AT8wsMPfhSAXFzA_k0Dboex7jIOKuBgulaumdz5SXflDjw&oe=634BC394",
+  "https://lh3.googleusercontent.com/FoaTN1l8jgjAatZojOtmDGFmP8JMBIUJBn19H_OT9FD6PykV2u28_n1zEflfJG7jWJSzubwh1MPYY1T_xI2RieQN9i7vmAmsYUmqRZQpgarXs0uTFLxu0DvYb_hi-Dk2GvalrywjvfZwyj4jB7jglR2FMoKi7WqKKcKdmKywONY_xDRGiLG8zmvlqW9ksN6mjp9xqOQVGUcp6yKcRuB_7kSC_9VxkOBwOhXricxFwj2FiDuT8Ti8mCu8ediGWTserpyA8rwaw-cwG0AYe41OBbxGPsMnyaxg3hn4c0Xy32yCg3lnBg9R2Fo5-g379reGELdi5LI5ik8bRtdgbedOLI77MAbQb9svpsksX2l0EmYCNRs8GGP-XVAWEV-HX7LcOU45Qp7AbyDiK5rb8ITllXybJACEPHI9Wdy9HflwT3aSkeQsl2dy2tVF6z1uuuJv8Ui3bgjGq7rtVvvnjlrZtFt3ksBzXgay0RTDQmInOj5Ma3BFRKNmpNmXXuwomk6TrzOKHFf4AVoNS2zCCu1WHRDmk2YyUWgaJ3XIJBYMBre5P6fXphfSV9lY63FbHhA2AtUKM_N8oSS7pIrHlpMvXop_NyN7xEBDZ5-FkFM8fsi1c7Cb_nERj0ewk3133XNsiDN7L1hUWFP6mBXlf2FNbsZERlLZASmzDJJTa9cxcjoMZpyLAa_hpNElB0kTY2089JT6lggEmutTDwOiJM5irz4BZzERVdhM0b2D7G8TFboRjTMWpD6DYMpGbvut8zrZN0AD9nwZkJxLr9ZCg4cVlAbejxEwrkLIApPMYrmgMNW1rWZLzqOziAPoKybOcYGw7msphMAQXBUi_p6hoEfZdpURMV9vJr5jdkijIYBcVvbYXMG64RKIVZh4N6VK1K6wvO42beI_-i2zadYjlizAXmoPRGA4XSaRI0wVjYBHHBxB9_I7rimRgRQ89lPNemDBEW2PsDqGbxrYjRN41Tzggi4Rb4JSMRt1rczGXeSCFT9ZgA=w297-h268-no?authuser=1",
+  "https://lh3.googleusercontent.com/KhU3T0iGj82lNzfaiyuUiiJOXms-scfsLIz2V93Z3GzyC_OYGt08HIWL7HQwk9BHXeQXv44LOIGp3Nvsptg-GaQShguFZk1gsdA54J1-XgaANqbgMzXHmXdwIW3lO6NC6swL0NkIq1coj1Pcnvmk1mpaQFhKjVVU--kvjhti9286XZrGxHj9cC2bShsowZCoLedB0fBONhE5ThsZDc1FSLIendjRkbzJYqtCQ3YrVRYAq2H3uOWOOt6SVykPTL3xnsu_mVSSGR7OfxTr_zDLRU6w2xBWugwL0VGeCqQvzW_6q1qjSFjApgN7IXtNkkXwlkp6FjzqUKXk2418sYFDHB3pb5LQ9WbDOl82gZ-3fiNF2MpAhtbnBDae1Tfu6spOItxZXqJomtH4OghLiGJLgQEmDiuJXSc2e3-kqesG3ZCoPXZ9gFK0JrxRndcji69_6jIBxpMUld28IZrl5kRrhFUMrtvqQ09ugZwCLsbfYk1W2VL_P-nDVU67xV0UMNdlCS0yoU2_Oef-9fodAxaKqCg6crs1CPazDGmGUDKcYlrSdtY6vrBER5ByTaBodELjXYfm1uVLMlZtdDxgeYFWaO2YUErxu8kN9GGX-054eqCthqXyJbDsdLTON0hQJaIlE_TbH3TF0uAU0_69VrqDAStG_rvWXGilaUQBlFzxZ9WwlVFuwZojrvi6xuDJJr3Et87eW1cfSZ5v1hX3MKQJKPzthFDm6nqcRv2GNIgPD56_GRZojefWKOE66VaSEnWYH8aWtWfZFVgxW0789ywzWj_bSFSxCUNI9sjdUnkVC2SZ8ssvM0lhS9N5nKAGudyvdxyqzMam8Luo_l0mx2PH4Qv2azhF_5aIUsDQpCs9KO5OBfo-Sh84TCnjBnbrUKGm5Conr8ub5t579yWXsjfPGGivc3w_ylluWAxNPOiaBopBX8I9icocysuoaXo8BjDqvLqBxN2KVpOYbckusFsWpbfUpwm_deiDJajwnTlvwlGfVw=w343-h209-no?authuser=1",
+  "https://lh3.googleusercontent.com/1WYjzmaDU6lPs-cqcZHRU7PVFPyCXBf7CD_4DJ078a5tMq0jMR83wii-1PULbGgi7oAv7Sy25GrWPonaJjNwqeIy8Bcc3mbZ8mh-pzDH1ebHkK95KF5GNTAdahLO9vCSww-aBwy4D8Ghy35MEWIzyJnYe5LdXLB0F7QIbPk2DQLRddd8aZdRhgxVyc76X3Y44ravtiMUO8QbqB28CmivKfnrKoeUuXddyBxPiqsjLxyuK0XEPNFrjzdz-spchZ6EX1-I1xlnZ_obOpoEfLm1x6KWypitnVMTc846BIavcFwUhCyUuLUYFfZIz_IUc_C7Kwo9-30NzD3M4CvhGZk406oXn_FGIpFjG5ev6ScLK5qQIjuOG_DLnTnkGTqmLlMbtoZpDLlLscP63V17wtXs3frGW4zIjQhq3dHHE5tn8T5UMSOLfGcEPPF70MWEZ-IXgwYBH5WAxc_jh_jQINmXnjVRhkdmMKPpsNcyW8i10DkHpMJTsVnHVzeEcWY_-Lg29jUw9jxtHwD_yf1nXnnPDh4We7lArEh1cbRvgqksfejm0VxhiUiQNh432yuK87uc39EA9hgKwSAPsrH4d6svMyT4UPHKvSpwZaQkQM98FncN94IXCMcuFPozUMnkfw1NEf9KvgSZUIULY9_QzoYsleyPYFfIKuommeRAOUytGQbzldt9_d0eqMcMdm6cQ0ysnvnIYMacRSuIwj9FOn4Gu4mcXZPQdfCgVR3C5nxSGE-ih-dPj3Cx5AyKgutsezE5aEjbHdlEcT1rP6lXWdcu0XfTrGQVRav2YS74ARvomh3Ljom1_BBVEA9RRxpy1Vu_19FUe2YqQUMuZDT0jQmjNBu-KCX0mrjE5DP1_2WfQyuRPpocodTGiEOmXG_8d3RF_VW9FTnOZM_4cUnNNyT1pH6KOmJ9u1DJ3tnxSEwAG7HSNtuTTj0MOv8tv2tL9S6qRL3w5pvalYMPimlT_eUa8X-rcCd3cHDCCorr85DLw6Jypw=w360-h220-no?authuser=1",
+  "https://lh3.googleusercontent.com/MlJ0mfnHcFo_We4aZJfhjDM9SSBLrCiXaUoVbo67EHTeos3EmRcxP1xDN16n76IOnS_BBW4OPPI2VEC0bfjIdxyvg31r6orO9rF-1qdryB2clV0S_PHT8_7-WySfZGH80iKoZzYI3ZUmzqleL6iXdzE9jwo3USHh6WTEN38HVjhl8gv6q9EMZF3MUCI5qxbesgnWTEON0x7iI0dStoUINPpfiP60GcbU_wczmM0dS4scmvlmbgrMEIrXg1ganKfmZCwsAU25fG7Sf5k1GxyjyZDqFd75bbY5UUkEea0AvAU5wt5aPqpWE-aS7c28NmRPsMWYm7nKHzv99KuUup3wFTY0Ct0ZXYxBCcqef1_2Yfb8e6PkRmqXHAgdPCXUCMtuuAoxzXBgYinJA-_6QbBHhhQH2X-GyojChPY9ZtWQV99utVw9crCHAAYy8Sj2S6mmmBR_vt2is1QQtNTSIRnVvzX2do2ZpXIr61a-uxAmtNNS7Jtr7f8t7w3taXu2QF-8WJCO_wl2nWbkdOXfeVg2S9y9WYi1slo6V06RaK9Gpoc4NMbeISEsc_0Ak7iNspEa4IgHS-Nj-sJu77Wp_ORA6FAZZ5-aIgX6z5mNyMIID3vCMFoVtEPeXu7LusDkfX_FHqyS3yeRHLxX-gW8dSXo6AyBt5Cx1blZTC68PyfxftVLGgcfKwoD-EdGkE5vUJSq1xfiFK4hs94kTpme9zZldeyAOhfVPA52m9OcgA8e2Hnsw5A2eUct0a0lVMsCneDyAEt4dql2_JZUs3DhB08mSzVgYE3Q5WJyR780Rx90Dz3T5AKEYT65XRzXf9IZqnCkLcKw2pdafYhfVFeUYzxIE80cawcL0I_T4EnNK-CKD8dJm8LG-tA0zuyLQe8iBTdco5JsNrY6Q7Z3-zchk3e20EvNGfOMsuwhSnTWNJqVu1mkTu028nLAJ7KGXeF0M4VdJmHH6P73RKYwnsSHARSsYNHc7PCtIW7qECt1Q89DoI9LGg=w360-h220-no?authuser=1",
+  "https://lh3.googleusercontent.com/x5BjpLo-iV37ciWeWOQVwqEb2_VQkYjwPI0wI0JhkcJlAWrwuvMjN0IgYlCRF2nGNs0qTwURUyWWRohAoRLhYQvztQXBIBfHPRrjyLuc6lK3me48BowgMg6lK9SR9FVAd6RItwDst5kMklPRn_25Um1mKDZs1IExxknnKhJKuEcZ_Xt8ZH3w53Jbjv3x1nef0t43km0mjnoIZtSI8SfC7ifxG14KmEWrxRnlKYSFcFaOVlYGgl7i_3gqZisexVulMBY7sZlOyeFX5upkvBOqkA6Kl0O_9dDSYpxOVj0iws0mPwtJovCY0dY-FHPL4Kb-KPD8Qq7hG6ptv879ZWT6_dEZf82wyU9nWgJhBGEqKoVk3SLgORgvvA2adrCQ-qlX5A3uKFNJ5s5kulkHLmVm4z1puhxS3XVO__CqW8IPbKx_pReUFiPt7lLK1vuG7UTV9y_tIyQ4F1TaWup13dy7E-S0vKI1HQDMn4LHeMSahpaIvqLZ0t4b_tLCZ6bUZUzI5SHpd3MNuaPwW-PSV1Hvq7pSArv9RUTYfsBWciBbhdmmyYpT8G1e2Z8HeHv2uAp12-vXUIFZVydaIbejIMje6Vwp7-r95AgpkdP3XG3t1u9GdtNp3eGJwf-Te7_Z9Mo3SkHyXjLRFMvNL3gxxd7ovu496mXHrqK-r8gPifu0fra2E5uNf7xTcwh3VlIxQ79yLoDMZuo56Hek9Omscy4oJXF4iLLwOcRQlmujL2cIblp857TB_soQKtWfpFJOzG8G-GmNQb72LKyZmpT2AtTtEzEX_fVODp8DPVMfZoGMagQEL5iaOalbMdq3xzx4nG1ZKkxES90rorathy4JPGWEGh4nTlPxsWSmkkuJJQGzhNsDbt8J_NVtJGFECQzA9sHhPIUBMfLAO5DOAe39HkVGFKYjQXxOKz-aE05IfOwjul5JCzgxdstEbrSMhGWhO3SwZ2iONLlsiwvjNGJHazodfh5DTsscf0SwcX9Tpaj1fwVtxg=w360-h220-no?authuser=1",
 ];
 
-export function Alice() {
+export function Convencoes() {
   const navigation = useNavigation();
   const [alerta, setAlerta] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -69,16 +64,11 @@ export function Alice() {
             </View>
             <ScrollView>
               <Text style={styles.textoModal}>
-                Sítio banhado com riachos e minas naturais de águas cristalinas.
-                Disponível para festas e eventos com agradável paisagem verde da
-                região, aliada à tranquilidade e exuberância do ambiente de
-                pleno contato com a natureza.
+              O Centro de Convenções Maranhense, localizado na cidade de Timon-MA, vizinha da capital do Piauí, Teresina. Com espaço de 10 mil metros quadrados, tem espaços para 6 eventos simultâneos, diversos tamanhos de auditórios para diversos tipos de eventos, espaços climatizados e semi-climatizados e restaurante exclusivo para eventos, fazemos o seu evento do tamanho que você imaginar.
+
               </Text>
               <Text style={styles.textoModal}>
-                3 Chalés com alto padrão de conforto e requinte, equipados com:
-                dois aparelhos de ar condicionado, uma Cama de casal, duas Camas
-                de solteiro, espaço para Redes, Televisor, DVD e Frigobar.
-                Acomodação de até 10 pessoas por chalé.
+             
               </Text>
             </ScrollView>
             <TouchableOpacity
@@ -124,7 +114,7 @@ export function Alice() {
 
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("RotaAlice") || setAlerta(false)
+                navigation.navigate("RotaConvencoes") || setAlerta(false)
               }
               style={styles.botaoModalAlerta}
             >
@@ -158,13 +148,13 @@ export function Alice() {
         </View>
 
         <View style={styles.containerInfor}>
-          <Text style={styles.title}>SÍTIO</Text>
-          <Text style={styles.title1}>ALICE</Text>
+          <Text style={styles.title}>CENTRO DE CONVENÇÕES</Text>
+          <Text style={styles.title1}>MARANHENSE</Text>
 
           <View>
-            <Text style={styles.middle}>⬤ Aluguel de espaço;</Text>
-            <Text style={styles.middle}>⬤ Riacho;</Text>
-            <Text style={styles.middle}>⬤ Possui três chalés;</Text>
+            <Text style={styles.middle}>⬤ 10 mil m²;</Text>
+            <Text style={styles.middle}>⬤ Espaço para 6 eventos simultâneos;</Text>
+            <Text style={styles.middle}>⬤ Restaurante exclusivo;</Text>
 
             <View
               style={{
@@ -173,30 +163,8 @@ export function Alice() {
                 alignItems: "center",
               }}
             >
-              <Entypo
-                name="instagram"
-                size={24}
-                color="black"
-                style={{ marginRight: 10 }}
-              />
-              <TouchableOpacity
-                onPress={() =>
-                  Linking.openURL("https://www.instagram.com/sitioalice/")
-                }
-              >
-                <Text style={styles.link}>@sitioalice</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View
-              style={{
-                flexDirection: "row",
-                marginTop: 15,
-                alignItems: "center",
-              }}
-            >
-              <Entypo
-                name="facebook"
+              <MaterialCommunityIcons
+                name="web"
                 size={24}
                 color="black"
                 style={{ marginRight: 10 }}
@@ -204,17 +172,17 @@ export function Alice() {
               <TouchableOpacity
                 onPress={() =>
                   Linking.openURL(
-                    "https://www.facebook.com/S%C3%ADtio-Alice-1428728514016876/"
+                    "https://www.grupofranly.com.br/centro-convencoes-ma/"
                   )
                 }
               >
-                <Text style={styles.link}>Sítio Alice</Text>
+                <Text style={styles.link}>Centro de Convencões Ma</Text>
               </TouchableOpacity>
             </View>
           </View>
 
-          <Text style={styles.taxa}>DIARIA PARA ALUGUEL</Text>
-          <Text style={styles.taxa1}>R$ 1.700,00 </Text>
+          <Text style={styles.taxa}>TELEFONE PARA CONTATO</Text>
+          <Text style={styles.taxa1}>(86) 3317-9201 </Text>
 
           <TouchableOpacity
             style={styles.sobre}

@@ -28,14 +28,7 @@ export function Login(){
     
 
     const toggleSwitch = () => setIsEnabled(previousState => !previousState) ;
-    useEffect(()=>{
-        if(isEnabled === false){
-           ()=>setUser('lucas')
-        }   else{
-            ()=>setUser(null)
-        }
-
-    })
+    
 
 
     useEffect(()=> {
@@ -153,7 +146,13 @@ export function Login(){
                             style={styles.SenhaInput}
                         />
                         <TouchableOpacity onPress={()=>setPasswordVisible(!PasswordVisible)} style={{marginLeft:25 }}>
-                            <Ionicons name="eye" size={25} style={{}}/>
+                            {
+                                PasswordVisible ?
+                                <Ionicons name="eye" size={25} style={{}}/>
+                                :
+                                <Ionicons name="eye-off" size={25} style={{}}/>
+
+                            }
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -161,8 +160,14 @@ export function Login(){
                 <KeyboardAvoidingView >
                     <TouchableOpacity 
                         style={styles.botaoEntrar} 
-                        onPress={()=> {isEnabled}}>
-                            
+                        onPress={()=> {if(isEnabled===false){
+                            setUser('lucas')
+                        }else {
+                            setUser(null) || Alert.alert('Você está tentando entrar como motorista.')
+                        }
+                         }}
+                    >
+                        
                         <Text style={styles.titleBotao}>ENTRAR</Text>
                     </TouchableOpacity>
 
@@ -170,7 +175,7 @@ export function Login(){
                         <Text style={styles.titleBotao}>CADASTRAR MOTORISTA</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.botaoCadPax} onPress={()=>navigation.navigate("CadastroPax")}>
+                    <TouchableOpacity style={styles.botaoCadPax}  onPress={()=>navigation.navigate("CadastroPax")}>
                         <Text style={styles.titleBotao}>CADASTRAR PASSAGEIRO</Text>
                     </TouchableOpacity>
                     

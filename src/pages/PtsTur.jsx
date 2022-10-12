@@ -15,6 +15,12 @@ import portalsol from '../images/PortalSol.jpg'
 import portalamazonia from '../images/PortalAmazonia.png'
 import roncador from '../images/roncador.jpg'
 import saoJose from '../images/saoJose.jpg'
+import centro from '../images/centro1.jpg'
+import convencao from '../images/convencao.jpg'
+import estadio from '../images/estadio2.png'
+import ponteMetalica from '../images/ponteMetalica1.jpg'
+import sucupira from '../images/sucupira1.jpg'
+import rodoviaria  from '../images/rodoviaria.jpg'
 
 export function PtsTur(){
 
@@ -70,9 +76,45 @@ const navigation = useNavigation()
                     <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.tagLast} onPress={()=>navigation.navigate('PracaSaoJose')}>
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('PracaSaoJose')}>
                     <Image source={saoJose} style={styles.imageSmaw}></Image>
                     <Text style={styles.title1}>PRAÇA SÃO JOSÉ</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Sucupira')}>
+                    <Image source={sucupira} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>PARQUE AMBIENTAL SUCUPIRA</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Juventude')}>
+                    <Image source={centro} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>CENTRO DA JUVENTUDE</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Convencoes')}>
+                    <Image source={convencao} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>CENTRO DE CONVENÇÕES</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('PonteMetalica')}>
+                    <Image source={ponteMetalica} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>PONTE METALICA</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('MiguelLima')}>
+                    <Image source={estadio} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>C.E. MIGUEL LIMA</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tagLast} onPress={()=>navigation.navigate('Rodoviaria')}>
+                    <Image source={rodoviaria} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>RODOVIARIA</Text>
                     <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
             </TouchableOpacity>
 

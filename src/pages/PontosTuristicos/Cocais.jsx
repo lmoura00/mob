@@ -407,7 +407,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     margin: 5,
     elevation: 10,
-    marginTop: 170,
+    marginTop: 150,
   },
   modal2: {
     alignSelf: "center",

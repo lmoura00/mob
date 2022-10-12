@@ -26,6 +26,13 @@ import { PortalAmazonia } from "../pages/PontosTuristicos/PortalAmazonia";
 import { PortalSol } from "../pages/PontosTuristicos/PortalSol";
 import { PracaSaoJose } from "../pages/PontosTuristicos/PracaSaojose";
 import { Roncador } from "../pages/PontosTuristicos/Roncador";
+import { Convencoes } from "../pages/PontosTuristicos/Convencoes";
+import { Juventude } from "../pages/PontosTuristicos/Juventude";
+import { MiguelLima } from "../pages/PontosTuristicos/MiguelLima";
+import { PonteMetalica } from "../pages/PontosTuristicos/PonteMetalica";
+import { Rodoviaria } from "../pages/PontosTuristicos/Rodoviaria";
+import { Sucupira } from "../pages/PontosTuristicos/Sucupira";
+
 
 import { Jose } from "../pages/Pessoas/JoseV";
 import { Mariana } from "../pages/Pessoas/Mariana";
@@ -43,6 +50,12 @@ import { RotaPortalAmazonia } from "../pages/Rotas/RotaPortalAmazonia";
 import { RotaPortalSol } from "../pages/Rotas/RotaPortalSol";
 import { RotaPracaSaoJose } from "../pages/Rotas/RotaPracaSaoJose";
 import { RotaRoncador } from "../pages/Rotas/RotaRoncador";
+import { RotaConvencoes } from "../pages/Rotas/RotaConvencoes";
+import { RotaJuventude } from "../pages/Rotas/RotaJuventude";
+import { RotaMiguelLima } from "../pages/Rotas/RotaMiguelLima";
+import { RotaPonteMetalica } from "../pages/Rotas/RotaPonteMetalica";
+import { RotaSucupira } from "../pages/Rotas/RotaSucupira";
+import { RotaRodoviaria } from "../pages/Rotas/RotaRodoviaria";
 
 import { RotaJose } from "../../src/pages/Rotas/RotaJose";
 import { RotaMariana } from "../pages/Rotas/RotaMariana";
@@ -59,6 +72,7 @@ import { HistoricoJose26 } from "../pages/Historico/HistoricoJose26";
 
 import { useAuth } from "../Hooks/Auth";
 import LottieView from "lottie-react-native";
+
 import { RotaJose1 } from "../pages/Historico/Rotas/RotaJose1";
 import { RotaJose2 } from "../pages/Historico/Rotas/RotaJose2";
 import { RotaMariana1 } from "../pages/Historico/Rotas/RotaMariana1";
@@ -587,6 +601,114 @@ export function AuthRoutes() {
       <Screen
         name="RotaMariana2"
         component={RotaMariana2}
+        options={{
+          headerTitle: "DETALHES",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+      <Screen
+        name="Convencoes"
+        component={Convencoes}
+        options={{
+          headerTitle: "DETALHES",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+      <Screen
+        name="Juventude"
+        component={Juventude}
+        options={{
+          headerTitle: "DETALHES",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+      <Screen
+        name="MiguelLima"
+        component={MiguelLima}
+        options={{
+          headerTitle: "DETALHES",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+      <Screen
+        name="PonteMetalica"
+        component={PonteMetalica}
+        options={{
+          headerTitle: "DETALHES",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+      <Screen
+        name="Rodoviaria"
+        component={Rodoviaria}
+        options={{
+          headerTitle: "DETALHES",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+      <Screen
+        name="Sucupira"
+        component={Sucupira}
+        options={{
+          headerTitle: "DETALHES",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+      <Screen
+        name="RotaConvencoes"
+        component={RotaConvencoes}
+        options={{
+          headerTitle: "DETALHES",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+      <Screen
+        name="RotaJuventude"
+        component={RotaJuventude}
+        options={{
+          headerTitle: "DETALHES",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+      <Screen
+        name="RotaMiguelLima"
+        component={RotaMiguelLima}
+        options={{
+          headerTitle: "DETALHES",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+      <Screen
+        name="RotaPonteMetalica"
+        component={RotaPonteMetalica}
+        options={{
+          headerTitle: "DETALHES",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+      <Screen
+        name="RotaSucupira"
+        component={RotaSucupira}
+        options={{
+          headerTitle: "DETALHES",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+      <Screen
+        name="RotaRodoviaria"
+        component={RotaRodoviaria}
         options={{
           headerTitle: "DETALHES",
           headerTitleAlign: "center",
