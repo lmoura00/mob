@@ -11,7 +11,7 @@ import {
 } from "react-native";
 
 import { Linking } from "react-native";
-
+import { StatusBar } from 'expo-status-bar'
 import { Entypo } from "@expo/vector-icons";
 import LottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -59,6 +59,7 @@ export function PonteMetalica() {
                 elevation: 10,
               }}
             >
+              
               <Text style={styles.titleModal}>SOBRE:</Text>
               <TouchableOpacity onPress={() => setVisible(false)}>
                 <LottieView
