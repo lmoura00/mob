@@ -41,38 +41,55 @@ export function Jericoroa() {
           style={{}}
         >
           <View style={styles.modal}>
-              <View
-                style={{ flexDirection: "row", justifyContent: "center", alignItems:'center', backgroundColor: "#fff",elevation:10}}
-              >
-                <Text style={styles.titleModal}>SOBRE:</Text>
-                <TouchableOpacity onPress={()=>setVisible(false)}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#fff",
+                elevation: 10,
+                borderRadius:8,
+              }}
+            >
+              <Text style={styles.titleModal}>SOBRE:</Text>
+              <TouchableOpacity onPress={() => setVisible(false)}>
                 <LottieView
-                    source={require("../../Assets/28566-to-x.json")}
-                    autoPlay={true}
-                    loop={true}
-                    style={{ width: 50, height: 50, marginLeft:30 }}
+                  source={require("../../Assets/28566-to-x.json")}
+                  autoPlay={true}
+                  loop={true}
+                  style={{ width: 50, height: 50, marginLeft: 30 }}
                 />
-                </TouchableOpacity>
+              </TouchableOpacity>
             </View>
-            <View style={{width:'98%', height:'75%', alignSelf:'center', marginTop:15}}>
+            <View
+              style={{
+                width: "98%",
+                height: "75%",
+                alignSelf: "center",
+                marginTop: 15,
+              }}
+            >
               <ScrollView>
                 <Text style={styles.textoModal}>
-                  Um bar construído em uma coroa do Rio Parnaíba, como são chamados os bancos de areia que se 
-                  formam ao longo do leito quando o nível das águas cai, 
-                  tem atraído a atenção da população de Teresina que passa pelo Centro da cidade, 
-                  próximo ao Shopping da Cidade.
+                  Um bar construído em uma coroa do Rio Parnaíba, como são
+                  chamados os bancos de areia que se formam ao longo do leito
+                  quando o nível das águas cai, tem atraído a atenção da
+                  população de Teresina que passa pelo Centro da cidade, próximo
+                  ao Shopping da Cidade.
                 </Text>
                 <Text style={styles.textoModal}>
-                  José Pinheiro, de 56 anos, responsável pelo estabelecimento, disse ao Cidadeverde.com que o empreendimento 
-                  é uma tradição familiar, iniciado com a mãe há cerca de 50 anos e agora assumido por ele.
-                  “Como ela já está bastante idosa, eu tomei de conta do negócio e estou colocando para a frente. 
-                  Só não abrimos o bar nos últimos dois anos de pandemia”, 
-                  relatou Zezinho, como é conhecido pelos clientes que frequentam o bar, "batizado" de “Jericoroa”.
+                  José Pinheiro, de 56 anos, responsável pelo estabelecimento,
+                  disse ao Cidadeverde.com que o empreendimento é uma tradição
+                  familiar, iniciado com a mãe há cerca de 50 anos e agora
+                  assumido por ele. “Como ela já está bastante idosa, eu tomei
+                  de conta do negócio e estou colocando para a frente. Só não
+                  abrimos o bar nos últimos dois anos de pandemia”, relatou
+                  Zezinho, como é conhecido pelos clientes que frequentam o bar,
+                  "batizado" de “Jericoroa”.
                 </Text>
               </ScrollView>
             </View>
 
-            
             <TouchableOpacity
               onPress={() => setVisible(false)}
               style={styles.botaoModal1}
@@ -90,18 +107,25 @@ export function Jericoroa() {
           style={{}}
         >
           <View style={styles.modal2}>
-          <View
-                style={{ flexDirection: "row", justifyContent: "center", alignItems:'center', backgroundColor: "#fff",elevation:10}}
-                >
-                <Text style={styles.titleModal}>ALERTA:</Text>
-                <TouchableOpacity onPress={()=>setAlerta(false)}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#fff",
+                elevation: 10,
+                borderRadius:8,
+              }}
+            >
+              <Text style={styles.titleModal}>ALERTA:</Text>
+              <TouchableOpacity onPress={() => setAlerta(false)}>
                 <LottieView
-                    source={require("../../Assets/28566-to-x.json")}
-                    autoPlay={true}
-                    loop={true}
-                    style={{ width: 50, height: 50, marginLeft:30 }}
+                  source={require("../../Assets/28566-to-x.json")}
+                  autoPlay={true}
+                  loop={true}
+                  style={{ width: 50, height: 50, marginLeft: 30 }}
                 />
-                </TouchableOpacity>
+              </TouchableOpacity>
             </View>
             <Text style={{ fontSize: 15, textAlign: "center", marginTop: 15 }}>
               Mob Timon coleta dados de local para ativar trajetos, localização,
@@ -203,6 +227,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "600",
     marginTop: 15,
+    fontFamily:'Ubuntu_500Medium'
   },
   taxa1: {
     fontSize: 20,
@@ -211,17 +236,23 @@ const styles = StyleSheet.create({
   },
   middle: {
     fontSize: 20,
+    fontFamily:'BalsamiqSans_400Regular'
+  },
+  link: {
+    fontSize: 20,
+    color: "#0206eb",
+    textDecorationLine: "underline",
   },
   title: {
     fontSize: 27,
     color: "black",
-    fontWeight: "900",
+    fontFamily:'Ubuntu_700Bold'
   },
   title1: {
     fontSize: 27,
     color: "black",
-    fontWeight: "700",
     marginBottom: 20,
+    fontFamily:'Ubuntu_500Medium'
   },
   image: {
     width,
@@ -253,7 +284,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 8,
     borderWidth: 1,
-    elevation:10,
+    elevation: 10,
   },
   verRota: {
     backgroundColor: "#14BC9C",
@@ -262,7 +293,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 8,
     borderWidth: 1,
-    elevation:10,
+    elevation: 10,
   },
   voltar: {
     backgroundColor: "#FF3030",
@@ -272,14 +303,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     marginBottom: 30,
-    elevation:10,
+    elevation: 10,
   },
   textoBotao: {
     fontSize: 18,
     padding: 8,
-    fontWeight: "600",
     color: "black",
     textAlign: "center",
+    fontFamily:'Ubuntu_700Bold'
   },
   modal: {
     alignSelf: "center",
@@ -289,7 +320,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginVertical: 80,
     width: "80%",
-    height: "80%",
+    height: "75%",
   },
   botaoModal1: {
     backgroundColor: "#FF3030",
@@ -302,24 +333,26 @@ const styles = StyleSheet.create({
     margin: 5,
     elevation: 10,
     marginVertical: 20,
+    fontFamily:'Ubuntu_400Regular'
   },
   titleModal: {
     textAlign: "center",
     fontSize: 20,
     marginLeft: 60,
-    fontWeight:'bold',
-    textDecorationLine:'underline'
+    textDecorationLine: "underline",
+    fontFamily:'Ubuntu_700Bold'
   },
   textBotao: {
     fontSize: 15,
     fontWeight: "600",
     textAlign: "center",
+    fontFamily:'Ubuntu_700Bold'
   },
   textoModal: {
     fontSize: 20,
     textAlign: "center",
     padding: 5,
-    color:'black'
+    fontFamily:'Ubuntu_400Regular',
   },
   botaoModalAlerta: {
     backgroundColor: "#FF3030",
@@ -331,7 +364,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     margin: 5,
     elevation: 10,
-    marginTop: 150,
+    marginTop: 10,
   },
   modal2: {
     alignSelf: "center",
@@ -339,8 +372,8 @@ const styles = StyleSheet.create({
     padding: 20,
     elevation: 10,
     borderRadius: 20,
-    marginVertical: 280,
+    marginVertical: 260,
     width: "80%",
-    height: "50%",
+    height: "30%",
   },
 });

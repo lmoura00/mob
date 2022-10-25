@@ -112,12 +112,14 @@ export function Login(){
                 >
 
                 <View style={{flexDirection:'row'}}>
-                    <LottieView 
-                        source={require('../../Assets/68036-mail.json')} 
-                        autoPlay={true} 
-                        loop={true} 
-                        style={{marginRight:125}}
-                    />
+                    <View style={{width:50, height:50}}>
+                        <LottieView 
+                            source={require('../../Assets/68036-mail.json')} 
+                            autoPlay={true} 
+                            loop={true} 
+                            
+                        />
+                    </View>
             
                     <TextInput 
                         placeholder="E-MAIL" 
@@ -129,12 +131,14 @@ export function Login(){
                 </View>
 
                 <View style={{flexDirection:'row'}}>
-                    <LottieView 
-                        source={require('../../Assets/76732-locked-icon.json')} 
-                        autoPlay={true} 
-                        loop={true} 
-                        style={{marginRight:125}}
-                    />
+                    <View style={{height:50, width:50}}>
+                        <LottieView 
+                            source={require('../../Assets/76732-locked-icon.json')} 
+                            autoPlay={true} 
+                            loop={true} 
+                            style={{}}
+                        />
+                    </View>
                     <View style={styles.SenhaInputContainer}>
                         <TextInput 
                             placeholder="SENHA" 
@@ -223,7 +227,8 @@ const styles = StyleSheet.create({
         fontSize:18,
         padding:5,
         fontWeight:'600',
-        color:'#fff'
+        color:'#fff',
+        fontFamily:'BalsamiqSans_400Regular'
     },
     EmailInput:{
         backgroundColor:'#D9D9D9',
@@ -232,19 +237,19 @@ const styles = StyleSheet.create({
         borderRadius:15,
         textAlign:'center',
         fontSize:18,
-        fontWeight:'500',
         borderWidth:1,
         marginBottom:10,
-        marginLeft:85,
-        opacity:0.6
+        opacity:0.6,
+        fontFamily:'Ubuntu_500Medium'
     },
     SenhaInput:{
         textAlign:'center',
         fontSize:18,
-        fontWeight:'500',
         width:'55%',
         height:50,
-        marginLeft:40
+        marginLeft:40,
+        fontFamily:'Ubuntu_500Medium',
+        
     },
     SenhaInputContainer:{
         backgroundColor:'#D9D9D9',
@@ -252,7 +257,6 @@ const styles = StyleSheet.create({
         borderWidth:1,
         width:'65%',
         height:45,
-        marginLeft:85,
         opacity:0.6,
         flexDirection:'row',
         alignItems:'center',
@@ -266,7 +270,7 @@ const styles = StyleSheet.create({
         marginTop:30,
         borderRadius:8,
         borderWidth:1,
-        
+        fontWeight:'Inter_900Black'
     },
     botaoCadMot:{
         backgroundColor:'#FF3030',
@@ -292,7 +296,8 @@ const styles = StyleSheet.create({
         padding:8,
         fontWeight:'600',
         color:'black',
-        textAlign:'center'
+        textAlign:'center',
+        fontFamily:'Ubuntu_700Bold'
     },
     ifma:{
         width:100,

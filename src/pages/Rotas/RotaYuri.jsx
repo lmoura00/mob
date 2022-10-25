@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import {View, Text, StyleSheet} from 'react-native'
 
-import MapView from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 import *  as Location from 'expo-location'
 import * as Permission from 'expo-permissions'
 import config from '../../../config/index.json'
@@ -47,6 +47,7 @@ export function RotaYuri(){
             initialRegion={partida}
             showsUserLocation={true}
             ref={mapEl}
+            loadingEnabled
         >
             <MapViewDirections
                 origin={partida}
@@ -68,7 +69,15 @@ export function RotaYuri(){
                     )
                 }}
             />
-
+            <Marker 
+            coordinate={destination}
+            title='DESTINO'
+            />
+            <Marker 
+            coordinate={partida}
+            title='PARTIDA'
+            pinColor={'#14BC9C'}
+            />
         </MapView>
             <View style={{backgroundColor:'#fff', width:'100%', height:100, alignSelf:'center', alignItems:'center', marginBottom:15}}>
                 {distance && 

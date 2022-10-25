@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import {View, Text, StyleSheet} from 'react-native'
 
-import MapView from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 import *  as Location from 'expo-location'
 import * as Permission from 'expo-permissions'
 import config from '../../../../config/index.json'
@@ -47,6 +47,7 @@ export function RotaJose2(){
             initialRegion={partida}
             showsUserLocation={true}
             ref={mapEl}
+            loadingEnabled
         >
             <MapViewDirections
                 origin={partida}
@@ -68,7 +69,12 @@ export function RotaJose2(){
                     )
                 }}
             />
-
+        <Marker
+        coordinate={partida}/>
+         pinColor={'#14BC9C'}
+        <Marker
+        coordinate={destination}
+        />
         </MapView>
             <View style={{backgroundColor:'#fff', width:'100%', height:100, alignSelf:'center', alignItems:'center'}}>
                 {distance && 

@@ -8,7 +8,7 @@ import LottieView from 'lottie-react-native'
 
 
 
-export function Mariana(){
+export function Marina(){
     const [alerta, setAlerta] = useState(false)
     const [visible1, setVisible1] = useState(false)
     const [visible, setVisible] = useState(false)
@@ -81,11 +81,14 @@ export function Mariana(){
                     style={{}}
                     >
                         <View style={styles.modal2}>
-                            <Text style={styles.titleModal}>ALERTA</Text>
+                            <View style={styles.titleModal}>
+                                <Text style={styles.titleModalText}>ALERTA</Text>
+                                
+                            </View>
                                 <Text style={{fontSize:15, textAlign:'center', marginTop:15}}>Mob Timon coleta dados de local para ativar trajetos, localização, mesmo quando o app está fechado ou não está em uso.</Text>
                         
                                 <TouchableOpacity 
-                                    onPress={()=>navigation.navigate('RotaMariana') || setAlerta(false)} 
+                                    onPress={()=>navigation.navigate('RotaMarina') || setAlerta(false)} 
                                     style={styles.botaoModalAlerta}>
                                         <Text style={styles.textBotao}>CONTINUAR</Text>
                                 </TouchableOpacity>
@@ -98,7 +101,7 @@ export function Mariana(){
             <LottieView source={require('../../Assets/95740-profile-person.json')} autoPlay={true} loop={true} style={{marginBottom:300}}/>
 
                 <View style={{marginTop:180, alignItems:'center', justifyContent:'center'}}>
-                    <Text style={styles.title}>MARIANA</Text>
+                    <Text style={styles.title}>MARINA</Text>
                     <Text style={styles.texto}>AUDI Q3</Text>
                     <Text style={styles.texto}>COR: PRATA </Text>
                 </View>
@@ -277,34 +280,44 @@ const styles = StyleSheet.create({
     titleModal:{
         textAlign:'center',
         fontSize:17,
-        fontWeight:'bold'
+        fontWeight:'bold',
+        backgroundColor:'#fff',
+        height:45,
+        borderRadius:8,
+        elevation:10,
+        justifyContent:'center'
+        
+    },
+    titleModalText:{
+        textAlign:'center',
+        fontSize:17,
+        fontWeight:'bold',
     },
     textBotao:{
         fontSize:15,
         fontWeight:'600',
         textAlign:'center'
     },
-    modal2:{
-        alignSelf: 'center',
-        backgroundColor:'#f9f9f9',
-        padding:20,
-        elevation:10,
-        borderRadius:20,
-        marginVertical:280,
-        width:"80%",
-        height:"50%",
-    },
-    botaoModalAlerta:{
-        backgroundColor:'#14BC9C',
+    botaoModalAlerta: {
+        backgroundColor: "#FF3030",
         height: 35,
-        width:"40%",
-        padding:5,
-        borderRadius:15,
-        borderWidth:1,
-        alignSelf:'center',
-        margin:5,
-        elevation:10,
-        marginTop:170
-        
-    },
+        width: "40%",
+        padding: 5,
+        borderRadius: 15,
+        borderWidth: 1,
+        alignSelf: "center",
+        margin: 5,
+        elevation: 10,
+        marginTop: 10,
+      },
+      modal2: {
+        alignSelf: "center",
+        backgroundColor: "#f9f9f9",
+        padding: 20,
+        elevation: 10,
+        borderRadius: 20,
+        marginVertical: 260,
+        width: "80%",
+        height: "30%",
+      },
 })

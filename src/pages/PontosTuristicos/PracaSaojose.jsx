@@ -20,15 +20,15 @@ const { width } = Dimensions.get("window");
 const height = width * 0.9;
 
 const imagens = [
-  "https://timon.ma.gov.br/site/wp-content/uploads/2016/11/EA9A3290.jpg",
-  "https://timon.ma.gov.br/site/wp-content/uploads/2016/11/igreja-l.jpg",
-  "https://timon.ma.gov.br/site/wp-content/uploads/2016/11/EA9A3277-300x183.jpg",
-  "https://timon.ma.gov.br/site/wp-content/uploads/2016/11/EA9A3289.jpg",
-  "https://timon.ma.gov.br/site/wp-content/uploads/2016/11/EA9A3285.jpg",
-  "https://timon.ma.gov.br/site/wp-content/uploads/2016/11/EA9A3292.jpg",
-  "https://timon.ma.gov.br/site/wp-content/uploads/2016/11/EA9A3284.jpg",
-  "https://timon.ma.gov.br/site/wp-content/uploads/2016/11/EA9A3283.jpg",
-  "https://timon.ma.gov.br/site/wp-content/uploads/2016/11/EA9A3282.jpg",
+  "https://thumbs2.imgbox.com/73/d2/0HeJOpI3_t.jpg",
+  "https://thumbs2.imgbox.com/aa/80/2KbQIkFU_t.jpg",
+  "https://thumbs2.imgbox.com/e1/74/hEsUHqkQ_t.jpg",
+  "https://thumbs2.imgbox.com/78/e7/yifOwaMJ_t.jpg",
+  "https://thumbs2.imgbox.com/0e/a1/ZEMqZfGJ_t.jpg",
+  "https://thumbs2.imgbox.com/e2/15/HAGv8EkW_t.jpg",
+  "https://thumbs2.imgbox.com/ba/ed/SxnNO6oN_t.jpg",
+  "https://thumbs2.imgbox.com/f5/5e/DD77Reqa_t.jpg",
+  "https://thumbs2.imgbox.com/83/ce/sniAb7Lb_t.jpg",
 ];
 
 export function PracaSaoJose() {
@@ -46,18 +46,25 @@ export function PracaSaoJose() {
           style={{}}
         >
           <View style={styles.modal}>
-          <View
-                style={{ flexDirection: "row", justifyContent: "center", alignItems:'center', backgroundColor: "#fff",elevation:10}}
-                >
-                <Text style={styles.titleModal}>SOBRE:</Text>
-                <TouchableOpacity onPress={()=>setVisible(false)}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#fff",
+                elevation: 10,
+                borderRadius:8
+              }}
+            >
+              <Text style={styles.titleModal}>SOBRE:</Text>
+              <TouchableOpacity onPress={() => setVisible(false)}>
                 <LottieView
-                    source={require("../../Assets/28566-to-x.json")}
-                    autoPlay={true}
-                    loop={true}
-                    style={{ width: 50, height: 50, marginLeft:30 }}
+                  source={require("../../Assets/28566-to-x.json")}
+                  autoPlay={true}
+                  loop={true}
+                  style={{ width: 50, height: 50, marginLeft: 30 }}
                 />
-                </TouchableOpacity>
+              </TouchableOpacity>
             </View>
             <Text style={styles.textoModal}>
               O espaço é considerado pelos timonenses um símbolo histórico e de
@@ -90,18 +97,25 @@ export function PracaSaoJose() {
           style={{}}
         >
           <View style={styles.modal2}>
-          <View
-                style={{ flexDirection: "row", justifyContent: "center", alignItems:'center', backgroundColor: "#fff",elevation:10}}
-                >
-                <Text style={styles.titleModal}>ALERTA:</Text>
-                <TouchableOpacity onPress={()=>setAlerta(false)}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#fff",
+                elevation: 10,
+                borderRadius:8,
+              }}
+            >
+              <Text style={styles.titleModal}>ALERTA:</Text>
+              <TouchableOpacity onPress={() => setAlerta(false)}>
                 <LottieView
-                    source={require("../../Assets/28566-to-x.json")}
-                    autoPlay={true}
-                    loop={true}
-                    style={{ width: 50, height: 50, marginLeft:30 }}
+                  source={require("../../Assets/28566-to-x.json")}
+                  autoPlay={true}
+                  loop={true}
+                  style={{ width: 50, height: 50, marginLeft: 30 }}
                 />
-                </TouchableOpacity>
+              </TouchableOpacity>
             </View>
             <Text style={{ fontSize: 15, textAlign: "center", marginTop: 15 }}>
               Mob Timon coleta dados de local para ativar trajetos, localização,
@@ -208,6 +222,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "600",
     marginTop: 15,
+    fontFamily:'Ubuntu_500Medium'
   },
   taxa1: {
     fontSize: 20,
@@ -216,6 +231,7 @@ const styles = StyleSheet.create({
   },
   middle: {
     fontSize: 20,
+    fontFamily:'BalsamiqSans_400Regular'
   },
   link: {
     fontSize: 20,
@@ -225,13 +241,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 27,
     color: "black",
-    fontWeight: "900",
+    fontFamily:'Ubuntu_700Bold'
   },
   title1: {
     fontSize: 27,
     color: "black",
-    fontWeight: "700",
     marginBottom: 20,
+    fontFamily:'Ubuntu_500Medium'
   },
   image: {
     width,
@@ -263,7 +279,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 8,
     borderWidth: 1,
-    elevation:10,
+    elevation: 10,
   },
   verRota: {
     backgroundColor: "#14BC9C",
@@ -272,7 +288,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 8,
     borderWidth: 1,
-    elevation:10,
+    elevation: 10,
   },
   voltar: {
     backgroundColor: "#FF3030",
@@ -282,14 +298,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     marginBottom: 30,
-    elevation:10,
+    elevation: 10,
   },
   textoBotao: {
     fontSize: 18,
     padding: 8,
-    fontWeight: "600",
     color: "black",
     textAlign: "center",
+    fontFamily:'Ubuntu_700Bold'
   },
   modal: {
     alignSelf: "center",
@@ -299,7 +315,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginVertical: 80,
     width: "80%",
-    height: "80%",
+    height: "75%",
   },
   botaoModal1: {
     backgroundColor: "#FF3030",
@@ -312,23 +328,26 @@ const styles = StyleSheet.create({
     margin: 5,
     elevation: 10,
     marginVertical: 50,
+    fontFamily:'Ubuntu_400Regular'
   },
   titleModal: {
     textAlign: "center",
     fontSize: 20,
     marginLeft: 60,
-    fontWeight:'bold',
-    textDecorationLine:'underline'
+    textDecorationLine: "underline",
+    fontFamily:'Ubuntu_700Bold'
   },
   textBotao: {
     fontSize: 15,
     fontWeight: "600",
     textAlign: "center",
+    fontFamily:'Ubuntu_700Bold'
   },
   textoModal: {
     fontSize: 20,
     textAlign: "center",
     padding: 5,
+    fontFamily:'Ubuntu_400Regular',
   },
   botaoModalAlerta: {
     backgroundColor: "#FF3030",
@@ -340,7 +359,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     margin: 5,
     elevation: 10,
-    marginTop: 170,
+    marginTop: 10,
   },
   modal2: {
     alignSelf: "center",
@@ -348,8 +367,8 @@ const styles = StyleSheet.create({
     padding: 20,
     elevation: 10,
     borderRadius: 20,
-    marginVertical: 280,
+    marginVertical: 260,
     width: "80%",
-    height: "50%",
+    height: "30%",
   },
 });

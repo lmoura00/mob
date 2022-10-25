@@ -34,94 +34,149 @@ const onRefresh = React.useCallback(() => {
         }
       >
 
-                <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Yuri')}>
-                    <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{marginRight:150}}/>
-                    <View style={{flexDirection:'column', marginLeft:50}}>
-                        <Text style={styles.nome}>YURI</Text>
-                        <Text >PLACA: PIT-7854</Text>
+                <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Gabrielly')}>
+                    <View style={{width:50, height:50}}>
+                    <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{}} />
+                    </View>
+                    <View style={{flexDirection:'column'}}>
+                        <Text style={styles.nome}>GABRIELLY</Text>
+                        <Text >PLACA:PIX-7563</Text>
                     
                     </View>
 
-                    <View style={{flexDirection:'column', marginRight:30}}>
-                        <Text>PARTIDA: 19:00 h</Text>
-                        <Text>17/08/2022</Text>
+                    <View style={{flexDirection:'column'}}>
+                        <Text>PARTIDA: 00:00 h</Text>
+                        <Text>14/09/2022</Text>
                     </View>
-                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} style={{marginLeft:160}}/>
+                    <View style={{height:50, width:50}}>
+                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} />
+                    </View>
                 </TouchableOpacity>
 
+
+
+
                 <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Jose')}>
-                    <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{marginRight:150}}/>
-                    <View style={{flexDirection:'column', marginLeft:50}}>
+                    <View style={{width:50, height:50}}>
+                    <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{}} />
+                    </View>
+                    <View style={{flexDirection:'column', }}>
                         <Text style={styles.nome}>JOSÉ V.</Text>
                         <Text >PLACA: HUT-5694</Text>
                     
                     </View>
 
-                    <View style={{flexDirection:'column', marginRight:30}}>
+                    <View style={{flexDirection:'column', }}>
                         <Text>PARTIDA: 15:00 h</Text>
                         <Text>18/08/2022</Text>
                     </View>
-                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} style={{marginLeft:160}}/>
+                    <View style={{height:50, width:50}}>
+                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} />
+                    </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Vitoria')}>
-                <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{marginRight:150}}/>
-                    <View style={{flexDirection:'column', marginLeft:50}}>
-                        <Text style={styles.nome}>VITORIA EV.</Text>
-                        <Text >PLACA: ABC-4196</Text>
+
+
+                <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Marina')}>
+                    <View style={{width:50, height:50}}>
+                    <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{}} />
+                    </View>
+                    <View style={{flexDirection:'column',}}>
+                        <Text style={styles.nome}>MARINA</Text>
+                        <Text >PLACA:PAP-5678</Text>
                     
                     </View>
 
-                    <View style={{flexDirection:'column', marginRight:30}}>
-                        <Text>PARTIDA: 12:00 h</Text>
-                        <Text>18/08/2022</Text>
+                    <View style={{flexDirection:'column',}}>
+                        <Text>PARTIDA: 15:30 h</Text>
+                        <Text>14/09/2022</Text>
                     </View>
-                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} style={{marginLeft:160}}/>
+                    <View style={{height:50, width:50}}>
+                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} />
+                    </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Thaiane')}>
-                    <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{marginRight:150}}/>
-                    <View style={{flexDirection:'column', marginLeft:50}}>
-                        <Text style={styles.nome}>THAIANE</Text>
-                        <Text >PLACA: PIX-4571</Text>
-                    
-                    </View>
 
-                    <View style={{flexDirection:'column', marginRight:30}}>
-                        <Text>PARTIDA: 12:00 h</Text>
-                        <Text>18/08/2022</Text>
-                    </View>
-                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} style={{marginLeft:160}}/>
-                </TouchableOpacity>
+
 
                 <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Odaleia')}>
-                    <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{marginRight:150}}/>
-                    <View style={{flexDirection:'column', marginLeft:50}}>
+                    <View style={{width:50, height:50}}>
+                    <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{}} />
+                    </View>
+                    <View style={{flexDirection:'column', }}>
                         <Text style={styles.nome}>ODALEIA</Text>
                         <Text >PLACA: PRO-1243</Text>
                     
                     </View>
 
-                    <View style={{flexDirection:'column', marginRight:30}}>
+                    <View style={{flexDirection:'column',}}>
                         <Text>PARTIDA: 18:45 h</Text>
                         <Text>17/08/2022</Text>
                     </View>
-                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} style={{marginLeft:160}}/>
+                    <View style={{height:50, width:50}}>
+                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} />
+                    </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Mariana')}>
-                    <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{marginRight:150}}/>
-                    <View style={{flexDirection:'column',marginLeft:50}}>
-                        <Text style={styles.nome}>MARIANA</Text>
-                        <Text >PLACA:PAP-5678</Text>
+
+
+                <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Thaiane')}>
+                    <View style={{width:50, height:50}}>
+                    <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{}} />
+                    </View>
+                    <View style={{flexDirection:'column'}}>
+                        <Text style={styles.nome}>THAIANE</Text>
+                        <Text >PLACA: PIX-4571</Text>
                     
                     </View>
 
-                    <View style={{flexDirection:'column', marginRight:30}}>
-                        <Text>PARTIDA: 15:30 h</Text>
-                        <Text>14/09/2022</Text>
+                    <View style={{flexDirection:'column'}}>
+                        <Text>PARTIDA: 12:00 h</Text>
+                        <Text>18/08/2022</Text>
                     </View>
-                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} style={{marginLeft:160}}/>
+                    <View style={{height:50, width:50}}>
+                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} />
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Vitoria')}>
+                    <View style={{width:50, height:50}}>
+                    <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{}} />
+                    </View>
+
+                    <View style={{flexDirection:'column'}}>
+                        <Text style={styles.nome}>VITORIA EV.</Text>
+                        <Text >PLACA: ABC-4196</Text>
+                    
+                    </View>
+
+                    <View style={{flexDirection:'column'}}>
+                        <Text>PARTIDA: 12:00 h</Text>
+                        <Text>18/08/2022</Text>
+                    </View>
+                    <View style={{height:50, width:50}}>
+                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} />
+                    </View>
+                </TouchableOpacity>
+
+
+                <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Yuri')}>
+                    <View style={{width:50, height:50}}>
+                    <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{}} />
+                    </View>
+                    <View style={{flexDirection:'column'}}>
+                        <Text style={styles.nome}>YURI</Text>
+                        <Text >PLACA: PIT-7854</Text>
+                    
+                    </View>
+
+                    <View style={{flexDirection:'column'}}>
+                        <Text>PARTIDA: 19:00 h</Text>
+                        <Text>17/08/2022</Text>
+                    </View>
+                    <View style={{height:50, width:50}}>
+                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} />
+                    </View>
                 </TouchableOpacity>
 
             
@@ -153,7 +208,8 @@ const styles = StyleSheet.create({
     },
     nome:{
         fontSize:22,
-        color:'black'
+        color:'black',
+        fontFamily:'Ubuntu_500Medium'
     },
     placa:{
         fontSize:18,

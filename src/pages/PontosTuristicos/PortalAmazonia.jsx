@@ -27,7 +27,7 @@ const imagens = [
   "https://portaldaamazoniaclube.com.br/img/galeria/19.jpg",
   "https://portaldaamazoniaclube.com.br/img/galeria/20.jpg",
   "https://portaldaamazoniaclube.com.br/img/galeria/21.jpg",
-  "https://portaldaamazoniaclube.com.br/img/galeria/22.jpg,",
+  "https://portaldaamazoniaclube.com.br/img/galeria/22.jpg",
   "https://portaldaamazoniaclube.com.br/img/galeria/27.jpg",
 ];
 
@@ -46,18 +46,25 @@ export function PortalAmazonia() {
           style={{}}
         >
           <View style={styles.modal}>
-          <View
-                style={{ flexDirection: "row", justifyContent: "center", alignItems:'center', backgroundColor: "#fff",elevation:10}}
-                >
-                <Text style={styles.titleModal}>SOBRE:</Text>
-                <TouchableOpacity onPress={()=>setVisible(false)}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#fff",
+                elevation: 10,
+                borderRadius:8,
+              }}
+            >
+              <Text style={styles.titleModal}>SOBRE:</Text>
+              <TouchableOpacity onPress={() => setVisible(false)}>
                 <LottieView
-                    source={require("../../Assets/28566-to-x.json")}
-                    autoPlay={true}
-                    loop={true}
-                    style={{ width: 50, height: 50, marginLeft:30 }}
+                  source={require("../../Assets/28566-to-x.json")}
+                  autoPlay={true}
+                  loop={true}
+                  style={{ width: 50, height: 50, marginLeft: 30 }}
                 />
-                </TouchableOpacity>
+              </TouchableOpacity>
             </View>
             <Text style={styles.textoModal}>Um verdadeiro paraíso! </Text>
             <Text style={styles.textoModal}>
@@ -87,18 +94,25 @@ export function PortalAmazonia() {
           style={{}}
         >
           <View style={styles.modal2}>
-          <View
-                style={{ flexDirection: "row", justifyContent: "center", alignItems:'center', backgroundColor: "#fff",elevation:10}}
-                >
-                <Text style={styles.titleModal}>ALERTA:</Text>
-                <TouchableOpacity onPress={()=>setAlerta(false)}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#fff",
+                elevation: 10,
+                borderRadius:8,
+              }}
+            >
+              <Text style={styles.titleModal}>ALERTA:</Text>
+              <TouchableOpacity onPress={() => setAlerta(false)}>
                 <LottieView
-                    source={require("../../Assets/28566-to-x.json")}
-                    autoPlay={true}
-                    loop={true}
-                    style={{ width: 50, height: 50, marginLeft:30 }}
+                  source={require("../../Assets/28566-to-x.json")}
+                  autoPlay={true}
+                  loop={true}
+                  style={{ width: 50, height: 50, marginLeft: 30 }}
                 />
-                </TouchableOpacity>
+              </TouchableOpacity>
             </View>
             <Text style={{ fontSize: 15, textAlign: "center", marginTop: 15 }}>
               Mob Timon coleta dados de local para ativar trajetos, localização,
@@ -145,7 +159,7 @@ export function PortalAmazonia() {
           <Text style={styles.title}>DA</Text>
           <Text style={styles.title1}>AMAZÔNIA</Text>
 
-          <View style={{marginHorizontal:20}}>
+          <View style={{ marginHorizontal: 20 }}>
             <Text style={styles.middle}>
               ⬤ VENHA CONHECER O MELHOR HOTEL FAZENDA DA REGIÃO
             </Text>
@@ -221,9 +235,7 @@ export function PortalAmazonia() {
                   Linking.openURL("https://portaldaamazoniaclube.com.br/")
                 }
               >
-                <Text style={styles.link}>
-                  portaldaamazoniaclube.com.br/
-                </Text>
+                <Text style={styles.link}>portaldaamazoniaclube.com.br/</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -282,6 +294,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "600",
     marginTop: 15,
+    fontFamily:'Ubuntu_500Medium'
   },
   taxa1: {
     fontSize: 20,
@@ -290,6 +303,7 @@ const styles = StyleSheet.create({
   },
   middle: {
     fontSize: 20,
+    fontFamily:'BalsamiqSans_400Regular'
   },
   link: {
     fontSize: 20,
@@ -299,13 +313,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 27,
     color: "black",
-    fontWeight: "900",
+    fontFamily:'Ubuntu_700Bold'
   },
   title1: {
     fontSize: 27,
     color: "black",
-    fontWeight: "700",
     marginBottom: 20,
+    fontFamily:'Ubuntu_500Medium'
   },
   image: {
     width,
@@ -337,7 +351,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 8,
     borderWidth: 1,
-    elevation:10
+    elevation: 10,
   },
   verRota: {
     backgroundColor: "#14BC9C",
@@ -346,7 +360,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 8,
     borderWidth: 1,
-    elevation:10,
+    elevation: 10,
   },
   voltar: {
     backgroundColor: "#FF3030",
@@ -356,14 +370,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     marginBottom: 30,
-    elevation:10
+    elevation: 10,
   },
   textoBotao: {
     fontSize: 18,
     padding: 8,
-    fontWeight: "600",
     color: "black",
     textAlign: "center",
+    fontFamily:'Ubuntu_700Bold'
   },
   modal: {
     alignSelf: "center",
@@ -371,9 +385,9 @@ const styles = StyleSheet.create({
     padding: 15,
     elevation: 15,
     borderRadius: 20,
-    marginVertical: 80,
+    marginVertical: 130,
     width: "80%",
-    height: "80%",
+    height: "60%",
   },
   botaoModal1: {
     backgroundColor: "#FF3030",
@@ -385,24 +399,27 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     margin: 5,
     elevation: 10,
-    marginVertical: 180,
+    marginVertical: 50,
+    fontFamily:'Ubuntu_400Regular'
   },
   titleModal: {
     textAlign: "center",
     fontSize: 20,
     marginLeft: 60,
-    fontWeight:'bold',
-    textDecorationLine:'underline'
+    textDecorationLine: "underline",
+    fontFamily:'Ubuntu_700Bold'
   },
   textBotao: {
     fontSize: 15,
     fontWeight: "600",
     textAlign: "center",
+    fontFamily:'Ubuntu_700Bold'
   },
   textoModal: {
     fontSize: 20,
     textAlign: "center",
     padding: 5,
+    fontFamily:'Ubuntu_400Regular',
   },
   botaoModalAlerta: {
     backgroundColor: "#FF3030",
@@ -414,7 +431,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     margin: 5,
     elevation: 10,
-    marginTop: 150,
+    marginTop: 10,
   },
   modal2: {
     alignSelf: "center",
@@ -422,8 +439,8 @@ const styles = StyleSheet.create({
     padding: 20,
     elevation: 10,
     borderRadius: 20,
-    marginVertical: 280,
+    marginVertical: 260,
     width: "80%",
-    height: "50%",
+    height: "30%",
   },
 });

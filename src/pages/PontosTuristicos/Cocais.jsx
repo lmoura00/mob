@@ -21,16 +21,19 @@ const { width } = Dimensions.get("window");
 const height = width * 0.9;
 
 const imagens = [
-  "https://lh3.googleusercontent.com/T6mDyMiEtoSLk0RTtT5zPVJna1nurszfqDiiwPjM3jmWyww5BmBfwn3IWbkpc4sFK7zAg8eM_j569ccN7fMmrQ9PwSOED1s8uzq0sEyeClzVrPVajCKywMD3vNlORLkV1romrtZCUDYJ9CNA_71Tlk1-IMwa-iYFyXKep4vCouHJ9ZDnGkxOc7cKTN57L7Jh9PrqAUqklvAlOZtUU5ZJOGWocgSGwY__hmiMnTgxWFWVVfsWZbnypLmmfzyDk5axsWaznIhsLn2ltZzjGHiIlBB2vWJiNVbiAcP9wbLHkauSZN4hPlBdT3ZALJyEKwd_9hM0Iq7T6l3eV7uCgwZhQx0rJJI-UwWxk0LP4GuuFBry3uoXkefBjZIxT62E_tpOfzrPuSODyI_e9fXz9EBCfLRUQ65C1SHeE2xtLfsuV_nRXmB_Z280jgsWBenVtU-izVqKqSuCbykG5S3EPNlPa88cVKj2vljW2PqaaQRPObbcYs6SFwX08BLRa9NtTIkqbwDmi7Ife0FQbjY-ktaXI_0yKyEKM0Iz-bW9Ico6iQ5ILk4KQIRTevYeB1XudomGYpKao6JSfR2QHicFxM42dvWPKyckhm9Pw57MOWZQuAfw-rUT_Z21U_wbQDms9VxItWYFdmQJB9yG_rECnz1kDuKEFgbE2NbXpSydTx_VqMRt-pE-ZhQwZ41z2AW4SN7kyZgq1WHvwYnPK-JsDwz_d_RGf65EauOHakIY1WLrXtFUu6Fv9K0X5zvatE_OqG00Ryit6I66PhDPwS1zxOhhGBd3dKiiwB4GWCHdM5yF2H69NkEBPkAXIrvNtj0CGkv4q9GSqA0esvtFh_o1kb2SUQc7eusPygYDFORUDQSMbyQ49e1wfzvizEEob0eWkXmF_mZ1WdqLEZ7xTRCNc414UFdRa1oNM56OEXu-GhSTTtLXSJzzRmvLP73M8Iy-JEtr-2Aq0fSXe6me9gM03TuMpa-gf1D3dSfE8mAloDJb13FwmA=s225-no?authuser=1",
-  "https://lh3.googleusercontent.com/e2zGwZnJrZNFuGxYkbWnPIWvyiwmE-wEz7KwSWJJC-YPaXI7EP1CeOHrVAg9TzsLVRxV_oO_8qqgdQ3XQultT_lXvXzPPTH-fT2Ody30E2wmNVgbIAg3_gQNW6sNyXosRAayKK5QCrRAt7C-CPbWYdMoNkA5mXvcxJ4q9WKsKZlqPDXR6ArYaCEBTHfhtYaYqgcHsr0N2wq9MWwmPXdkpeRz0ELELRD2mK6DmetUCqgc_65dgapGQvkumk2IaN1LrOqjux-qNu-xADb-G_tewNY9LS_WuGYjQI8UePnOQtMqXwL1DBBVk719cieyW6-n1GsbMW1h8n1EyhohenoHXpehsJcakhsvw-CHdjxiHpMlDBdwQzcAvePKX0VIzmkDBhZo5eGVcdBQdM97nOIbkq4qyKbBqY2VpuwAZq8eAwIjoudSJhxmYr2wlqim38eSak2PQB8FEW6CNR_OTzr1oZ0oyMJGrXjELkHNg_FPQ5Xz2D7BZWocEdeh-BjBk0qRIpKdO0h_0kR_Z2hTeKMp0QIU1WNuKdQ5BO_L910G1TDp1fh7PtR8skYByiZr58ZnN0t3s0X4gwku3pWSOIxudtQqCJ6oejIG18J3k5KQOi19dOgwFEFcbptZ7V5bzpMiyMSzhFMkUK3ayuEgH8EUSxVAs-z1PCZ4jBSkUGdhrc1HITcwf1cNwLyEbTHCANfR_1LB-l54HDXKQxy9PqQMaiPtEujxfsXOJqrHCXOSIKSyDmt7fpMuTwj1oCYVKH1iu7L8PO8QvLp3EwhvBnSprtR5Em9SaOKKLor9mlAjj9RC4FsFVRDeXBjofEBkKgOs1cj2iofTlhMYwSvbqYV5YQW3bpTKPdYha_uvaP0jTaDDhLcMVe6vlxCy-IRRyz-gLGXJmEZVUhLJduPKxvanyh67N9bfvhmMKd8rjuaABV_m1DLpvygdog9iSZqKLAk6PRgoytP5yhXI4sNLIW0C_EmIYYlJoBYezx0feQ8YxLRDuw=w1087-h592-no?authuser=1",
-  "https://lh3.googleusercontent.com/w2hN0jqHlmLZoGJ677eYooXJ0tN-mfMDR3u-S8gs1h11mZmcQlMKXGkLHpZKCdm8Nz4nwlB9icjbKeCAl6YOBDiEkMNhxs4DNLyeAVU0mj2T4tft9jAyxG1SmI8u7nXhsFm9PKaAhOzXLdVkf5B2wDslEBZsDBBJxhTnRgfCfeUHOtFdxH0VE4wgbKwTXaBMWUj_fOnS2KJd9B2jWbGz9M9BPJLWQ9IXJHLmNtqI2ziRQFYso7s9r4xIQ3ytXI9RkB0oyWjbkGsXF1uKR00CAlQ64_YEhoclZM5myARDHM0qslKrp0vnfOXkURt654uII45OUsijoYJqUm4jtRudUgAeHPL6xUxR1ZEuC2o_lvwgCDEv8U5KZWfHKlYIOJqv6kU4oAyoaenwRzqUv4a9FjTq19isAzVQH3gnfA4FhveiSDWTsnjpRm8bjiQkg5xjKe98cFPp6gQwiyit3meyRLN8DHUOPntVpNM3ObvmJVIb8wgw_Wu4mPmuAeT3t-NRoWP2wNjJjNLE7aokJqigHNAYC6dAvFtTEJdKlDTnFnvc07Fy0ja76Oyk3rgN5H46sS2-PeIqnmQsuQktbw2tG6TfuBE2vxAZwQyxyySMP5CJ6-T3tKx0I5mgvd8lU9Ag_FbARX_K8nPvYOFbv9TdN6K9e7nVL0QUxTuwKiR9zlvXv_9YEc2UyzqDPsDpPU-Z0hAcXWeqxqlCIboTrGKLu9gW4kWrCSRV1QI0pERje5xjNwdMnhIuNl3_YDXEmgfjp2Ddet5Oc6cFO1RkaoFoFTjHKx_Oq6GdMda5ozAH9TJjlGvI_40hWA3ew7gomM87Uf15f2-w6HzmjLo18oHSEz520A3xJhVXzel4gHQa7cCIy8KoLiXXxuBIkhkvE9a4lpc1HIQncyutH_IVhlXP_j57s6lzox_Jh5jpEM-CZvkPsrAp1rh9o3EYVhWQW7t8D7qrZhdgqhxkuNd1jwveyPUdm6HnT0t9OQ6h-M9QzUNFCQ=s342-no?authuser=1",
-  "https://lh3.googleusercontent.com/VS1a8Cvt_YjbtpyJRgQY28j1YjSbNgZm43XCtXkKqLsyI_-ogrTz6WKpsmuOx5U0p9d1HfRpHdsmQYY4o4Rcba8cNvJ_b1Yd4frpNT-Q91IpvOCDgy5T9Gs40KUSXSMwnOMuLzeWZ8idRMne0EtKczNPobY1eOvywfPQ8fwtD-DAwRM-QHlwP6KceC4amkHU5VNhm7_j43HX8izyaVWHzOzz7kb-GS3ShreB6SX_xQGlC313FJqRGg39PyLKBhOARww7FKCvBI_l9K0jcwKDEK5qxH9rlJ27OWaTVt4WuejmGyPmzg1fFXonpGQCNa7gfqvtQhnnaHIgZsNp_j6W0AKlK4a_ebrrz_bIMYSQmi_k7H5wT6bnYrn72lC-_rIUqM4sDrg7sOdmAJrdHaLWVyrktf7--fiOakK4OPL_-C93p0wK21TxUnXKkoI2vrUyKPA0AqHU1GGiB0S2mcwjVwW1G1fu1U3rFtXX2w9_hd7sbH-M3PaN7xBx5ATiPOruuexkuekEjR4ZfwwyHBpzRtG6Iobuzbq4zNLEXzugkKDcXZ5ir7099YhfxRuZ1LCcsNoZfZ7m7i-fp9bOP_daRFLRIQ2H45YkdcP72lYkrab1YOoAhImjJBy8ASVGs0MFWuY_ylzFE-PNjG9OWIiVd0XfJ-slgmS-7JxYAlGdXqY-JCudF-ewSVA9GynlxqG6rbpjcM5Q02RIXEqll1RyZ9bIbLbUByvX0oR2IeqKTqEBfn1X2YXK-W2CUKS3MJk9ATPYTRIXWnw4mgK53bR9m6_p3mICVkRcTxI7hOE4HbDlns_9hry6RII7cOvXkgsJUqcdyGEX4Nh2l6J5qztDD55zkH_Xnpei7JAKZLJV0uy2pM6qfU1r5I_3h5DIcfuQCuF7Tj3l9Firhp_CCynDI7Bh8tWZHPf2HgAGNi9MNtU-WvJVGBJKILiG1iX4MfTURiRafJxQAhTrAIfEy0q07te18aZAebnNUbjIVZeflEC8oA=w453-h302-no?authuser=1",
-  "https://timon.ma.gov.br/site/wp-content/uploads/2017/09/EDI_2024.jpg",
-  "https://timon.ma.gov.br/site/wp-content/gallery/inauguracao-do-shopping-cocais/842A2004-2.jpg",
-  "https://timon.ma.gov.br/site/wp-content/gallery/inauguracao-do-shopping-cocais/842A2010-2.jpg",
-  "https://timon.ma.gov.br/site/wp-content/gallery/inauguracao-do-shopping-cocais/842A2018-2.jpg",
-  "https://timon.ma.gov.br/site/wp-content/gallery/inauguracao-do-shopping-cocais/842A2019-2.jpg",
-  "https://timon.ma.gov.br/site/wp-content/gallery/inauguracao-do-shopping-cocais/842A2016-2.jpg",
+  "https://thumbs2.imgbox.com/c3/39/Yc6HxHJU_t.jpg",
+  "https://thumbs2.imgbox.com/3f/64/Y7gL81sH_t.jpg",
+  "https://thumbs2.imgbox.com/a9/1c/UFXvfxw3_t.jpg",
+  "https://thumbs2.imgbox.com/f6/6b/xRvzlxLd_t.jpg",
+  "https://thumbs2.imgbox.com/d1/32/APvRzEqe_t.jpg",
+  "https://thumbs2.imgbox.com/26/01/rHWQKBor_t.jpg",
+  "https://thumbs2.imgbox.com/c3/66/6iqJZvoX_t.jpg",
+  "https://thumbs2.imgbox.com/3d/37/zeEl5Oge_t.jpg",
+  "https://thumbs2.imgbox.com/29/bf/IPT4meV0_t.jpg",
+  "https://thumbs2.imgbox.com/fd/89/gNMEF5f6_t.jpg",
+  'https://thumbs2.imgbox.com/f3/36/F6Z92Ocj_t.jpg',
+  'https://thumbs2.imgbox.com/ba/37/Kre1CJgm_t.jpg',
+  'https://thumbs2.imgbox.com/ba/ea/n3tANj1d_t.jpg'
 ];
 
 export function Cocais() {
@@ -49,16 +52,23 @@ export function Cocais() {
         >
           <View style={styles.modal}>
             <View
-              style={{ flexDirection: "row", justifyContent: "center", alignItems:'center', backgroundColor: "#fff",elevation:10}}
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#fff",
+                elevation: 10,
+                borderRadius:8
+              }}
             >
               <Text style={styles.titleModal}>SOBRE:</Text>
-              <TouchableOpacity onPress={()=>setVisible(false)}>
-              <LottieView
-                source={require("../../Assets/28566-to-x.json")}
-                autoPlay={true}
-                loop={true}
-                style={{ width: 50, height: 50, marginLeft:30 }}
-              />
+              <TouchableOpacity onPress={() => setVisible(false)}>
+                <LottieView
+                  source={require("../../Assets/28566-to-x.json")}
+                  autoPlay={true}
+                  loop={true}
+                  style={{ width: 50, height: 50, marginLeft: 30 }}
+                />
               </TouchableOpacity>
             </View>
 
@@ -89,17 +99,24 @@ export function Cocais() {
         >
           <View style={styles.modal2}>
             <View
-                style={{ flexDirection: "row", justifyContent: "center", alignItems:'center', backgroundColor: "#fff",elevation:10}}
-                >
-                <Text style={styles.titleModal}>ALERTA:</Text>
-                <TouchableOpacity onPress={()=>setAlerta(false)}>
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#fff",
+                elevation: 10,
+                borderRadius:8,
+              }}
+            >
+              <Text style={styles.titleModal}>ALERTA:</Text>
+              <TouchableOpacity onPress={() => setAlerta(false)}>
                 <LottieView
-                    source={require("../../Assets/28566-to-x.json")}
-                    autoPlay={true}
-                    loop={true}
-                    style={{ width: 50, height: 50, marginLeft:30 }}
+                  source={require("../../Assets/28566-to-x.json")}
+                  autoPlay={true}
+                  loop={true}
+                  style={{ width: 50, height: 50, marginLeft: 30 }}
                 />
-                </TouchableOpacity>
+              </TouchableOpacity>
             </View>
             <Text style={{ fontSize: 15, textAlign: "center", marginTop: 15 }}>
               Mob Timon coleta dados de local para ativar trajetos, localização,
@@ -275,6 +292,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "600",
     marginTop: 15,
+    fontFamily:'Ubuntu_500Medium'
   },
   taxa1: {
     fontSize: 20,
@@ -283,6 +301,7 @@ const styles = StyleSheet.create({
   },
   middle: {
     fontSize: 20,
+    fontFamily:'BalsamiqSans_400Regular'
   },
   link: {
     fontSize: 20,
@@ -292,13 +311,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 27,
     color: "black",
-    fontWeight: "900",
+    fontFamily:'Ubuntu_700Bold'
   },
   title1: {
     fontSize: 27,
     color: "black",
-    fontWeight: "700",
     marginBottom: 20,
+    fontFamily:'Ubuntu_500Medium'
   },
   image: {
     width,
@@ -330,7 +349,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 8,
     borderWidth: 1,
-    elevation:10,
+    elevation: 10,
   },
   verRota: {
     backgroundColor: "#14BC9C",
@@ -339,7 +358,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 8,
     borderWidth: 1,
-    elevation:10,
+    elevation: 10,
   },
   voltar: {
     backgroundColor: "#FF3030",
@@ -349,14 +368,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     marginBottom: 30,
-    elevation:10,
+    elevation: 10,
   },
   textoBotao: {
     fontSize: 18,
     padding: 8,
-    fontWeight: "600",
     color: "black",
     textAlign: "center",
+    fontFamily:'Ubuntu_700Bold'
   },
   modal: {
     alignSelf: "center",
@@ -364,9 +383,9 @@ const styles = StyleSheet.create({
     padding: 15,
     elevation: 15,
     borderRadius: 20,
-    marginVertical: 80,
+    marginVertical: 120,
     width: "80%",
-    height: "80%",
+    height: "70%",
   },
   botaoModal1: {
     backgroundColor: "#FF3030",
@@ -378,24 +397,27 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     margin: 5,
     elevation: 10,
-    marginVertical: 110,
+    marginVertical: 50,
+    fontFamily:'Ubuntu_400Regular'
   },
   titleModal: {
     textAlign: "center",
     fontSize: 20,
     marginLeft: 60,
-    fontWeight:'bold',
-    textDecorationLine:'underline'
+    textDecorationLine: "underline",
+    fontFamily:'Ubuntu_700Bold'
   },
   textBotao: {
     fontSize: 15,
     fontWeight: "600",
     textAlign: "center",
+    fontFamily:'Ubuntu_700Bold'
   },
   textoModal: {
     fontSize: 20,
     textAlign: "center",
     padding: 5,
+    fontFamily:'Ubuntu_400Regular',
   },
   botaoModalAlerta: {
     backgroundColor: "#FF3030",
@@ -407,7 +429,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     margin: 5,
     elevation: 10,
-    marginTop: 150,
+    marginTop: 10,
   },
   modal2: {
     alignSelf: "center",
@@ -415,8 +437,8 @@ const styles = StyleSheet.create({
     padding: 20,
     elevation: 10,
     borderRadius: 20,
-    marginVertical: 280,
+    marginVertical: 260,
     width: "80%",
-    height: "50%",
+    height: "30%",
   },
 });

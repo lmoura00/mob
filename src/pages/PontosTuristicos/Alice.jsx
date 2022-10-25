@@ -20,16 +20,16 @@ const { width } = Dimensions.get("window");
 const height = width * 0.9;
 
 const imagens = [
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22449868_1957084384514617_8316780327499194748_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeHZLaDWgp3dSVQBiA2hTSoXkV6Krd_RilyRXoqt39GKXLizqhRMvvKjTtRcRBSQ2gxFwRJX5EYfLgyakrfm6lp9&_nc_ohc=w0XWli1CO18AX8KBWYl&_nc_ht=scontent.fthe18-1.fna&oh=00_AT_wM5AZgaUW5Agoz-pXbLofWLzPJX4iqbUy3xLUPA9UDQ&oe=634E69F9",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22449896_1957084364514619_7551983529861275600_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeGpFi8E1ZeIiznij2diZuW8s_5YREWY2cKz_lhERZjZwpQW0ok3kaXFSLMksREIduPPRJTq3DY5AmeQUuywIdQi&_nc_ohc=6LhcdKcebqgAX_I2SQ8&tn=3WG5uJQzW1OH0zMc&_nc_ht=scontent.fthe18-1.fna&oh=00_AT_M-MxLkthu9zRyNX-RVnIxwfVTA5aEaDi6Spv4xEcaTw&oe=634B79EF",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22449724_1957084361181286_2237347879569093642_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeHlhaXMct3Fr4wxhIdhI4ul2oIs7DOyxkfagizsM7LGR5_BNTrBarIw9MpWQ_I_iUNQz0fhN6szzxBvZzUXjBLv&_nc_ohc=qwdKXDzvOtgAX8MFf8y&_nc_ht=scontent.fthe18-1.fna&oh=00_AT9_cFOQ2oPY888zdSxivKy1K5B2eChM1uPH_RdKb9s88w&oe=634C2988",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22448564_1957084341181288_8606313369812939067_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeHOICdm6ORPjJzVLRmsdI5vmSuAm8Jh0ZCZK4CbwmHRkH4QDE4jKcPIerOhKzWorw7CuMyTPrh5kyr2PRV_nzjS&_nc_ohc=_XzFgZBddXsAX8fiVMY&tn=3WG5uJQzW1OH0zMc&_nc_ht=scontent.fthe18-1.fna&oh=00_AT-NVFycYkcBDDugDIU3E3cHCGLkNs7wy50FgTTEmBIMOQ&oe=634D0DEE",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22448621_1957084281181294_5160790516998986076_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeG6PfdfvsiMxgJnI36MBYDD0RmfVQ7XjiLRGZ9VDteOIshnwLKrwSXo6aIasqurwP8mp2AqAIeSqN85QTUhdxbO&_nc_ohc=GWoIQ7eGKeAAX82YSzj&tn=3WG5uJQzW1OH0zMc&_nc_ht=scontent.fthe18-1.fna&oh=00_AT_wvcUTGdLL9qjhJxeR0VfgHmZCxRdmam5vkA_b3XwVDA&oe=634DD673",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22519613_1957084277847961_7661633805960970105_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeElv5foNfnK6R99qDRzef0MZSxDwkJszzhlLEPCQmzPOKDwmLNMomkm3f6mQip179_2dk2yKyY4LfpW59NlMArU&_nc_ohc=ZVSMUfLKPBsAX_2f0UH&_nc_ht=scontent.fthe18-1.fna&oh=00_AT-4tsFDOpoCgsMMEvSOUJCSsg_c3e4ju5z0gq3TuQwMsA&oe=634EA8B8",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.18169-9/22552321_1957084231181299_5073876818718488883_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeFaj_Ms03dHq6EwJtTqzVTdElxkKzmMTCQSXGQrOYxMJPpa-UOzET4mgx0rSmB4zG543pFP4pySpBZId6aqcTxH&_nc_ohc=NUesrM70A_QAX8h5Hqs&_nc_ht=scontent.fthe18-1.fna&oh=00_AT9lisFyd6btAvpm1mo1caKpuNqebO490Biq4wnkej9L4A&oe=634BE3C3",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t31.18172-8/1500964_1459732130916514_893422592_o.jpg?_nc_cat=107&ccb=1-7&_nc_sid=9267fe&_nc_eui2=AeGtH1H1JWFyJFw7KTCsCDO3MUJZI1kTSAsxQlkjWRNICxOYrdEfVZBvUsXR0Vk4lk9fYsWUkP82OAhnl3Fhw3n-&_nc_ohc=Dk2pzfOr_McAX-DXgEd&_nc_ht=scontent.fthe18-1.fna&oh=00_AT-aHYy3ku-v0PVecGy-zhifQpY28fY37TAeMdLbkJBtTQ&oe=634E817B",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t31.18172-8/1492642_1452968164926244_106881821_o.jpg?_nc_cat=102&ccb=1-7&_nc_sid=9267fe&_nc_eui2=AeFqwypEhHIiwp4buEmtbZx6gN_T_jmD8LeA39P-OYPwtw-kmZRq7I3X87WFCjP3_BicFxH4j_ogAiqbZ8h0d85r&_nc_ohc=Q7qsU1iirDsAX8e0_YF&_nc_oc=AQnCvBahnSNrEsZ-SN6cy3gIl_ONpeAM9EMefoQcoeX4535uu3pFgvcAYst3xkqWC4GHtOuCJT3CFAmGcvAzVpzI&_nc_ht=scontent.fthe18-1.fna&oh=00_AT_Amn2vtxRWmzcHwWvYMhHTs_xn0iDl916j1-ebndQMAw&oe=634B3A48",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t31.18172-8/860399_1432655040290890_1464674184_o.jpg?_nc_cat=108&ccb=1-7&_nc_sid=9267fe&_nc_eui2=AeGKN_4rcNY9e_5jNOcj1mliwIbye0SX7bDAhvJ7RJftsO3jq7XTwVSRF_TFQMAnzv709DAE0xmTxZAiCBUUfX_H&_nc_ohc=MBaCDHjFO6EAX8pt_qr&_nc_ht=scontent.fthe18-1.fna&oh=00_AT8wsMPfhSAXFzA_k0Dboex7jIOKuBgulaumdz5SXflDjw&oe=634BC394",
+  "https://cdn-thumbs.imagevenue.com/59/c5/9b/ME15GFU3_b.jpg",
+  "https://cdn-thumbs.imagevenue.com/62/92/cb/ME15GFU4_b.jpg",
+  "https://cdn-thumbs.imagevenue.com/08/1d/7b/ME15GFU5_b.jpg",
+  "https://cdn-thumbs.imagevenue.com/f8/3f/22/ME15GFU6_b.jpg",
+  "https://cdn-thumbs.imagevenue.com/42/5d/a6/ME15GFU7_b.jpg",
+  "https://cdn-thumbs.imagevenue.com/17/44/38/ME15GFU8_b.jpg",
+  "https://cdn-thumbs.imagevenue.com/a0/82/90/ME15GFU9_b.jpg",
+  "https://cdn-thumbs.imagevenue.com/fa/d0/f1/ME15GFUA_b.jpg",
+  "https://cdn-thumbs.imagevenue.com/9b/0b/86/ME15GFUB_b.jpg",
+  "https://cdn-thumbs.imagevenue.com/b4/90/65/ME15GFUC_b.jpg",
 ];
 
 export function Alice() {
@@ -55,6 +55,7 @@ export function Alice() {
                 alignItems: "center",
                 backgroundColor: "#fff",
                 elevation: 10,
+                borderRadius:8
               }}
             >
               <Text style={styles.titleModal}>SOBRE:</Text>
@@ -105,6 +106,7 @@ export function Alice() {
                 alignItems: "center",
                 backgroundColor: "#fff",
                 elevation: 10,
+                borderRadius:8
               }}
             >
               <Text style={styles.titleModal}>ALERTA:</Text>
@@ -263,6 +265,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "600",
     marginTop: 15,
+    fontFamily:'Ubuntu_500Medium'
   },
   taxa1: {
     fontSize: 20,
@@ -271,6 +274,7 @@ const styles = StyleSheet.create({
   },
   middle: {
     fontSize: 20,
+    fontFamily:'BalsamiqSans_400Regular'
   },
   link: {
     fontSize: 20,
@@ -280,13 +284,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 27,
     color: "black",
-    fontWeight: "900",
+    fontFamily:'Ubuntu_700Bold'
   },
   title1: {
     fontSize: 27,
     color: "black",
-    fontWeight: "700",
     marginBottom: 20,
+    fontFamily:'Ubuntu_500Medium'
   },
   image: {
     width,
@@ -318,7 +322,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 8,
     borderWidth: 1,
-    elevation:10,
+    elevation: 10,
   },
   verRota: {
     backgroundColor: "#14BC9C",
@@ -327,7 +331,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 8,
     borderWidth: 1,
-    elevation:10,
+    elevation: 10,
   },
   voltar: {
     backgroundColor: "#FF3030",
@@ -337,14 +341,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     marginBottom: 30,
-    elevation:10
+    elevation: 10,
   },
   textoBotao: {
     fontSize: 18,
     padding: 8,
-    fontWeight: "600",
     color: "black",
     textAlign: "center",
+    fontFamily:'Ubuntu_700Bold'
   },
   modal: {
     alignSelf: "center",
@@ -366,24 +370,27 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     margin: 5,
     elevation: 10,
-    marginVertical: 40,
+    marginVertical: 50,
+    fontFamily:'Ubuntu_400Regular'
   },
   titleModal: {
     textAlign: "center",
     fontSize: 20,
     marginLeft: 60,
-    fontWeight:'bold',
-    textDecorationLine:'underline'
+    textDecorationLine: "underline",
+    fontFamily:'Ubuntu_700Bold'
   },
   textBotao: {
     fontSize: 15,
     fontWeight: "600",
     textAlign: "center",
+    fontFamily:'Ubuntu_700Bold'
   },
   textoModal: {
     fontSize: 20,
     textAlign: "center",
     padding: 5,
+    fontFamily:'Ubuntu_400Regular',
   },
   botaoModalAlerta: {
     backgroundColor: "#FF3030",
@@ -395,7 +402,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     margin: 5,
     elevation: 10,
-    marginTop: 150,
+    marginTop: 10,
   },
   modal2: {
     alignSelf: "center",
@@ -403,8 +410,8 @@ const styles = StyleSheet.create({
     padding: 20,
     elevation: 10,
     borderRadius: 20,
-    marginVertical: 280,
+    marginVertical: 260,
     width: "80%",
-    height: "50%",
+    height: "30%",
   },
 });

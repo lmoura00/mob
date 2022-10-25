@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import {View, Text, StyleSheet} from 'react-native'
 
-import MapView from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 import *  as Location from 'expo-location'
 import MapViewDirections from 'react-native-maps-directions';
 import api from '../../../config/index.json'
@@ -45,6 +45,7 @@ export function RotaConvencoes(){
             initialRegion={location}
             showsUserLocation={true}
             ref={mapEl}
+            loadingEnabled
         >
             <MapViewDirections
                 origin={location}
@@ -65,6 +66,9 @@ export function RotaConvencoes(){
                         }
                     )
                 }}
+            />  
+            <Marker
+            coordinate={destination}
             />
 
         </MapView>

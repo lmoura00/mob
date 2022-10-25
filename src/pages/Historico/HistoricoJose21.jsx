@@ -25,7 +25,10 @@ export function HistoricoJose21(){
                     style={{}}
                     >
                         <View style={styles.modal2}>
-                            <Text style={styles.titleModal}>ALERTA</Text>
+                            <View style={styles.titleModal}>
+                                <Text style={styles.titleModalText}>ALERTA</Text>
+                                
+                            </View>
                                 <Text style={{fontSize:15, textAlign:'center', marginTop:15}}>Mob Timon coleta dados de local para ativar trajetos, localização, mesmo quando o app está fechado ou não está em uso.</Text>
                         
                                 <TouchableOpacity 
@@ -200,19 +203,6 @@ const styles = StyleSheet.create({
         elevation:10,
         
     },
-    botaoModalAlerta:{
-        backgroundColor:'#14BC9C',
-        height: 35,
-        width:"40%",
-        padding:5,
-        borderRadius:15,
-        borderWidth:1,
-        alignSelf:'center',
-        margin:5,
-        elevation:10,
-        marginTop:170
-        
-    },
     botaoModal2:{
         backgroundColor:'#fff',
         height: 35,
@@ -227,21 +217,44 @@ const styles = StyleSheet.create({
     titleModal:{
         textAlign:'center',
         fontSize:17,
-        fontWeight:'bold'
+        fontWeight:'bold',
+        backgroundColor:'#fff',
+        height:45,
+        borderRadius:8,
+        elevation:10,
+        justifyContent:'center'
+        
+    },
+    titleModalText:{
+        textAlign:'center',
+        fontSize:17,
+        fontWeight:'bold',
     },
     textBotao:{
         fontSize:15,
         fontWeight:'600',
         textAlign:'center'
     },
-    modal2:{
-        alignSelf: 'center',
-        backgroundColor:'#f9f9f9',
-        padding:20,
-        elevation:10,
-        borderRadius:20,
-        marginVertical:280,
-        width:"80%",
-        height:"50%",
-    },
+    botaoModalAlerta: {
+        backgroundColor: "#FF3030",
+        height: 35,
+        width: "40%",
+        padding: 5,
+        borderRadius: 15,
+        borderWidth: 1,
+        alignSelf: "center",
+        margin: 5,
+        elevation: 10,
+        marginTop: 10,
+      },
+      modal2: {
+        alignSelf: "center",
+        backgroundColor: "#f9f9f9",
+        padding: 20,
+        elevation: 10,
+        borderRadius: 20,
+        marginVertical: 260,
+        width: "80%",
+        height: "30%",
+      },
 })

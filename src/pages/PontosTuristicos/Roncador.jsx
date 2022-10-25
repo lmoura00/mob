@@ -20,11 +20,20 @@ const { width } = Dimensions.get("window");
 const height = width * 0.9;
 
 const imagens = [
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.6435-9/49206178_522090721607924_4094037778021482496_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=730e14&_nc_ohc=S1EmqC7u7dsAX9ZTgb6&_nc_ht=scontent.fthe18-1.fna&oh=00_AT_D_GWc4A3F6SkM-6Fx69qdjzlHg2iw64gCwvBJWkKdtw&oe=63571233",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.6435-9/49755935_522089764941353_5130777071492005888_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=730e14&_nc_ohc=5z13wtmtr1AAX8VYzt6&_nc_ht=scontent.fthe18-1.fna&oh=00_AT_vFVAetwUQGYmUeIWeoetxHDrXZEo6rchWBNcMZhSWiQ&oe=635981BA",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.6435-9/44304546_478463692637294_7239673303080632320_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=730e14&_nc_ohc=-olZffpaO3MAX9Jplxx&_nc_ht=scontent.fthe18-1.fna&oh=00_AT-qzUdOanRMGGTncA7X0q-oLHFjdNqlge58f1fZfKm2FQ&oe=6357B912",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.6435-9/44332664_478463395970657_3083581124601970688_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=730e14&_nc_ohc=nYNb_1URMaQAX_mO4xJ&_nc_oc=AQmBDfRyF-OpZ7Eu2dbDoHJ4jawkxf4FyKnhrY9OMstxB3klWSONvllWuw5xNuJFkZ6Y6I4AXv-d-L5xlvgU0pmo&_nc_ht=scontent.fthe18-1.fna&oh=00_AT-Z4wsHafEKbF9-MkKoIGdSPM7c-EBOr--_zSWNs1EUvA&oe=6356B8B1",
-  "https://scontent.fthe18-1.fna.fbcdn.net/v/t1.6435-9/44433002_478462905970706_8034872569356091392_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=730e14&_nc_ohc=dru3rXf3_58AX8zOgWx&_nc_ht=scontent.fthe18-1.fna&oh=00_AT9ye5cnO3tZPARwXvqmeqYGlnqqQLd-S8sT9v8CV1GruQ&oe=63596AFD",
+  "https://thumbs2.imgbox.com/d8/5d/ZDtmSPNG_t.jpg",
+  "https://thumbs2.imgbox.com/98/5e/RQPSyT8D_t.jpg",
+  "https://thumbs2.imgbox.com/01/bb/uo1l3Ccu_t.jpg",
+  "https://thumbs2.imgbox.com/7f/0a/db5kRqW9_t.jpg",
+  "https://thumbs2.imgbox.com/9d/d2/xZWVOxWr_t.jpg",
+  "https://thumbs2.imgbox.com/35/99/yUbhdsbi_t.jpg",
+  "https://thumbs2.imgbox.com/9c/d7/JZJodMks_t.jpg",
+  "https://thumbs2.imgbox.com/a3/15/oSC0tKal_t.jpg",
+  "https://thumbs2.imgbox.com/fd/6a/0tI232A6_t.jpg",
+  "https://thumbs2.imgbox.com/1b/c7/mP0TJQ81_t.jpg",
+  "https://thumbs2.imgbox.com/8e/d8/GjoWl0mW_t.jpg",
+  "https://thumbs2.imgbox.com/99/40/oVXlIYSf_t.jpg",
+  "https://thumbs2.imgbox.com/18/58/wifvGVu9_t.jpg",
+  "https://thumbs2.imgbox.com/9c/df/jWyr8AX9_t.jpg",
 ];
 
 export function Roncador() {
@@ -42,18 +51,25 @@ export function Roncador() {
           style={{}}
         >
           <View style={styles.modal}>
-          <View
-                style={{ flexDirection: "row", justifyContent: "center", alignItems:'center', backgroundColor: "#fff",elevation:10}}
-                >
-                <Text style={styles.titleModal}>SOBRE:</Text>
-                <TouchableOpacity onPress={()=>setVisible(false)}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#fff",
+                elevation: 10,
+                borderRadius:8,
+              }}
+            >
+              <Text style={styles.titleModal}>SOBRE:</Text>
+              <TouchableOpacity onPress={() => setVisible(false)}>
                 <LottieView
-                    source={require("../../Assets/28566-to-x.json")}
-                    autoPlay={true}
-                    loop={true}
-                    style={{ width: 50, height: 50, marginLeft:30 }}
+                  source={require("../../Assets/28566-to-x.json")}
+                  autoPlay={true}
+                  loop={true}
+                  style={{ width: 50, height: 50, marginLeft: 30 }}
                 />
-                </TouchableOpacity>
+              </TouchableOpacity>
             </View>
             <Text style={styles.textoModal}>
               É o lugar tranquilo com água geladinha, com riachos com água
@@ -85,18 +101,25 @@ export function Roncador() {
           style={{}}
         >
           <View style={styles.modal2}>
-          <View
-                style={{ flexDirection: "row", justifyContent: "center", alignItems:'center', backgroundColor: "#fff",elevation:10}}
-                >
-                <Text style={styles.titleModal}>ALERTA:</Text>
-                <TouchableOpacity onPress={()=>setAlerta(false)}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#fff",
+                elevation: 10,
+                borderRadius:8,
+              }}
+            >
+              <Text style={styles.titleModal}>ALERTA:</Text>
+              <TouchableOpacity onPress={() => setAlerta(false)}>
                 <LottieView
-                    source={require("../../Assets/28566-to-x.json")}
-                    autoPlay={true}
-                    loop={true}
-                    style={{ width: 50, height: 50, marginLeft:30 }}
+                  source={require("../../Assets/28566-to-x.json")}
+                  autoPlay={true}
+                  loop={true}
+                  style={{ width: 50, height: 50, marginLeft: 30 }}
                 />
-                </TouchableOpacity>
+              </TouchableOpacity>
             </View>
             <Text style={{ fontSize: 15, textAlign: "center", marginTop: 15 }}>
               Mob Timon coleta dados de local para ativar trajetos, localização,
@@ -248,6 +271,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "600",
     marginTop: 15,
+    fontFamily:'Ubuntu_500Medium'
   },
   taxa1: {
     fontSize: 20,
@@ -256,6 +280,7 @@ const styles = StyleSheet.create({
   },
   middle: {
     fontSize: 20,
+    fontFamily:'BalsamiqSans_400Regular'
   },
   link: {
     fontSize: 20,
@@ -265,13 +290,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 27,
     color: "black",
-    fontWeight: "900",
+    fontFamily:'Ubuntu_700Bold'
   },
   title1: {
     fontSize: 27,
     color: "black",
-    fontWeight: "700",
     marginBottom: 20,
+    fontFamily:'Ubuntu_500Medium'
   },
   image: {
     width,
@@ -303,7 +328,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 8,
     borderWidth: 1,
-    elevation:10,
+    elevation: 10,
   },
   verRota: {
     backgroundColor: "#14BC9C",
@@ -312,7 +337,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 8,
     borderWidth: 1,
-    elevation:10,
+    elevation: 10,
   },
   voltar: {
     backgroundColor: "#FF3030",
@@ -322,14 +347,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     marginBottom: 30,
-    elevation:10,
+    elevation: 10,
   },
   textoBotao: {
     fontSize: 18,
     padding: 8,
-    fontWeight: "600",
     color: "black",
     textAlign: "center",
+    fontFamily:'Ubuntu_700Bold'
   },
   modal: {
     alignSelf: "center",
@@ -337,9 +362,9 @@ const styles = StyleSheet.create({
     padding: 15,
     elevation: 15,
     borderRadius: 20,
-    marginVertical: 80,
+    marginVertical: 140,
     width: "80%",
-    height: "80%",
+    height: "60%",
   },
   botaoModal1: {
     backgroundColor: "#FF3030",
@@ -352,23 +377,26 @@ const styles = StyleSheet.create({
     margin: 5,
     elevation: 10,
     marginVertical: 50,
+    fontFamily:'Ubuntu_400Regular'
   },
   titleModal: {
     textAlign: "center",
     fontSize: 20,
     marginLeft: 60,
-    fontWeight:'bold',
-    textDecorationLine:'underline'
+    textDecorationLine: "underline",
+    fontFamily:'Ubuntu_700Bold'
   },
   textBotao: {
     fontSize: 15,
     fontWeight: "600",
     textAlign: "center",
+    fontFamily:'Ubuntu_700Bold'
   },
   textoModal: {
     fontSize: 20,
     textAlign: "center",
     padding: 5,
+    fontFamily:'Ubuntu_400Regular',
   },
   botaoModalAlerta: {
     backgroundColor: "#FF3030",
@@ -380,7 +408,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     margin: 5,
     elevation: 10,
-    marginTop: 170,
+    marginTop: 10,
   },
   modal2: {
     alignSelf: "center",
@@ -388,8 +416,8 @@ const styles = StyleSheet.create({
     padding: 20,
     elevation: 10,
     borderRadius: 20,
-    marginVertical: 280,
+    marginVertical: 260,
     width: "80%",
-    height: "50%",
+    height: "30%",
   },
 });

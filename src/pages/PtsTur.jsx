@@ -21,6 +21,17 @@ import estadio from '../images/estadio2.png'
 import ponteMetalica from '../images/ponteMetalica1.jpg'
 import sucupira from '../images/sucupira1.jpg'
 import rodoviaria  from '../images/rodoviaria.jpg'
+import mapa from '../images/mapa.jpg'
+import santoantonio from '../images/santoantonio.jpeg'
+import velokart from '../images/velokart.jpg'
+import silvabrito from '../images/silvabrito.jpg'
+import sambico from '../images/sambico.jpg'
+import ponteamizade from '../images/ponteamizade.jpg'
+import osamigos from '../images/osamigos.jpg'
+import meninojesus from '../images/meninojesus.jpg'
+import leklek from '../images/leklek.jpg'
+import centroartesanato from '../images/centroartesanato.jpg'
+import templocentral from '../images/templocentral.jpg'
 
 export function PtsTur(){
 
@@ -28,17 +39,6 @@ const navigation = useNavigation()
 
     return(
         <ScrollView style={styles.container}>
-            <TouchableOpacity style={styles.tag} onPress={()=> navigation.navigate("Sena")}>
-                    <Image source={sena} style={styles.imageSmaw}></Image>
-                    <Text style={styles.title1}>BALNEÁRIO SENA BRASIL</Text>
-                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}}/>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Cocais')}>
-                    <Image source={cocais} style={styles.imageSmaw}></Image>
-                    <Text style={styles.title1}>COCAIS SHOPPING</Text>
-                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}}/>
-            </TouchableOpacity>
 
             <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Chico')}>
                     <Image source={chico} style={styles.imageSmaw}></Image>
@@ -46,63 +46,35 @@ const navigation = useNavigation()
                     <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}}/>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Alice')}>
-                    <Image source={alice} style={styles.imageSmaw}></Image>
-                    <Text style={styles.title1}>SÍTIO ALICE</Text>
-                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}}/>
-            </TouchableOpacity>
 
-            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('PortalAmazonia')}>
-                    <Image source={portalamazonia} style={styles.imageSmaw}></Image>
-                    <Text style={styles.title1}>PORTAL DA AMAZÔNIA</Text>
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('LekLek')}>
+                    <Image source={leklek} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>BALNEÁRIO LEK LEK</Text>
                     <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
             </TouchableOpacity>
+
 
             <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('PortalSol')}>
                     <Image source={portalsol} style={styles.imageSmaw}></Image>
-                    <Text style={styles.title1}>BALNEÁRIO PORTAL DO SOL</Text>
+                    <View>
+                    <Text style={styles.title1}>BALNEÁRIO</Text>
+                    <Text style={styles.title1}>PORTAL DO SOL</Text>
+                    </View>
                     <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Jericoroa')}>
-                    <Image source={jericoroa} style={styles.imageSmaw}></Image>
-                    <Text style={styles.title1}>"JERICOROA"</Text>
-                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            <TouchableOpacity style={styles.tag} onPress={()=> navigation.navigate("Sena")}>
+                    <Image source={sena} style={styles.imageSmaw}></Image>
+                    <View>
+                    <Text style={styles.title1}>BALNEÁRIO</Text>
+                    <Text style={styles.title1}>SENA BRASIL</Text>
+                    </View>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}}/>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Roncador')}>
-                    <Image source={roncador} style={styles.imageSmaw}></Image>
-                    <Text style={styles.title1}>RONCADOR</Text>
-                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('PracaSaoJose')}>
-                    <Image source={saoJose} style={styles.imageSmaw}></Image>
-                    <Text style={styles.title1}>PRAÇA SÃO JOSÉ</Text>
-                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Sucupira')}>
-                    <Image source={sucupira} style={styles.imageSmaw}></Image>
-                    <Text style={styles.title1}>PARQUE AMBIENTAL SUCUPIRA</Text>
-                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Juventude')}>
-                    <Image source={centro} style={styles.imageSmaw}></Image>
-                    <Text style={styles.title1}>CENTRO DA JUVENTUDE</Text>
-                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Convencoes')}>
-                    <Image source={convencao} style={styles.imageSmaw}></Image>
-                    <Text style={styles.title1}>CENTRO DE CONVENÇÕES</Text>
-                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('PonteMetalica')}>
-                    <Image source={ponteMetalica} style={styles.imageSmaw}></Image>
-                    <Text style={styles.title1}>PONTE METALICA</Text>
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('SilvaBrito')}>
+                    <Image source={silvabrito} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>BALNEÁRIO SILVA BRITO</Text>
                     <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
             </TouchableOpacity>
 
@@ -112,11 +84,140 @@ const navigation = useNavigation()
                     <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.tagLast} onPress={()=>navigation.navigate('Rodoviaria')}>
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Juventude')}>
+                    <Image source={centro} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>CENTRO DA JUVENTUDE</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('CentroArtesanato')}>
+                    <Image source={centroartesanato} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>CENTRO DE ARTESANATO</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Convencoes')}>
+                    <Image source={convencao} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>CENTRO DE CONVENÇÕES</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Cocais')}>
+                    <Image source={cocais} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>COCAIS SHOPPING</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}}/>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Jericoroa')}>
+                    <Image source={jericoroa} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>"JERICOROA"</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Sambico')}>
+                    <Image source={sambico} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>LAGOA DO SAMBICO</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('MeninoJesus')}>
+                    <Image source={meninojesus} style={styles.imageSmaw}></Image>
+                    <View style={{flexDirection:'column', alignItems:'center'}}>
+                        <Text style={styles.title1}>PARÓQUIA MENINO</Text>
+                        <Text style={styles.title1}>JESUS DE PRAGA</Text>
+                    </View>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('SantoAntonio')}>
+                    <Image source={santoantonio} style={styles.imageSmaw}></Image>
+                    <View>
+                    <Text style={styles.title1}>PARÓQUIA</Text>
+                    <Text style={styles.title1}>SANTO ANTÔNIO</Text>
+                    </View>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Sucupira')}>
+                    <Image source={sucupira} style={styles.imageSmaw}></Image>
+                    <View>
+                    <Text style={styles.title1}>PARQUE AMBIENTAL</Text>
+                    <Text style={styles.title1}>SUCUPIRA</Text>
+                    </View>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('PonteAmizade')}>
+                    <Image source={ponteamizade} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>PONTE DA AMIZADE</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('PonteMetalica')}>
+                    <Image source={ponteMetalica} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>PONTE METALICA</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('PortalAmazonia')}>
+                    <Image source={portalamazonia} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>PORTAL DA AMAZÔNIA</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('PracaSaoJose')}>
+                    <Image source={saoJose} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>PRAÇA SÃO JOSÉ</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Rodoviaria')}>
                     <Image source={rodoviaria} style={styles.imageSmaw}></Image>
                     <Text style={styles.title1}>RODOVIARIA</Text>
                     <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
             </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Roncador')}>
+                    <Image source={roncador} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>RONCADOR</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Alice')}>
+                    <Image source={alice} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>SÍTIO ALICE</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}}/>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('OsAmigos')}>
+                    <Image source={osamigos} style={styles.imageSmaw}></Image>
+                    <View>
+                    <Text style={styles.title1}>SÍTIO</Text>
+                    <Text style={styles.title1}>ENCONTRO DOS AMIGOS</Text>   
+                    </View>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('TemploCentral')}>
+                    <Image source={templocentral} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>TEMPLO CENTRAL</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tag} onPress={()=>navigation.navigate('Velokart')}>
+                    <Image source={velokart} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>VELOKART</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tagLast} onPress={()=> navigation.navigate("Todos")}>
+                    <Image source={mapa} style={styles.imageSmaw}></Image>
+                    <Text style={styles.title1}>VER NO MAPA</Text>
+                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}}/>
+            </TouchableOpacity>
+
+
+
 
         </ScrollView>
     )
@@ -165,7 +266,9 @@ const styles = StyleSheet.create({
     title1:{
         fontSize:18,
         fontWeight:'500',
-        margin:5
+        margin:5,
+        textAlign:'center',
+        fontFamily:'Ubuntu_700Bold'
     }
 
 })

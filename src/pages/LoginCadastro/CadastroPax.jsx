@@ -13,6 +13,7 @@ import {
 
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
+import MaskInput, { Masks } from 'react-native-mask-input';
 
 export function CadastroPax() {
   const [image, SetImage] = useState(null);
@@ -40,6 +41,8 @@ export function CadastroPax() {
   const [cpf,setCpf] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
+  const [senha, setSenha] = useState('')
+  const [confSenha, setConfSenha] = useState('')
  
 
   
@@ -53,6 +56,7 @@ export function CadastroPax() {
       email,
       telefone,
       image,
+      senha
     }
     
     console.log(data) || 
@@ -61,13 +65,20 @@ export function CadastroPax() {
     navigation.navigate('Login')
   }
   function completo(){
-    if(nome ==='' || date === '' || cpf === '' || email === '' || telefone === '' || image === null){
-      Alert.alert('Todos os campos são obrigatorios.')
+    
+    if (senha != confSenha){
+      Alert.alert('As senhas devem ser idênticas.')
     } else {
-      setConfirmar(true)
-    }
+      if(nome ==='' || date === '' || cpf === '' || email === '' || telefone === '' || senha === '' || image === null){
+        Alert.alert('Todos os campos são obrigatorios.')
+      } else {
+        setConfirmar(true)
+      }
+    } 
   }
+ 
   
+
   return (
     <ScrollView style={styles.container}>
       <Modal
@@ -108,6 +119,8 @@ export function CadastroPax() {
           <Text>⬤ {cpf}</Text>
           <Text>⬤ {email}</Text>
           <Text>⬤ {telefone}</Text>
+          <Text>⬤ {senha}</Text>
+
           
           {image && (
             <Image
@@ -146,24 +159,27 @@ export function CadastroPax() {
         ></TextInput>
 
       <Text style={styles.title}>DATA DE NASCIMENTO</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Data de nascimento"
-        keyboardType="number-pad"
-        maxLength={8}
+      <MaskInput
         value={date}
-        onChangeText={setDate}
-      ></TextInput>
-
-      <Text style={styles.title}>CPF</Text>
-      <TextInput
         style={styles.input}
-        placeholder="CPF"
-        keyboardType="number-pad"
-        maxLength={14}
-        value={cpf}
-        onChangeText={setCpf}
-      ></TextInput>
+        keyboardType='number-pad'
+        onChangeText={setDate}
+        mask={Masks.DATE_DDMMYYYY}
+      />
+
+      <View>
+        <Text style={styles.title}>CPF</Text>
+        <MaskInput
+          value={cpf}
+          keyboardType='number-pad'
+          style={styles.input}
+          mask={Masks.BRL_CPF}
+          showObfuscatedValue
+          obfuscationCharacter="#"
+          onChangeText={(masked, unmasked, obfuscated) => {
+            setCpf(obfuscated);}}
+        />
+      </View>
 
       <Text style={styles.title}>E-MAIL</Text>
       <TextInput
@@ -175,14 +191,35 @@ export function CadastroPax() {
       ></TextInput>
 
       <Text style={styles.title}>TELEFONE</Text>
-      <TextInput
+      <MaskInput
         style={styles.input}
-        keyboardType="phone-pad"
-        placeholder="Telefone"
-        maxLength={11}
         value={telefone}
-        onChangeText={setTelefone}
-      ></TextInput>
+        keyboardType='numeric'
+        onChangeText={(unmasked) => {
+          setTelefone(unmasked);
+        }}
+        mask={['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+      />
+        
+              <Text style={styles.title}>SENHA</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Senha"
+                keyboardType="default"
+                value={senha}
+                maxLength={6}
+                onChangeText={setSenha}
+              ></TextInput>
+        
+              <Text style={styles.title}>CONFIRME SUA SENHA</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Confirme sua senha"
+                keyboardType="default"
+                value={confSenha}
+                maxLength={6}
+                onChangeText={setConfSenha}
+              ></TextInput>
 
       <Text
         style={{

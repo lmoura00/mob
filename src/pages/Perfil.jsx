@@ -12,10 +12,23 @@ import {
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
+import MaskInput, {Masks} from "react-native-mask-input";
+
 
 export function Perfil() {
+  const [nome, setNome] = useState('');
+  const [date, setDate] = useState('');
+  const [cpf,setCpf] = useState('');
+  const [email, setEmail] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const [senha, setSenha] = useState('')
+  const [confSenha, setConfSenha] = useState('')
   const [visible, setVisible] = useState(false);
   const [image, SetImage] = useState(null);
+
+  function sair(){
+    () => setVisible(false) && navigation.navigate('CaronasDisponiveis')
+  }
 
   const navigation = useNavigation();
 
@@ -51,14 +64,15 @@ export function Perfil() {
             <TouchableOpacity
               onPress={() =>
                 Alert.alert("Seus dados não foram alterados.") ===
-                setVisible(false)
+                setVisible(false) === 
+                navigation.navigate('CaronasDisponiveis')
               }
               style={styles.botaoModal1}
             >
               <Text style={styles.textBotao}>SAIR</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => setVisible(false)}
+              onPress={() => setVisible(false) && navigation.navigate('CaronasDisponiveis')}
               style={styles.botaoModal2}
             >
               <Text style={styles.textBotao}>VOU CONTINUAR</Text>
@@ -70,18 +84,25 @@ export function Perfil() {
         <TextInput style={styles.input} placeholder="Nome completo"></TextInput>
 
         <Text style={styles.title}>DATA DE NASCIMENTO</Text>
-        <TextInput
-          style={styles.input}
-          keyboardType="numbers-and-punctuation"
-          placeholder="Data de nascimento"
-        ></TextInput>
+        <MaskInput
+        value={date}
+        style={styles.input}
+        keyboardType='number-pad'
+        onChangeText={setDate}
+        mask={Masks.DATE_DDMMYYYY}
+      />
 
         <Text style={styles.title}>CPF</Text>
-        <TextInput
+        <MaskInput
+          value={cpf}
+          keyboardType='number-pad'
           style={styles.input}
-          keyboardType="numbers-and-punctuation"
-          placeholder="CPF"
-        ></TextInput>
+          mask={Masks.BRL_CPF}
+          showObfuscatedValue
+          obfuscationCharacter="#"
+          onChangeText={(masked, unmasked, obfuscated) => {
+            setCpf(obfuscated);}}
+        />
 
         <Text style={styles.title}>E-MAIL</Text>
         <TextInput
@@ -90,12 +111,36 @@ export function Perfil() {
           placeholder="E-mail"
         ></TextInput>
 
-        <Text style={styles.title}>TELEFONE</Text>
-        <TextInput
-          style={styles.input}
-          keyboardType="phone-pad"
-          placeholder="Número de telefone"
-        ></TextInput>
+      <Text style={styles.title}>TELEFONE</Text>
+      <MaskInput
+        style={styles.input}
+        value={telefone}
+        keyboardType='numeric'
+        onChangeText={(unmasked) => {
+          setTelefone(unmasked);
+        }}
+        mask={['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+      />
+        
+              <Text style={styles.title}>SENHA</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Senha"
+                keyboardType="default"
+                value={senha}
+                maxLength={6}
+                onChangeText={setSenha}
+              ></TextInput>
+        
+              <Text style={styles.title}>CONFIRME SUA SENHA</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Confirme sua senha"
+                keyboardType="default"
+                value={confSenha}
+                maxLength={6}
+                onChangeText={setConfSenha}
+              ></TextInput>
 
         <Text
           style={{
@@ -129,7 +174,7 @@ export function Perfil() {
 
         <TouchableOpacity
           style={styles.botao1}
-          onPress={() => Alert.alert("Seu perfil foi atualizado com sucesso.")}
+          onPress={() => Alert.alert("Seu perfil foi atualizado com sucesso.") || navigation.navigate('CaronasDisponiveis')}
         >
           <Text style={styles.textBotao}>ATUALIZAR</Text>
         </TouchableOpacity>

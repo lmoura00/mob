@@ -16,6 +16,7 @@ import { CaronasDisponiveis } from "../pages/CaronasDisponiveis";
 import { PtsTur } from "../pages/PtsTur";
 import { Perfil } from "../pages/Perfil";
 import { Historico } from "../pages/Historico";
+import { Todos } from "../pages/PontosTuristicos/Todos"; 
 
 import { Alice } from "../pages/PontosTuristicos/Alice";
 import { Chico } from "../pages/PontosTuristicos/Chico";
@@ -32,14 +33,25 @@ import { MiguelLima } from "../pages/PontosTuristicos/MiguelLima";
 import { PonteMetalica } from "../pages/PontosTuristicos/PonteMetalica";
 import { Rodoviaria } from "../pages/PontosTuristicos/Rodoviaria";
 import { Sucupira } from "../pages/PontosTuristicos/Sucupira";
+import { CentroArtesanato } from "../pages/PontosTuristicos/CentroArtesanato";
+import { MeninoJesus } from "../pages/PontosTuristicos/MeninoJesus";
+import { PonteAmizade } from "../pages/PontosTuristicos/PonteAmizade";
+import { Sambico } from "../pages/PontosTuristicos/Sambico";
+import { SantoAntonio } from "../pages/PontosTuristicos/SantoAntonio";
+import { SilvaBrito } from "../pages/PontosTuristicos/SilvaBrito";
+import { Velokart } from "../pages/PontosTuristicos/Velokart";
+import { LekLek } from "../pages/PontosTuristicos/LekLek";
+import { OsAmigos } from "../pages/PontosTuristicos/OsAmigos";
+import { TemploCentral } from "../pages/PontosTuristicos/TemploCentral";
 
 
 import { Jose } from "../pages/Pessoas/JoseV";
-import { Mariana } from "../pages/Pessoas/Mariana";
+import { Marina } from "../pages/Pessoas/Marina";
 import { Odaleia } from "../pages/Pessoas/Odaleia";
 import { Thaiane } from "../pages/Pessoas/Thaiane";
 import { Vitoria } from "../pages/Pessoas/Vitoria";
 import { Yuri } from "../pages/Pessoas/Yuri";
+import { Gabrielly } from "../pages/Pessoas/Gabrielly";
 
 import { RotaChico } from "../pages/Rotas/RotaChico";
 import { RotaSena } from "../pages/Rotas/RotaSena";
@@ -56,16 +68,28 @@ import { RotaMiguelLima } from "../pages/Rotas/RotaMiguelLima";
 import { RotaPonteMetalica } from "../pages/Rotas/RotaPonteMetalica";
 import { RotaSucupira } from "../pages/Rotas/RotaSucupira";
 import { RotaRodoviaria } from "../pages/Rotas/RotaRodoviaria";
+import { RotaSantoAntonio } from "../pages/Rotas/RotaSantoAntonio";
+import { RotaVelokart } from "../pages/Rotas/RotaVelokart";
+import { RotaSilvaBrito } from "../pages/Rotas/RotaSilvaBrito";
+import { RotaSambico } from "../pages/Rotas/RotaSambico";
+import { RotaPonteAmizade } from "../pages/Rotas/RotaPonteAmizade";
+import { RotaMeninoJesus } from "../pages/Rotas/RotaMeninoJesus";
+import { RotaCentroArtesanato } from "../pages/Rotas/RotaCentroArtesanato";
+import { RotaLekLek } from "../pages/Rotas/RotaLekLek";
+import { RotaOsAmigos } from "../pages/Rotas/RotaOsAmigos";
+import { RotaTemploCentral } from "../pages/Rotas/RotaTemploCentral";
+
 
 import { RotaJose } from "../../src/pages/Rotas/RotaJose";
-import { RotaMariana } from "../pages/Rotas/RotaMariana";
+import { RotaMarina } from "../pages/Rotas/RotaMarina";
 import { RotaOdaleia } from "../pages/Rotas/RotaOdaleia";
 import { RotaThaiane } from "../pages/Rotas/RotaThaiane";
 import { RotaVitoria } from "../pages/Rotas/RotaVitoria";
 import { RotaYuri } from "../pages/Rotas/RotaYuri";
+import { RotaGabrielly } from "../pages/Rotas/RotaGabrielly";
 
-import { HistoricoMariana1 } from "../pages/Historico/HistoricoMariana1";
-import { HistoricoMariana2 } from "../pages/Historico/HistoricoMariana2";
+import { HistoricoMarina1 } from "../pages/Historico/HistoricoMarina1";
+import { HistoricoMarina2 } from "../pages/Historico/HistoricoMarina2";
 import { HistoricoOdaleia } from "../pages/Historico/HistoricoOdaleia";
 import { HistoricoJose21 } from "../pages/Historico/HistoricoJose21";
 import { HistoricoJose26 } from "../pages/Historico/HistoricoJose26";
@@ -75,8 +99,8 @@ import LottieView from "lottie-react-native";
 
 import { RotaJose1 } from "../pages/Historico/Rotas/RotaJose1";
 import { RotaJose2 } from "../pages/Historico/Rotas/RotaJose2";
-import { RotaMariana1 } from "../pages/Historico/Rotas/RotaMariana1";
-import { RotaMariana2 } from "../pages/Historico/Rotas/RotaMariana2";
+import { RotaMarina1 } from "../pages/Historico/Rotas/RotaMarina1";
+import { RotaMarina2 } from "../pages/Historico/Rotas/RotaMarina2";
 
 function AuthRoutesTabBar() {
   const { setUser } = useAuth();
@@ -141,8 +165,11 @@ function AuthRoutesTabBar() {
           statusBarStyle: "dark",
           tabBarLabel: "INICIAL.",
           headerTitleAlign: "center",
+          tabBarActiveBackgroundColor:'#B9B9B9',
+          tabBarShowLabel:true,
+          tabBarLabelStyle:{fontFamily:'Ubuntu_500Medium',color:'black'},
           headerTitle: "CARONAS DISPONÍVEIS",
-          headerTitleStyle: { fontWeight: "700" },
+          headerTitleStyle: { fontFamily:'Ubuntu_700Bold' },
           headerRight: () => (
             <TouchableOpacity
               onPress={() => setUser(null)}
@@ -165,8 +192,11 @@ function AuthRoutesTabBar() {
         options={{
           tabBarLabel: "HISTÓRICO",
           headerTitleAlign: "center",
-          headerTitle: "PERFIL",
-          headerTitleStyle: { fontWeight: "bold" },
+          tabBarActiveBackgroundColor:'#B9B9B9',
+          tabBarShowLabel:true,
+          tabBarLabelStyle:{fontFamily:'Ubuntu_500Medium', color:'black'},
+          headerTitle: "HISTÓRICO",
+          headerTitleStyle: { fontFamily:'Ubuntu_700Bold' },
           headerRight: () => (
             <TouchableOpacity
               onPress={() => setUser(null)}
@@ -188,10 +218,13 @@ function AuthRoutesTabBar() {
         component={PtsTur}
         options={{
           headerShown: true,
+          tabBarActiveBackgroundColor:'#B9B9B9',
+          tabBarShowLabel:true,
+          tabBarLabelStyle:{fontFamily:'Ubuntu_500Medium',color:'black'},
           tabBarLabel: "PONTOS TUR.",
           headerTitleAlign: "center",
           headerTitle: "PONTOS TURISTICOS",
-          headerTitleStyle: { fontWeight: "bold" },
+          headerTitleStyle: { fontFamily:'Ubuntu_700Bold' },
           headerRight: () => (
             <TouchableOpacity
               onPress={() => setUser(null)}
@@ -214,8 +247,11 @@ function AuthRoutesTabBar() {
         options={{
           tabBarLabel: "PERFIL",
           headerTitleAlign: "center",
+          tabBarActiveBackgroundColor:'#B9B9B9',
+          tabBarShowLabel:true,
+          tabBarLabelStyle:{fontFamily:'Ubuntu_500Medium',color:'black'},
           headerTitle: "PERFIL",
-          headerTitleStyle: { fontWeight: "bold" },
+          headerTitleStyle: {fontFamily:'Ubuntu_700Bold' },
           headerRight: () => (
             <TouchableOpacity
               onPress={() => setUser(null)}
@@ -253,6 +289,7 @@ export function AuthRoutes() {
           headerTitle: "DETALHES",
           headerTitleAlign: "center",
           statusBarStyle: "dark",
+
         }}
       />
       <Screen
@@ -296,8 +333,8 @@ export function AuthRoutes() {
         }}
       />
       <Screen
-        name="Mariana"
-        component={Mariana}
+        name="Marina"
+        component={Marina}
         options={{
           headerShown: true,
           headerTitle: "DETALHES",
@@ -410,8 +447,8 @@ export function AuthRoutes() {
         }}
       />
       <Screen
-        name="RotaMariana"
-        component={RotaMariana}
+        name="RotaMarina"
+        component={RotaMarina}
         options={{
           headerTitle: "ROTA",
           headerTitleAlign: "center",
@@ -554,8 +591,8 @@ export function AuthRoutes() {
         }}
       />
       <Screen
-        name="HistoricoMariana1"
-        component={HistoricoMariana1}
+        name="HistoricoMarina1"
+        component={HistoricoMarina1}
         options={{
           headerTitle: "DETALHES",
           headerTitleAlign: "center",
@@ -563,8 +600,8 @@ export function AuthRoutes() {
         }}
       />
       <Screen
-        name="HistoricoMariana2"
-        component={HistoricoMariana2}
+        name="HistoricoMarina2"
+        component={HistoricoMarina2}
         options={{
           headerTitle: "DETALHES",
           headerTitleAlign: "center",
@@ -590,8 +627,8 @@ export function AuthRoutes() {
         }}
       />
       <Screen
-        name="RotaMariana1"
-        component={RotaMariana1}
+        name="RotaMarina1"
+        component={RotaMarina1}
         options={{
           headerTitle: "DETALHES",
           headerTitleAlign: "center",
@@ -599,8 +636,8 @@ export function AuthRoutes() {
         }}
       />
       <Screen
-        name="RotaMariana2"
-        component={RotaMariana2}
+        name="RotaMarina2"
+        component={RotaMarina2}
         options={{
           headerTitle: "DETALHES",
           headerTitleAlign: "center",
@@ -711,6 +748,237 @@ export function AuthRoutes() {
         component={RotaRodoviaria}
         options={{
           headerTitle: "DETALHES",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="Todos"
+        component={Todos}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="CentroArtesanato"
+        component={CentroArtesanato}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="MeninoJesus"
+        component={MeninoJesus}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="PonteAmizade"
+        component={PonteAmizade}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="Sambico"
+        component={Sambico}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="SantoAntonio"
+        component={SantoAntonio}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="SilvaBrito"
+        component={SilvaBrito}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="Velokart"
+        component={Velokart}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="LekLek"
+        component={LekLek}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="OsAmigos"
+        component={OsAmigos}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="RotaSantoAntonio"
+        component={RotaSantoAntonio}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="RotaVelokart"
+        component={RotaVelokart}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="RotaSilvaBrito"
+        component={RotaSilvaBrito}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="RotaSambico"
+        component={RotaSambico}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="RotaPonteAmizade"
+        component={RotaPonteAmizade}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="RotaMeninoJesus"
+        component={RotaMeninoJesus}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="RotaCentroArtesanato"
+        component={RotaCentroArtesanato}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="RotaLekLek"
+        component={RotaLekLek}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="RotaOsAmigos"
+        component={RotaOsAmigos}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="TemploCentral"
+        component={TemploCentral}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="RotaTemploCentral"
+        component={RotaTemploCentral}
+        options={{
+          headerTitle: "PONTOS TURISTICOS",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="Gabrielly"
+        component={Gabrielly}
+        options={{
+          headerTitle: "DETALHES",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+          headerTitleStyle: {fontFamily:'Ubuntu_700Bold' },
+        }}
+      />
+
+      <Screen
+        name="RotaGabrielly"
+        component={RotaGabrielly}
+        options={{
+          headerTitle: "ROTA",
           headerTitleAlign: "center",
           statusBarStyle: "dark",
         }}

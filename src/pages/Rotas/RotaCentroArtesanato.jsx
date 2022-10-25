@@ -1,19 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import {View, Text, StyleSheet} from 'react-native'
 
-import MapView from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 import *  as Location from 'expo-location'
 import * as Permission from 'expo-permissions'
-import config from '../../../../config/index.json'
+import config from '../../../config/index.json'
 import MapViewDirections from 'react-native-maps-directions';
 
 
 
-export function RotaMariana2(){
+export function RotaCentroArtesanato(){
     const mapEl = useRef(null)
     const [location, setLocation] = useState(null);
-    const partida = {latitude: -5.118836807167505,     longitude:  -42.82463727556615 , latitudeDelta: 0.0922, longitudeDelta: 0.0421,};
-    const destination = {latitude: -5.105774416078441,    longitude:  -42.75391901772511 };
+    const destination = {latitude: -5.090210890634855,   longitude:  -42.82738778794578};
     const [distance, SetDistance] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const GOOGLE_MAPS_APIKEY = config.googleApi;
@@ -44,12 +43,13 @@ export function RotaMariana2(){
         <View style={styles.container}>
         <MapView 
             style={styles.map}
-            initialRegion={partida}
+            initialRegion={location}
             showsUserLocation={true}
             ref={mapEl}
+            loadingEnabled
         >
             <MapViewDirections
-                origin={partida}
+                origin={location}
                 destination={destination}
                 apikey={GOOGLE_MAPS_APIKEY}
                 strokeWidth={3}
@@ -68,11 +68,13 @@ export function RotaMariana2(){
                     )
                 }}
             />
-
+            <Marker
+            coordinate={destination}
+            />
         </MapView>
-            <View style={{backgroundColor:'#fff', width:'80%', height:20, marginBottom:15, alignSelf:'center', alignItems:'center'}}>
+            <View style={{backgroundColor:'#fff', width:'100%', height:100, alignSelf:'center', alignItems:'center'}}>
                 {distance && 
-                    <Text style={{fontSize:18,}}>Distância: {distance} m</Text>
+                    <Text style={{fontSize:18}}>Distância: {distance} m</Text>
                 }
             </View>
 
