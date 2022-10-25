@@ -15,6 +15,8 @@ import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
 import MaskInput, { Masks } from 'react-native-mask-input';
 
+import LottieView from 'lottie-react-native'
+
 export function CadastroPax() {
   const [image, SetImage] = useState(null);
   const navigation = useNavigation();
@@ -33,7 +35,7 @@ export function CadastroPax() {
       SetImage(result.uri);
     }
   };
-
+  const [visibleConfirma, setVisibleConfirma] = useState(false)
   const [visible, setVisible] = useState(false);
   const [confirmar, setConfirmar] = useState(false)
   const [nome, setNome] = useState('');
@@ -61,8 +63,7 @@ export function CadastroPax() {
     
     console.log(data) || 
     setConfirmar(false) || 
-    Alert.alert(nome  + ", seu cadastro foi efetivado com sucesso.") || 
-    navigation.navigate('Login')
+    setVisibleConfirma(true)
   }
   function completo(){
     
@@ -150,7 +151,47 @@ export function CadastroPax() {
         </View>
       </Modal>
 
-      <Text style={styles.title}>NOME COMPLETO</Text>
+
+      
+              <Modal
+                    animationType="fade"
+                    visible={visibleConfirma}
+                    statusBarTranslucent={false}
+                    transparent={true}
+                    style={{}}
+                    >
+                        <View style={styles.modal2}>
+                            <View style={styles.titleBoxModal}>
+                            <Text style={styles.titleModal}>SEU CADASTRO FOI CONCLUIDO</Text>
+                            </View>
+                            <View style={{width:120, height:120,}}>
+                                <LottieView 
+                                    source={require('../../Assets/45793-confirmed.json')} 
+                                    autoPlay={true} 
+                                    loop={true} 
+                                />
+                            </View>
+                            <Text style={styles.subTitleModal}>Aguarde confirmação no seu e-mail.</Text>
+                            <TouchableOpacity 
+                                onPress={()=>navigation.navigate("Login") || setVisibleConfirma(false)} 
+                                style={styles.botaoModal3}>
+                                    <Text style={styles.textBotao}>SAIR</Text>
+                            </TouchableOpacity>
+                     
+                        </View>
+                    
+              </Modal>
+
+      <View style={{flexDirection:'row', alignItems:'center'}}>
+        <View style={{width:40, height:40}}>
+          <LottieView 
+              source={require('../../Assets/9994-name-profile-icon-animation-circle.json')} 
+              autoPlay={true} 
+              loop={true} 
+          />
+        </View>
+        <Text style={styles.title}>NOME COMPLETO</Text>
+      </View>
       <TextInput 
         style={styles.input} 
         placeholder="Nome completo"
@@ -158,7 +199,18 @@ export function CadastroPax() {
         onChangeText={setNome}
         ></TextInput>
 
-      <Text style={styles.title}>DATA DE NASCIMENTO</Text>
+
+      <View style={{flexDirection:'row', alignItems:'center'}}>
+        <View style={{width:40, height:40}}>
+        <LottieView 
+              source={require('../../Assets/4399-schedule-date.json')} 
+              autoPlay={true} 
+              loop={true} 
+              style={{}}
+        />
+        </View>
+        <Text style={styles.title}>DATA DE NASCIMENTO</Text>
+      </View>
       <MaskInput
         value={date}
         style={styles.input}
@@ -168,7 +220,17 @@ export function CadastroPax() {
       />
 
       <View>
-        <Text style={styles.title}>CPF</Text>
+        <View style={{flexDirection:'row', alignItems:'center'}}>
+          <View style={{width:40, height:40}}>
+          <LottieView 
+                source={require('../../Assets/5202-review-id (1).json')} 
+                autoPlay={true} 
+                loop={true} 
+                style={{}}
+          />
+          </View>
+          <Text style={styles.title}> CPF</Text>
+        </View>
         <MaskInput
           value={cpf}
           keyboardType='number-pad'
@@ -181,7 +243,17 @@ export function CadastroPax() {
         />
       </View>
 
-      <Text style={styles.title}>E-MAIL</Text>
+      <View style={{flexDirection:'row', alignItems:'center'}}>
+        <View style={{width:45, height:45}}>
+        <LottieView 
+              source={require('../../Assets/29133-windows-10-icon-mail.json')} 
+              autoPlay={true} 
+              loop={true} 
+              style={{}}
+        />
+        </View>
+        <Text style={styles.title}>E-MAIL</Text>
+      </View>
       <TextInput
         style={styles.input}
         placeholder="E-mail"
@@ -190,7 +262,17 @@ export function CadastroPax() {
         onChangeText={setEmail}
       ></TextInput>
 
-      <Text style={styles.title}>TELEFONE</Text>
+      <View style={{flexDirection:'row', alignItems:'center'}}>
+        <View style={{width:40, height:40}}>
+        <LottieView 
+              source={require('../../Assets/97981-hand-holding-phone.json')} 
+              autoPlay={true} 
+              loop={true} 
+              style={{}}
+        />
+        </View>
+        <Text style={styles.title}> TELEFONE</Text>
+      </View>
       <MaskInput
         style={styles.input}
         value={telefone}
@@ -201,7 +283,17 @@ export function CadastroPax() {
         mask={['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
       />
         
-              <Text style={styles.title}>SENHA</Text>
+        <View style={{flexDirection:'row', alignItems:'center'}}>
+              <View style={{width:40, height:40}}>
+              <LottieView 
+                    source={require('../../Assets/74938-lock-blue.json')} 
+                    autoPlay={true} 
+                    loop={true} 
+                    style={{}}
+              />
+              </View>
+              <Text style={styles.title}> SENHA</Text>
+        </View>
               <TextInput
                 style={styles.input}
                 placeholder="Senha"
@@ -211,7 +303,17 @@ export function CadastroPax() {
                 onChangeText={setSenha}
               ></TextInput>
         
-              <Text style={styles.title}>CONFIRME SUA SENHA</Text>
+            <View style={{flexDirection:'row', alignItems:'center'}}>
+              <View style={{width:40, height:40}}>
+              <LottieView 
+                    source={require('../../Assets/103837-checkmark.json')} 
+                    autoPlay={true} 
+                    loop={true} 
+                    style={{}}
+              />
+              </View>
+              <Text style={styles.title}> CONFIRME SUA SENHA</Text>
+            </View>
               <TextInput
                 style={styles.input}
                 placeholder="Confirme sua senha"
@@ -220,17 +322,17 @@ export function CadastroPax() {
                 maxLength={6}
                 onChangeText={setConfSenha}
               ></TextInput>
-
-      <Text
-        style={{
-          fontSize: 19,
-          color: "#fff",
-          fontWeight: "350",
-          marginTop: 25,
-        }}
-      >
-        SELECIONE A SUA FOTO:
-      </Text>
+           <View style={{flexDirection:'row', alignItems:'center'}}>
+              <View style={{width:40, height:40}}>
+              <LottieView 
+                    source={require('../../Assets/5704-choose-photo.json')} 
+                    autoPlay={true} 
+                    loop={true} 
+                    style={{}}
+              />
+              </View>
+              <Text style={styles.title}> SELECIONE SUA FOTO</Text>
+            </View>
 
       {image && (
         <Image
@@ -296,14 +398,13 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "#D9D9D9",
-    height: 35,
+    height: 40,
     borderRadius: 7,
     borderWidth: 1,
     marginBottom: 5,
     marginTop: 5,
-    paddingHorizontal: 10,
-    padding: 10,
-    marginHorizontal: 10,
+    paddingHorizontal: 8,
+    fontFamily:'BalsamiqSans_700Bold'
   },
   botao1: {
     backgroundColor: "#fff",
@@ -418,6 +519,12 @@ const styles = StyleSheet.create({
     elevation: 10,
     marginTop: 5,
   },
+  titleModal: {
+    textAlign:'center',
+    fontSize:17,
+    fontFamily:'BalsamiqSans_700Bold',
+    textDecorationLine:'underline'
+  },
   botaoAlterarDadosModal: {
     backgroundColor: "#FF3030",
     height: 35,
@@ -429,8 +536,43 @@ const styles = StyleSheet.create({
     elevation: 10,
     marginTop: 5,
   },
-  titleModal: {
-    textAlign: "center",
-    fontSize: 17,
+  modal2: {
+    alignSelf: "center",
+    backgroundColor: "#f9f9f9",
+    padding: 20,
+    elevation: 10,
+    borderRadius: 20,
+    marginVertical: 220,
+    width: "80%",
+    height: "45%",
+    justifyContent:'center',
+    alignItems:'center'
   },
+  subTitleModal:{
+    fontSize:15,
+    fontFamily:'Ubuntu_500Medium',
+    marginTop:15,
+    textAlign:'center'
+},
+titleBoxModal:{
+    backgroundColor:'#fff',
+    height:50,
+    width:'95%',
+    borderRadius:8,
+    elevation:10,
+    alignItems:'center',
+    justifyContent:'center'
+},    
+botaoModal3: {
+  backgroundColor: "#FF3030",
+  height: 35,
+  width: "65%",
+  padding: 5,
+  borderRadius: 15,
+  borderWidth: 1,
+  alignSelf: "center",
+  margin: 5,
+  elevation: 10,
+  marginTop: 30,
+},
 });

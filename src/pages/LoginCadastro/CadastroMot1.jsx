@@ -12,6 +12,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import MaskInput, { Masks } from 'react-native-mask-input';
 
+import LottieView from 'lottie-react-native'
 
 export function CadastroMot1() {
   const navigation = useNavigation();
@@ -124,7 +125,16 @@ export function CadastroMot1() {
         <Text style={styles.title1}>CADASTRAR MOTORISTA: PARTE 1</Text>
       </View>
 
-      <Text style={styles.title}>NOME COMPLETO</Text>
+      <View style={{flexDirection:'row', alignItems:'center'}}>
+        <View style={{width:40, height:40}}>
+          <LottieView 
+              source={require('../../Assets/9994-name-profile-icon-animation-circle.json')} 
+              autoPlay={true} 
+              loop={true} 
+          />
+        </View>
+        <Text style={styles.title}>NOME COMPLETO</Text>
+      </View>
       <TextInput 
         style={styles.input} 
         placeholder="Nome completo"
@@ -132,7 +142,18 @@ export function CadastroMot1() {
         onChangeText={setNome}
       ></TextInput>
 
-      <Text style={styles.title}>DATA DE NASCIMENTO</Text>
+
+      <View style={{flexDirection:'row', alignItems:'center'}}>
+        <View style={{width:40, height:40}}>
+        <LottieView 
+              source={require('../../Assets/4399-schedule-date.json')} 
+              autoPlay={true} 
+              loop={true} 
+              style={{}}
+        />
+        </View>
+        <Text style={styles.title}>DATA DE NASCIMENTO</Text>
+      </View>
       <MaskInput
         value={date}
         style={styles.input}
@@ -141,7 +162,17 @@ export function CadastroMot1() {
         mask={Masks.DATE_DDMMYYYY}
       />
 
-      <Text style={styles.title}>CARTEIRA DE HABILITAÇÃO</Text>
+      <View style={{flexDirection:'row', alignItems:'center'}}>
+        <View style={{width:40, height:40}}>
+        <LottieView 
+              source={require('../../Assets/82941-remove-the-identification-document-from-the-plastic.json')} 
+              autoPlay={true} 
+              loop={true} 
+              style={{}}
+        />
+        </View>
+        <Text style={styles.title}> DOCUMENTO DE HABILITAÇÃO</Text>
+      </View>
       <TextInput 
         style={styles.input} 
         placeholder="Número da CNH"
@@ -150,7 +181,17 @@ export function CadastroMot1() {
         
         ></TextInput>
 
-      <Text style={styles.title}>CPF</Text>
+      <View style={{flexDirection:'row', alignItems:'center'}}>
+        <View style={{width:40, height:40}}>
+        <LottieView 
+              source={require('../../Assets/5202-review-id (1).json')} 
+              autoPlay={true} 
+              loop={true} 
+              style={{}}
+        />
+        </View>
+        <Text style={styles.title}> CPF</Text>
+      </View>
       <MaskInput
           value={cpf}
           keyboardType='number-pad'
@@ -162,7 +203,17 @@ export function CadastroMot1() {
             setCpf(obfuscated);}}
         />
 
-      <Text style={styles.title}>E-MAIL</Text>
+      <View style={{flexDirection:'row', alignItems:'center'}}>
+        <View style={{width:45, height:45}}>
+        <LottieView 
+              source={require('../../Assets/29133-windows-10-icon-mail.json')} 
+              autoPlay={true} 
+              loop={true} 
+              style={{}}
+        />
+        </View>
+        <Text style={styles.title}>E-MAIL</Text>
+      </View>
       <TextInput
         style={styles.input}
         placeholder="E-mail"
@@ -171,7 +222,17 @@ export function CadastroMot1() {
         onChangeText={setEmail}
       ></TextInput>
 
-      <Text style={styles.title}>TELEFONE</Text>
+    <View style={{flexDirection:'row', alignItems:'center'}}>
+        <View style={{width:40, height:40}}>
+        <LottieView 
+              source={require('../../Assets/97981-hand-holding-phone.json')} 
+              autoPlay={true} 
+              loop={true} 
+              style={{}}
+        />
+        </View>
+        <Text style={styles.title}> TELEFONE</Text>
+      </View>
       <MaskInput
         style={styles.input}
         value={telefone}
@@ -183,7 +244,17 @@ export function CadastroMot1() {
       />
 
         
-        <Text style={styles.title}>SENHA</Text>
+      <View style={{flexDirection:'row', alignItems:'center'}}>
+              <View style={{width:40, height:40}}>
+              <LottieView 
+                    source={require('../../Assets/74938-lock-blue.json')} 
+                    autoPlay={true} 
+                    loop={true} 
+                    style={{}}
+              />
+              </View>
+              <Text style={styles.title}> SENHA</Text>
+        </View>
              <TextInput
                 style={styles.input}
                 placeholder="Senha"
@@ -193,7 +264,17 @@ export function CadastroMot1() {
                 onChangeText={setSenha}
               ></TextInput>
         
-              <Text style={styles.title}>CONFIRME SUA SENHA</Text>
+           <View style={{flexDirection:'row', alignItems:'center'}}>
+              <View style={{width:40, height:40}}>
+              <LottieView 
+                    source={require('../../Assets/103837-checkmark.json')} 
+                    autoPlay={true} 
+                    loop={true} 
+                    style={{}}
+              />
+              </View>
+              <Text style={styles.title}> CONFIRME SUA SENHA</Text>
+            </View>
               <TextInput
                 style={styles.input}
                 placeholder="Confirme sua senha"
@@ -255,7 +336,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 5,
     marginTop: 5,
-    paddingHorizontal: 5,
+    paddingHorizontal: 8,
+    fontFamily:'BalsamiqSans_700Bold'
   },
   botao1: {
     backgroundColor: "#fff",

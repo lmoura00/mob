@@ -2,12 +2,13 @@ import React, {useState} from "react";
 import {Image, View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, Modal, ScrollView} from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 
-
+import LottieView from 'lottie-react-native'
 
 
 export function CadastroMot4(){
     const navigation = useNavigation()
     const [visible, setVisible] = useState(false)
+    const [visibleConfirma, setVisibleConfirma] = useState(false)
     return(
         <ScrollView>
 
@@ -36,16 +37,51 @@ export function CadastroMot4(){
                     
                 </Modal>
 
-                
-                <Text style={styles.title1}>CADASTRAR MOTORISTA: ANEXOS</Text>
+                <Modal
+                    animationType="fade"
+                    visible={visibleConfirma}
+                    statusBarTranslucent={false}
+                    transparent={true}
+                    style={{}}
+                    >
+                        <View style={styles.modal2}>
+                            <View style={styles.titleBoxModal}>
+                            <Text style={styles.titleModal}>SEU CADASTRO FOI CONCLUIDO</Text>
+                            </View>
+                            <View style={{width:120, height:120,}}>
+                                <LottieView 
+                                    source={require('../../Assets/45793-confirmed.json')} 
+                                    autoPlay={true} 
+                                    loop={true} 
+                                />
+                            </View>
+                            <Text style={styles.subTitleModal}>Aguarde confirmação no seu e-mail.</Text>
+                            <TouchableOpacity 
+                                onPress={()=>navigation.navigate("Login") || setVisibleConfirma(false)} 
+                                style={styles.botaoModal3}>
+                                    <Text style={styles.textBotao}>SAIR</Text>
+                            </TouchableOpacity>
+                     
+                        </View>
+                    
+                </Modal>
+                <Text style={styles.title1}>CADASTRAR MOTORISTA: SOBRE VOCÊ</Text>
 
-                <TextInput placeholder="SOBRE VOCÊ..." style={{height:345, width:'70%', backgroundColor:'#f9f9f9', marginTop:55, borderRadius:8, paddingHorizontal:10}}></TextInput>
+                <View style={{width:120, height:120}}>
+                        <LottieView 
+                            source={require('../../Assets/81450-team.json')} 
+                            autoPlay={true} 
+                            loop={true} 
+                        />
+                      </View>
+
+                <TextInput placeholder="SOBRE VOCÊ..." style={{height:345, width:'70%', backgroundColor:'#f9f9f9', marginTop:25, borderRadius:8, paddingHorizontal:10}}></TextInput>
                 
                 
                 
 
                 
-                <TouchableOpacity style={styles.botao1} onPress={()=>Alert.alert("Seu dados foram enviados com sucesso") || navigation.navigate('Login')}>
+                <TouchableOpacity style={styles.botao1} onPress={()=>setVisibleConfirma(true)}>
                     <Text style={styles.textBotao}>SALVAR</Text>
                 </TouchableOpacity>
 
@@ -75,18 +111,18 @@ const styles = StyleSheet.create({
         color:'black',
         marginBottom:15
     },
-    title:{
-        fontSize:19,
-        color:'#fff',
-        fontWeight:'350'
-    },
+    title: {
+        fontSize: 19,
+        color: "#fff",
+        
+      },
     title1:{
         fontSize:20,
         color:'#fff',
-        fontWeight:'500',
         textAlign:'center',
         marginTop:10,
-        textDecorationLine:'underline'
+        textDecorationLine:'underline',
+        fontFamily:'Roboto_500Medium'
     },
     input:{
         backgroundColor:'#D9D9D9',
@@ -105,7 +141,7 @@ const styles = StyleSheet.create({
         margin:12,
         borderRadius:15,
         borderWidth:1,
-        marginTop:110
+        marginTop:60
     },
     botao2:{
         backgroundColor:'#FF3030',
@@ -143,12 +179,12 @@ const styles = StyleSheet.create({
         borderWidth:2,
         borderColor:'#f9f9f9',
     },
-    textBotao:{
-        fontSize:15,
-        fontWeight:'600',
-        textAlign:'center',
-    
-    },
+    textBotao: {
+        fontSize: 15,
+        fontWeight: "600",
+        textAlign: "center",
+        fontFamily:'Ubuntu_700Bold'
+      },
     modal:{
         alignSelf: 'center',
         backgroundColor:'#f9f9f9',
@@ -159,31 +195,72 @@ const styles = StyleSheet.create({
         width:"80%",
         height:"25%",
     },
-    botaoModal1:{
-        backgroundColor:'#FF3030',
+    botaoModal1: {
+        backgroundColor: "#FF3030",
         height: 35,
-        width:"65%",
-        padding:5,
-        borderRadius:15,
-        borderWidth:1,
-        alignSelf:'center',
-        margin:5,
-        elevation:10,
-        marginTop:20
-    },
-    botaoModal2:{
-        backgroundColor:'#fff',
+        width: "65%",
+        padding: 5,
+        borderRadius: 15,
+        borderWidth: 1,
+        alignSelf: "center",
+        margin: 5,
+        elevation: 10,
+        marginTop: 30,
+      },
+    botaoModal3: {
+        backgroundColor: "#FF3030",
         height: 35,
-        width:"65%",
-        padding:5,
-        borderRadius:15,
-        borderWidth:1,
-        alignSelf:'center',
-        elevation:10,
-        marginTop:5
-    },
-    titleModal:{
+        width: "65%",
+        padding: 5,
+        borderRadius: 15,
+        borderWidth: 1,
+        alignSelf: "center",
+        margin: 5,
+        elevation: 10,
+        marginTop: 30,
+      },
+      botaoModal2: {
+        backgroundColor: "#fff",
+        height: 35,
+        width: "65%",
+        padding: 5,
+        borderRadius: 15,
+        borderWidth: 1,
+        alignSelf: "center",
+        elevation: 10,
+        marginTop: 5,
+      },
+      titleModal: {
         textAlign:'center',
-        fontSize:17
+        fontSize:17,
+        fontFamily:'BalsamiqSans_700Bold',
+        textDecorationLine:'underline'
+      },
+    subTitleModal:{
+        fontSize:15,
+        fontFamily:'Ubuntu_500Medium',
+        marginTop:15,
+        textAlign:'center'
     },
+    titleBoxModal:{
+        backgroundColor:'#fff',
+        height:50,
+        width:'95%',
+        borderRadius:8,
+        elevation:10,
+        alignItems:'center',
+        justifyContent:'center'
+    },
+    modal2: {
+        alignSelf: "center",
+        backgroundColor: "#f9f9f9",
+        padding: 20,
+        elevation: 10,
+        borderRadius: 20,
+        marginVertical: 220,
+        width: "80%",
+        height: "45%",
+        justifyContent:'center',
+        alignItems:'center'
+      },
 })

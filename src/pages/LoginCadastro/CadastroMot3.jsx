@@ -13,8 +13,39 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 import * as ImagePicker from "expo-image-picker";
+import AppIntroSlider from 'react-native-app-intro-slider';
+import LottieView from 'lottie-react-native'
+
+const slides = [
+  {
+    key: '1',
+    title:'Hora de selecionar as fotos?',
+    text: 'Selecione fotos claras e de fácil entendimento.',
+    image: require('../../Assets/101410-photo-instructions (1).json')
+  },
+  {
+    key: '2',
+    title:'Tem algo no meio dos dados?',
+    text: 'Certifique-se de que não haja nada atrapalhando a leitura dos dados.',
+    image: require('../../Assets/38076-id-scan (1).json'),
+  },
+  {
+    key: '3',
+    title:'Você tem a chance de fazer a diferença',
+    text: 'A sua ajuda, por menor que seja, ajuda na vida de muitos estudantes.',
+    image: require('../../Assets/90398-check-green.json')
+  },
+  {
+    key: '4',
+    title:'Não se preocupe!!',
+    text: 'Todos os seus dados estão seguros, só precisamos deles para assegurar que os passageiros e pais, tenham mais garantias.',
+    image: require('../../Assets/107580-secure-data.json')
+  },
+]
+
 
 export function CadastroMot3() {
+  const [showHome, setShowHome] = useState(false);
   const pickImage1 = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -109,135 +140,186 @@ export function CadastroMot3() {
     }
   }
 
-  return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Modal
-          animationType="fade"
-          visible={visible}
-          statusBarTranslucent={false}
-          transparent={true}
-          style={{}}
-        >
-          <View style={styles.modal}>
-            <Text style={styles.titleModal}>DESEJA CANCELAR SEU CADASTRO?</Text>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Login")}
-              style={styles.botaoModal1}
-            >
-              <Text style={styles.textBotao}>SAIR</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => setVisible(false)}
-              style={styles.botaoModal2}
-            >
-              <Text style={styles.textBotao}>VOU CONTINUAR</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
-
-        <Modal
-          animationType="fade"
-          visible={confirmar}
-          statusBarTranslucent={false}
-          transparent={true}
-          style={{}}
-        >
-          <View style={styles.modal1}>
-            <Text style={styles.titleModal}>
-              OS DADOS INSERIDOS ESTÃO CORRETOS?
-            </Text>
-            <ScrollView>
-                {Image1 && <Image source={{ uri: Image1 }} style={styles.imageModal} />}
-                {Image2 && <Image source={{ uri: Image2 }} style={styles.imageModal} />}
-                {Image3 && <Image source={{ uri: Image3 }} style={styles.imageModal} />}
-                {Image4 && <Image source={{ uri: Image4 }} style={styles.imageModal} />}
-            </ScrollView>
-           
-
-            <TouchableOpacity
-              onPress={salvar}
-              style={styles.botaoConfirmarModal}
-            >
-              <Text style={styles.textBotao}>CONFIRMAR</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => setConfirmar(false)}
-              style={styles.botaoAlterarDadosModal}
-            >
-              <Text style={styles.textBotao}>ALTERAR DADOS</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
-
-        <Text style={styles.title1}>CADASTRAR MOTORISTA: ANEXOS</Text>
-
-        <Text style={styles.title}>SELFIE + DOCUMENTO</Text>
-        {Image1 && <Image source={{ uri: Image1 }} style={styles.imagem} />}
-        <TouchableOpacity onPress={pickImage1} style={styles.botao3}>
-          <Text style={styles.textBotao}>Selecione a sua foto</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => SetImage1(null)} style={styles.botao4}>
-          <Text style={styles.textBotao}>Apagar foto</Text>
-        </TouchableOpacity>
-
-        <Text style={styles.title}>CNH</Text>
-        {Image2 && <Image source={{ uri: Image2 }} style={styles.imagem} />}
-        <TouchableOpacity onPress={pickImage2} style={styles.botao3}>
-          <Text style={styles.textBotao}>Selecione a sua foto</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => SetImage2(null)} style={styles.botao4}>
-          <Text style={styles.textBotao}>Apagar foto</Text>
-        </TouchableOpacity>
-
-        <Text style={styles.title}>CRVL</Text>
-        {Image3 && <Image source={{ uri: Image3 }} style={styles.imagem} />}
-        <TouchableOpacity onPress={pickImage3} style={styles.botao3}>
-          <Text style={styles.textBotao}>Selecione a sua foto</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => SetImage3(null)} style={styles.botao4}>
-          <Text style={styles.textBotao}>Apagar foto</Text>
-        </TouchableOpacity>
-
-        <Text
-          style={{
-            fontSize: 19,
-            color: "#fff",
-            fontWeight: "350",
-            marginTop: 25,
-          }}
-        >
-          SELECIONE A SUA FOTO:
+  function renderSlides({item}){
+    return(
+      <View style={{flex:1, backgroundColor:'#334A58'}}>
+          <LottieView
+            source={item.image}
+            autoPlay={true}
+            loop={true}
+            style={{
+              height:'65%',
+              width:'100%',
+              marginTop: 20,
+              alignSelf:'center', 
+              backgroundColor:'#334A58',
+              resizeMode:'cover'
+            }}
+            /> 
+        <Text style={styles.titleAppIntro}>
+          {item.title}
         </Text>
 
-        {Image4 && <Image source={{ uri: Image4 }} style={styles.imagem} />}
-        <TouchableOpacity onPress={pickImage4} style={styles.botao3}>
-          <Text style={styles.textBotao}>Selecione a sua foto</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => SetImage4(null)} style={styles.botao4}>
-          <Text style={styles.textBotao}>Apagar foto</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.botao1}
-          onPress={completo}
-        >
-          <Text style={styles.textBotao}>PRÓXIMO</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.botao2}
-          onPress={() => setVisible(true)}
-        >
-          <Text style={styles.textBotao}>CANCELAR</Text>
-        </TouchableOpacity>
+        <Text style={styles.subTitle}>
+          {item.text}
+        </Text>
+      
       </View>
-    </ScrollView>
-  );
+    )
+  }
+
+
+  if(showHome){
+    return (
+      
+
+    <ScrollView>
+    <View style={styles.container}>
+      <Modal
+        animationType="fade"
+        visible={visible}
+        statusBarTranslucent={false}
+        transparent={true}
+        style={{}}
+      >
+        <View style={styles.modal}>
+          <Text style={styles.titleModal}>DESEJA CANCELAR SEU CADASTRO?</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Login")}
+            style={styles.botaoModal1}
+          >
+            <Text style={styles.textBotao}>SAIR</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => setVisible(false)}
+            style={styles.botaoModal2}
+          >
+            <Text style={styles.textBotao}>VOU CONTINUAR</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+
+      <Modal
+        animationType="fade"
+        visible={confirmar}
+        statusBarTranslucent={false}
+        transparent={true}
+        style={{}}
+      >
+        <View style={styles.modal1}>
+          <Text style={styles.titleModal}>
+            OS DADOS INSERIDOS ESTÃO CORRETOS?
+          </Text>
+          <ScrollView>
+              {Image1 && <Image source={{ uri: Image1 }} style={styles.imageModal} />}
+              {Image2 && <Image source={{ uri: Image2 }} style={styles.imageModal} />}
+              {Image3 && <Image source={{ uri: Image3 }} style={styles.imageModal} />}
+              {Image4 && <Image source={{ uri: Image4 }} style={styles.imageModal} />}
+          </ScrollView>
+         
+
+          <TouchableOpacity
+            onPress={salvar}
+            style={styles.botaoConfirmarModal}
+          >
+            <Text style={styles.textBotao}>CONFIRMAR</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => setConfirmar(false)}
+            style={styles.botaoAlterarDadosModal}
+          >
+            <Text style={styles.textBotao}>ALTERAR DADOS</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+
+      <Text style={styles.title1}>CADASTRAR MOTORISTA: ANEXOS</Text>
+
+      <Text style={styles.title}>SELFIE + DOCUMENTO</Text>
+      {Image1 && <Image source={{ uri: Image1 }} style={styles.imagem} />}
+      <TouchableOpacity onPress={pickImage1} style={styles.botao3}>
+        <Text style={styles.textBotao}>Selecione a sua foto</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => SetImage1(null)} style={styles.botao4}>
+        <Text style={styles.textBotao}>Apagar foto</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.title}>CNH</Text>
+      {Image2 && <Image source={{ uri: Image2 }} style={styles.imagem} />}
+      <TouchableOpacity onPress={pickImage2} style={styles.botao3}>
+        <Text style={styles.textBotao}>Selecione a sua foto</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => SetImage2(null)} style={styles.botao4}>
+        <Text style={styles.textBotao}>Apagar foto</Text>
+      </TouchableOpacity>
+
+      <Text style={styles.title}>CRVL</Text>
+      {Image3 && <Image source={{ uri: Image3 }} style={styles.imagem} />}
+      <TouchableOpacity onPress={pickImage3} style={styles.botao3}>
+        <Text style={styles.textBotao}>Selecione a sua foto</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => SetImage3(null)} style={styles.botao4}>
+        <Text style={styles.textBotao}>Apagar foto</Text>
+      </TouchableOpacity>
+
+      <Text
+        style={styles.title}
+      >
+        SELECIONE A SUA FOTO:
+      </Text>
+
+      {Image4 && <Image source={{ uri: Image4 }} style={styles.imagem} />}
+      <TouchableOpacity onPress={pickImage4} style={styles.botao3}>
+        <Text style={styles.textBotao}>Selecione a sua foto</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => SetImage4(null)} style={styles.botao4}>
+        <Text style={styles.textBotao}>Apagar foto</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.botao1}
+        onPress={completo}
+      >
+        <Text style={styles.textBotao}>PRÓXIMO</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.botao2}
+        onPress={() => setVisible(true)}
+      >
+        <Text style={styles.textBotao}>CANCELAR</Text>
+      </TouchableOpacity>
+    </View>
+  </ScrollView>
+);
+  } else{
+    return(
+      <AppIntroSlider
+        renderItem={renderSlides}
+        data={slides}
+        activeDotStyle={{
+          backgroundColor:'#b9b9b9',
+          width:30  
+        }}
+        renderNextButton={()=>{}}
+        renderDoneButton={()=><Text style={{fontSize:15, marginTop:12, fontFamily:"Roboto_500Medium", color:'#009cff'}}>Vamos lá!!!</Text>}
+        onDone={()=>setShowHome(true)}
+      />
+    )    
+  }
+
+
+  
+
+
+
+
+  
+    
 }
 
 const styles = StyleSheet.create({
@@ -259,7 +341,24 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 19,
     color: "#fff",
-    fontWeight: "350",
+    fontFamily:'Roboto_500Medium'
+  },
+  titleAppIntro:{
+    fontFamily:"Roboto_500Medium",
+    fontSize:25,
+    textAlign:'center',
+    marginBottom:10,
+    elevation:10,
+    color:'#009cff'
+  },
+  subTitle:{
+    fontFamily:"Poppins_500Medium",
+    fontSize:18,
+    textAlign:'center',
+    margin:5,
+    elevation:10,
+    paddingHorizontal:20,
+    color:'#b5b5b5'
   },
   title1: {
     fontSize: 20,
@@ -306,6 +405,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 5,
     marginTop: 5,
+    justifyContent:'center'
   },
   botao4: {
     backgroundColor: "#FF3030",
@@ -315,6 +415,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 5,
     marginTop: 5,
+    justifyContent:'center'
   },
   imagem: {
     width: 200,
@@ -329,6 +430,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "600",
     textAlign: "center",
+    fontFamily:'Ubuntu_700Bold'
   },
   modal: {
     alignSelf: "center",
@@ -364,8 +466,10 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   titleModal: {
-    textAlign: "center",
-    fontSize: 17,
+    textAlign:'center',
+    fontSize:17,
+    fontFamily:'BalsamiqSans_700Bold',
+    textDecorationLine:'underline'
   },
   modal1: {
     alignSelf: "center",

@@ -40,6 +40,8 @@ import {
   Roboto_900Black,
   Roboto_900Black_Italic,
 } from '@expo-google-fonts/roboto';
+import {Poppins_400Regular, Poppins_500Medium} from '@expo-google-fonts/poppins'
+
 
 export default function App(){
 
@@ -70,6 +72,8 @@ export default function App(){
     Roboto_700Bold_Italic,
     Roboto_900Black,
     Roboto_900Black_Italic,
+    Poppins_400Regular,
+    Poppins_500Medium
   });
 
   if (!fontsLoaded) {

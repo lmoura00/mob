@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, ScrollView, 
 import {useNavigation} from '@react-navigation/native'
 import SelectBox from 'react-native-multi-selectbox'
 import { xorBy } from 'lodash'
-
+import LottieView from 'lottie-react-native'
 
 const K_OPTIONS = [
     {
@@ -22,7 +22,6 @@ export function CadastroMot2(){
     const navigation = useNavigation();
     const [visible, setVisible] = useState(false)
     const [selectedTeam, setSelectedTeam] = useState({})
-    const [selectedTeams, setSelectedTeams] = useState([])
     const [placa, setPlaca] = useState('');
     const [crvl, setCrvl] = useState('');
 
@@ -76,38 +75,39 @@ export function CadastroMot2(){
                 
             </Modal>
 
-        <Modal
-        animationType="fade"
-        visible={confirmar}
-        statusBarTranslucent={false}
-        transparent={true}
-        style={{}}
-      >
-        <View style={styles.modal1}>
-          <Text style={styles.titleModal}>OS DADOS INSERIDOS ESTÃO CORRETOS?</Text>
-       
-       
-          <Text>⬤ {selectedTeam.id}</Text>
-          <Text>⬤ {placa}</Text>
-          <Text>⬤ {crvl}</Text>
-
-    
-          <TouchableOpacity
-            onPress={salvar}
+              <Modal
+              animationType="fade"
+              visible={confirmar}
+              statusBarTranslucent={false}
+              transparent={true}
+              style={{}}
+            >
+              <View style={styles.modal1}>
+                <Text style={styles.titleModal}>OS DADOS INSERIDOS ESTÃO CORRETOS?</Text>
             
-            style={styles.botaoConfirmarModal}
-          >
-            <Text style={styles.textBotao}>CONFIRMAR</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={()=>setConfirmar(false)}
-            style={styles.botaoAlterarDadosModal}
-          >
-            <Text style={styles.textBotao}>ALTERAR DADOS</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
+            
+                <Text>⬤ {selectedTeam.id}</Text>
+                <Text>⬤ {placa}</Text>
+                <Text>⬤ {crvl}</Text>
 
+          
+                <TouchableOpacity
+                  onPress={salvar}
+                  
+                  style={styles.botaoConfirmarModal}
+                >
+                  <Text style={styles.textBotao}>CONFIRMAR</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={()=>setConfirmar(false)}
+                  style={styles.botaoAlterarDadosModal}
+                >
+                  <Text style={styles.textBotao}>ALTERAR DADOS</Text>
+                </TouchableOpacity>
+              </View>
+            </Modal>
+
+        
 
                 <View style={{alignItems:'center'}}>
                     
@@ -115,7 +115,15 @@ export function CadastroMot2(){
                     
                 </View>
 
-
+                <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
+                  <View style={{width:250, height:70}}>
+                    <LottieView 
+                        source={require('../../Assets/5036-walk-processes.json')} 
+                        autoPlay={true} 
+                        loop={true} 
+                    />
+                  </View>
+                </View>
                       <SelectBox
                             label="TIPO DE VEICULO:"
                             labelStyle={styles.title}
@@ -128,8 +136,18 @@ export function CadastroMot2(){
                             optionsLabelStyle={{fontWeight:'700', color:'black'}}
                             optionContainerStyle={{backgroundColor:'#fff', padding:4}}
                         />
+            <ScrollView>
 
-                <Text style={styles.title}>PLACA</Text>
+              <View style={{flexDirection:'row', alignItems:'center',}}>
+                      <View style={{width:80, height:40}}>
+                        <LottieView 
+                            source={require('../../Assets/46986-car-number-plate.json')} 
+                            autoPlay={true} 
+                            loop={true} 
+                        />
+                      </View>
+                    <Text style={styles.title}>PLACA</Text>
+                    </View>
                 <TextInput 
                     style={styles.input} 
                     placeholder='Placa do veiculo'
@@ -137,7 +155,17 @@ export function CadastroMot2(){
                     onChangeText={setPlaca}
                 ></TextInput>
 
-                <Text style={styles.title}>CRVL</Text>
+
+                 <View style={{flexDirection:'row', alignItems:'center'}}>
+                      <View style={{width:50, height:50}}>
+                        <LottieView 
+                            source={require('../../Assets/78299-document.json')} 
+                            autoPlay={true} 
+                            loop={true} 
+                        />
+                      </View>
+                    <Text style={styles.title}>CRVL</Text>
+                    </View>
                 <TextInput 
                     style={styles.input} 
                     placeholder='Documento do veiculo'
@@ -153,9 +181,11 @@ export function CadastroMot2(){
                 <TouchableOpacity style={styles.botao2} onPress={()=>setVisible(true)}>
                     <Text style={styles.textBotao}>CANCELAR</Text>
                 </TouchableOpacity>
+            </ScrollView>
             
+        
 
-        </View>
+      </View>
     )
 
       function onChange() {
@@ -178,28 +208,30 @@ const styles = StyleSheet.create({
         color:'black',
         marginBottom:15
     },
-    title:{
-        fontSize:19,
-        color:'#fff',
-        fontWeight:'350'
+    title: {
+      fontSize: 19,
+      color: "#fff",
+      fontFamily:'Roboto_500Medium'
     },
-    title1:{
-        fontSize:20,
-        color:'#fff',
-        fontWeight:'500',
-        textAlign:'center',
-        marginTop:10,
-        textDecorationLine:'underline',
-        marginBottom:10,
+    title1: {
+      fontSize: 20,
+      color: "#fff",
+      fontWeight: "500",
+      textAlign: "center",
+      marginTop: 10,
+      textDecorationLine: "underline",
+      marginBottom: 10,
+      fontFamily:'Roboto_700Bold'
     },
-    input:{
-        backgroundColor:'#D9D9D9',
-        height:35,
-        borderRadius:7,
-        borderWidth:1,
-        marginBottom:5,
-        marginTop:5,
-        paddingHorizontal:5
+    input: {
+      backgroundColor: "#D9D9D9",
+      height: 40,
+      borderRadius: 7,
+      borderWidth: 1,
+      marginBottom: 5,
+      marginTop: 5,
+      paddingHorizontal: 8,
+      fontFamily:'BalsamiqSans_700Bold'
     },
     inputSelect:{
         backgroundColor:'#D9D9D9',
@@ -235,10 +267,11 @@ const styles = StyleSheet.create({
         borderWidth:1,
         alignSelf:'center'
     },
-    textBotao:{
-        fontSize:15,
-        fontWeight:'600',
-        textAlign:'center'
+    textBotao: {
+      fontSize: 15,
+      fontWeight: "600",
+      textAlign: "center",
+      fontFamily:'Ubuntu_700Bold'
     },
     modal:{
         alignSelf: 'center',
@@ -250,32 +283,34 @@ const styles = StyleSheet.create({
         width:"80%",
         height:"25%",
     },
-    botaoModal1:{
-        backgroundColor:'#FF3030',
-        height: 35,
-        width:"65%",
-        padding:5,
-        borderRadius:15,
-        borderWidth:1,
-        alignSelf:'center',
-        margin:5,
-        elevation:10,
-        marginTop:20
+    botaoModal1: {
+      backgroundColor: "#FF3030",
+      height: 35,
+      width: "65%",
+      padding: 5,
+      borderRadius: 15,
+      borderWidth: 1,
+      alignSelf: "center",
+      margin: 5,
+      elevation: 10,
+      marginTop: 20,
     },
-    botaoModal2:{
-        backgroundColor:'#fff',
-        height: 35,
-        width:"65%",
-        padding:5,
-        borderRadius:15,
-        borderWidth:1,
-        alignSelf:'center',
-        elevation:10,
-        marginTop:5
+    botaoModal2: {
+      backgroundColor: "#fff",
+      height: 35,
+      width: "65%",
+      padding: 5,
+      borderRadius: 15,
+      borderWidth: 1,
+      alignSelf: "center",
+      elevation: 10,
+      marginTop: 5,
     },
-    titleModal:{
-        textAlign:'center',
-        fontSize:17
+    titleModal: {
+      textAlign:'center',
+      fontSize:17,
+      fontFamily:'BalsamiqSans_700Bold',
+      textDecorationLine:'underline'
     },
     modal1: {
         alignSelf: "center",
