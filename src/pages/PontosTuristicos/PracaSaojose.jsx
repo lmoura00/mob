@@ -257,6 +257,7 @@ const styles = StyleSheet.create({
   scroll: {
     width,
     height,
+    alignSelf:'center'
   },
   pagination: {
     flexDirection: "row",
@@ -350,7 +351,7 @@ const styles = StyleSheet.create({
     fontFamily:'Ubuntu_400Regular',
   },
   botaoModalAlerta: {
-    backgroundColor: "#FF3030",
+    backgroundColor:'#14BC9C',
     height: 35,
     width: "40%",
     padding: 5,

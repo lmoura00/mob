@@ -52,8 +52,10 @@ export function Yuri(){
                     transparent={true}
                     style={{}}
                     >
-                        <View style={styles.modal2}>
-                            <Text style={styles.titleModal}>AGUARDE O MOTORISTA</Text>
+                        <View style={styles.modal3}>
+                        <View style={styles.titleModal}>
+                            <Text style={styles.titleModalText}>AGUARDE O MOTORISTA</Text>
+                            </View>
                             
                             <LottieView 
                                 source={require('../../Assets/92893-man-waiting-car.json')} 
@@ -158,20 +160,16 @@ const styles = StyleSheet.create({
         marginTop:25,
         marginBottom:25,
     },
-    lottie:{
-        flex:1,
-        backgroundColor:"#fff",
-    },
     title:{
         marginTop:15,
         fontSize:27,
         color:'black',
-        fontWeight:'bold',
-        paddingTop:25,
+        marginBottom:8,
+        fontFamily:'Inter_600SemiBold'
     },
     texto:{
         fontSize:25,
-        fontWeight:'400'
+        fontFamily:'Ubuntu_400Regular'
 
     },
     vagas:{
@@ -249,9 +247,9 @@ const styles = StyleSheet.create({
     titleBotao:{
         fontSize:18,
         padding:8,
-        fontWeight:'600',
         color:'black',
-        textAlign:'center'
+        textAlign:'center',
+        fontFamily:'Ubuntu_700Bold'
     },
     modal:{
         alignSelf: 'center',
@@ -288,13 +286,13 @@ const styles = StyleSheet.create({
     },
     titleModal:{
         textAlign:'center',
+        justifyContent:'center',
         fontSize:17,
         fontWeight:'bold',
         backgroundColor:'#fff',
         height:45,
         borderRadius:8,
         elevation:10,
-        justifyContent:'center'
         
     },
     titleModalText:{
@@ -308,7 +306,7 @@ const styles = StyleSheet.create({
         textAlign:'center'
     },
     botaoModalAlerta: {
-        backgroundColor: "#FF3030",
+        backgroundColor:'#14BC9C',
         height: 35,
         width: "40%",
         padding: 5,
@@ -328,5 +326,15 @@ const styles = StyleSheet.create({
         marginVertical: 260,
         width: "80%",
         height: "30%",
+      },
+      modal3: {
+        alignSelf: "center",
+        backgroundColor: "#f9f9f9",
+        padding: 20,
+        elevation: 10,
+        borderRadius: 20,
+        marginVertical: 220,
+        width: "80%",
+        height: "50%",
       },
 })

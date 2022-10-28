@@ -287,7 +287,7 @@ export function CadastroMot1() {
 
       <TouchableOpacity
         style={styles.botao1}
-        onPress={completo}
+        onPress={()=>navigation.navigate("CadastroMot2")}
       >
         <Text style={styles.textBotao}>PRÓXIMO</Text>
       </TouchableOpacity>
@@ -317,7 +317,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 19,
     color: "#fff",
-    fontFamily:'Roboto_500Medium'
+    fontFamily:'Ubuntu_400Regular'
   },
   title1: {
     fontSize: 20,
@@ -331,7 +331,7 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "#D9D9D9",
-    height: 40,
+    height: 45,
     borderRadius: 7,
     borderWidth: 1,
     marginBottom: 5,

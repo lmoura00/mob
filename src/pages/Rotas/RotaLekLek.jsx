@@ -72,7 +72,7 @@ export function RotaLekLek(){
             coordinate={destination}
             />
         </MapView>
-            <View style={{backgroundColor:'#fff', width:'100%', height:100, alignSelf:'center', alignItems:'center'}}>
+            <View style={styles.distance}>
                 {distance && 
                     <Text style={{fontSize:18}}>Distância: {distance} m</Text>
                 }
@@ -83,17 +83,30 @@ export function RotaLekLek(){
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        justifyContent:'center',
-
-    },
-    text:{
-        fontSize:15,
-        height:'40%'
-    },
-    map:{
-        height:'100%',
-
-    }
+    container: {
+        flex: 1,
+        justifyContent: "center",
+      },
+      text: {
+        fontSize: 15,
+        height: "40%",
+      },
+      map: {
+        flex: 1,
+      },
+      distance:{
+        justifyContent: "flex-end",
+        left: "25%",
+        bottom: 10,
+        position: "absolute",
+        backgroundColor: "#fff",
+        alignSelf: "center",
+        width: "50%",
+        height: 40,
+        alignItems: "center",
+        justifyContent: "center",
+        opacity: 0.7,
+        borderRadius:10,
+        elevation:10
+      },
 })

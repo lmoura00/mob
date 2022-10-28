@@ -49,8 +49,10 @@ export function Gabrielly(){
                     transparent={true}
                     style={{}}
                     >
-                        <View style={styles.modal2}>
-                            <Text style={styles.titleModal}>AGUARDE O MOTORISTA</Text>
+                        <View style={styles.modal3}>
+                            <View style={styles.titleModal}>
+                            <Text style={styles.titleModalText}>AGUARDE O MOTORISTA</Text>
+                            </View>
                             
                             <LottieView 
                                 source={require('../../Assets/92893-man-waiting-car.json')} 
@@ -157,13 +159,12 @@ const styles = StyleSheet.create({
         fontSize:27,
         color:'black',
         marginBottom:8,
-        fontFamily:'BalsamiqSans_700Bold',
-        textDecorationLine:'underline'
+        fontFamily:'Inter_600SemiBold'
     },
     texto:{
         fontSize:25,
-        fontWeight:'400',
-        fontFamily:'Ubuntu_500Medium'
+        fontFamily:'Ubuntu_400Regular'
+
     },
     vagas:{
         fontSize:25,
@@ -182,7 +183,6 @@ const styles = StyleSheet.create({
         fontSize:20,
         fontWeight:'600',
         marginTop:10,
-        textDecorationLine:'underline'
         
     },
     inicioLugar:{
@@ -190,20 +190,18 @@ const styles = StyleSheet.create({
         fontWeight:'400',
         marginTop:10,
         marginLeft:15,
-       fontFamily:'BalsamiqSans_400Regular'
     },
     DestinoNome:{
         fontSize:18,
         fontWeight:'600',
-        marginBottom:15,
-        textDecorationLine:'underline',
+        marginBottom:15
+        
     },
     DestinoLugar:{
         fontSize:18,
         fontWeight:'400',
         marginBottom:15,
         marginLeft:15,
-        fontFamily:'BalsamiqSans_400Regular'
     },
     imagem:{
         width:150,
@@ -220,7 +218,6 @@ const styles = StyleSheet.create({
         borderRadius:8,
         borderWidth:1,
         elevation:10,
-        
     },
     botaoNaoEParaMim:{
         backgroundColor:'#FF3030',
@@ -244,10 +241,9 @@ const styles = StyleSheet.create({
     titleBotao:{
         fontSize:18,
         padding:8,
-        fontWeight:'600',
         color:'black',
         textAlign:'center',
-        fontFamily:'Ubuntu_700Bold',
+        fontFamily:'Ubuntu_700Bold'
     },
     modal:{
         alignSelf: 'center',
@@ -284,13 +280,13 @@ const styles = StyleSheet.create({
     },
     titleModal:{
         textAlign:'center',
+        justifyContent:'center',
         fontSize:17,
         fontWeight:'bold',
         backgroundColor:'#fff',
         height:45,
         borderRadius:8,
         elevation:10,
-        justifyContent:'center'
         
     },
     titleModalText:{
@@ -304,7 +300,7 @@ const styles = StyleSheet.create({
         textAlign:'center'
     },
     botaoModalAlerta: {
-        backgroundColor: "#FF3030",
+        backgroundColor:'#14BC9C',
         height: 35,
         width: "40%",
         padding: 5,
@@ -324,5 +320,15 @@ const styles = StyleSheet.create({
         marginVertical: 260,
         width: "80%",
         height: "30%",
+      },
+      modal3: {
+        alignSelf: "center",
+        backgroundColor: "#f9f9f9",
+        padding: 20,
+        elevation: 10,
+        borderRadius: 20,
+        marginVertical: 220,
+        width: "80%",
+        height: "50%",
       },
 })

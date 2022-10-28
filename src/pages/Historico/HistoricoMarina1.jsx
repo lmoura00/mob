@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
         textAlign:'center'
     },
     botaoModalAlerta: {
-        backgroundColor: "#FF3030",
+        backgroundColor:'#14BC9C',
         height: 35,
         width: "40%",
         padding: 5,

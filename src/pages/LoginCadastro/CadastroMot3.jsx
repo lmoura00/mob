@@ -143,19 +143,18 @@ export function CadastroMot3() {
   function renderSlides({item}){
     return(
       <View style={{flex:1, backgroundColor:'#334A58'}}>
+        <View style={{height:'40%', width:'75%', marginBottom:100, marginTop:35, alignSelf:'center'}}>
           <LottieView
             source={item.image}
             autoPlay={true}
             loop={true}
             style={{
-              height:'65%',
-              width:'100%',
-              marginTop: 20,
               alignSelf:'center', 
               backgroundColor:'#334A58',
               resizeMode:'cover'
             }}
             /> 
+        </View>
         <Text style={styles.titleAppIntro}>
           {item.title}
         </Text>
@@ -282,7 +281,7 @@ export function CadastroMot3() {
 
       <TouchableOpacity
         style={styles.botao1}
-        onPress={completo}
+        onPress={()=>navigation.navigate('CadastroMot4')}
       >
         <Text style={styles.textBotao}>PRÓXIMO</Text>
       </TouchableOpacity>
@@ -327,7 +326,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: "#334A58",
-    padding: 5,
+    paddingVertical:25 ,
   },
   line1: {
     fontSize: 25,
@@ -341,7 +340,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 19,
     color: "#fff",
-    fontFamily:'Roboto_500Medium'
+    fontFamily:'Ubuntu_400Regular'
   },
   titleAppIntro:{
     fontFamily:"Roboto_500Medium",

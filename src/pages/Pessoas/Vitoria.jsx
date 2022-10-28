@@ -48,8 +48,10 @@ export function Vitoria(){
                     transparent={true}
                     style={{}}
                     >
-                        <View style={styles.modal2}>
-                            <Text style={styles.titleModal}>AGUARDE O MOTORISTA</Text>
+                        <View style={styles.modal3}>
+                            <View style={styles.titleModal}>
+                                <Text style={styles.titleModalText}>AGUARDE O MOTORISTA</Text>
+                            </View>
                             
                             <LottieView 
                                 source={require('../../Assets/92893-man-waiting-car.json')} 
@@ -99,10 +101,10 @@ export function Vitoria(){
                 <LottieView source={require('../../Assets/95740-profile-person.json')} autoPlay={true} loop={true} style={{marginBottom:300}}/>
                 <View style={{marginTop:180, alignItems:'center', justifyContent:'center'}}>
                     <Text style={styles.title}>VITORIA EV.</Text>
-                    <Text style={styles.texto}>VW GOLF</Text>
-                    <Text style={styles.texto}>COR: CINZA </Text>
+                    <Text style={styles.texto}>BMW X5</Text>
+                    <Text style={styles.texto}>COR: AZUL MARINHO </Text>
                 </View>
-                <Image source={{uri:'https://carroslancamentos.com.br/wp-content/uploads/2019/02/fotos-volkswagen-golf-e1549196918523.png'}} style={{width:150, height:90, margin:7}}/>
+                <Image source={{uri:'https://www.webmotors.com.br/imagens/prod/348878/BMW_X5_4.4_V8_BITURBO_GASOLINA_M_AUTOMATICO_34887812325867794.png?s=fill&w=130&h=97&q=70&t=true)'}} style={{width:150, height:90, margin:7}}/>
                 <Text style={styles.texto}>PLACA: ABC - 4196</Text>
                 <Text style={styles.texto}>CONTATO: 86 9 0000 0000</Text>
 
@@ -153,12 +155,12 @@ const styles = StyleSheet.create({
         marginTop:15,
         fontSize:27,
         color:'black',
-        fontWeight:'bold',
-        marginBottom:8
+        marginBottom:8,
+        fontFamily:'Inter_600SemiBold'
     },
     texto:{
         fontSize:25,
-        fontWeight:'400'
+        fontFamily:'Ubuntu_400Regular'
 
     },
     vagas:{
@@ -236,9 +238,9 @@ const styles = StyleSheet.create({
     titleBotao:{
         fontSize:18,
         padding:8,
-        fontWeight:'600',
         color:'black',
-        textAlign:'center'
+        textAlign:'center',
+        fontFamily:'Ubuntu_700Bold'
     },
     modal:{
         alignSelf: 'center',
@@ -275,13 +277,13 @@ const styles = StyleSheet.create({
     },
     titleModal:{
         textAlign:'center',
+        justifyContent:'center',
         fontSize:17,
         fontWeight:'bold',
         backgroundColor:'#fff',
         height:45,
         borderRadius:8,
         elevation:10,
-        justifyContent:'center'
         
     },
     titleModalText:{
@@ -295,7 +297,7 @@ const styles = StyleSheet.create({
         textAlign:'center'
     },
     botaoModalAlerta: {
-        backgroundColor: "#FF3030",
+        backgroundColor:'#14BC9C',
         height: 35,
         width: "40%",
         padding: 5,
@@ -315,5 +317,15 @@ const styles = StyleSheet.create({
         marginVertical: 260,
         width: "80%",
         height: "30%",
+      },
+      modal3: {
+        alignSelf: "center",
+        backgroundColor: "#f9f9f9",
+        padding: 20,
+        elevation: 10,
+        borderRadius: 20,
+        marginVertical: 220,
+        width: "80%",
+        height: "50%",
       },
 })

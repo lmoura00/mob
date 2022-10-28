@@ -33,7 +33,7 @@ export function HistoricoJose26(){
                                 <TouchableOpacity 
                                     onPress={()=>navigation.navigate('RotaJose1') || setAlerta(false)} 
                                     style={styles.botaoModalAlerta}>
-                                        <Text style={styles.textBotao}>FECHAR</Text>
+                                        <Text style={styles.textBotao}>CONTINUAR</Text>
                                 </TouchableOpacity>
                             
                         </View>
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
         textAlign:'center'
     },
     botaoModalAlerta: {
-        backgroundColor: "#FF3030",
+        backgroundColor:'#14BC9C',
         height: 35,
         width: "40%",
         padding: 5,
