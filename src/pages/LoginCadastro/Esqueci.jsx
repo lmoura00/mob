@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Text, StyleSheet, TouchableOpacity, View, ScrollView, TextInput, Modal} from 'react-native'
+import {Text, StyleSheet, TouchableOpacity, View, ScrollView, TextInput, Modal, Alert} from 'react-native'
 import LottieView from 'lottie-react-native'
 import { useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -7,8 +7,17 @@ import { useNavigation } from "@react-navigation/native";
 
 export function Esqueci(){
 
+    function preenchido(){
+        if(Email === ""){
+            Alert.alert('Opa, parece que você não preencheu corretamente!', 'Preencha o campo de E-mail.')
+        }else {
+            setTeste(true)
+        }
+    }
+
     const navigation = useNavigation()
     const [Teste, setTeste] = useState(false)
+    const [Email, SetEmail] = useState('')
     return(
         <ScrollView style={styles.container}>
 
@@ -56,10 +65,12 @@ export function Esqueci(){
                     <TextInput
                         placeholder="Insira seu e-mail"
                         style={styles.input}
+                        value={Email}
+                        onChangeText={SetEmail}
                     />
                 </View>
 
-                <TouchableOpacity style={styles.botao} onPress={()=>setTeste(true)}>
+                <TouchableOpacity style={styles.botao} onPress={preenchido}>
                     <Text style={styles.subtitle}>ENVIAR</Text>
                 </TouchableOpacity>
         </ScrollView>
