@@ -167,7 +167,7 @@ export function Login(){
                         onPress={()=> {if(isEnabled===false){
                             setUser('lucas')
                         }else {
-                            setUser(null) || Alert.alert('Você está tentando entrar como motorista.')
+                            setUser(null) || Alert.alert('Ei. Você está tentando entrar como motorista.', 'Por enquanto ainda não tem nada aí. Mas vamos chegar lá!!')
                         }
                          }}
                     >
@@ -182,6 +182,10 @@ export function Login(){
                     <TouchableOpacity style={styles.botaoCadPax}  onPress={()=>navigation.navigate("CadastroPax")}>
                         <Text style={styles.titleBotao}>CADASTRAR PASSAGEIRO</Text>
                     </TouchableOpacity>
+
+                    <TouchableOpacity onPress={()=>navigation.navigate("Esqueci")}>
+                        <Text style={styles.subtitleBotao}>ESQUECI A SENHA</Text>
+                    </TouchableOpacity>
                     
                 </KeyboardAvoidingView>
 
@@ -194,13 +198,14 @@ export function Login(){
 
 const styles = StyleSheet.create({
     containerInput:{
-        flex:1,
+        flex:0.6,
         justifyContent:'center',
         alignItems:'center',
         backgroundColor:"#334A58"
     },
     containerLogo:{
-        flex:1,
+        flex:0.4,
+        marginTop:25,
         justifyContent:'center',
         alignItems:'center',
         backgroundColor:"#334A58"
@@ -232,7 +237,7 @@ const styles = StyleSheet.create({
     },
     EmailInput:{
         backgroundColor:'#D9D9D9',
-        width:'65%',
+        width:260,
         height:45,
         borderRadius:15,
         textAlign:'center',
@@ -255,7 +260,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#D9D9D9',
         borderRadius:15,
         borderWidth:1,
-        width:'65%',
+        width:260,
         height:45,
         opacity:0.6,
         flexDirection:'row',
@@ -266,7 +271,7 @@ const styles = StyleSheet.create({
     botaoEntrar:{
         backgroundColor:'#fff',
         height:45,
-        width: 270,
+        width: 300,
         marginTop:30,
         borderRadius:8,
         borderWidth:1,
@@ -275,7 +280,7 @@ const styles = StyleSheet.create({
     botaoCadMot:{
         backgroundColor:'#FF3030',
         height:45,
-        width: 270,
+        width: 300,
         marginTop:10,
         borderRadius:8,
         borderWidth:1,
@@ -284,7 +289,7 @@ const styles = StyleSheet.create({
     botaoCadPax:{
         backgroundColor:'#14BC9C',
         height:45,
-        width: 270,
+        width: 300,
         marginTop:10,
         marginBottom:10,
         borderRadius:8,
@@ -294,10 +299,16 @@ const styles = StyleSheet.create({
     titleBotao:{
         fontSize:18,
         padding:8,
-        fontWeight:'600',
         color:'black',
         textAlign:'center',
         fontFamily:'Ubuntu_700Bold'
+    },
+    subtitleBotao:{
+        fontSize:16,
+        padding:8,
+        color:'#fff',
+        textAlign:'center',
+        fontFamily:'Inter_500Medium'
     },
     ifma:{
         width:100,

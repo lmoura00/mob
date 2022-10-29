@@ -219,13 +219,14 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "#D9D9D9",
-    width: "100%",
-    height: 35,
+    height: 45,
     borderRadius: 7,
     borderWidth: 1,
     marginBottom: 5,
     marginTop: 5,
-    paddingHorizontal: 5,
+    paddingHorizontal: 8,
+    fontFamily:'BalsamiqSans_700Bold',
+    fontSize:16
   },
   botao1: {
     backgroundColor: "#fff",

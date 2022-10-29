@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import {View, Text, StyleSheet} from 'react-native'
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 
 import MapView, {Marker} from 'react-native-maps';
 import *  as Location from 'expo-location'
 import * as Permission from 'expo-permissions'
 import config from '../../../config/index.json'
 import MapViewDirections from 'react-native-maps-directions';
-
+import {useNavigation} from '@react-navigation/native'
 
 
 export function RotaGabrielly(){
+    const navigation = useNavigation()
     const pinPartida = '#14BC9C'
     const mapEl = useRef(null)
     const [location, setLocation] = useState(null);
@@ -81,6 +82,11 @@ export function RotaGabrielly(){
             />
 
         </MapView>
+            <View>
+              <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate("Gabrielly") &&  setVisible(true)}>
+                <Text style={{fontSize:18}}>QUERO A CARONA!</Text>
+              </TouchableOpacity>
+            </View>
             <View style={styles.distance}>
                 {distance && 
                     <Text style={{fontSize:18}}>Distância: {distance} m</Text>
@@ -118,4 +124,19 @@ const styles = StyleSheet.create({
         borderRadius:10,
         elevation:10
       },
+      botao:{
+        justifyContent: "flex-end",
+        left: "25%",
+        bottom: 80,
+        position: "absolute",
+        backgroundColor: "red",
+        alignSelf: "center",
+        width: "50%",
+        height: 40,
+        alignItems: "center",
+        justifyContent: "center",
+        opacity: 1,
+        borderRadius:10,
+        elevation:10
+      }
 })

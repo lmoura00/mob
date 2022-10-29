@@ -174,7 +174,7 @@ export function CadastroMot2(){
                 ></TextInput>
 
 
-                <TouchableOpacity style={styles.botao1} onPress={()=>navigation.navigate("CadastroMot3")}>
+                <TouchableOpacity style={styles.botao1} onPress={()=>navigation.navigate('CadastroMot3')}>
                     <Text style={styles.textBotao}>PRÓXIMO</Text>
                 </TouchableOpacity>
 
