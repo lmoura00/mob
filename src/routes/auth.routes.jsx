@@ -102,6 +102,8 @@ import { RotaJose2 } from "../pages/Historico/Rotas/RotaJose2";
 import { RotaMarina1 } from "../pages/Historico/Rotas/RotaMarina1";
 import { RotaMarina2 } from "../pages/Historico/Rotas/RotaMarina2";
 
+import {Teste} from '../pages/Teste'
+
 function AuthRoutesTabBar() {
   const { setUser } = useAuth();
   const { Navigator, Screen } = createBottomTabNavigator();
@@ -979,6 +981,16 @@ export function AuthRoutes() {
         component={RotaGabrielly}
         options={{
           headerTitle: "ROTA",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="Teste"
+        component={Teste}
+        options={{
+          headerTitle: "TESTE",
           headerTitleAlign: "center",
           statusBarStyle: "dark",
         }}

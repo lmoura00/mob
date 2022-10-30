@@ -305,7 +305,7 @@ export function CadastroMot3() {
           width:30  
         }}
         renderNextButton={()=>{}}
-        renderDoneButton={()=><Text style={{fontSize:15, marginTop:12, fontFamily:"Roboto_500Medium", color:'#009cff'}}>Vamos lá!!!</Text>}
+        renderDoneButton={()=><Text style={{fontSize:17, marginTop:12, fontFamily:"Roboto_500Medium", color:'#009cff', justifyContent:'center', alignSelf:'center'}}>Vamos lá!!!</Text>}
         onDone={()=>setShowHome(true)}
       />
     )    
