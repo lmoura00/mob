@@ -1,5 +1,5 @@
 import { addListener } from "expo-updates";
-import React, {useState} from "react";
+import React, {Component, useState} from "react";
 import {View, ScrollView, Image, StyleSheet, Text, Dimensions, Modal, TouchableOpacity} from 'react-native'
 import MapView, { Marker } from 'react-native-maps';
 import { useNavigation } from "@react-navigation/native";

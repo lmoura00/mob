@@ -103,6 +103,7 @@ import { RotaMarina1 } from "../pages/Historico/Rotas/RotaMarina1";
 import { RotaMarina2 } from "../pages/Historico/Rotas/RotaMarina2";
 
 import {Teste} from '../pages/Teste'
+import {Teste2} from '../pages/Teste2'
 
 function AuthRoutesTabBar() {
   const { setUser } = useAuth();
@@ -989,6 +990,16 @@ export function AuthRoutes() {
       <Screen
         name="Teste"
         component={Teste}
+        options={{
+          headerTitle: "TESTE",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="Teste2"
+        component={Teste2}
         options={{
           headerTitle: "TESTE",
           headerTitleAlign: "center",
