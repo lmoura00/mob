@@ -104,6 +104,7 @@ import { RotaMarina2 } from "../pages/Historico/Rotas/RotaMarina2";
 
 import {Teste} from '../pages/Teste'
 import {Teste2} from '../pages/Teste2'
+import {HomeMot} from '../pages/HomeMot'
 
 function AuthRoutesTabBar() {
   const { setUser } = useAuth();
@@ -1002,6 +1003,17 @@ export function AuthRoutes() {
         component={Teste2}
         options={{
           headerTitle: "TESTE",
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="HomeMot"
+        component={HomeMot}
+        options={{
+          headerTitle: "Home",
+          headerShown:false,
           headerTitleAlign: "center",
           statusBarStyle: "dark",
         }}

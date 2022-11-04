@@ -1,5 +1,5 @@
 import React,{useState, useEffect, useRef} from "react";
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image} from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Dimensions, Image, Animated} from "react-native";
 import MapView, {Marker, MarkerAnimated} from "react-native-maps";
 import LottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -103,6 +103,8 @@ export function Teste(){
           
         })();
       }, []);
+
+    
 
 
     return(

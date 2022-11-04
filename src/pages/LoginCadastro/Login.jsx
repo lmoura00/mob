@@ -54,13 +54,13 @@ export function Login(){
     function keyboardDidShow(){
       Animated.parallel([
         Animated.timing(logotipo.x,{
-          toValue:100,
+          toValue:60,
           duration:50,
           useNativeDriver: false
           
         }),
         Animated.timing(logotipo.y,{
-          toValue:100,
+          toValue:60,
           duration:50,
           useNativeDriver: false
         }),
@@ -70,12 +70,12 @@ export function Login(){
     function keyboardDidHide(){
       Animated.parallel([
         Animated.timing(logotipo.x,{
-          toValue:200,
+          toValue:220,
           duration:100,
           useNativeDriver: false
         }),
         Animated.timing(logotipo.y,{
-          toValue:200,
+          toValue:220,
           duration:100,
           useNativeDriver: false
         }),
@@ -93,7 +93,9 @@ export function Login(){
                         height:logotipo.y, 
                         borderRadius:20,
                         borderWidth:2,
-                        borderColor:'black'}}/>
+                        marginTop:15,
+                        borderColor:'black',
+                        }}/>
 
                 <View style={styles.ViewSwitch}>
                     <Text style={styles.TextSwitch}>PASSAGEIRO</Text>
@@ -110,6 +112,7 @@ export function Login(){
                     }
                     ]}
                 >
+            
 
                 <View style={{flexDirection:'row'}}>
                     <View style={{width:50, height:50}}>
@@ -118,7 +121,7 @@ export function Login(){
                             autoPlay={true} 
                             loop={true} 
                             
-                        />
+                            />
                     </View>
             
                     <TextInput 
@@ -127,7 +130,7 @@ export function Login(){
                         value={email}
                         onChangeText={setEmail} 
                         style={styles.EmailInput}
-                    />
+                        />
                 </View>
 
                 <View style={{flexDirection:'row'}}>
@@ -137,7 +140,7 @@ export function Login(){
                             autoPlay={true} 
                             loop={true} 
                             style={{}}
-                        />
+                            />
                     </View>
                     <View style={styles.SenhaInputContainer}>
                         <TextInput 
@@ -148,14 +151,14 @@ export function Login(){
                             maxLength={8} 
                             secureTextEntry={PasswordVisible} 
                             style={styles.SenhaInput}
-                        />
+                            />
                         <TouchableOpacity onPress={()=>setPasswordVisible(!PasswordVisible)} style={{marginLeft:25 }}>
                             {
                                 PasswordVisible ?
                                 <Ionicons name="eye" size={25} style={{}}/>
                                 :
                                 <Ionicons name="eye-off" size={25} style={{}}/>
-
+                                
                             }
                         </TouchableOpacity>
                     </View>
@@ -169,7 +172,7 @@ export function Login(){
                         }else {
                             setUser(null) || Alert.alert('Ei. Você está tentando entrar como motorista.', 'Por enquanto ainda não tem nada aí. Mas vamos chegar lá!!')
                         }
-                         }}
+                    }}
                     >
                         
                         <Text style={styles.titleBotao}>ENTRAR</Text>
@@ -189,6 +192,7 @@ export function Login(){
                     
                 </KeyboardAvoidingView>
 
+           
 
             </Animated.View>
             
@@ -226,7 +230,7 @@ const styles = StyleSheet.create({
         justifyContent:'center', 
         alignItems:'center',  
         backgroundColor:'#334A58',
-        marginTop:35
+        marginTop:10
     },
     TextSwitch:{
         fontSize:18,
@@ -244,8 +248,9 @@ const styles = StyleSheet.create({
         fontSize:18,
         borderWidth:1,
         marginBottom:10,
-        opacity:0.6,
-        fontFamily:'Ubuntu_500Medium'
+        opacity:1,
+        fontFamily:'Ubuntu_500Medium',
+        elevation:10
     },
     SenhaInput:{
         textAlign:'center',
@@ -262,7 +267,8 @@ const styles = StyleSheet.create({
         borderWidth:1,
         width:260,
         height:45,
-        opacity:0.6,
+        opacity:1,
+        elevation:10,
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'center',
@@ -274,8 +280,9 @@ const styles = StyleSheet.create({
         width: 300,
         marginTop:30,
         borderRadius:8,
-        borderWidth:1,
-        fontWeight:'Inter_900Black'
+        borderWidth:0,
+        fontWeight:'Inter_900Black',
+        elevation:10
     },
     botaoCadMot:{
         backgroundColor:'#FF3030',
@@ -283,7 +290,8 @@ const styles = StyleSheet.create({
         width: 300,
         marginTop:10,
         borderRadius:8,
-        borderWidth:1,
+        borderWidth:0,
+        elevation:10,
         
     },
     botaoCadPax:{
@@ -293,8 +301,8 @@ const styles = StyleSheet.create({
         marginTop:10,
         marginBottom:10,
         borderRadius:8,
-        borderWidth:1,
-        
+        borderWidth:0,
+        elevation:10,
     },
     titleBotao:{
         fontSize:18,

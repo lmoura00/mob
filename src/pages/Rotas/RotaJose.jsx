@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import {View, Text, StyleSheet} from 'react-native'
-
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
+import { useNavigation } from "@react-navigation/native";
 import MapView, {Marker} from 'react-native-maps';
 import *  as Location from 'expo-location'
 import * as Permission from 'expo-permissions'
@@ -10,6 +10,7 @@ import MapViewDirections from 'react-native-maps-directions';
 
 
 export function RotaJose(){
+    const navigation = useNavigation()
     const mapEl = useRef(null)
     const partida = {latitude: -5.117517200852349, longitude: -42.83394512280961, latitudeDelta: 0.0922, longitudeDelta: 0.0421,}
     const [location, setLocation] = useState(null);
@@ -80,6 +81,11 @@ export function RotaJose(){
             />
 
         </MapView>
+            <View>
+              <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate("Jose") &&  setVisible(true)}>
+                <Text style={{fontSize:18}}>QUERO A CARONA!</Text>
+              </TouchableOpacity>
+            </View>
             <View style={styles.distance}>
                 {distance && 
                     <Text style={{fontSize:18}}>Distância: {distance} m</Text>
@@ -91,7 +97,7 @@ export function RotaJose(){
 }
 
 const styles = StyleSheet.create({
-    container: {
+      container: {
         flex: 1,
         justifyContent: "center",
       },
@@ -117,4 +123,19 @@ const styles = StyleSheet.create({
         borderRadius:10,
         elevation:10
       },
+      botao:{
+        justifyContent: "flex-end",
+        left: "25%",
+        bottom: 80,
+        position: "absolute",
+        backgroundColor: "red",
+        alignSelf: "center",
+        width: "50%",
+        height: 40,
+        alignItems: "center",
+        justifyContent: "center",
+        opacity: 1,
+        borderRadius:10,
+        elevation:10
+      }
 })

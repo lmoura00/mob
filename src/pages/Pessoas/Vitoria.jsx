@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {View, Text, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, ScrollView, Modal} from 'react-native'
+import {View, Text, Alert, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, ScrollView, Modal, Button} from 'react-native'
 
 import pessoa from '../../images/pessoa.png'
 
@@ -12,6 +12,22 @@ export function Vitoria(){
     const [visible, setVisible] = useState(false)
     const navigation = useNavigation()
     const [visible1, setVisible1] = useState(false)
+    var n = 4;
+    const [pax, setPax] = useState(n)
+    const [aceito, setAceito] = useState(false)
+
+    function PaxAceito(){
+        if (aceito===true){
+            Alert.alert('Ei...', 'Você já tem uma corrida em andamento.' )||setVisible(false)
+        } else{
+            setPax(n - 1) === setVisible1(true) === setAceito(true)
+        }
+    }
+
+    function NaoPax(){
+        setPax(n) === setVisible(false) === setAceito(false)
+    }
+
     return(
         <ScrollView style={{backgroundColor:"#334A58",}}>
             <View style={styles.container}>
@@ -27,12 +43,12 @@ export function Vitoria(){
                             <Text style={styles.titleModal}>ESSA É A CARONA QUE VOCÊ DESEJA?</Text>
                             <View style={{flexDirection:'row', padding:5, justifyContent:'center', marginTop:40}}>
                                 <TouchableOpacity 
-                                    onPress={()=>setVisible1(true)}
+                                    onPress={PaxAceito}
                                     style={styles.botaoModal2}>
                                         <Text style={styles.textBotao}>SIM!</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity 
-                                    onPress={()=>setVisible(false)} 
+                                    onPress={NaoPax} 
                                     style={styles.botaoModal1}>
                                         <Text style={styles.textBotao}>NÃO</Text>
                                 </TouchableOpacity>
@@ -110,7 +126,7 @@ export function Vitoria(){
 
                 <KeyboardAvoidingView style={{flexDirection:'row'}}>
                     <Text style={styles.vagas}>VAGAS DISPONÍVEIS:</Text>
-                    <Text style={styles.vagasNumero}>4</Text>
+                    <Text style={styles.vagasNumero}>{pax}</Text>
                 </KeyboardAvoidingView>
 
                 <KeyboardAvoidingView style={{flexDirection:'row'}}>
@@ -213,7 +229,7 @@ const styles = StyleSheet.create({
         width: 270,
         marginTop:10,
         borderRadius:8,
-        borderWidth:1,
+        borderWidth:0,
         elevation:10,
     },
     botaoNaoEParaMim:{
@@ -222,7 +238,7 @@ const styles = StyleSheet.create({
         width: 270,
         marginTop:10,
         borderRadius:8,
-        borderWidth:1,
+        borderWidth:0,
         marginBottom:30,
         elevation:10,
     },
@@ -232,7 +248,7 @@ const styles = StyleSheet.create({
         width: 270,
         marginTop:10,
         borderRadius:8,
-        borderWidth:1,
+        borderWidth:0,
         elevation:10,
     },
     titleBotao:{

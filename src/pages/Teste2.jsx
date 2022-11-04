@@ -9,6 +9,10 @@ import {
   PanResponder,
 } from 'react-native';
 
+import cocais from '../images/cocais.jpg'
+import chico from '../images/chico.jpg'
+import alice from  '../images/alice.jpg'
+
 const SwipeableCard = ({item, removeCard, swipedDirection}) => {
   const window = useWindowDimensions();
   const xPosition = useRef(new Animated.Value(0)).current;
@@ -176,17 +180,18 @@ const styles = StyleSheet.create({
 const CARDS_CONTENT = [
   {
     id: '1',
-    cardTitle: 'Card 1',
+    cardTitle: 'Sitio Alice',
+    image: {alice},
     backgroundColor: '#FFC107',
   },
   {
     id: '2',
-    cardTitle: 'Card 2',
+    cardTitle: 'Balneário Chico',
     backgroundColor: '#ED2525',
   },
   {
     id: '3',
-    cardTitle: 'Card 3',
+    cardTitle: 'Cocais Shopping',
     backgroundColor: '#E7088E',
   },
   {
