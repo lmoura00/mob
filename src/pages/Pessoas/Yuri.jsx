@@ -9,6 +9,7 @@ import {
   ScrollView,
   Modal,
   Alert,
+  Linking,
 } from "react-native";
 
 import pessoa from "../../images/pessoa.png";
@@ -138,12 +139,12 @@ export function Yuri() {
           source={require("../../Assets/95740-profile-person.json")}
           autoPlay={true}
           loop={true}
-          style={{ marginBottom: 280 }}
+          style={{ marginBottom: 300 }}
         />
 
         <View
           style={{
-            marginTop: 150,
+            marginTop: 180,
             alignItems: "center",
             justifyContent: "center",
           }}

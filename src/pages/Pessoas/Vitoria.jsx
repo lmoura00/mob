@@ -10,6 +10,7 @@ import {
   ScrollView,
   Modal,
   Button,
+  Linking,
 } from "react-native";
 
 import pessoa from "../../images/pessoa.png";

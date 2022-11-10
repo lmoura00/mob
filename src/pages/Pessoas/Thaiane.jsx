@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Modal,
+  Linking,
 } from "react-native";
 
 import pessoa from "../../images/pessoa.png";
