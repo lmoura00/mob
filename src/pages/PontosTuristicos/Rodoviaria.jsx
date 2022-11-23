@@ -9,32 +9,39 @@ import {
   Dimensions,
   Modal,
 } from "react-native";
-
-import { Linking } from "react-native";
-
-import { Entypo } from "@expo/vector-icons";
 import LottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/native";
-
-const { width } = Dimensions.get("window");
-const height = width * 0.9;
-
+import Carousel, { Pagination } from 'react-native-snap-carousel'
 const imagens = [
-  "https://thumbs2.imgbox.com/1f/28/ayPwQql7_t.jpg",
-  "https://thumbs2.imgbox.com/f3/08/Nisk8mAx_t.jpg",
-  "https://thumbs2.imgbox.com/78/3e/NNGmQ1Jx_t.jpg",
-  "https://thumbs2.imgbox.com/6d/91/pLtY8nrG_t.jpg",
-  "https://thumbs2.imgbox.com/47/8c/1vaIiF3b_t.jpg",
+  {imgUrl:"https://thumbs2.imgbox.com/1f/28/ayPwQql7_t.jpg"},
+  {imgUrl:"https://thumbs2.imgbox.com/f3/08/Nisk8mAx_t.jpg"},
+  {imgUrl:"https://thumbs2.imgbox.com/78/3e/NNGmQ1Jx_t.jpg"},
+  {imgUrl:"https://thumbs2.imgbox.com/6d/91/pLtY8nrG_t.jpg"},
+  {imgUrl:"https://thumbs2.imgbox.com/47/8c/1vaIiF3b_t.jpg"}
 ];
+const SLIDER_WIDTH = Dimensions.get('window').width
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.9)
 
 export function Rodoviaria() {
   const navigation = useNavigation();
   const [alerta, setAlerta] = useState(false);
   const [visible, setVisible] = useState(false);
+  const isCarousel = React.useRef(null)
+  const CarouselCardItem = ({ item, index }) => {
+  return (
+    <View style={styles.containerCarousel} key={index}>
+      <Image
+        source={{ uri: item.imgUrl }}
+        style={styles.imageCarousel}
+      />
+    </View>
+  )
+  }
 
+  const [index, setIndex] = React.useState(0)
   return (
     <View style={{ backgroundColor: "#334A58" }}>
-      <ScrollView style={{ backgroundColor: "#fff", marginBottom: 15 }}>
+      <ScrollView style={{ marginBottom: 15 }}>
         <Modal
           animationType="fade"
           visible={visible}
@@ -123,28 +130,35 @@ export function Rodoviaria() {
         </Modal>
 
         <View style={styles.containerImages}>
-          <ScrollView
-            pagingEnabled
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={styles.scroll}
-          >
-            {imagens.map((imagem, index) => (
-              <Image
-                key={index}
-                style={styles.image}
-                source={{ uri: imagem }}
-              />
-            ))}
-          </ScrollView>
-          <View style={styles.pagination}>
-            {imagens.map((i, k) => (
-              <Text key={k} style={styles.paginText}>
-                ⬤
-              </Text>
-            ))}
-          </View>
+            <Carousel
+            layout="stack"
+            layoutCardOffset={9}
+            ref={isCarousel}
+            data={imagens}
+            renderItem={CarouselCardItem}
+            sliderWidth={SLIDER_WIDTH}
+            itemWidth={ITEM_WIDTH}
+            inactiveSlideShift={0}
+            useScrollView={true}
+            onSnapToItem={(index) => setIndex(index)}
+          />
+          <Pagination
+            dotsLength={imagens.length}
+            activeDotIndex={index}
+            carouselRef={isCarousel}
+            dotStyle={{
+              width: 10,
+              height: 10,
+              borderRadius: 5,
+              marginHorizontal: 0,
+              backgroundColor: 'rgba(0, 0, 0, 0.92)'
+            }}
+            inactiveDotOpacity={0.4}
+            inactiveDotScale={0.6}
+            tappableDots={true}
+          />
         </View>
+
 
         <View style={styles.containerInfor}>
           <Text style={styles.title}>TERMINAL RODOVIARIO</Text>
@@ -191,9 +205,7 @@ const styles = StyleSheet.create({
   containerImages: {
     marginTop: 25,
     marginBottom: 25,
-    width,
-    height,
-    backgroundColor: "#334A58",
+    backgroundColor: "#d9d9d9",
   },
   containerInfor: {
     alignItems: "center",
@@ -229,30 +241,6 @@ const styles = StyleSheet.create({
     color: "black",
     marginBottom: 20,
     fontFamily:'Ubuntu_500Medium'
-  },
-  image: {
-    width,
-    height,
-    resizeMode: "cover",
-  },
-  scroll: {
-    width,
-    height,
-    alignSelf:'center'
-  },
-  pagination: {
-    flexDirection: "row",
-    position: "absolute",
-    bottom: 0,
-    alignSelf: "center",
-  },
-  paginText: {
-    color: "#fff",
-    margin: 3,
-  },
-  paginActiveText: {
-    color: "#888",
-    margin: 3,
   },
   sobre: {
     backgroundColor: "#fff",
@@ -352,5 +340,39 @@ const styles = StyleSheet.create({
     marginVertical: 260,
     width: "80%",
     height: "30%",
+  },
+  containerCarousel: {
+    backgroundColor: '#334A58',
+    borderRadius: 8,
+    width: ITEM_WIDTH,
+    paddingBottom: 5,
+    paddingTop:5,
+    shadowColor: "#000",
+    marginTop:15,
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
+  },
+  imageCarousel: {
+    width: ITEM_WIDTH,
+    height: 350,
+  },
+  headerCarousel: {
+    color: "#222",
+    fontSize: 28,
+    fontWeight: "bold",
+    paddingLeft: 20,
+    paddingTop: 20
+  },
+  bodyCarousel: {
+    color: "#222",
+    fontSize: 18,
+    paddingLeft: 20,
+    paddingLeft: 20,
+    paddingRight: 20
   },
 });

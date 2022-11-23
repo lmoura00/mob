@@ -216,17 +216,13 @@ const navigation = useNavigation()
                     <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}}/>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.tag} onPress={()=> navigation.navigate("Teste")}>
+            <TouchableOpacity style={styles.tagLast} onPress={()=> navigation.navigate("Teste")}>
                     <Image source={mapa} style={styles.imageSmaw}></Image>
                     <Text style={styles.title1}>TESTE</Text>
                     <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}}/>
             </TouchableOpacity>
             
-            <TouchableOpacity style={styles.tag} onPress={()=> navigation.navigate("Teste2")}>
-                    <Image source={mapa} style={styles.imageSmaw}></Image>
-                    <Text style={styles.title1}>TESTE</Text>
-                    <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}}/>
-            </TouchableOpacity>
+
 
         </ScrollView>
     )

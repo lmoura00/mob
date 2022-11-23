@@ -164,8 +164,8 @@ export function Teste(){
           setLocation({
               latitude: locationCurrent.coords.latitude,
               longitude: locationCurrent.coords.longitude,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
+              latitudeDelta: 0.0072,
+              longitudeDelta: 0.0055,
           })
           
         })();
@@ -668,7 +668,8 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignSelf:'center',
         marginBottom:15,
-        marginRight:10
+        borderRadius:8,
+        elevation:10,
     },
     botaoMapa:{
         width:100,
@@ -688,7 +689,10 @@ const styles = StyleSheet.create({
     image:{
         height:120,
         width:120,
-        margin:10
+        margin:10,
+        borderRadius:8,
+        borderWidth:2,
+        borderColor:'#252525'
     },
     textBotao:{
         fontSize:15,
