@@ -221,6 +221,7 @@ const navigation = useNavigation()
                     <Text style={styles.title1}>TESTE</Text>
                     <EvilIcons name="arrow-right" size={30} color="black" style={{margin:5}}/>
             </TouchableOpacity>
+
             
 
 
