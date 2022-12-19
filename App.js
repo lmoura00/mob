@@ -2,6 +2,7 @@ import {Routes} from './src/routes/index'
 import {AuthProvider} from './src/Hooks/Auth'
 import { StatusBar } from 'expo-status-bar'
 import AppLoading from 'expo-app-loading';
+
 import {
   useFonts,
   Ubuntu_300Light,

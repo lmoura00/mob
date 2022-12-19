@@ -16,6 +16,7 @@ export function Login(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [PasswordVisible, setPasswordVisible] = useState(true)
+    const [login, setLogin] = useState('')
 
     const {setUser} = useAuth()
     const navigation = useNavigation()
@@ -80,6 +81,20 @@ export function Login(){
           useNativeDriver: false
         }),
       ]).start()
+    }
+
+    async function sendForm(){
+        let response = await fetch('http://192.168.0.8:3000/login', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              firstParam: email,
+              secondParam: password,
+            }),
+        })
     }
 
     return(
@@ -167,12 +182,7 @@ export function Login(){
                 <KeyboardAvoidingView >
                     <TouchableOpacity 
                         style={styles.botaoEntrar} 
-                        onPress={()=> {if(isEnabled===false){
-                            setUser('lucas')
-                        }else {
-                            setUser(null) || Alert.alert('Ei. Você está tentando entrar como motorista.', 'Por enquanto ainda não tem nada aí. Mas vamos chegar lá!!')
-                        }
-                    }}
+                        onPress={()=>sendForm()}
                     >
                         
                         <Text style={styles.titleBotao}>ENTRAR</Text>
