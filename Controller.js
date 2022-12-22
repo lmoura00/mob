@@ -13,8 +13,7 @@ let mot = models.Mot;
 let corrida = models.Corrida;
 
 app.post('/login', async (req, res)=>{
-    let login = await pax.findOne({where: {name:'lucas'}});
-        console.log(login); // true
+    console.log(req.body)
 })
 
 
