@@ -7,12 +7,18 @@ import {useNavigation} from '@react-navigation/native'
 import {useAuth} from "../../Hooks/Auth"
 import fapema from '../../images/fapema.png'
 import ifma from '../../images/ifma.png'
-
+import app from "../../../firebaseConfig";
 
 import LottieView from 'lottie-react-native'
 
 
+
 export function Login(){
+
+
+    function pegaNome(){
+        app.Database()
+    }
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [PasswordVisible, setPasswordVisible] = useState(true)
@@ -182,7 +188,12 @@ export function Login(){
                 <KeyboardAvoidingView >
                     <TouchableOpacity 
                         style={styles.botaoEntrar} 
-                        onPress={()=>sendForm()}
+                        onPress={()=> {if(isEnabled===false){
+                            setUser('lucas')
+                        }else {
+                            setUser(null) || Alert.alert('Ei. Você está tentando entrar como motorista.', 'Por enquanto ainda não tem nada aí. Mas vamos chegar lá!!')
+                        }
+                    }}
                     >
                         
                         <Text style={styles.titleBotao}>ENTRAR</Text>
