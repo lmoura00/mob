@@ -9,32 +9,42 @@ import fapema from '../../images/fapema.png'
 import ifma from '../../images/ifma.png'
 import app from "../../../firebaseConfig";
 
+
 import LottieView from 'lottie-react-native'
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+
 
 
 
 export function Login(){
 
-
-    function pegaNome(){
-        app.Database()
-    }
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [PasswordVisible, setPasswordVisible] = useState(true)
-    const [login, setLogin] = useState('')
 
     const {setUser} = useAuth()
     const navigation = useNavigation()
     const [offset] = useState(new Animated.ValueXY({x:0,y:95}));
     const [opacity] = useState(new Animated.Value(0));
     const [logotipo] = useState(new Animated.ValueXY({x:200, y:200})) 
-
     const [isEnabled, setIsEnabled] = useState(false);
 
-    
-
     const toggleSwitch = () => setIsEnabled(previousState => !previousState) ;
+
+    const auth = getAuth();
+
+    function SignIn(){
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in 
+            console.log('valido') || setUser('lucas')
+            // ...
+        })
+        .catch((error) => {
+          Alert.alert('Atenção','login invalido')
+        });
+    }
     
 
 
@@ -55,8 +65,11 @@ export function Login(){
             })
           ]).start()
     
-        }, [])
+    }, [])
+
+  
     
+
     
     function keyboardDidShow(){
       Animated.parallel([
@@ -89,19 +102,6 @@ export function Login(){
       ]).start()
     }
 
-    async function sendForm(){
-        let response = await fetch('http://192.168.0.8:3000/login', {
-            method: 'POST',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              firstParam: email,
-              secondParam: password,
-            }),
-        })
-    }
 
     return(
         <KeyboardAvoidingView style={{flex:1, backgroundColor:'#334A58'}}>
@@ -123,6 +123,7 @@ export function Login(){
                     <Switch trackColor={{ false: "#767577", true: "#81b0ff" }} thumbColor={isEnabled ? "#334A58" : "#f4f3f4"} ios_backgroundColor="#3e3e3e" onValueChange={toggleSwitch} value={isEnabled}/>
                     <Text style={styles.TextSwitch}>MOTORISTA</Text>
                 </View>
+
             </View>
 
             <Animated.View style={[styles.containerInput, {
@@ -188,12 +189,7 @@ export function Login(){
                 <KeyboardAvoidingView >
                     <TouchableOpacity 
                         style={styles.botaoEntrar} 
-                        onPress={()=> {if(isEnabled===false){
-                            setUser('lucas')
-                        }else {
-                            setUser(null) || Alert.alert('Ei. Você está tentando entrar como motorista.', 'Por enquanto ainda não tem nada aí. Mas vamos chegar lá!!')
-                        }
-                    }}
+                        onPress={SignIn}
                     >
                         
                         <Text style={styles.titleBotao}>ENTRAR</Text>

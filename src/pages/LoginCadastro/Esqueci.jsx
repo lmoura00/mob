@@ -3,21 +3,33 @@ import {Text, StyleSheet, TouchableOpacity, View, ScrollView, TextInput, Modal, 
 import LottieView from 'lottie-react-native'
 import { useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 export function Esqueci(){
 
-    function preenchido(){
-        if(Email === ""){
-            Alert.alert('Opa, parece que você não preencheu corretamente!', 'Preencha o campo de E-mail.')
-        }else {
-            setTeste(true)
-        }
-    }
+
 
     const navigation = useNavigation()
     const [Teste, setTeste] = useState(false)
     const [Email, SetEmail] = useState('')
+    const auth = getAuth();
+    function Sended(){
+        if(Email === "" ){
+            Alert.alert('Opa, parece que você não preencheu corretamente!', 'Preencha o campo de E-mail.')
+        }else {
+            setTeste(true)
+            ||
+            sendPasswordResetEmail(auth, Email)
+        .then(() => {
+           console.log(enviado)
+        })
+        .catch((error) => {
+            
+            // ..
+        });
+        }
+        
+    }
     return(
         <ScrollView style={styles.container}>
 
@@ -70,7 +82,7 @@ export function Esqueci(){
                     />
                 </View>
 
-                <TouchableOpacity style={styles.botao} onPress={preenchido}>
+                <TouchableOpacity style={styles.botao} onPress={Sended}>
                     <Text style={styles.subtitle}>ENVIAR</Text>
                 </TouchableOpacity>
         </ScrollView>

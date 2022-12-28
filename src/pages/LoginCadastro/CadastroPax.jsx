@@ -14,8 +14,9 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
 import MaskInput, { Masks } from 'react-native-mask-input';
-
 import LottieView from 'lottie-react-native'
+
+
 
 export function CadastroPax() {
   const [image, SetImage] = useState(null);
