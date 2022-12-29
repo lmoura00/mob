@@ -15,12 +15,15 @@ import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
 import MaskInput, { Masks } from 'react-native-mask-input';
 import LottieView from 'lottie-react-native'
+import {useAuth} from "../../Hooks/Auth"
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification} from "firebase/auth";
 
 
 
 export function CadastroPax() {
   const [image, SetImage] = useState(null);
   const navigation = useNavigation();
+  const auth = getAuth();
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -46,8 +49,22 @@ export function CadastroPax() {
   const [telefone, setTelefone] = useState('');
   const [senha, setSenha] = useState('')
   const [confSenha, setConfSenha] = useState('')
- 
+  const {setUser} = useAuth()
 
+
+  function criarConta(){
+    createUserWithEmailAndPassword(auth, email, senha)
+    .then((userCredential) => {
+    })
+    .catch((error) => {
+      const errorMessage = error.message;
+      // ..
+    })
+    setConfirmar(true)
+
+
+
+  }
   
   function salvar(){
     
@@ -64,7 +81,17 @@ export function CadastroPax() {
     
     console.log(data) || 
     setConfirmar(false) || 
-    setVisibleConfirma(true)
+    setVisibleConfirma(true) ||
+    createUserWithEmailAndPassword(auth, email, senha)
+    .then((userCredential) => {
+      console.log('usuário criado com sucesso')
+    })
+    .catch((error) => {
+      const errorMessage = error.message;
+    }) 
+    
+
+
   }
   function completo(){
     
@@ -74,7 +101,7 @@ export function CadastroPax() {
       if(nome ==='' || date === '' || cpf === '' || email === '' || telefone === '' || senha === '' || image === null){
         Alert.alert('Todos os campos são obrigatorios.')
       } else {
-        setConfirmar(true)
+       setConfirmar(true)
       }
     } 
   }
@@ -172,7 +199,7 @@ export function CadastroPax() {
                                     loop={true} 
                                 />
                             </View>
-                            <Text style={styles.subTitleModal}>Aguarde confirmação no seu e-mail.</Text>
+                            <Text style={styles.subTitleModal}>Aproveite o app</Text>
                             <TouchableOpacity 
                                 onPress={()=>navigation.navigate("Login") || setVisibleConfirma(false)} 
                                 style={styles.botaoModal3}>
@@ -300,7 +327,7 @@ export function CadastroPax() {
                 placeholder="Senha"
                 keyboardType="default"
                 value={senha}
-                maxLength={6}
+                maxLength={8}
                 onChangeText={setSenha}
               ></TextInput>
         
@@ -320,7 +347,7 @@ export function CadastroPax() {
                 placeholder="Confirme sua senha"
                 keyboardType="default"
                 value={confSenha}
-                maxLength={6}
+                maxLength={8}
                 onChangeText={setConfSenha}
               ></TextInput>
            <View style={{flexDirection:'row', alignItems:'center'}}>
