@@ -52,19 +52,7 @@ export function CadastroPax() {
   const {setUser} = useAuth()
 
 
-  function criarConta(){
-    createUserWithEmailAndPassword(auth, email, senha)
-    .then((userCredential) => {
-    })
-    .catch((error) => {
-      const errorMessage = error.message;
-      // ..
-    })
-    setConfirmar(true)
 
-
-
-  }
   
   function salvar(){
     
@@ -84,10 +72,10 @@ export function CadastroPax() {
     setVisibleConfirma(true) ||
     createUserWithEmailAndPassword(auth, email, senha)
     .then((userCredential) => {
-      console.log('usuário criado com sucesso')
+      console.log('usuário criado com sucesso');
     })
     .catch((error) => {
-      const errorMessage = error.message;
+      console.log(error)
     }) 
     
 

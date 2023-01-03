@@ -20,11 +20,11 @@ export function Esqueci(){
             setTeste(true)
             ||
             sendPasswordResetEmail(auth, Email)
-        .then(() => {
+            .then(() => {
            console.log(enviado)
         })
         .catch((error) => {
-            
+            Alert.alert('Ops', 'Verifique o e-mail')
             // ..
         });
         }
