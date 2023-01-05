@@ -76,7 +76,7 @@ export function Login(){
 useEffect(()=>{
 
     async function ler(){
-       get(child(dbRef, 'Users/2')).then((snapshot) => {
+       get(child(dbRef, 'Users/1')).then((snapshot) => {
            if (snapshot.exists()) {
              setNome(snapshot.val().Name)
              setAge(snapshot.val().Idade)
