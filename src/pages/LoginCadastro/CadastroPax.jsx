@@ -17,6 +17,7 @@ import MaskInput, { Masks } from 'react-native-mask-input';
 import LottieView from 'lottie-react-native'
 import {useAuth} from "../../Hooks/Auth"
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification} from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
 
 
 
@@ -94,6 +95,19 @@ export function CadastroPax() {
     } 
   }
  
+  function enviar(){
+    function writeUserData(userId, nome, email, image, date, cpf, telefone) {
+      const db = getDatabase();
+      set(ref(db, 'users/' + userId), {
+        username: nome,
+        email: email,
+        profile_picture : image.uri,
+        cpf:cpf,
+        date:date,
+        telefone
+      });
+    }
+  }
   
 
   return (

@@ -5,16 +5,17 @@ import { AntDesign } from '@expo/vector-icons';
 import logo from '../../images/logo.jpg'
 import {useNavigation} from '@react-navigation/native'
 import {useAuth} from "../../Hooks/Auth"
-import fapema from '../../images/fapema.png'
-import ifma from '../../images/ifma.png'
-import app from "../../../firebaseConfig";
+
+import database from "../../../firebaseConfig";
 
 
 import LottieView from 'lottie-react-native'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, ref, child, get } from "firebase/database";
 
 
 
+console.disableYellowBox=true
 
 
 export function Login(){
@@ -33,6 +34,12 @@ export function Login(){
     const toggleSwitch = () => setIsEnabled(previousState => !previousState) ;
 
     const auth = getAuth();
+    const [nome, setNome] = useState('...Carregando')
+    const [age, setAge] = useState('...Carregando')
+    const dbRef = ref(getDatabase());
+
+
+
 
     function SignIn(){
         signInWithEmailAndPassword(auth, email, password)
@@ -66,6 +73,28 @@ export function Login(){
           ]).start()
     
     }, [])
+useEffect(()=>{
+
+    async function ler(){
+       get(child(dbRef, 'Users/2')).then((snapshot) => {
+           if (snapshot.exists()) {
+             setNome(snapshot.val().Name)
+             setAge(snapshot.val().Idade)
+           } else {
+             console.log("No data available");
+             alert("No data available");
+           }
+         }).catch((error) => {
+           console.error(error);
+         })
+    }
+
+
+
+    ler();
+    
+},[])
+
 
   
     
@@ -124,6 +153,12 @@ export function Login(){
                     <Text style={styles.TextSwitch}>MOTORISTA</Text>
                 </View>
 
+                <View style={{flexDirection:'column', marginBottom:50}}>
+                    <Text style={{fontSize:25, backgroundColor:'#fb9dff'}}>Bem-vindo {nome}</Text>
+                    <Text style={{fontSize:25, backgroundColor:'#fb9dff', alignSelf:'center'}}>Idade: {age}</Text>
+                   
+                </View>
+                
             </View>
 
             <Animated.View style={[styles.containerInput, {
