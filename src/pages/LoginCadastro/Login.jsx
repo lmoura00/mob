@@ -31,7 +31,7 @@ export function Login(){
     const [logotipo] = useState(new Animated.ValueXY({x:200, y:200})) 
     const [isEnabled, setIsEnabled] = useState(false);
 
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState) ;
+    const toggleSwitch = () => setIsEnabled(previousState => !previousState || console.log(isEnabled)) ;
 
     const auth = getAuth();
     const [nome, setNome] = useState('...Carregando')
@@ -53,6 +53,15 @@ export function Login(){
         });
     }
     
+
+    function choose(){
+        if (isEnabled === true){
+            console.log("ativado")
+        }
+        else {
+            console.log('desativado')
+        }
+    }
 
 
     useEffect(()=> {
@@ -149,7 +158,12 @@ useEffect(()=>{
 
                 <View style={styles.ViewSwitch}>
                     <Text style={styles.TextSwitch}>PASSAGEIRO</Text>
-                    <Switch trackColor={{ false: "#767577", true: "#81b0ff" }} thumbColor={isEnabled ? "#334A58" : "#f4f3f4"} ios_backgroundColor="#3e3e3e" onValueChange={toggleSwitch} value={isEnabled}/>
+                    <Switch 
+                        trackColor={{ false: "#767577", true: "#81b0ff" }} 
+                        thumbColor={isEnabled ? "#334A58" : "#f4f3f4"} 
+                        ios_backgroundColor="#3e3e3e" 
+                        onValueChange={toggleSwitch} 
+                        value={isEnabled}/>
                     <Text style={styles.TextSwitch}>MOTORISTA</Text>
                 </View>
 
