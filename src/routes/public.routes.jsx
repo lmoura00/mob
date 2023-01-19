@@ -16,7 +16,7 @@ const {Navigator, Screen} = createNativeStackNavigator()
         <Navigator>
                 <Screen name='Login' component={Login} options={{headerShown:false, statusBarStyle:'dark' }}/>
                 <Screen name='CadastroMot3' component={CadastroMot3} options={{headerShown:true, headerTitle:'CADASTRAR MOTORISTA', statusBarStyle:'dark',headerTitleStyle: {fontWeight: 'bold',}, headerTitleAlign:'center'}}/>
-                <Screen name='CadastroPax' component={CadastroPax} options={{headerShown:true, headerTitle:'CADASTRAR PASSAGEIRO', statusBarStyle:'dark',headerTitleStyle: {fontWeight: 'bold',}, headerTitleAlign:'center'}}/>
+                <Screen name='CadastroPax' component={CadastroPax} options={{headerShown:true, headerTitle:'CADASTRAR', statusBarStyle:'dark',headerTitleStyle: {fontWeight: 'bold',}, headerTitleAlign:'center'}}/>
                 <Screen name='CadastroMot2' component={CadastroMot2} options={{headerShown:true, headerTitle:'CADASTRAR MOTORISTA', statusBarStyle:'dark',headerTitleStyle: {fontWeight: 'bold',}, headerTitleAlign:'center'}}/>
                 <Screen name='CadastroMot1' component={CadastroMot1} options={{headerShown:true, headerTitle:'CADASTRAR MOTORISTA', statusBarStyle:'dark',headerTitleStyle: {fontWeight: 'bold',}, headerTitleAlign:'center'}}/>
                 <Screen name='CadastroMot4' component={CadastroMot4} options={{headerShown:true, headerTitle:'CADASTRAR MOTORISTA', statusBarStyle:'dark',headerTitleStyle: {fontWeight: 'bold',}, headerTitleAlign:'center'}}/>

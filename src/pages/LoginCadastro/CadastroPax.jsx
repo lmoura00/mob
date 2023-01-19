@@ -18,6 +18,8 @@ import LottieView from 'lottie-react-native'
 import {useAuth} from "../../Hooks/Auth"
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification} from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
+import { async } from "@firebase/util";
+
 
 
 
@@ -50,7 +52,11 @@ export function CadastroPax() {
   const [telefone, setTelefone] = useState('');
   const [senha, setSenha] = useState('')
   const [confSenha, setConfSenha] = useState('')
+  const [sobrenome, setSobrenome] = useState('')
+
   const {setUser} = useAuth()
+  
+
 
 
 
@@ -60,6 +66,7 @@ export function CadastroPax() {
     
     const data = {
       nome,
+      sobrenome,
       date,
       cpf,
       email,
@@ -71,15 +78,26 @@ export function CadastroPax() {
     console.log(data) || 
     setConfirmar(false) || 
     setVisibleConfirma(true) ||
-    createUserWithEmailAndPassword(auth, email, senha)
+    createUserWithEmailAndPassword(auth, email, senha, telefone, nome, cpf, date, sobrenome)
     .then((userCredential) => {
-      console.log('usuário criado com sucesso');
+      console.log('usuário criado com sucesso')
+      ||
+      sendEmailVerification(auth.currentUser)
+        .then(() => {
+          console.log('email enviado com sucesso')
+        })
+      
+        ||
+        writeUserData(uid, nome, email)
+        
+        
+        
+        
+       
     })
-    .catch((error) => {
-      console.log(error)
+    .catch(() => {
+      console.log('Algo deu errado')
     }) 
-    
-
 
   }
   function completo(){
@@ -87,7 +105,7 @@ export function CadastroPax() {
     if (senha != confSenha){
       Alert.alert('As senhas devem ser idênticas.')
     } else {
-      if(nome ==='' || date === '' || cpf === '' || email === '' || telefone === '' || senha === '' || image === null){
+      if(nome ==='' || sobrenome === ''|| date === '' || cpf === '' || email === '' || telefone === '' || senha === '' || image === null){
         Alert.alert('Todos os campos são obrigatorios.')
       } else {
        setConfirmar(true)
@@ -95,19 +113,17 @@ export function CadastroPax() {
     } 
   }
  
-  function enviar(){
-    function writeUserData(userId, nome, email, image, date, cpf, telefone) {
-      const db = getDatabase();
-      set(ref(db, 'users/' + userId), {
-        username: nome,
-        email: email,
-        profile_picture : image.uri,
-        cpf:cpf,
-        date:date,
-        telefone
-      });
-    }
+
+  function writeUserData( nome, email) {
+    const db = getDatabase()
+    set(ref(db, 'users/'+ nome ), {
+      username: nome,
+      email: email,
+      
+    });
   }
+  
+  
   
 
   return (
@@ -146,6 +162,7 @@ export function CadastroPax() {
         <View style={styles.modal1}>
           <Text style={styles.titleModal}>OS DADOS INSERIDOS ESTÃO CORRETOS?</Text>
           <Text>⬤ {nome}</Text>
+          <Text>⬤ {sobrenome}</Text>
           <Text>⬤ {date}</Text>
           <Text>⬤ {cpf}</Text>
           <Text>⬤ {email}</Text>
@@ -220,14 +237,31 @@ export function CadastroPax() {
               loop={true} 
           />
         </View>
-        <Text style={styles.title}>NOME COMPLETO</Text>
+        <Text style={styles.title}>NOME</Text>
       </View>
       <TextInput 
         style={styles.input} 
-        placeholder="Nome completo"
+        placeholder="Nome"
         value={nome}
         onChangeText={setNome}
-        ></TextInput>
+      ></TextInput>
+
+      <View style={{flexDirection:'row', alignItems:'center'}}>
+        <View style={{width:40, height:40}}>
+          <LottieView 
+              source={require('../../Assets/9994-name-profile-icon-animation-circle.json')} 
+              autoPlay={true} 
+              loop={true} 
+          />
+        </View>
+        <Text style={styles.title}>SOBRENOME</Text>
+      </View>
+      <TextInput 
+        style={styles.input} 
+        placeholder="Sobrenome"
+        value={sobrenome}
+        onChangeText={setSobrenome}
+      ></TextInput>
 
 
       <View style={{flexDirection:'row', alignItems:'center'}}>
@@ -387,7 +421,7 @@ export function CadastroPax() {
 
       <TouchableOpacity
         style={styles.botao1}
-        onPress={completo}
+        onPress={()=>writeUserData(nome, email)}
       >
         <Text style={styles.textBotao}>SALVAR</Text>
       </TouchableOpacity>

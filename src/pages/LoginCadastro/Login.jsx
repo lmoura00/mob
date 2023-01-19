@@ -84,23 +84,7 @@ export function Login(){
     }, [])
 useEffect(()=>{
 
-    async function ler(){
-       get(child(dbRef, 'Users/1')).then((snapshot) => {
-           if (snapshot.exists()) {
-             setNome(snapshot.val().Name)
-             setAge(snapshot.val().Idade)
-           } else {
-             console.log("No data available");
-             alert("No data available");
-           }
-         }).catch((error) => {
-           console.error(error);
-         })
-    }
 
-
-
-    ler();
     
 },[])
 
@@ -156,22 +140,8 @@ useEffect(()=>{
                         borderColor:'black',
                         }}/>
 
-                <View style={styles.ViewSwitch}>
-                    <Text style={styles.TextSwitch}>PASSAGEIRO</Text>
-                    <Switch 
-                        trackColor={{ false: "#767577", true: "#81b0ff" }} 
-                        thumbColor={isEnabled ? "#334A58" : "#f4f3f4"} 
-                        ios_backgroundColor="#3e3e3e" 
-                        onValueChange={toggleSwitch} 
-                        value={isEnabled}/>
-                    <Text style={styles.TextSwitch}>MOTORISTA</Text>
-                </View>
-
-                <View style={{flexDirection:'column', marginBottom:50}}>
-                    <Text style={{fontSize:25, backgroundColor:'#fb9dff'}}>Bem-vindo {nome}</Text>
-                    <Text style={{fontSize:25, backgroundColor:'#fb9dff', alignSelf:'center'}}>Idade: {age}</Text>
-                   
-                </View>
+                
+ 
                 
             </View>
 
@@ -249,7 +219,7 @@ useEffect(()=>{
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.botaoCadPax}  onPress={()=>navigation.navigate("CadastroPax")}>
-                        <Text style={styles.titleBotao}>CADASTRAR PASSAGEIRO</Text>
+                        <Text style={styles.titleBotao}>CADASTRAR</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={()=>navigation.navigate("Esqueci")}>
