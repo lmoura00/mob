@@ -13,10 +13,14 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
 import MaskInput, {Masks} from "react-native-mask-input";
+import { getDatabase, ref, child, get, onValue, DataSnapshot } from "firebase/database";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useEffect } from "react";
 
 
 export function Perfil() {
   const [nome, setNome] = useState('');
+  const [lastname, setLastname] = useState('');
   const [date, setDate] = useState('');
   const [cpf,setCpf] = useState('');
   const [email, setEmail] = useState('');
@@ -29,8 +33,42 @@ export function Perfil() {
   function sair(){
     () => setVisible(false) && navigation.navigate('CaronasDisponiveis')
   }
-
   const navigation = useNavigation();
+
+ 
+    useEffect(()=>{
+      async function ler(){
+        const auth = getAuth()
+        const dbRef = ref(getDatabase());
+        const userId = auth.currentUser.uid
+        get(child(dbRef, `users/${userId}`))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            setNome(snapshot.val().name);
+            setDate(snapshot.val().date);
+            setCpf(snapshot.val().cpf);
+            setTelefone(snapshot.val().telefone);
+            setLastname(snapshot.val().lastname);
+          } else {
+            console.log("No data available");
+            alert("No data available");
+          }
+            setEmail(auth.currentUser.email);
+     
+        }).catch((error) => {
+          console.error(error);
+        });
+      }
+      
+      console.log(lastname)
+      ler()
+
+  },[])
+
+
+
+
+
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -80,8 +118,11 @@ export function Perfil() {
           </View>
         </Modal>
 
-        <Text style={styles.title}>NOME COMPLETO</Text>
-        <TextInput style={styles.input} placeholder="Nome completo"></TextInput>
+        <Text style={styles.title}>NOME</Text>
+        <TextInput style={styles.input} placeholder="Nome" value={nome} onChangeText={setNome}></TextInput>
+
+        <Text style={styles.title}>SOBRENOME</Text>
+        <TextInput style={styles.input} placeholder="Sobrenome" value={lastname} onChangeText={setLastname}></TextInput>
 
         <Text style={styles.title}>DATA DE NASCIMENTO</Text>
         <MaskInput
@@ -109,6 +150,8 @@ export function Perfil() {
           style={styles.input}
           keyboardType="email-address"
           placeholder="E-mail"
+          value={email}
+          onChangeText={setEmail}
         ></TextInput>
 
       <Text style={styles.title}>TELEFONE</Text>
@@ -174,7 +217,7 @@ export function Perfil() {
 
         <TouchableOpacity
           style={styles.botao1}
-          onPress={() => Alert.alert("Seu perfil foi atualizado com sucesso.") || navigation.navigate('CaronasDisponiveis')}
+          onPress={() => Alert.alert("Seu perfil foi atualizado com sucesso.")}
         >
           <Text style={styles.textBotao}>ATUALIZAR</Text>
         </TouchableOpacity>

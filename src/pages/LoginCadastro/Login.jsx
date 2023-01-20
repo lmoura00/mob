@@ -15,8 +15,6 @@ import { getDatabase, ref, child, get } from "firebase/database";
 
 
 
-console.disableYellowBox=true
-
 
 export function Login(){
 
@@ -34,10 +32,7 @@ export function Login(){
     const toggleSwitch = () => setIsEnabled(previousState => !previousState || console.log(isEnabled)) ;
 
     const auth = getAuth();
-    const [nome, setNome] = useState('...Carregando')
-    const [age, setAge] = useState('...Carregando')
-    const dbRef = ref(getDatabase());
-
+    
 
 
 
@@ -45,8 +40,9 @@ export function Login(){
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed in 
-            console.log('valido') || setUser('lucas')
-            // ...
+            setUser(userCredential.user.uid);
+            console.log(userCredential.user.uid)
+            
         })
         .catch((error) => {
           Alert.alert('Atenção','login invalido')
@@ -54,14 +50,6 @@ export function Login(){
     }
     
 
-    function choose(){
-        if (isEnabled === true){
-            console.log("ativado")
-        }
-        else {
-            console.log('desativado')
-        }
-    }
 
 
     useEffect(()=> {
@@ -82,11 +70,7 @@ export function Login(){
           ]).start()
     
     }, [])
-useEffect(()=>{
 
-
-    
-},[])
 
 
   
@@ -214,9 +198,7 @@ useEffect(()=>{
                         <Text style={styles.titleBotao}>ENTRAR</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.botaoCadMot} onPress={()=>navigation.navigate('CadastroMot1')}>
-                        <Text style={styles.titleBotao}>CADASTRAR MOTORISTA</Text>
-                    </TouchableOpacity>
+
 
                     <TouchableOpacity style={styles.botaoCadPax}  onPress={()=>navigation.navigate("CadastroPax")}>
                         <Text style={styles.titleBotao}>CADASTRAR</Text>

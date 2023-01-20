@@ -3,23 +3,54 @@ import {View, Text, StyleSheet, Image,RefreshControl, SafeAreaView, TouchableOpa
 import { SimpleLineIcons } from '@expo/vector-icons'; 
 import { EvilIcons } from '@expo/vector-icons';
 import {useNavigation} from '@react-navigation/native'
-
 import LottieView from 'lottie-react-native'
+import { getDatabase, ref, child, get, onValue } from "firebase/database";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+import { useState } from "react";
+import { useEffect } from "react";
+
+
 
 export function CaronasDisponiveis(){
+    
+    const navigation = useNavigation()
+    const [nome, setNome] = useState()
+    const wait = (timeout) => {
+        return new Promise(resolve => setTimeout(resolve, timeout));
+    }
+    
+    const [refreshing, setRefreshing] = React.useState(false);
 
-const navigation = useNavigation()
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(2000).then(() => setRefreshing(false));
+    }, []);
 
-const wait = (timeout) => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  }
-  
-const [refreshing, setRefreshing] = React.useState(false);
 
-const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
-  }, []);
+
+
+
+    useEffect(()=>{
+        const auth = getAuth()
+        const dbRef = ref(getDatabase());
+        const userId = auth.currentUser.uid
+        get(child(dbRef, `users/${userId}/name`)).then((snapshot) => {
+          if (snapshot.exists()) {
+            setNome(snapshot.val());
+          } else {
+            console.log("No data available");
+          }
+        }).catch((error) => {
+          console.error(error);
+        });
+        
+    },[])
+    
+
+    
+
+        
 
     return(
         <SafeAreaView style={styles.container}>
@@ -33,7 +64,9 @@ const onRefresh = React.useCallback(() => {
           />
         }
       >
-
+            <View>
+                <Text style={{color:'#f9f9f9', fontSize: 25, textAlign:'center'}}>Bem vindo(a) {nome}</Text>
+            </View>
                 <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Gabrielly')}>
                     <View style={{width:50, height:50}}>
                     <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{}} />
