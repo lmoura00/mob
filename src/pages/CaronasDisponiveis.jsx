@@ -212,7 +212,9 @@ export function CaronasDisponiveis(){
                     </View>
                 </TouchableOpacity>
 
-            
+                <TouchableOpacity style={styles.botaoAdCarona} onPress={()=>navigation.navigate('HomeMot')}>
+                    <Text style={styles.textoBotaoAdCarona}>+</Text>
+                </TouchableOpacity>
             
             </ScrollView>
         </SafeAreaView>
@@ -251,5 +253,22 @@ const styles = StyleSheet.create({
     imagem:{
         width:150,
         height:150,
+    },
+    textoBotaoAdCarona:{
+        fontSize:45
+        
+    },
+    botaoAdCarona:{
+        position: 'absolute',
+        backgroundColor:'#1FFA50',
+        width: 60,
+        height: 60,
+        alignItems: 'center',
+        justifyContent: 'center',
+        right: 15,
+        bottom: 5,
+        opacity:0.8,
+        borderRadius:30,
+        textAlign:'center'
     },
 })

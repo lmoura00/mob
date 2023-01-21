@@ -190,32 +190,7 @@ function AuthRoutesTabBar() {
         }}
       />
 
-      <Screen
-        name="Historico"
-        component={Historico}
-        options={{
-          tabBarLabel: "HISTÓRICO",
-          headerTitleAlign: "center",
-          tabBarActiveBackgroundColor:'#B9B9B9',
-          tabBarShowLabel:true,
-          tabBarLabelStyle:{fontFamily:'Ubuntu_500Medium', color:'black'},
-          headerTitle: "HISTÓRICO",
-          headerTitleStyle: { fontFamily:'Ubuntu_700Bold' },
-          headerRight: () => (
-            <TouchableOpacity
-              onPress={() => setUser(null)}
-              style={{ marginRight: 10 }}
-            >
-              <LottieView
-                source={require("../Assets/38063-log-out.json")}
-                autoPlay={true}
-                loop={true}
-                style={{ width: 50, height: 50 }}
-              />
-            </TouchableOpacity>
-          ),
-        }}
-      />
+
 
       <Screen
         name="PtsTur"
@@ -1012,12 +987,14 @@ export function AuthRoutes() {
         name="HomeMot"
         component={HomeMot}
         options={{
-          headerTitle: "Home",
-          headerShown:false,
+          headerTitle: "ADICIONAR CARONA",
+          headerShown:true,
           headerTitleAlign: "center",
           statusBarStyle: "dark",
         }}
       />
+
+      
     </Navigator>
   );
 }

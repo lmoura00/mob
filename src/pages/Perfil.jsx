@@ -63,7 +63,7 @@ export function Perfil() {
       console.log(lastname)
       ler()
 
-  },[])
+    },[])
 
 
 
