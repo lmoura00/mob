@@ -105,11 +105,22 @@ import { RotaMarina2 } from "../pages/Historico/Rotas/RotaMarina2";
 import {Teste} from '../pages/Teste'
 import {Teste2} from '../pages/Teste2'
 import {HomeMot} from '../pages/HomeMot'
+import { getAuth, signOut } from "firebase/auth";
 
 function AuthRoutesTabBar() {
   const { setUser } = useAuth();
   const { Navigator, Screen } = createBottomTabNavigator();
+  const auth = getAuth();
 
+  function LogOut(){
+    signOut(auth).then(() => {
+      setUser(null);
+      console.log('LogOut efetuado com sucesso')
+    }).catch((error) => {
+      Alert.alert('Ops...', 'Algo deu errado, tente novamente mais tarde.')
+    });
+    
+  }
   return (
     <Navigator
       screenOptions={({ route }) => ({
@@ -176,7 +187,7 @@ function AuthRoutesTabBar() {
           headerTitleStyle: { fontFamily:'Ubuntu_700Bold' },
           headerRight: () => (
             <TouchableOpacity
-              onPress={() => setUser(null)}
+              onPress={LogOut}
               style={{ marginRight: 10 }}
             >
               <LottieView
@@ -206,7 +217,7 @@ function AuthRoutesTabBar() {
           headerTitleStyle: { fontFamily:'Ubuntu_700Bold' },
           headerRight: () => (
             <TouchableOpacity
-              onPress={() => setUser(null)}
+              onPress={LogOut}
               style={{ marginRight: 10 }}
             >
               <LottieView
@@ -233,7 +244,7 @@ function AuthRoutesTabBar() {
           headerTitleStyle: {fontFamily:'Ubuntu_700Bold' },
           headerRight: () => (
             <TouchableOpacity
-              onPress={() => setUser(null)}
+              onPress={LogOut}
               style={{ marginRight: 10 }}
             >
               <LottieView

@@ -107,6 +107,8 @@ export function HomeMot() {
               setStart('');
               setVagas('');
               setPlaca('');
+              setData('');
+              setHorario('');
               
             }).catch(()=>{
                 console.log("Dados não enviados")
@@ -186,9 +188,10 @@ export function HomeMot() {
       <Text style={styles.homeTitle}>
         INSIRA OS DADOS PARA ADICIONAR A NOVA CARONA
       </Text>
+    <View style={{marginBottom:50}}>
 
       <Text style={styles.title}>PARTIDA</Text>
-
+    
       <GooglePlacesAutocomplete
         placeholder="De onde vamos sair?"
         onPress={(data, details = null) => {
@@ -206,8 +209,11 @@ export function HomeMot() {
         }}
         enablePoweredByContainer={false}
         fetchDetails={true}
-        styles={{ listView: { height: 100 } }}
+        disableScroll
+        styles={{ listView: { height: 80, minHeight:180 } }}
       />
+    </View>
+    <View style={{marginTop:150}}>
 
       <Text style={styles.title}>DESTINO</Text>
       <GooglePlacesAutocomplete
@@ -227,8 +233,11 @@ export function HomeMot() {
         }}
         enablePoweredByContainer={false}
         fetchDetails={true}
-        styles={{  listView: { height: 100, minHeight:100, } }}
+        styles={{  listView: { height: 120, minHeight:100,  } }}
       />
+      
+    </View>
+    <ScrollView style={{marginTop:150}}>
 
       <Text style={styles.title}>VAGAS</Text>
       <TextInput placeholder="Vagas" keyboardType="number-pad" value={vagas} onChangeText={setVagas} style={styles.input}></TextInput>
@@ -249,7 +258,7 @@ export function HomeMot() {
         keyboardType='number-pad'
         onChangeText={setHorario}
         mask={hourMask}
-        maxLength={4}
+        maxLength={5}
       />
     
     <TouchableOpacity 
@@ -260,6 +269,7 @@ export function HomeMot() {
             else{setAberto(true)}}}>
         <Text style={{fontSize:18}}>OK</Text>
     </TouchableOpacity>
+    </ScrollView>
 
 
     
@@ -303,7 +313,7 @@ const styles = StyleSheet.create({
   input:{
     backgroundColor:'#f9f9f9',
     height:40,
-    marginBottom:10,
+    marginBottom:5,
     borderRadius:8,
     fontSize:16,
     paddingHorizontal:8

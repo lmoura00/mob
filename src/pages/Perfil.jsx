@@ -13,8 +13,8 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
 import MaskInput, {Masks} from "react-native-mask-input";
-import { getDatabase, ref, child, get, onValue, DataSnapshot } from "firebase/database";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getDatabase, ref, child, get, onValue, DataSnapshot, set } from "firebase/database";
+import { getAuth, onAuthStateChanged, updateProfile  } from "firebase/auth";
 import { useEffect } from "react";
 
 
@@ -66,7 +66,18 @@ export function Perfil() {
     },[])
 
 
-
+   function update(){
+    const auth = getAuth();
+    let currentUser = auth.currentUser
+    function writeUserData(currentUser, name, email) {
+      const db = getDatabase();
+      set(ref(db, 'users/${currentUser}'), {
+        username: name,
+        email: email,
+        profile_picture : imageUrl
+      });
+    }
+   }
 
 
 
@@ -217,7 +228,7 @@ export function Perfil() {
 
         <TouchableOpacity
           style={styles.botao1}
-          onPress={() => Alert.alert("Seu perfil foi atualizado com sucesso.")}
+          onPress={()=>update(email, senha)}
         >
           <Text style={styles.textBotao}>ATUALIZAR</Text>
         </TouchableOpacity>
