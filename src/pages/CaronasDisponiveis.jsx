@@ -119,20 +119,20 @@ export function CaronasDisponiveis(){
 
     ]
     
-    const Item = ({nome, }) => (
+    const Item = ({nome, start, date, placa }) => (
                 <TouchableOpacity style={styles.botao} >
                     <View style={{width:50, height:50}}>
                     <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{}} />
                     </View>
                     <View style={{flexDirection:'column'}}>
                         <Text style={styles.nome}>{nome}</Text>
-                        <Text >placa</Text>
+                        <Text >{placa}</Text>
                     
                     </View>
 
                     <View style={{flexDirection:'column'}}>
-                        <Text>PARTIDA: start h</Text>
-                        <Text>date</Text>
+                        <Text>PARTIDA: {start} h</Text>
+                        <Text>{date}</Text>
                     </View>
                     <View style={{height:50, width:50}}>
                     <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} />
@@ -152,7 +152,19 @@ export function CaronasDisponiveis(){
                 <Text style={{color:'#f9f9f9', fontSize: 25, textAlign:'center'}}>Bem vindo(a) {nome}</Text>
             </View>
  
-
+                <FlatList
+                    data={data}
+                    renderItem={
+                        ({item})=>
+                        <data 
+                            date={item.date}
+                            nome={item.nome}
+                            partida={item.start}
+                            placa={item.placa}
+                            />
+                    }
+                    keyExtractor={(item)=>item.id}
+                />
                 
 
            
