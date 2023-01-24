@@ -26,7 +26,9 @@ import {
   sendEmailVerification,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getDatabase, ref, set, onValue, child, get, DataSnapshot } from "firebase/database";
+import { getDatabase, ref, set, onValue, push, update, child, get, DataSnapshot } from "firebase/database";
+
+
 import { useNavigation } from "@react-navigation/native";
 import MaskInput, {Masks, createNumberMask } from "react-native-mask-input";
 
@@ -90,7 +92,8 @@ export function HomeMot() {
     let CarMot = Math.floor(Math.random() * 1000) + 1 
     function enviarCarona(nome, sobrenome, telefone, partida, destino, placa, data, horario) {
         const db = getDatabase();
-        set(ref(db, "caronas/" + CarMot  ), {
+        const newCaronaKey = push(child(ref(db), 'caronas')).key;
+        set(ref(db , "caronas/" + newCaronaKey  ), {
             name: nome,
             lastname: sobrenome,
             telefone:telefone,
@@ -119,6 +122,8 @@ export function HomeMot() {
   return (
 
     <SafeAreaView style={styles.container}>
+       
+
         
         <Modal
             animationType="fade"
@@ -128,42 +133,46 @@ export function HomeMot() {
             style={{}}
         >
             <View style={styles.modal1}>
-                <View style={{alignItems:'center', marginBottom:5}}>
-                    <Text style={styles.titleModal}>CONFIRMA?</Text>
-                </View>
-            <MapView 
-                style={{flex:1, elevation:10, borderRadius:8}}
-                initialRegion={start}
-                showsUserLocation={true}
-                ref={mapEl}
-                loadingEnabled
-            >
-            <MapViewDirections
-                origin={start}
-                destination={destino}
-                apikey={GOOGLE_MAPS_APIKEY}
-                strokeWidth={3}
-                strokeColor="blue"
-                onReady={result=>{
-                    SetDistance(result.distance)
-                    mapEl.current.fitToCoordinates(
-                        result.coordinates,{
-                            edgePadding:{
-                                top:50,
-                                bottom:50,
-                                left:50,
-                                right:50,
-                            }
-                        }
-                    )
-                }}
-                
-            />
-            <Marker
-            coordinate={destino}
-            />
-            </MapView>
+             
 
+                    <View style={{alignItems:'center', marginBottom:5}}>
+                        <Text style={styles.titleModal}>CONFIRMA?</Text>
+                    </View>
+                <MapView 
+                    style={{flex:1, elevation:10, borderRadius:8}}
+                    initialRegion={start}
+                    showsUserLocation={true}
+                    ref={mapEl}
+                    loadingEnabled
+                >
+                <MapViewDirections
+                    origin={start}
+                    destination={destino}
+                    apikey={GOOGLE_MAPS_APIKEY}
+                    strokeWidth={3}
+                    strokeColor="blue"
+                    onReady={result=>{
+                        SetDistance(result.distance)
+                        mapEl.current.fitToCoordinates(
+                            result.coordinates,{
+                                edgePadding:{
+                                    top:50,
+                                    bottom:50,
+                                    left:50,
+                                    right:50,
+                                }
+                            }
+                        )
+                    }}
+                    
+                />
+                <Marker
+                coordinate={destino}
+                />
+                </MapView>
+              
+
+          
             <View style={{flexDirection:'row', justifyContent:'space-around'}}>
                 <TouchableOpacity 
                     style={styles.botaoSimModal}
@@ -188,6 +197,8 @@ export function HomeMot() {
       <Text style={styles.homeTitle}>
         INSIRA OS DADOS PARA ADICIONAR A NOVA CARONA
       </Text>
+      
+
     <View style={{marginBottom:50}}>
 
       <Text style={styles.title}>PARTIDA</Text>
@@ -213,7 +224,7 @@ export function HomeMot() {
         styles={{ listView: { height: 80, minHeight:180 } }}
       />
     </View>
-    <View style={{marginTop:150}}>
+    <View style={{marginTop:50}}>
 
       <Text style={styles.title}>DESTINO</Text>
       <GooglePlacesAutocomplete
@@ -271,7 +282,7 @@ export function HomeMot() {
     </TouchableOpacity>
     </ScrollView>
 
-
+   
     
     </SafeAreaView>
 

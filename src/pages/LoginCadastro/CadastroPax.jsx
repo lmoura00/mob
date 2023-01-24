@@ -24,11 +24,14 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { getDatabase, ref, set, onValue } from "firebase/database";
+import { getStorage, uploadBytes } from "firebase/storage";
 
 export function CadastroPax() {
   const [image, SetImage] = useState(null);
   const navigation = useNavigation();
   const auth = getAuth();
+  const storage = getStorage();
+
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -39,9 +42,11 @@ export function CadastroPax() {
     });
 
     console.log(result);
+    console.log(image)
 
     if (!result.cancelled) {
       SetImage(result.uri);
+      
     }
   };
   const [visibleConfirma, setVisibleConfirma] = useState(false);
@@ -74,6 +79,7 @@ export function CadastroPax() {
         .then((userCredential) => {
           console.log("usuário criado com sucesso");
           let userUid = userCredential.user.uid;
+          
 
           function writeUserData(email, nome, sobrenome, telefone, cpf, date) {
             const db = getDatabase();
@@ -98,6 +104,8 @@ export function CadastroPax() {
           console.log("Algo deu errado");
         });
   }
+
+  
 
   function completo() {
     if (senha != confSenha) {

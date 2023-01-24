@@ -13,10 +13,10 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import { useNavigation } from "@react-navigation/native";
 import MaskInput, {Masks} from "react-native-mask-input";
-import { getDatabase, ref, child, get, onValue, DataSnapshot, set } from "firebase/database";
-import { getAuth, onAuthStateChanged, updateProfile  } from "firebase/auth";
+import { getDatabase, ref, child, get, onValue, DataSnapshot, set, update} from "firebase/database";
+import { getAuth, onAuthStateChanged, updateProfile, updateEmail, updatePassword } from "firebase/auth";
 import { useEffect } from "react";
-
+import { useAuth } from "../Hooks/Auth";
 
 export function Perfil() {
   const [nome, setNome] = useState('');
@@ -29,7 +29,7 @@ export function Perfil() {
   const [confSenha, setConfSenha] = useState('')
   const [visible, setVisible] = useState(false);
   const [image, SetImage] = useState(null);
-
+  const { setUser } = useAuth();
   function sair(){
     () => setVisible(false) && navigation.navigate('CaronasDisponiveis')
   }
@@ -37,7 +37,7 @@ export function Perfil() {
 
  
     useEffect(()=>{
-      async function ler(){
+       function ler(){
         const auth = getAuth()
         const dbRef = ref(getDatabase());
         const userId = auth.currentUser.uid
@@ -60,24 +60,46 @@ export function Perfil() {
         });
       }
       
-      console.log(lastname)
+      
       ler()
 
     },[])
 
 
-   function update(){
-    const auth = getAuth();
-    let currentUser = auth.currentUser
-    function writeUserData(currentUser, name, email) {
+    function ups(name, lastname, email, date, cpf, telefone, senha){
+      const auth = getAuth();
+      let userUid = auth.currentUser.uid 
       const db = getDatabase();
-      set(ref(db, 'users/${currentUser}'), {
-        username: name,
-        email: email,
-        profile_picture : imageUrl
-      });
+        update(ref(db, 'users/' + userUid), {
+          name: name,
+          lastname: lastname,
+          email: email,
+          date:date,
+          cpf: cpf,
+          telefone:telefone,
+          senha: senha
+  
+        })
+        .then(()=>{
+          console.log('Dados atualizados')
+        });
+
+        updateEmail(auth.currentUser, email).then(() => {
+          console.log("Email atualizado com sucesso")
+        }).catch((error) => {
+          console.log('Email NÃO atualizado');
+        });
+
+        updatePassword(auth.currentUser, senha).then(() => {
+          console.log("Senha atualizada com sucesso");
+          setUser(null);
+        }).catch((error) => {
+          console.log('Sua senha NÃO foi atualizada')
+        });
+        
+    
     }
-   }
+   
 
 
 
@@ -176,17 +198,17 @@ export function Perfil() {
         mask={['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
       />
         
-              <Text style={styles.title}>SENHA</Text>
+              <Text style={styles.title}>NOVA SENHA</Text>
               <TextInput
                 style={styles.input}
                 placeholder="Senha"
                 keyboardType="default"
                 value={senha}
-                maxLength={6}
+                maxLength={8}
                 onChangeText={setSenha}
               ></TextInput>
         
-              <Text style={styles.title}>CONFIRME SUA SENHA</Text>
+              <Text style={styles.title}>CONFIRME SUA NOVA SENHA</Text>
               <TextInput
                 style={styles.input}
                 placeholder="Confirme sua senha"
@@ -228,7 +250,7 @@ export function Perfil() {
 
         <TouchableOpacity
           style={styles.botao1}
-          onPress={()=>update(email, senha)}
+          onPress={()=>ups(nome, lastname, email, date, cpf, telefone, senha)}
         >
           <Text style={styles.textBotao}>ATUALIZAR</Text>
         </TouchableOpacity>

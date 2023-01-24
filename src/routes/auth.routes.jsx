@@ -119,8 +119,8 @@ function AuthRoutesTabBar() {
     }).catch((error) => {
       Alert.alert('Ops...', 'Algo deu errado, tente novamente mais tarde.')
     });
-    
   }
+
   return (
     <Navigator
       screenOptions={({ route }) => ({

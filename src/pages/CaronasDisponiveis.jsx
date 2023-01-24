@@ -1,10 +1,10 @@
-import React from "react";
-import {View, Text, StyleSheet, Image,RefreshControl, SafeAreaView, TouchableOpacity, ScrollView, FlatList} from 'react-native'
+import React, { Children } from "react";
+import {View, Text, StyleSheet, Image,RefreshControl, SafeAreaView, Alert, TouchableOpacity, ScrollView, FlatList} from 'react-native'
 import { SimpleLineIcons } from '@expo/vector-icons'; 
 import { EvilIcons } from '@expo/vector-icons';
 import {useNavigation} from '@react-navigation/native'
 import LottieView from 'lottie-react-native'
-import { getDatabase, ref, child, get, onValue } from "firebase/database";
+import { getDatabase, ref, child, get, onValue, push} from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import { useState } from "react";
@@ -31,7 +31,7 @@ export function CaronasDisponiveis(){
 
 
 
-
+    let userData = [];
     useEffect(()=>{
         const auth = getAuth()
         const dbRef = ref(getDatabase());
@@ -45,11 +45,20 @@ export function CaronasDisponiveis(){
         }).catch((error) => {
           console.error(error);
         });
+
+       
         get(child(dbRef, `caronas/`)).then((snapshot) => {
-            let userData = [];
+        
         if (snapshot.exists()) {
-            snapshot.forEach((child)=>{userData.push(snapshot.val())})
             
+            snapshot.forEach((child) => {
+                 
+        })
+       
+        
+        console.log(userData)
+        console.log(caronas)
+        
         } else {
             console.log("No data available");
         }
@@ -57,7 +66,6 @@ export function CaronasDisponiveis(){
         console.error(error);
         });
     },[])
-
     const data = [
         {
             id: 1,
@@ -111,20 +119,20 @@ export function CaronasDisponiveis(){
 
     ]
     
-    const Item = ({nome, placa, start, date}) => (
+    const Item = ({nome, }) => (
                 <TouchableOpacity style={styles.botao} >
                     <View style={{width:50, height:50}}>
                     <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{}} />
                     </View>
                     <View style={{flexDirection:'column'}}>
                         <Text style={styles.nome}>{nome}</Text>
-                        <Text >{placa}</Text>
+                        <Text >placa</Text>
                     
                     </View>
 
                     <View style={{flexDirection:'column'}}>
-                        <Text>PARTIDA: {start} h</Text>
-                        <Text>{date}</Text>
+                        <Text>PARTIDA: start h</Text>
+                        <Text>date</Text>
                     </View>
                     <View style={{height:50, width:50}}>
                     <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} />
@@ -143,11 +151,7 @@ export function CaronasDisponiveis(){
             <View>
                 <Text style={{color:'#f9f9f9', fontSize: 25, textAlign:'center'}}>Bem vindo(a) {nome}</Text>
             </View>
-                <FlatList
-                data={data}
-                renderItem={({item})=> <Item nome={item.nome} start={item.start} date={item.date} placa={item.placa}/>}
-                keyExtractor={item => item.id}
-                />
+ 
 
                 
 
