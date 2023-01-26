@@ -1,5 +1,5 @@
 import React, { Children } from "react";
-import {View, Text, StyleSheet, Image,RefreshControl, SafeAreaView, Alert, TouchableOpacity, ScrollView, FlatList} from 'react-native'
+import {View, Text, StyleSheet, Image,RefreshControl, SafeAreaView, Alert, TouchableOpacity, ScrollView, FlatList, KeyboardAvoidingView} from 'react-native'
 import { SimpleLineIcons } from '@expo/vector-icons'; 
 import { EvilIcons } from '@expo/vector-icons';
 import {useNavigation} from '@react-navigation/native'
@@ -15,8 +15,8 @@ import { useEffect } from "react";
 export function CaronasDisponiveis(){
     
     const navigation = useNavigation()
-    const [nome, setNome] = useState()
-    const [caronas, setCaronas] = [] 
+    const [name, setname] = useState()
+    const [caronas, setCaronas] = [''] 
     const wait = (timeout) => {
         return new Promise(resolve => setTimeout(resolve, timeout));
     }
@@ -31,14 +31,14 @@ export function CaronasDisponiveis(){
 
 
 
-    let userData = [];
+    const userData = [];
     useEffect(()=>{
         const auth = getAuth()
         const dbRef = ref(getDatabase());
         const userId = auth.currentUser.uid
         get(child(dbRef, `users/${userId}/name`)).then((snapshot) => {
           if (snapshot.exists()) {
-            setNome(snapshot.val());
+            setname(snapshot.val());
           } else {
             console.log("No data available");
           }
@@ -47,18 +47,18 @@ export function CaronasDisponiveis(){
         });
 
        
-        get(child(dbRef, `caronas/`)).then((snapshot) => {
-        
+        get(child(dbRef, `caronas/${'-NMj2w2WjpDrqdr9GTpl'}`))
+        .then((snapshot) =>{
         if (snapshot.exists()) {
             
-            snapshot.forEach((child) => {
-                 
-        })
+           userData.push(snapshot.exportVal())
+           
        
-        
+           
         console.log(userData)
-        console.log(caronas)
-        
+        console.log(userData)
+        console.log(data)
+        console.log(auth.currentUser.email)
         } else {
             console.log("No data available");
         }
@@ -67,72 +67,56 @@ export function CaronasDisponiveis(){
         });
     },[])
     const data = [
+       
         {
-            id: 1,
-            nome: 'gabrielly',
-            placa: 'PIX-7563',
-            start: '00:00',
-            date: '14/09/2022'
-        },
-        {
-            id: 2,
-            nome: 'JOSÉ V.',
-            placa: 'HUT-5694',
-            start: '15:00',
-            date: '18/08/2022'
-        },
-        {
-            id: 3,
-            nome: 'MARINA.',
-            placa: 'PAP-5678',
-            start: '15:30',
-            date: '17/08/2022'
-        },
-        {
-            id: 4,
-            nome: 'ODALEIA',
-            placa: 'PRO-1234',
-            start: '18:45',
-            date: '18/08/2022'
-        },
-        {
-            id: 5,
-            nome: 'THAIANE',
-            placa: 'ABC-4196',
-            start: '12:00',
-            date: '18/08/2022'
-        },
-        {
-            id: 6,
-            nome: 'YURI',
+            id: "NM_B5pweIHX1gIydMap",
+            name: 'Luca',
             placa: 'PIT-7854',
-            start: '19:00',
-            date: '17/08/2022'
+            horario: '19:00',
+            data: '17/08/2022',
+            partida: {"latitude": -5.111737100000001, "latitudeDelta": 0.000922, "longitude": -42.8538358, "longitudeDelta": 0.000421},
+            destino: {"latitude": -5.088821900000001, "latitudeDelta": 0.000922, "longitude": -42.8112273, "longitudeDelta": 0.000421},
         },
         {
-            id: 7,
-            nome: 'Lucas',
-            placa: 'RZX4U8T',
-            start: '19:00',
-            date: '17/08/2022'
+            data: "27/01/2023", 
+            destino: {
+                "latitude": -5.088821900000001, 
+                "latitudeDelta": 0.000922, 
+                "longitude": -42.8112273, 
+                "longitudeDelta": 0.000421
+            }, 
+            horario: "12:00", 
+            id: "w4OE5BFZDAa1lKHv0si6p9ofqK93", 
+            lastname: "Moura ", 
+            name: "Lucas", 
+            partida: {
+                "latitude": -5.111737100000001, 
+                "latitudeDelta": 0.000922, 
+                "longitude": -42.8538358, 
+                "longitudeDelta": 0.000421
+            }, 
+            placa: "Tetetwt", 
+            telefone: "(86) 98101-9840"
         },
 
+
     ]
-    
-    const Item = ({nome, start, date, placa }) => (
-                <TouchableOpacity style={styles.botao} >
+ 
+
+    const Item = ({name, horario, data, placa }) => (
+                <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Detalhes')}>
                     <View style={{width:50, height:50}}>
                     <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{}} />
                     </View>
                     <View style={{flexDirection:'column'}}>
-                        <Text style={styles.nome}>{nome}</Text>
+                        <Text style={styles.name}>{name}</Text>
                         <Text >{placa}</Text>
                     
                     </View>
 
                     <View style={{flexDirection:'column'}}>
-                        <Text>PARTIDA: {start} h</Text>
-                        <Text>{date}</Text>
+                        <Text>PARTIDA: {horario} h</Text>
+                        <Text>{data}</Text>
                     </View>
                     <View style={{height:50, width:50}}>
                     <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} />
@@ -149,22 +133,21 @@ export function CaronasDisponiveis(){
 
 
             <View>
-                <Text style={{color:'#f9f9f9', fontSize: 25, textAlign:'center'}}>Bem vindo(a) {nome}</Text>
+                <Text style={{color:'#f9f9f9', fontSize: 25, textAlign:'center'}}>Bem vindo(a) {name}</Text>
             </View>
- 
                 <FlatList
-                    data={data}
+                    data={userData}
                     renderItem={
-                        ({item})=>
-                        <data 
-                            date={item.date}
-                            nome={item.nome}
-                            partida={item.start}
-                            placa={item.placa}
-                            />
-                    }
-                    keyExtractor={(item)=>item.id}
+                        ({item})=> 
+                        <Item 
+                            data={item.data}
+                            horario = {item.horario}
+                            name = {item.name}
+                            placa = {item.placa}
+                    /> }
                 />
+
+
                 
 
            
@@ -195,7 +178,7 @@ const styles = StyleSheet.create({
         fontSize:25,
         color:'black'
     },
-    nome:{
+    name:{
         fontSize:22,
         color:'black',
         fontFamily:'Ubuntu_500Medium',

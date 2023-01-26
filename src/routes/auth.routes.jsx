@@ -106,6 +106,7 @@ import {Teste} from '../pages/Teste'
 import {Teste2} from '../pages/Teste2'
 import {HomeMot} from '../pages/HomeMot'
 import { getAuth, signOut } from "firebase/auth";
+import { Detalhes } from "../pages/Pessoas/Detalhes";
 
 function AuthRoutesTabBar() {
   const { setUser } = useAuth();
@@ -999,6 +1000,17 @@ export function AuthRoutes() {
         component={HomeMot}
         options={{
           headerTitle: "ADICIONAR CARONA",
+          headerShown:true,
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="Detalhes"
+        component={Detalhes}
+        options={{
+          headerTitle: "DETALHES",
           headerShown:true,
           headerTitleAlign: "center",
           statusBarStyle: "dark",

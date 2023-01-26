@@ -37,6 +37,7 @@ export function HomeMot() {
   const [start, setStart] = useState(null);
   const [destino, setDestino] = useState(null);
   const [aberto, setAberto] = useState(false);
+  const [aberto1, setAberto1] = useState(false);
   const [vagas, setVagas] = useState('');
   const [placa, setPlaca] = useState('');
   const [data, setData] = useState('');
@@ -48,6 +49,7 @@ export function HomeMot() {
 
   const [nome, setNome] = useState('');
   const [lastname, setLastname] = useState('');
+  
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
   const navigation = useNavigation();
@@ -57,7 +59,7 @@ export function HomeMot() {
     separator: ':',
     precision: 2,
   })
-
+  
 
   useEffect(()=>{
     async function ler(){
@@ -90,10 +92,13 @@ export function HomeMot() {
 
   
     let CarMot = Math.floor(Math.random() * 1000) + 1 
+    const userUid = auth.currentUser.uid
     function enviarCarona(nome, sobrenome, telefone, partida, destino, placa, data, horario) {
         const db = getDatabase();
         const newCaronaKey = push(child(ref(db), 'caronas')).key;
         set(ref(db , "caronas/" + newCaronaKey  ), {
+            id: newCaronaKey,
+            uid:userUid,
             name: nome,
             lastname: sobrenome,
             telefone:telefone,
@@ -132,6 +137,67 @@ export function HomeMot() {
             transparent={true}
             style={{}}
         >
+            <View style={styles.modal}>
+              
+
+                    <View style={{alignItems:'center', marginBottom:5}}>
+                        <Text style={styles.titleModal}>NOVA CARONA</Text>
+                    </View>
+                    <ScrollView style={{paddingBottom:15}}>
+
+                        <Text style={styles.title}>VAGAS</Text>
+                        <TextInput placeholder="Vagas" keyboardType="number-pad" value={vagas} onChangeText={setVagas} style={styles.input}></TextInput>
+                        <Text style={styles.title}>PLACA DO VEÍCULO</Text>
+                        <TextInput placeholder="Placa" keyboardType="default" value={placa} onChangeText={setPlaca} style={styles.input}></TextInput>
+                        <Text style={styles.title}>DATA PARTIDA</Text>
+                        <MaskInput
+                          value={data}
+                          style={styles.input}
+                          keyboardType='number-pad'
+                          onChangeText={setData}
+                          mask={Masks.DATE_DDMMYYYY}
+                          />
+                        <Text style={styles.title}>HORÁRIO PARTIDA</Text>
+                        <MaskInput
+                          value={horario}
+                          style={styles.input}
+                          keyboardType='number-pad'
+                          onChangeText={setHorario}
+                          mask={hourMask}
+                          maxLength={5}
+                          />
+                      </ScrollView>
+          
+            <View style={{flexDirection:'row', justifyContent:'space-around'}}>
+                <TouchableOpacity 
+                    style={styles.botaoContinuarModal}
+                    onPress={()=>setAberto1(true) || setAberto(false) || navigation.navigate('CaronasDisponiveis')}
+                    >
+                    <Text>CONTINUAR</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                    style={styles.botaoCancelarModal} 
+                    onPress={()=>{if(vagas === null || horario === null || data === null )
+                      {Alert.alert('Atenção', 'Os campos não podem ficar vazios.')}
+                      else{setAberto1(true)||setAberto(false)}}}
+                >
+                    <Text>CANCELAR</Text>
+                </TouchableOpacity>
+            </View>
+
+            </View>
+            
+        </Modal>
+
+
+        <Modal
+            animationType="fade"
+            visible={aberto1}
+            statusBarTranslucent={false}
+            transparent={true}
+            style={{}}
+        >
             <View style={styles.modal1}>
              
 
@@ -141,7 +207,7 @@ export function HomeMot() {
                 <MapView 
                     style={{flex:1, elevation:10, borderRadius:8}}
                     initialRegion={start}
-                    showsUserLocation={true}
+                    showsUserLocation={false}
                     ref={mapEl}
                     loadingEnabled
                 >
@@ -169,6 +235,10 @@ export function HomeMot() {
                 <Marker
                 coordinate={destino}
                 />
+                <Marker
+                coordinate={start}
+                pinColor={'#14BC9C'}
+                />
                 </MapView>
               
 
@@ -176,14 +246,14 @@ export function HomeMot() {
             <View style={{flexDirection:'row', justifyContent:'space-around'}}>
                 <TouchableOpacity 
                     style={styles.botaoSimModal}
-                    onPress={()=>enviarCarona(nome, lastname, telefone, start, destino, placa, data, horario)}
+                    onPress={()=>enviarCarona(nome, lastname, telefone, start, destino, placa, data, horario) || setAberto1(false)}
                 >
                     <Text>SIM</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity 
                     style={styles.botaoNaoModal} 
-                    onPress={()=>setAberto(false)}
+                    onPress={()=>setAberto1(false)}
                 >
                     <Text>NÃO</Text>
                 </TouchableOpacity>
@@ -199,7 +269,7 @@ export function HomeMot() {
       </Text>
       
 
-    <View style={{marginBottom:50}}>
+    <View style={{marginBottom:150}}>
 
       <Text style={styles.title}>PARTIDA</Text>
     
@@ -221,10 +291,10 @@ export function HomeMot() {
         enablePoweredByContainer={false}
         fetchDetails={true}
         disableScroll
-        styles={{ listView: { height: 80, minHeight:180 } }}
+        styles={{ listView: {minHeight:150, marginTop:50 } }}
       />
     </View>
-    <View style={{marginTop:50}}>
+    <View style={{marginTop:50, marginBottom:45}}>
 
       <Text style={styles.title}>DESTINO</Text>
       <GooglePlacesAutocomplete
@@ -244,38 +314,18 @@ export function HomeMot() {
         }}
         enablePoweredByContainer={false}
         fetchDetails={true}
-        styles={{  listView: { height: 120, minHeight:100,  } }}
+        styles={{  listView: {minHeight:150, marginTop:50 } }}
       />
       
     </View>
     <ScrollView style={{marginTop:150}}>
 
-      <Text style={styles.title}>VAGAS</Text>
-      <TextInput placeholder="Vagas" keyboardType="number-pad" value={vagas} onChangeText={setVagas} style={styles.input}></TextInput>
-      <Text style={styles.title}>PLACA DO VEÍCULO</Text>
-      <TextInput placeholder="Placa" keyboardType="default" value={placa} onChangeText={setPlaca} style={styles.input}></TextInput>
-      <Text style={styles.title}>DATA PARTIDA</Text>
-      <MaskInput
-        value={data}
-        style={styles.input}
-        keyboardType='number-pad'
-        onChangeText={setData}
-        mask={Masks.DATE_DDMMYYYY}
-      />
-      <Text style={styles.title}>HORÁRIO PARTIDA</Text>
-      <MaskInput
-        value={horario}
-        style={styles.input}
-        keyboardType='number-pad'
-        onChangeText={setHorario}
-        mask={hourMask}
-        maxLength={5}
-      />
+      
     
     <TouchableOpacity 
         style={styles.botao} 
         onPress={()=>{
-            if(start === null || destino === null || vagas === '' || placa === '' || data === '' || horario === '')
+            if(start === null || destino === null )
             {Alert.alert('Atenção', 'Os campos não podem ficar vazios.')}
             else{setAberto(true)}}}>
         <Text style={{fontSize:18}}>OK</Text>
@@ -303,7 +353,7 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
   title: {
-    color: "#f9f9f9",
+    color: "#272727",
     fontSize: 18,
     marginTop: 10,
     marginBottom: 5,
@@ -322,12 +372,22 @@ const styles = StyleSheet.create({
 
   },
   input:{
-    backgroundColor:'#f9f9f9',
+    backgroundColor:'#b9b9b9',
     height:40,
     marginBottom:5,
     borderRadius:8,
     fontSize:16,
     paddingHorizontal:8
+  },
+  modal: {
+    alignSelf: "center",
+    backgroundColor: "#f9f9f9",
+    padding: 20,
+    elevation: 10,
+    borderRadius: 20,
+    marginVertical: 190,
+    width: "80%",
+    height: "60%",
   },
   modal1: {
     alignSelf: "center",
@@ -376,9 +436,32 @@ const styles = StyleSheet.create({
     alignItems:'center',
     alignSelf:'center'
   },
+  botaoContinuarModal:{
+    backgroundColor:'#4DEA73',
+    marginBottom:10,
+    marginTop:10,
+    width:85,
+    height:45,
+    borderRadius:9, 
+    justifyContent:'center',
+    alignItems:'center',
+    alignSelf:'center'
+  },
+  botaoCancelarModal:{
+    backgroundColor:'#E85B24',
+    marginBottom:10,
+    marginTop:10,
+    width:85,
+    height:45,
+    borderRadius:9, 
+    justifyContent:'center',
+    alignItems:'center',
+    alignSelf:'center'
+  },
   titleModal:{
     fontSize:20,
     textDecorationLine:'underline',
+    fontWeight:'bold'
 
   }
 });
