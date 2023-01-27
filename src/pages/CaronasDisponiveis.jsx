@@ -16,60 +16,44 @@ export function CaronasDisponiveis(){
     
     const navigation = useNavigation()
     const [name, setname] = useState()
-    const [caronas, setCaronas] = [''] 
+    const [caronas, setCaronas] = useState([]) 
     const wait = (timeout) => {
         return new Promise(resolve => setTimeout(resolve, timeout));
     }
     
     const [refreshing, setRefreshing] = React.useState(false);
 
-    const onRefresh = React.useCallback(() => {
-        setRefreshing(true);
-        wait(2000).then(() => setRefreshing(false));
-    }, []);
 
 
 
 
-    const userData = [];
+
+
     useEffect(()=>{
-        const auth = getAuth()
-        const dbRef = ref(getDatabase());
-        const userId = auth.currentUser.uid
-        get(child(dbRef, `users/${userId}/name`)).then((snapshot) => {
-          if (snapshot.exists()) {
-            setname(snapshot.val());
-          } else {
-            console.log("No data available");
-          }
-        }).catch((error) => {
-          console.error(error);
-        });
+         function lerNome(){
+            const auth = getAuth()
+            const dbRef = ref(getDatabase());
+            const userId = auth.currentUser.uid
+             get(child(dbRef, `users/${userId}/name`)).then((snapshot) => {
+              if (snapshot.exists()) {
+                setname(snapshot.val());
+              } else {
+                console.log("No data available");
+              }
+            }).catch((error) => {
+              console.error(error);
+            });
 
-       
-        get(child(dbRef, `caronas/${'-NMj2w2WjpDrqdr9GTpl'}`))
-        .then((snapshot) =>{
-        if (snapshot.exists()) {
-            
-           userData.push(snapshot.exportVal())
-           
-       
-           
-        console.log(userData)
-        console.log(userData)
-        console.log(data)
-        console.log(auth.currentUser.email)
-        } else {
-            console.log("No data available");
         }
-        }).catch((error) => {
-        console.error(error);
-        });
+       lerNome()
+       
     },[])
+    
+    
     const data = [
        
         {
-            id: "NM_B5pweIHX1gIydMap",
+            key: "NM_B5pweIHX1gIydMap",
             name: 'Luca',
             placa: 'PIT-7854',
             horario: '19:00',
@@ -86,7 +70,7 @@ export function CaronasDisponiveis(){
                 "longitudeDelta": 0.000421
             }, 
             horario: "12:00", 
-            id: "w4OE5BFZDAa1lKHv0si6p9ofqK93", 
+            key: "w4OE5BFZDAa1lKHv0si6p9ofqK93", 
             lastname: "Moura ", 
             name: "Lucas", 
             partida: {
@@ -101,6 +85,47 @@ export function CaronasDisponiveis(){
 
 
     ]
+    const userData = [];
+    function lerCaronas(){
+        const dbRef = ref(getDatabase());
+        get(child(dbRef, `caronas`))
+           .then((snapshot) =>{
+         
+               
+             /* userData.push(snapshot?.forEach((childItem)=>{
+                let date = {
+                    key: childItem.key,
+                    name: childItem.val().name,
+                    data: childItem.val().data,
+                    placa: childItem.val().placa,
+                    horario: childItem.val().horario,
+                    
+                }
+                
+                setCaronas(date)
+
+            }));*/
+
+               snapshot?.forEach((childItem)=>{
+                   let date = {
+                       key: childItem.key,
+                       name: childItem.val().name,
+                       data: childItem.val().data,
+                       placa: childItem.val().placa,
+                       horario: childItem.val().horario,
+                       
+                   }
+                   
+                   setCaronas(date)
+  
+               })
+               console.log(caronas)
+             
+     
+           }).catch((error) => {
+           console.error(error);
+           });
+       }
  
 
     const Item = ({name, horario, data, placa }) => (
@@ -126,26 +151,32 @@ export function CaronasDisponiveis(){
     );
     
 
-        
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        lerCaronas();
+        wait(500).then(() => setRefreshing(false));
+    }, []);
 
     return(
         <SafeAreaView style={styles.container}>
+            <RefreshControl style={{flex:1}} onRefresh={onRefresh} refreshing={refreshing}>
 
 
             <View>
                 <Text style={{color:'#f9f9f9', fontSize: 25, textAlign:'center'}}>Bem vindo(a) {name}</Text>
             </View>
                 <FlatList
-                    data={userData}
+                    data={data}
                     renderItem={
                         ({item})=> 
                         <Item 
-                            data={item.data}
-                            horario = {item.horario}
-                            name = {item.name}
-                            placa = {item.placa}
-                    /> }
-                />
+                        data={item.data}
+                        horario = {item.horario}
+                        name = {item.name}
+                        placa = {item.placa}
+                        /> }
+                        keyExtractor={(item)=>item.key}
+                        />
 
 
                 
@@ -154,6 +185,7 @@ export function CaronasDisponiveis(){
                 <TouchableOpacity style={styles.botaoAdCarona} onPress={()=>navigation.navigate('HomeMot')}>
                     <Text style={styles.textoBotaoAdCarona}>+</Text>
                 </TouchableOpacity>
+            </RefreshControl>
         </SafeAreaView>
     )
 }

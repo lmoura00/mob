@@ -247,7 +247,7 @@ export function CadastroPax() {
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <View style={{ width: 40, height: 40 }}>
           <LottieView
-            source={require("../../Assets/9994-name-profile-icon-animation-circle.json")}
+            source={require("../../Assets/109029-writing.json")}
             autoPlay={true}
             loop={true}
           />
@@ -339,7 +339,7 @@ export function CadastroPax() {
         style={styles.input}
         value={telefone}
         keyboardType="numeric"
-        onChangeText={(unmasked) => {
+        onChangeText={(mask,unmasked) => {
           setTelefone(unmasked);
         }}
         mask={[

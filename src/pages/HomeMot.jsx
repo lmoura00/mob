@@ -93,7 +93,7 @@ export function HomeMot() {
   
     let CarMot = Math.floor(Math.random() * 1000) + 1 
     const userUid = auth.currentUser.uid
-    function enviarCarona(nome, sobrenome, telefone, partida, destino, placa, data, horario) {
+    function enviarCarona(nome, sobrenome, telefone, partida, destino, placa, data, horario, vagas) {
         const db = getDatabase();
         const newCaronaKey = push(child(ref(db), 'caronas')).key;
         set(ref(db , "caronas/" + newCaronaKey  ), {
@@ -106,6 +106,7 @@ export function HomeMot() {
             destino:destino,
             placa: placa,
             data: data,
+            vagas: vagas,
             horario: horario, 
 
             }).then(() => {
@@ -171,16 +172,16 @@ export function HomeMot() {
             <View style={{flexDirection:'row', justifyContent:'space-around'}}>
                 <TouchableOpacity 
                     style={styles.botaoContinuarModal}
-                    onPress={()=>setAberto1(true) || setAberto(false) || navigation.navigate('CaronasDisponiveis')}
+                    onPress={()=>{if(vagas === null || horario === null || data === null )
+                      {Alert.alert('Atenção', 'Os campos não podem ficar vazios.')}
+                      else{setAberto1(true)||setAberto(false)}}}
                     >
                     <Text>CONTINUAR</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity 
                     style={styles.botaoCancelarModal} 
-                    onPress={()=>{if(vagas === null || horario === null || data === null )
-                      {Alert.alert('Atenção', 'Os campos não podem ficar vazios.')}
-                      else{setAberto1(true)||setAberto(false)}}}
+                    onPress={()=>setAberto}
                 >
                     <Text>CANCELAR</Text>
                 </TouchableOpacity>
@@ -246,7 +247,7 @@ export function HomeMot() {
             <View style={{flexDirection:'row', justifyContent:'space-around'}}>
                 <TouchableOpacity 
                     style={styles.botaoSimModal}
-                    onPress={()=>enviarCarona(nome, lastname, telefone, start, destino, placa, data, horario) || setAberto1(false)}
+                    onPress={()=>enviarCarona(nome, lastname, telefone, start, destino, placa, data, horario, vagas) || setAberto1(false) || navigation.navigate('CaronasDisponiveis')}
                 >
                     <Text>SIM</Text>
                 </TouchableOpacity>

@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import LottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/native";
-import { getDatabase, ref, child, get, onValue, push, set,  update,  DataSnapshot} from "firebase/database";
+import { getDatabase, ref, child, get } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
@@ -31,11 +31,14 @@ export function Detalhes() {
   const [telefone, setTelefone] = useState();
   const [placa, setPlaca] = useState();
   const [vagas, setVagas] = useState();
+  const [data, setData] = useState();
+  const [horario, setHorario] = useState();
   const GOOGLE_MAPS_APIKEY = api.googleApi;
   const [start, setStart] = useState(null);
   const [destino, setDestino] = useState(null);
   const mapEl = useRef(null);
-
+  const [distance, SetDistance] = useState(null);
+  const [location, setLocation] = useState(null);
   var n = 1;
   function PaxAceito() {
     if (aceito === true) {
@@ -54,29 +57,48 @@ export function Detalhes() {
 
 
   useEffect(()=>{
-    async function ler(){
+      async () => {
+          
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+          setErrorMsg('Permissão ao acesso a localização foi negado');
+          return;
+        }
+
+        let locationCurrent = await Location.getCurrentPositionAsync({});
+        setLocation({
+            latitude: locationCurrent.coords.latitude,
+            longitude: locationCurrent.coords.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+        })
+        
+      }
+      async function ler(){
       const auth = getAuth()
       const data = []
       const dbRef = ref(getDatabase());
       const userUID = auth.currentUser.uid
-      get(child(dbRef, `caronas/${`-NMj2w2WjpDrqdr9GTpl`}` ))
-          .then((snapshot) =>{
-          if (snapshot.exists()) {
-              data.toString(data.push(snapshot.val()))
-              
-              
-             
-         
-             
-          console.log(data)
-          console.log(name)
-          
-          } else {
-              console.log("No data available");
-          }
-          }).catch((error) => {
-          console.error(error);
-          });
+      await get(child(dbRef, `caronas/${`-NMo5ziDPfGHvDGHHG3m`}`)).then((snapshot) => {
+        if (snapshot.exists()) {
+          setName(snapshot.val().name);
+          setPlaca(snapshot.val().placa);
+          setVagas(snapshot.val().vagas);
+          setHorario(snapshot.val().horario);
+          setStart(snapshot.val().start);
+          setDestino(snapshot.val().destino);
+          setData(snapshot.val().data);
+          setTelefone(snapshot.val().telefone);
+          setLastname(snapshot.val().lastname);
+
+          console.log(vagas)
+        } else {
+          console.log("No data available");
+        }
+      }).catch((error) => {
+        console.error(error);
+      });
+      
     }
 
     ler()
@@ -107,8 +129,12 @@ export function Detalhes() {
                 marginTop: 40,
               }}
             >
-              <TouchableOpacity onPress={PaxAceito} style={styles.botaoModal2}>
-                <Text style={styles.textBotao}>SIM!</Text>
+              <TouchableOpacity 
+                onPress={() => {
+                  Linking.openURL("http://api.whatsapp.com/send?phone=55" + telefone );
+                }}
+                style={styles.botaoModal2}>
+              <Text style={styles.textBotao}>SIM!</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={NaoPax} style={styles.botaoModal1}>
                 <Text style={styles.textBotao}>NÃO</Text>
@@ -183,7 +209,7 @@ export function Detalhes() {
           source={require("../../Assets/95740-profile-person.json")}
           autoPlay={true}
           loop={true}
-          style={{ marginBottom: 300 }}
+          style={{ marginBottom: 330 }}
         />
 
         <View
@@ -193,43 +219,49 @@ export function Detalhes() {
             justifyContent: "center",
           }}
         >
-          <Text style={styles.title}>YURI</Text>
-          <Text style={styles.texto}>AUDI R8</Text>
-          <Text style={styles.texto}>COR: PRATA </Text>
+          <Text style={styles.title}>{name} {lastname}</Text>
+          {/*<Text style={styles.texto}>AUDI R8</Text>
+          <Text style={styles.texto}>COR: PRATA </Text>*/}
         </View>
 
-        <Image
+        {/*<Image
           source={{
             uri: "https://mediaservice.audi.com/media/fast/H4sIAAAAAAAAAFvzloG1tIiBOTrayfuvpGh6-m1zJgaGigIGBgZGoDhTtNOaz-I_2DhCHkCFGe8ysJSnJhUwAlW4MXFl5iamp-qDBPgZuYssdFMrSnTzUnPz2YHSfDxx82OvGmYdv7P9odeX-UEuL9jvPBNn4JG80c5idmnvwdZ5rgwT-Nb8-CLL6sPA80Ljz3ynLG9X55KNxmkmK6rP_I85ysDDa3x7zo9_LDP1Pj_UUr3v_Yxjg5s2A8-MJyEt65yrn0119Z3L518bciD7fCcDTxCz1fvu0JJWKYF9l_j8Dz1mmz9zIgNPBuPMFeeOTFT5uu3h5VpjA8cN328C3eBSWnq15cu9uD38u77f-HyweolJyCYGnrYY8XKRUnPBmOJb6e_al5lxiDFnMPDsrVD8zRJnIXDzyYnLnX9PyqZftxAE-mLb95P758kv3-XpdrKVa2rDfnGW7Qw8r6fW-q0pU3kZI7RXxsLVqtQuOnM3Aw_DA72seu0VTJP1jL5sV1p2aXfI8ucMPJ1X3V-mBMfM5JHmyfJ4N3leDNPScwyswIBl2g0kWOKABM8TIMFhwwAmQUG-AUgwLgTxWeuZGRi4HRgY2EIYQIBPuLQopyCxKDFXryi1uCA_rzizLFVQw4BIIMzq4xjpGgQAa47rIxACAAA?mimetype=image/png",
           }}
           style={{ width: 150, height: 90, marginBottom: 5, marginLeft: 15 }}
-        />
+        />*/}
 
-        <Text style={styles.texto}>PLACA: PIT - 7854</Text>
+        <Text style={styles.texto}>PLACA: {placa}</Text>
         <Text style={styles.texto}>CONTATO:</Text>
         <Text
           style={styles.textoNúmero}
           onPress={() => {
-            Linking.openURL("http://api.whatsapp.com/send?phone=5586900000000");
+            Linking.openURL("http://api.whatsapp.com/send?phone=55" + telefone );
           }}
         >
-        (86) 9 0000 0000
+        {telefone}
         </Text>
 
         <KeyboardAvoidingView style={{ flexDirection: "row" }}>
           <Text style={styles.vagas}>VAGAS DISPONÍVEIS:</Text>
-          <Text style={styles.vagasNumero}>{pax}</Text>
+          <Text style={styles.vagasNumero}>{vagas}</Text>
         </KeyboardAvoidingView>
 
-        <KeyboardAvoidingView style={{ flexDirection: "row" }}>
-          <Text style={styles.inicioNome}>INÍCIO:</Text>
-          <Text style={styles.inicioLugar}>Parque Alvorada 19:00 h</Text>
-        </KeyboardAvoidingView>
-
-        <KeyboardAvoidingView style={{ flexDirection: "row" }}>
-          <Text style={styles.DestinoNome}>DESTINO:</Text>
-          <Text style={styles.DestinoLugar}>IFMA Campus Timon</Text>
-        </KeyboardAvoidingView>
+        <View>
+          <MapView
+            initialRegion={location}
+            ref={mapEl}
+            style={styles.map}
+            showsUserLocation={true}
+            zoomEnabled={false}
+            scrollEnabled={false}
+            loadingEnabled={true}
+          >
+              {start!= <Marker coordinate={destino} title='DESTINO'/
+              
+              >}
+          </MapView>
+        </View>
 
         <TouchableOpacity
           style={styles.botaoVerRota}
@@ -271,10 +303,12 @@ const styles = StyleSheet.create({
     color: "black",
     marginBottom: 8,
     fontFamily: "Inter_600SemiBold",
+    textTransform:"uppercase"
   },
   texto: {
     fontSize: 25,
     fontFamily: "Ubuntu_400Regular",
+    textTransform:'uppercase'
   },
   textoNúmero: {
     fontSize: 25,
@@ -441,4 +475,9 @@ const styles = StyleSheet.create({
     width: "80%",
     height: "50%",
   },
+  map:{
+    width:250,
+    height:300,
+  
+  }
 });
