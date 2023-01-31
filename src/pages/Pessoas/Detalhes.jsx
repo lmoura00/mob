@@ -19,6 +19,8 @@ import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import MapViewDirections from "react-native-maps-directions";
 import api from "../../../config/index.json";
+import { getStorage, ref as sRef, getDownloadURL,  uploadBytes   } from "firebase/storage";
+
 
 export function Detalhes() {
   const [alerta, setAlerta] = useState(false);
@@ -27,6 +29,7 @@ export function Detalhes() {
   const [aceito, setAceito] = useState(false);
   const navigation = useNavigation();
   const [name, setName] = useState(null);
+  const [image, setImage] = useState(null);
   const [lastname, setLastname] = useState()
   const [telefone, setTelefone] = useState();
   const [placa, setPlaca] = useState();
@@ -54,10 +57,10 @@ export function Detalhes() {
   }
 
   const [pax, setPax] = useState(n);
-
-
+  const auth = getAuth()
+  const userUID = auth.currentUser.uid
   useEffect(()=>{
-      async () => {
+      async function ler() {
           
         let { status } = await Location.requestForegroundPermissionsAsync();
         if (status !== 'granted') {
@@ -73,35 +76,43 @@ export function Detalhes() {
             longitudeDelta: 0.0421,
         })
         
+        const data = []
+        const dbRef = ref(getDatabase());
+        
+        await get(child(dbRef, `caronas/${`-NMo5ziDPfGHvDGHHG3m`}`))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            setName(snapshot.val().name);
+            setPlaca(snapshot.val().placa);
+            setVagas(snapshot.val().vagas);
+            setHorario(snapshot.val().horario);
+            setStart(snapshot.val().partida);
+            setDestino(snapshot.val().destino);
+            setData(snapshot.val().data);
+            setTelefone(snapshot.val().telefone);
+            setLastname(snapshot.val().lastname);
+
+          } else {
+            console.log("No data available");
+          }
+        }).catch((error) => {
+          console.error(error);
+        });
+        
+        const storage = getStorage();
+        
+        await getDownloadURL(sRef(storage, `${userUID}`))
+        .then((url) => {
+          setImage(url)
+    
+        })
       }
-      async function ler(){
-      const auth = getAuth()
-      const data = []
-      const dbRef = ref(getDatabase());
-      const userUID = auth.currentUser.uid
-      await get(child(dbRef, `caronas/${`-NMo5ziDPfGHvDGHHG3m`}`)).then((snapshot) => {
-        if (snapshot.exists()) {
-          setName(snapshot.val().name);
-          setPlaca(snapshot.val().placa);
-          setVagas(snapshot.val().vagas);
-          setHorario(snapshot.val().horario);
-          setStart(snapshot.val().start);
-          setDestino(snapshot.val().destino);
-          setData(snapshot.val().data);
-          setTelefone(snapshot.val().telefone);
-          setLastname(snapshot.val().lastname);
-
-          console.log(vagas)
-        } else {
-          console.log("No data available");
-        }
-      }).catch((error) => {
-        console.error(error);
-      });
+      ler()
+      console.log(destino)
+     
       
-    }
 
-    ler()
+
     
     
   },[])
@@ -131,7 +142,7 @@ export function Detalhes() {
             >
               <TouchableOpacity 
                 onPress={() => {
-                  Linking.openURL("http://api.whatsapp.com/send?phone=55" + telefone );
+                  Linking.openURL(`http://api.whatsapp.com/send?phone=55 + ${telefone} + &text=Essa+carona+ainda+se+encontra+disponível? `);
                 }}
                 style={styles.botaoModal2}>
               <Text style={styles.textBotao}>SIM!</Text>
@@ -204,17 +215,33 @@ export function Detalhes() {
             </TouchableOpacity>
           </View>
         </Modal>
+        {image ? 
+                    <Image
+                    source={{ uri: image }}
+                    style={{
+                      width: 150,
+                      height: 150,
+                      alignSelf: "center",
+                      marginBottom: 20,
+                      marginTop: 20,
+                      borderRadius:50,
+                      borderWidth:2,
+                      borderColor:'#F6C445',
+                    }}/> :        
+                    <LottieView
+                    source={require("../../Assets/95740-profile-person.json")}
+                    autoPlay={true}
+                    loop={true}
+                    style={{ marginBottom: 330 }}
+                  />   
 
-        <LottieView
-          source={require("../../Assets/95740-profile-person.json")}
-          autoPlay={true}
-          loop={true}
-          style={{ marginBottom: 330 }}
-        />
-
+      
+        }
+        
         <View
           style={{
-            marginTop: 180,
+            ...image ? {marginTop: 20,} : {marginTop:180, },
+            
             alignItems: "center",
             justifyContent: "center",
           }}
@@ -236,7 +263,7 @@ export function Detalhes() {
         <Text
           style={styles.textoNúmero}
           onPress={() => {
-            Linking.openURL("http://api.whatsapp.com/send?phone=55" + telefone );
+            Linking.openURL("http://api.whatsapp.com/send?phone=55" + telefone);
           }}
         >
         {telefone}
@@ -246,8 +273,7 @@ export function Detalhes() {
           <Text style={styles.vagas}>VAGAS DISPONÍVEIS:</Text>
           <Text style={styles.vagasNumero}>{vagas}</Text>
         </KeyboardAvoidingView>
-
-        <View>
+          {start && <View>
           <MapView
             initialRegion={location}
             ref={mapEl}
@@ -257,11 +283,31 @@ export function Detalhes() {
             scrollEnabled={false}
             loadingEnabled={true}
           >
-              {start!= <Marker coordinate={destino} title='DESTINO'/
-              
-              >}
+              <MapViewDirections
+                origin={start}
+                destination={destino}
+                apikey={GOOGLE_MAPS_APIKEY}
+                strokeWidth={3}
+                strokeColor="blue"
+                onReady={result=>{
+                    SetDistance(result.distance)
+                    mapEl.current.fitToCoordinates(
+                        result.coordinates,{
+                            edgePadding:{
+                                top:50,
+                                bottom:50,
+                                left:50,
+                                right:50,
+                            }
+                        }
+                    )
+                }}
+              />
+              {start&& <Marker coordinate={destino} title='DESTINO' />}
+              {start&& <Marker coordinate={start} title='COMEÇO' pinColor={'#14BC9C'}/>}
           </MapView>
-        </View>
+        </View> }
+        
 
         <TouchableOpacity
           style={styles.botaoVerRota}

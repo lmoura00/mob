@@ -247,7 +247,7 @@ export function HomeMot() {
             <View style={{flexDirection:'row', justifyContent:'space-around'}}>
                 <TouchableOpacity 
                     style={styles.botaoSimModal}
-                    onPress={()=>enviarCarona(nome, lastname, telefone, start, destino, placa, data, horario, vagas) || setAberto1(false) || navigation.navigate('CaronasDisponiveis')}
+                    onPress={()=>enviarCarona(nome, lastname, telefone, start, destino, placa, data, horario, vagas) || setAberto1(false) || navigation.navigate('CaronasDisponiveis') || Alert.alert('Só um aviso...', 'A sua carona foi criada com sucesso')}
                 >
                     <Text>SIM</Text>
                 </TouchableOpacity>

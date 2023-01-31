@@ -25,12 +25,16 @@ import {
 } from "firebase/auth";
 import { getDatabase, ref, set, onValue } from "firebase/database";
 import { getStorage, uploadBytes } from "firebase/storage";
+import { ref as sRef } from 'firebase/storage';
+
 
 export function CadastroPax() {
   const [image, SetImage] = useState(null);
+  const [imageUrl, SetImageUrl] = useState(null);
   const navigation = useNavigation();
   const auth = getAuth();
   const storage = getStorage();
+  
 
 
   const pickImage = async () => {
@@ -63,9 +67,9 @@ export function CadastroPax() {
 
   const { setUser } = useAuth();
 
-  function salvar() {
+  async function salvar() {
     setConfirmar(false) ||
-      setVisibleConfirma(true) ||
+      setVisibleConfirma(true) || 
       createUserWithEmailAndPassword(
         auth,
         email,
@@ -79,9 +83,23 @@ export function CadastroPax() {
         .then((userCredential) => {
           console.log("usuário criado com sucesso");
           let userUid = userCredential.user.uid;
-          
+            
+          async function enviarFoto(){
+            const response =  await fetch(image)
+            const blob = await response.blob()
+            const storageRef = sRef(storage, `${userUid}`);
+            const metadata = {
+              contentType: 'image/jpeg',
+            };
+            await uploadBytes(storageRef, blob, metadata)
+            .then((snapshot) => {
+             console.log('Imagem enviada com sucesso');
+             SetImageUrl(blob)
+            })
+            .catch(()=>console.log('erro'));
+          }
 
-          function writeUserData(email, nome, sobrenome, telefone, cpf, date) {
+           function writeUserData(email, nome, sobrenome, telefone, cpf, date) {
             const db = getDatabase();
             set(ref(db, "users/" + userUid), {
               name: nome,
@@ -89,8 +107,8 @@ export function CadastroPax() {
               email: email,
               cpf: cpf,
               date: date,
-              telefone,
-              telefone,
+              telefone:telefone,
+              image: imageUrl,
             }).then(() => {
               console.log("Dados enviados com sucesso");
             });
@@ -99,13 +117,31 @@ export function CadastroPax() {
           sendEmailVerification(auth.currentUser).then(() => {
             console.log("email enviado com sucesso");
           });
+
+          enviarFoto();
+
+          
         })
         .catch(() => {
           console.log("Algo deu errado");
         });
   }
 
-  
+  async function enviarFoto(){
+    const response =  await fetch(image)
+    const blob = await response.blob()
+    const storageRef = sRef(storage, 'image');
+    const metadata = {
+      contentType: 'image/jpeg',
+    };
+    await uploadBytes(storageRef, blob, metadata)
+    .then((snapshot) => {
+     console.log('Imagem enviada com sucesso');
+    })
+    .catch(()=>console.log('erro'));
+    
+
+  }
 
   function completo() {
     if (senha != confSenha) {
@@ -421,6 +457,9 @@ export function CadastroPax() {
             alignSelf: "center",
             marginBottom: 20,
             marginTop: 20,
+            borderRadius:50,
+            borderWidth:2,
+            borderColor:'#F6C445',
           }}
         />
       )}

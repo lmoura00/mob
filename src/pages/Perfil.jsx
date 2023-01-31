@@ -17,6 +17,7 @@ import { getDatabase, ref, child, get, onValue, DataSnapshot, set, update} from 
 import { getAuth, onAuthStateChanged, updateProfile, updateEmail, updatePassword } from "firebase/auth";
 import { useEffect } from "react";
 import { useAuth } from "../Hooks/Auth";
+import { getStorage, ref as sRef, getDownloadURL,  uploadBytes   } from "firebase/storage";
 
 export function Perfil() {
   const [nome, setNome] = useState('');
@@ -40,6 +41,7 @@ export function Perfil() {
        function ler(){
         const auth = getAuth()
         const dbRef = ref(getDatabase());
+  
         const userId = auth.currentUser.uid
         get(child(dbRef, `users/${userId}`))
         .then((snapshot) => {
@@ -58,6 +60,14 @@ export function Perfil() {
         }).catch((error) => {
           console.error(error);
         });
+        const storage = getStorage();
+
+        getDownloadURL(sRef(storage, `${userId}`))
+        .then((url) => {
+          console.log(url),
+          SetImage(url)
+
+        })
       }
       
       
@@ -96,7 +106,23 @@ export function Perfil() {
         }).catch((error) => {
           console.log('Sua senha NÃO foi atualizada')
         });
-        
+        async function enviarFoto(){
+          const response =  await fetch(image)
+          const storage = getStorage();
+          const blob = await response.blob()
+          const storageRef = sRef(storage, `${userUid}`);
+          const metadata = {
+            contentType: 'image/jpeg',
+          };
+          await uploadBytes(storageRef, blob, metadata)
+          .then((snapshot) => {
+           console.log('Imagem enviada com sucesso');
+          })
+          .catch(()=>console.log('erro'));
+          
+      
+        }
+        enviarFoto();
     
     }
    
@@ -237,6 +263,9 @@ export function Perfil() {
               alignSelf: "center",
               marginBottom: 20,
               marginTop: 20,
+              borderRadius:50,
+              borderWidth:2,
+              borderColor:'#F6C445',
             }}
           />
         )}

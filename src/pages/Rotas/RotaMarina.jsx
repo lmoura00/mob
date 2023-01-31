@@ -69,7 +69,7 @@ export function RotaMarina(){
                         }
                     )
                 }}
-            />
+              />
             <Marker 
             coordinate={destination}
             title='DESTINO'
