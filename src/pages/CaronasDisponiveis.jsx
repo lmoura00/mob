@@ -120,7 +120,7 @@ export function CaronasDisponiveis(){
         
         const userData = []
        setCaronas(null)
-        get(child(dbRef, `caronas/`))
+        get(child(dbRef, `caronas`))
             
            .then((snapshot) =>{
          
@@ -129,10 +129,17 @@ export function CaronasDisponiveis(){
                 let date = {
                     key: childItem.key,
                     name: childItem.val().name,
+                    lastName: childItem.val().lastname,
                     data: childItem.val().data,
                     placa: childItem.val().placa,
                     horario: childItem.val().horario,
-                    image: childItem.val().imageUrl
+                    image: childItem.val().imageUrl,
+                    partida: childItem.val().partida,
+                    destino: childItem.val().destino,
+                    uid: childItem.val().uid,
+                    id: childItem.val().id,
+                    vagas: childItem.val().vagas,
+                    telefone: childItem.val().telefone,
                     
                 }
                 
@@ -155,7 +162,7 @@ export function CaronasDisponiveis(){
 
     
 
-    const Item = ( name, horario, data, placa, image ) => [
+    /*const Item = ( name, horario, data, placa, image ) => [
                 <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Detalhes')}>
                     <View style={{width:50, height:50}}>
                         {image ? 
@@ -180,9 +187,9 @@ export function CaronasDisponiveis(){
                     </View>
                 </TouchableOpacity>
 
-    ];
+    ];*/
     
-
+    // refresh pagina
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
         lerCaronas();
@@ -203,7 +210,7 @@ export function CaronasDisponiveis(){
             <FlatList
                 data={caronas}
                 renderItem={({item})=> (
-                    <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Detalhes')}>
+                    <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Detalhes', {item})}>
                     <View style={{width:50, height:50}}>
                     {item.image ? 
                             <Image 
@@ -239,6 +246,7 @@ export function CaronasDisponiveis(){
                     </View>
                 </TouchableOpacity>
                 )} 
+                keyExtractor={item => item.id}
             />
             
 

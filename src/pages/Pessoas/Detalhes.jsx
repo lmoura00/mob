@@ -12,7 +12,7 @@ import {
   Linking,
 } from "react-native";
 import LottieView from "lottie-react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { getDatabase, ref, child, get, onValue } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import MapView, { Marker } from "react-native-maps";
@@ -23,6 +23,8 @@ import { getStorage, ref as sRef, getDownloadURL,  uploadBytes   } from "firebas
 
 
 export function Detalhes() {
+  const {params} = useRoute()
+  console.log(params)
   const [alerta, setAlerta] = useState(false);
   const [visible, setVisible] = useState(false);
   const [visible1, setVisible1] = useState(false);
@@ -76,49 +78,52 @@ export function Detalhes() {
             longitudeDelta: 0.0421,
         })
         
-        const data = []
-        const db = getDatabase();
-        const dbRef = ref(db, 'caronas/');
+        //caso fizesse leitura dos dados diretamente do firebase
+          /*const data = []
+          const db = getDatabase();
+          const dbRef = ref(db, 'caronas/');
         //ler dados
-        onValue(dbRef, (snapshot) => {
-          snapshot.forEach((childSnapshot) => {
-            const childKey = childSnapshot.key;
-            const childData = childSnapshot.val();
-            console.log(childKey)
+          onValue(dbRef, (snapshot) => {
+            snapshot.forEach((childSnapshot) => {
+              const childKey = childSnapshot.key;
+              const childData = childSnapshot.val();
+              console.log(childKey)
+            });
+          }, {
+            onlyOnce: true
           });
-        }, {
-          onlyOnce: true
-        });
-        await get(child(dbRef, `caronas/`))
-        .then((snapshot) => {
-          if (snapshot.exists()) {
-            setName(snapshot.val().name);
-            setPlaca(snapshot.val().placa);
-            setVagas(snapshot.val().vagas);
-            setHorario(snapshot.val().horario);
-            setStart(snapshot.val().partida);
-            setDestino(snapshot.val().destino);
-            setData(snapshot.val().data);
-            setTelefone(snapshot.val().telefone);
-            setLastname(snapshot.val().lastname);
-            setImage(snapshot.val().imageUrl)
+          await get(child(dbRef, `caronas/`))
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              setName(snapshot.val().name);
+              setPlaca(snapshot.val().placa);
+              setVagas(snapshot.val().vagas);
+              setHorario(snapshot.val().horario);
+              setStart(snapshot.val().partida);
+              setDestino(snapshot.val().destino);
+              setData(snapshot.val().data);
+              setTelefone(snapshot.val().telefone);
+              setLastname(snapshot.val().lastname);
+              setImage(snapshot.val().imageUrl)
 
-          } else {
-            console.log("No data available");
-          }
-        }).catch((error) => {
-          console.error(error);
-        });
-        //ler imagem
-        const storage = getStorage();
-        await getDownloadURL(sRef(storage, `${userUID}`))
-        .then((url) => {
-          setImage(url)
-    
-        })
+            } else {
+              console.log("No data available");
+            }
+          }).catch((error) => {
+            console.error(error);
+          });
+        //ler imagem do firebase
+            const storage = getStorage();
+            await getDownloadURL(sRef(storage, `${userUID}`))
+            .then((url) => {
+              setImage(url)
+            })*/
+        setImage(params.item.image) //ler imagem direto do params
+        setStart(params.item.partida) //set partida corrida
+        setDestino(params.item.destino) //set destino corrida
       }
       ler()
-      console.log(name)
+     
      
       
 
@@ -152,7 +157,7 @@ export function Detalhes() {
             >
               <TouchableOpacity 
                 onPress={() => {
-                  Linking.openURL(`http://api.whatsapp.com/send?phone=55 + ${telefone} + &text=Essa+carona+ainda+se+encontra+disponível? `);
+                  Linking.openURL(`http://api.whatsapp.com/send?phone=55 + ${params.item.telefone} + &text=Essa+carona+ainda+se+encontra+disponível? `);
                 }}
                 style={styles.botaoModal2}>
               <Text style={styles.textBotao}>SIM!</Text>
@@ -227,12 +232,12 @@ export function Detalhes() {
         </Modal>
         {image ? 
                     <Image
-                    source={{ uri: image }}
+                    source={{ uri: params.item.image }}
                     style={{
-                      width: 150,
-                      height: 150,
+                      width: 180,
+                      height: 180,
                       alignSelf: "center",
-                      marginBottom: 20,
+                      marginBottom: 0,
                       marginTop: 20,
                       borderRadius:50,
                       borderWidth:2,
@@ -242,7 +247,7 @@ export function Detalhes() {
                     source={require("../../Assets/95740-profile-person.json")}
                     autoPlay={true}
                     loop={true}
-                    style={{ marginBottom: 330 }}
+                    style={{ marginBottom: 355 }}
                   />   
 
       
@@ -250,13 +255,13 @@ export function Detalhes() {
         
         <View
           style={{
-            ...image ? {marginTop: 20,} : {marginTop:180, },
+            ...image ? {marginTop: 10,} : {marginTop:180, },
             
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <Text style={styles.title}>{name} {lastname}</Text>
+          <Text style={styles.title}>{params.item.name} {params.item.lastName}</Text>
           {/*<Text style={styles.texto}>AUDI R8</Text>
           <Text style={styles.texto}>COR: PRATA </Text>*/}
         </View>
@@ -268,20 +273,20 @@ export function Detalhes() {
           style={{ width: 150, height: 90, marginBottom: 5, marginLeft: 15 }}
         />*/}
 
-        <Text style={styles.texto}>PLACA: {placa}</Text>
+        <Text style={styles.texto}>PLACA: {params.item.placa}</Text>
         <Text style={styles.texto}>CONTATO:</Text>
         <Text
           style={styles.textoNúmero}
           onPress={() => {
-            Linking.openURL("http://api.whatsapp.com/send?phone=55" + telefone);
+            Linking.openURL("http://api.whatsapp.com/send?phone=55" + params.item.telefone);
           }}
         >
-        {telefone}
+        {params.item.telefone}
         </Text>
 
         <KeyboardAvoidingView style={{ flexDirection: "row" }}>
           <Text style={styles.vagas}>VAGAS DISPONÍVEIS:</Text>
-          <Text style={styles.vagasNumero}>{vagas}</Text>
+          <Text style={styles.vagasNumero}>{params.item.vagas}</Text>
         </KeyboardAvoidingView>
           {start && <View>
           <MapView
@@ -317,14 +322,20 @@ export function Detalhes() {
               {start&& <Marker coordinate={start} title='COMEÇO' pinColor={'#14BC9C'}/>}
           </MapView>
         </View> }
+
+
+        <KeyboardAvoidingView style={{ flexDirection: "row" }}>
+          <Text style={styles.vagas}>DATA CARONA:</Text>
+          <Text style={styles.vagasNumero}>{params.item.data}</Text>
+        </KeyboardAvoidingView>
+
+        <KeyboardAvoidingView style={{ flexDirection: "row" }}>
+          <Text style={styles.vagas}>HORÁRIO CARONA:</Text>
+          <Text style={styles.vagasNumero}>{params.item.horario}</Text>
+        </KeyboardAvoidingView>
         
 
-        <TouchableOpacity
-          style={styles.botaoVerRota}
-          onPress={() => setAlerta(true)}
-        >
-          <Text style={styles.titleBotao}>VER ROTA</Text>
-        </TouchableOpacity>
+
 
         <TouchableOpacity
           style={styles.botaoQueroACarona}
