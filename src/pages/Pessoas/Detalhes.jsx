@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import LottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/native";
-import { getDatabase, ref, child, get } from "firebase/database";
+import { getDatabase, ref, child, get, onValue } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
@@ -59,8 +59,8 @@ export function Detalhes() {
   const [pax, setPax] = useState(n);
   const auth = getAuth()
   const userUID = auth.currentUser.uid
-  useEffect(()=>{
-      async function ler() {
+  useEffect( ()=>{
+       async function ler() {
           
         let { status } = await Location.requestForegroundPermissionsAsync();
         if (status !== 'granted') {
@@ -77,9 +77,19 @@ export function Detalhes() {
         })
         
         const data = []
-        const dbRef = ref(getDatabase());
-        
-        await get(child(dbRef, `caronas/${`-NMo5ziDPfGHvDGHHG3m`}`))
+        const db = getDatabase();
+        const dbRef = ref(db, 'caronas/');
+        //ler dados
+        onValue(dbRef, (snapshot) => {
+          snapshot.forEach((childSnapshot) => {
+            const childKey = childSnapshot.key;
+            const childData = childSnapshot.val();
+            console.log(childKey)
+          });
+        }, {
+          onlyOnce: true
+        });
+        await get(child(dbRef, `caronas/`))
         .then((snapshot) => {
           if (snapshot.exists()) {
             setName(snapshot.val().name);
@@ -91,6 +101,7 @@ export function Detalhes() {
             setData(snapshot.val().data);
             setTelefone(snapshot.val().telefone);
             setLastname(snapshot.val().lastname);
+            setImage(snapshot.val().imageUrl)
 
           } else {
             console.log("No data available");
@@ -98,9 +109,8 @@ export function Detalhes() {
         }).catch((error) => {
           console.error(error);
         });
-        
+        //ler imagem
         const storage = getStorage();
-        
         await getDownloadURL(sRef(storage, `${userUID}`))
         .then((url) => {
           setImage(url)
@@ -108,7 +118,7 @@ export function Detalhes() {
         })
       }
       ler()
-      console.log(destino)
+      console.log(name)
      
       
 

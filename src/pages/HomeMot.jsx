@@ -27,13 +27,14 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { getDatabase, ref, set, onValue, push, update, child, get, DataSnapshot } from "firebase/database";
-
+import { getStorage, ref as sRef, getDownloadURL,  uploadBytes, deleteObject    } from "firebase/storage";
 
 import { useNavigation } from "@react-navigation/native";
 import MaskInput, {Masks, createNumberMask } from "react-native-mask-input";
 
 export function HomeMot() {
   const GOOGLE_MAPS_APIKEY = api.googleApi;
+  const [imageUrl, setImageUrl] = useState(null)
   const [start, setStart] = useState(null);
   const [destino, setDestino] = useState(null);
   const [aberto, setAberto] = useState(false);
@@ -82,6 +83,16 @@ export function HomeMot() {
       }).catch((error) => {
         console.error(error);
       });
+      const storage = getStorage();
+      getDownloadURL(sRef(storage, `${userId}`))
+        .then((url) => {
+          
+          setImageUrl(url)
+
+        })
+        .catch((error)=>{
+          console.log(error)
+        })
     }
     
    
@@ -91,7 +102,9 @@ export function HomeMot() {
 
 
   
-    let CarMot = Math.floor(Math.random() * 1000) + 1 
+    //let CarMot = Math.floor(Math.random() * 1000) + 1 
+
+    
     const userUid = auth.currentUser.uid
     function enviarCarona(nome, sobrenome, telefone, partida, destino, placa, data, horario, vagas) {
         const db = getDatabase();
@@ -99,6 +112,7 @@ export function HomeMot() {
         set(ref(db , "caronas/" + newCaronaKey  ), {
             id: newCaronaKey,
             uid:userUid,
+            imageUrl:imageUrl,
             name: nome,
             lastname: sobrenome,
             telefone:telefone,
@@ -205,7 +219,7 @@ export function HomeMot() {
                     <View style={{alignItems:'center', marginBottom:5}}>
                         <Text style={styles.titleModal}>CONFIRMA?</Text>
                     </View>
-                <MapView 
+                    {start &&       <MapView 
                     style={{flex:1, elevation:10, borderRadius:8}}
                     initialRegion={start}
                     showsUserLocation={false}
@@ -240,7 +254,8 @@ export function HomeMot() {
                 coordinate={start}
                 pinColor={'#14BC9C'}
                 />
-                </MapView>
+                </MapView>}
+          
               
 
           
@@ -294,6 +309,19 @@ export function HomeMot() {
         disableScroll
         styles={{ listView: {minHeight:150, marginTop:50 } }}
       />
+      {start&& 
+        <MapView 
+          style={{height:120, width:'50%', position:"absolute", left: 100, top:100}}
+          initialRegion={start}
+          showsUserLocation={false}
+          loadingEnabled
+        >
+          <Marker
+            coordinate={start}
+            pinColor={'#14BC9C'}
+          />
+        </MapView>
+      }
     </View>
     <View style={{marginTop:50, marginBottom:45}}>
 
@@ -317,6 +345,18 @@ export function HomeMot() {
         fetchDetails={true}
         styles={{  listView: {minHeight:150, marginTop:50 } }}
       />
+            {destino&& 
+        <MapView 
+          style={{height:120, width:'50%', position:"absolute", left: 100, top:100}}
+          initialRegion={destino}
+          showsUserLocation={false}
+          loadingEnabled
+        >
+          <Marker
+            coordinate={destino}
+          />
+        </MapView>
+      }
       
     </View>
     <ScrollView style={{marginTop:150}}>

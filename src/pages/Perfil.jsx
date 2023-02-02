@@ -17,7 +17,7 @@ import { getDatabase, ref, child, get, onValue, DataSnapshot, set, update} from 
 import { getAuth, onAuthStateChanged, updateProfile, updateEmail, updatePassword } from "firebase/auth";
 import { useEffect } from "react";
 import { useAuth } from "../Hooks/Auth";
-import { getStorage, ref as sRef, getDownloadURL,  uploadBytes   } from "firebase/storage";
+import { getStorage, ref as sRef, getDownloadURL,  uploadBytes, deleteObject    } from "firebase/storage";
 
 export function Perfil() {
   const [nome, setNome] = useState('');
@@ -30,12 +30,14 @@ export function Perfil() {
   const [confSenha, setConfSenha] = useState('')
   const [visible, setVisible] = useState(false);
   const [image, SetImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
   const { setUser } = useAuth();
   function sair(){
     () => setVisible(false) && navigation.navigate('CaronasDisponiveis')
   }
   const navigation = useNavigation();
-
+  const auth = getAuth();
+  let userUid = auth.currentUser.uid 
  
     useEffect(()=>{
        function ler(){
@@ -60,13 +62,18 @@ export function Perfil() {
         }).catch((error) => {
           console.error(error);
         });
-        const storage = getStorage();
 
+
+        const storage = getStorage();
         getDownloadURL(sRef(storage, `${userId}`))
         .then((url) => {
           console.log(url),
+          setImageUrl(url),
           SetImage(url)
 
+        })
+        .catch((error)=>{
+          console.log(error)
         })
       }
       
@@ -87,7 +94,8 @@ export function Perfil() {
           date:date,
           cpf: cpf,
           telefone:telefone,
-          senha: senha
+          senha: senha,
+          image:imageUrl
   
         })
         .then(()=>{
@@ -126,7 +134,15 @@ export function Perfil() {
     
     }
    
-
+    function apagarFoto(){
+      const storage = getStorage();
+      const storageRef = sRef(storage, `${userUid}`);
+      deleteObject(storageRef).then(() => {
+        console.log('Foto apagada')
+      }).catch((error) => {
+        console.log('Um erro aconteceu')
+      });
+    }
 
 
   const pickImage = async () => {
@@ -273,7 +289,7 @@ export function Perfil() {
           <Text style={styles.textBotao}>Selecione a sua foto</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.botao4} onPress={() => SetImage(null)}>
+        <TouchableOpacity style={styles.botao4} onPress={() => SetImage(null) || apagarFoto()}>
           <Text style={styles.textBotao}>Apagar foto</Text>
         </TouchableOpacity>
 

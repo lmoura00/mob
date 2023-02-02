@@ -4,11 +4,15 @@ import { SimpleLineIcons } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
 import {useNavigation} from '@react-navigation/native'
 import LottieView from 'lottie-react-native'
-import { getDatabase, ref, child, get, onValue, push} from "firebase/database";
+import { getDatabase, ref, child, get, onValue, push, set} from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { db } from '../../firebaseConfig';
+import { getStorage, ref as sRef, getDownloadURL,  uploadBytes, deleteObject    } from "firebase/storage";
+
 
 import { useState } from "react";
 import { useEffect } from "react";
+
 
 
 
@@ -16,13 +20,16 @@ export function CaronasDisponiveis(){
     
     const navigation = useNavigation()
     const [name, setname] = useState()
-    const [caronas, setCaronas] = useState([]) 
+    const [caronas, setCaronas] = useState({}) 
+
     const wait = (timeout) => {
         return new Promise(resolve => setTimeout(resolve, timeout));
     }
     
     const [refreshing, setRefreshing] = React.useState(false);
-
+    const auth = getAuth()
+    const dbRef = ref(getDatabase());
+    const userId = auth.currentUser.uid
 
 
 
@@ -30,7 +37,7 @@ export function CaronasDisponiveis(){
 
 
     useEffect(()=>{
-         function lerNome(){
+        function lerNome(){
             const auth = getAuth()
             const dbRef = ref(getDatabase());
             const userId = auth.currentUser.uid
@@ -43,9 +50,31 @@ export function CaronasDisponiveis(){
             }).catch((error) => {
               console.error(error);
             });
-
         }
-       lerNome()
+        /*function lerCaronas(){
+         /*onValue(ref(db, '/caronas'), querySnapShot => {
+                let data = querySnapShot.val() || {};
+                let todoItems = {...data, 
+                    key: querySnapShot.key,
+                    name: querySnapShot.val().name,
+                    placa: querySnapShot.val().placa,
+                    horario: querySnapShot.val().horario,
+
+                };
+                setCaronas(todoItems);
+                console.log(caronas)
+            });  
+            const db = getDatabase();
+            const caronasRef = ref(db, 'caronas/');
+            onValue(caronasRef, (snapshot) => {
+            const data = snapshot.val();
+            setCaronas(data)
+            });
+            
+        }*/
+       lerNome();
+        lerCaronas();
+        
        
     },[])
     
@@ -85,53 +114,56 @@ export function CaronasDisponiveis(){
 
 
     ]
-    const userData = [];
+
     function lerCaronas(){
-        const dbRef = ref(getDatabase());
-        get(child(dbRef, `caronas`))
+        
+        
+        const userData = []
+       setCaronas(null)
+        get(child(dbRef, `caronas/`))
+            
            .then((snapshot) =>{
          
                
-             /* userData.push(snapshot?.forEach((childItem)=>{
+              userData.push(snapshot.forEach((childItem)=>{
                 let date = {
                     key: childItem.key,
                     name: childItem.val().name,
                     data: childItem.val().data,
                     placa: childItem.val().placa,
                     horario: childItem.val().horario,
+                    image: childItem.val().imageUrl
                     
                 }
                 
-                setCaronas(date)
+                userData.push(date)
+                setCaronas(userData)
+                console.log(date.key)
+                
 
-            }));*/
-
-               snapshot?.forEach((childItem)=>{
-                   let date = {
-                       key: childItem.key,
-                       name: childItem.val().name,
-                       data: childItem.val().data,
-                       placa: childItem.val().placa,
-                       horario: childItem.val().horario,
-                       
-                   }
-                   
-                   setCaronas(date)
-  
-               })
-               console.log(caronas)
+            }));
              
      
            }).catch((error) => {
            console.error(error);
            });
-       }
+
+       
+        
+    }
  
 
-    const Item = ({name, horario, data, placa }) => (
+    
+
+    const Item = ( name, horario, data, placa, image ) => [
                 <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Detalhes')}>
                     <View style={{width:50, height:50}}>
-                    <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{}} />
+                        {image ? 
+                            <Image source={image}/>
+                            : 
+                            <LottieView source={require('../Assets/28497-profile-icon.json')} autoPlay={true} loop={true} style={{}} />
+                        }
+                    
                     </View>
                     <View style={{flexDirection:'column'}}>
                         <Text style={styles.name}>{name}</Text>
@@ -148,7 +180,7 @@ export function CaronasDisponiveis(){
                     </View>
                 </TouchableOpacity>
 
-    );
+    ];
     
 
     const onRefresh = React.useCallback(() => {
@@ -157,6 +189,7 @@ export function CaronasDisponiveis(){
         wait(500).then(() => setRefreshing(false));
     }, []);
 
+   
     return(
         <SafeAreaView style={styles.container}>
             <RefreshControl style={{flex:1}} onRefresh={onRefresh} refreshing={refreshing}>
@@ -165,18 +198,49 @@ export function CaronasDisponiveis(){
             <View>
                 <Text style={{color:'#f9f9f9', fontSize: 25, textAlign:'center'}}>Bem vindo(a) {name}</Text>
             </View>
-                <FlatList
-                    data={data}
-                    renderItem={
-                        ({item})=> 
-                        <Item 
-                        data={item.data}
-                        horario = {item.horario}
-                        name = {item.name}
-                        placa = {item.placa}
-                        /> }
-                        keyExtractor={(item)=>item.key}
-                        />
+
+           
+            <FlatList
+                data={caronas}
+                renderItem={({item})=> (
+                    <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Detalhes')}>
+                    <View style={{width:50, height:50}}>
+                    {item.image ? 
+                            <Image 
+                                source={{uri:item.image}} 
+                                style={{
+                                    width:50, 
+                                    height:50, 
+                                    borderRadius:25, 
+                                    borderWidth:2,
+                                    borderColor:'#252525'
+                                }}/>
+                            : 
+                            <LottieView 
+                                source={require('../Assets/28497-profile-icon.json')} 
+                                autoPlay={true} 
+                                loop={true} 
+                                style={{}} 
+                            />
+                        }
+                    </View>
+                    <View style={{flexDirection:'column'}}>
+                        <Text style={styles.name}>{item.name}</Text>
+                        <Text >{item.placa}</Text>
+                    
+                    </View>
+
+                    <View style={{flexDirection:'column'}}>
+                        <Text>PARTIDA: {item.horario} h</Text>
+                        <Text>{item.data}</Text>
+                    </View>
+                    <View style={{height:50, width:50}}>
+                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} />
+                    </View>
+                </TouchableOpacity>
+                )} 
+            />
+            
 
 
                 
