@@ -8,6 +8,7 @@ import { getDatabase, ref, child, get, onValue, push, set} from "firebase/databa
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { db } from '../../firebaseConfig';
 import { getStorage, ref as sRef, getDownloadURL,  uploadBytes, deleteObject    } from "firebase/storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 import { useState } from "react";
@@ -72,8 +73,8 @@ export function CaronasDisponiveis(){
             });
             
         }*/
-       lerNome();
-        lerCaronas();
+    lerNome();
+    lerCaronas();
         
        
     },[])
@@ -125,7 +126,7 @@ export function CaronasDisponiveis(){
            .then((snapshot) =>{
          
                
-              userData.push(snapshot.forEach((childItem)=>{
+              snapshot.forEach((childItem)=>{
                 let date = {
                     key: childItem.key,
                     name: childItem.val().name,
@@ -145,10 +146,10 @@ export function CaronasDisponiveis(){
                 
                 userData.push(date)
                 setCaronas(userData)
-                console.log(date.key)
+                console.log(date.name)
                 
 
-            }));
+            });
              
      
            }).catch((error) => {
@@ -203,7 +204,7 @@ export function CaronasDisponiveis(){
 
 
             <View>
-                <Text style={{color:'#f9f9f9', fontSize: 25, textAlign:'center'}}>Bem vindo(a) {name}</Text>
+                <Text style={{color:'#f9f9f9', fontSize: 25, textAlign:'center', marginBottom:10, textDecorationLine:'underline'}}>Bem vindo(a) {name}</Text>
             </View>
 
            
@@ -246,7 +247,7 @@ export function CaronasDisponiveis(){
                     </View>
                 </TouchableOpacity>
                 )} 
-                keyExtractor={item => item.id}
+             
             />
             
 
@@ -276,7 +277,9 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'space-evenly',
         borderWidth:2,
-        margin:5
+        marginBottom:12,
+        borderRadius:8, 
+        elevation:10
     },
     title:{
         fontSize:25,

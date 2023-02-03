@@ -413,7 +413,7 @@ export function CadastroPax() {
         placeholder="Senha"
         keyboardType="default"
         value={senha}
-        maxLength={8}
+        maxLength={12}
         onChangeText={setSenha}
       ></TextInput>
 
@@ -433,7 +433,7 @@ export function CadastroPax() {
         placeholder="Confirme sua senha"
         keyboardType="default"
         value={confSenha}
-        maxLength={8}
+        maxLength={12}
         onChangeText={setConfSenha}
       ></TextInput>
       <View style={{ flexDirection: "row", alignItems: "center" }}>

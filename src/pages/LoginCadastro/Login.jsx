@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {View, Text, Switch, StyleSheet, Image, Keyboard, TouchableOpacity, Animated, TextInput, KeyboardAvoidingView, TurboModuleRegistry, Alert} from 'react-native'
+import {View, Text, Switch, StyleSheet, Image, Keyboard, TouchableOpacity, Animated, TextInput, KeyboardAvoidingView, Alert} from 'react-native'
 import { Ionicons } from '@expo/vector-icons'; 
 import { AntDesign } from '@expo/vector-icons'; 
 import logo from '../../images/logo.jpg'
@@ -12,7 +12,7 @@ import database from "../../../firebaseConfig";
 import LottieView from 'lottie-react-native'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { getDatabase, ref, child, get } from "firebase/database";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -22,7 +22,7 @@ export function Login(){
     const [password, setPassword] = useState("")
     const [PasswordVisible, setPasswordVisible] = useState(true)
 
-    const {setUser} = useAuth()
+    const {user, setUser} = useAuth()
     const navigation = useNavigation()
     const [offset] = useState(new Animated.ValueXY({x:0,y:95}));
     const [opacity] = useState(new Animated.Value(0));
@@ -37,22 +37,24 @@ export function Login(){
 
 
     function SignIn(){
-        signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in 
-            setUser(userCredential.user.uid);
-            console.log(userCredential.user.uid)
-            
-        })
-        .catch((error) => {
-          Alert.alert('Atenção','login invalido')
-        });
+            signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                setUser(userCredential.user.uid)
+                
+            })
+            .catch((error) => {
+              Alert.alert('Atenção','login invalido')
+            });
+        
+        
     }
     
 
 
 
     useEffect(()=> {
+   
         KeyboardDidShowListener = Keyboard.addListener('keyboardDidShow', keyboardDidShow)
         KeyboardDidHideListener = Keyboard.addListener('keyboardDidHide', keyboardDidHide)
         Animated.parallel([
@@ -72,9 +74,50 @@ export function Login(){
     }, [])
 
 
-
+     async function lerAsync(){
+            const getData = async () => {
+                try {
+                const value = await AsyncStorage.getItem('@storage_Key')
+                if(value === null) {
+                   return
+                  
+                }else{
+                    //console.log(value),
+                    //alert(value),
+                    //setUser(value)
+                }
+                } catch {
+                
+                }
+            }
+            getData()
+    }
   
-    
+    function gravarAsync(value){
+        const storeData = async () => {
+            try {
+              await AsyncStorage.setItem('@storage_Key', value)
+            } catch (e) {
+              // saving error
+            }
+          }
+          storeData()
+    }
+
+
+    function removerAsync(){
+        const removeValue = async () => {
+            try {
+              await AsyncStorage.removeItem('@storage_Key')
+            } catch(e) {
+              // remove error
+            }
+          
+            console.log('removido.')
+            alert('removido')
+        }
+        removeValue()
+    }
 
     
     function keyboardDidShow(){
@@ -173,7 +216,7 @@ export function Login(){
                             keyboardType='default'
                             value={password}
                             onChangeText={setPassword} 
-                            maxLength={8} 
+                            maxLength={12} 
                             secureTextEntry={PasswordVisible} 
                             style={styles.SenhaInput}
                             />

@@ -43,7 +43,8 @@ export function Perfil() {
        function ler(){
         const auth = getAuth()
         const dbRef = ref(getDatabase());
-  
+
+  //função para puxar os dados do firebase
         const userId = auth.currentUser.uid
         get(child(dbRef, `users/${userId}`))
         .then((snapshot) => {
@@ -63,11 +64,11 @@ export function Perfil() {
           console.error(error);
         });
 
-
+//função para puxar imagem
         const storage = getStorage();
         getDownloadURL(sRef(storage, `${userId}`))
         .then((url) => {
-          console.log(url),
+          //console.log(url),
           setImageUrl(url),
           SetImage(url)
 
@@ -82,7 +83,7 @@ export function Perfil() {
 
     },[])
 
-
+//função para atualizar
     function ups(name, lastname, email, date, cpf, telefone, senha){
       const auth = getAuth();
       let userUid = auth.currentUser.uid 
@@ -133,7 +134,8 @@ export function Perfil() {
         enviarFoto();
     
     }
-   
+
+//função para apagar foto
     function apagarFoto(){
       const storage = getStorage();
       const storageRef = sRef(storage, `${userUid}`);
@@ -144,7 +146,7 @@ export function Perfil() {
       });
     }
 
-
+//função para selecionar imagem
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -246,7 +248,7 @@ export function Perfil() {
                 placeholder="Senha"
                 keyboardType="default"
                 value={senha}
-                maxLength={8}
+                maxLength={12}
                 onChangeText={setSenha}
               ></TextInput>
         
@@ -256,7 +258,7 @@ export function Perfil() {
                 placeholder="Confirme sua senha"
                 keyboardType="default"
                 value={confSenha}
-                maxLength={6}
+                maxLength={12}
                 onChangeText={setConfSenha}
               ></TextInput>
 

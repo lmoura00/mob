@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   Text,
@@ -13,18 +13,29 @@ import {
 } from "react-native";
 import LottieView from "lottie-react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { getDatabase, ref, child, get, onValue } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  child,
+  get,
+  onValue,
+  remove,
+} from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import MapViewDirections from "react-native-maps-directions";
 import api from "../../../config/index.json";
-import { getStorage, ref as sRef, getDownloadURL,  uploadBytes   } from "firebase/storage";
-
+import {
+  getStorage,
+  ref as sRef,
+  getDownloadURL,
+  uploadBytes,
+} from "firebase/storage";
 
 export function Detalhes() {
-  const {params} = useRoute()
-  console.log(params)
+  const { params } = useRoute();
+  console.log(params);
   const [alerta, setAlerta] = useState(false);
   const [visible, setVisible] = useState(false);
   const [visible1, setVisible1] = useState(false);
@@ -32,7 +43,7 @@ export function Detalhes() {
   const navigation = useNavigation();
   const [name, setName] = useState(null);
   const [image, setImage] = useState(null);
-  const [lastname, setLastname] = useState()
+  const [lastname, setLastname] = useState();
   const [telefone, setTelefone] = useState();
   const [placa, setPlaca] = useState();
   const [vagas, setVagas] = useState();
@@ -59,27 +70,28 @@ export function Detalhes() {
   }
 
   const [pax, setPax] = useState(n);
-  const auth = getAuth()
-  const userUID = auth.currentUser.uid
-  useEffect( ()=>{
-       async function ler() {
-          
-        let { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== 'granted') {
-          setErrorMsg('Permissão ao acesso a localização foi negado');
-          return;
-        }
+  const auth = getAuth();
+  const userUID = auth.currentUser.uid;
+  const db = getDatabase();
+  const [dono, setDono] = useState(false);
+  useEffect(() => {
+    async function ler() {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permissão ao acesso a localização foi negado");
+        return;
+      }
 
-        let locationCurrent = await Location.getCurrentPositionAsync({});
-        setLocation({
-            latitude: locationCurrent.coords.latitude,
-            longitude: locationCurrent.coords.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-        })
-        
-        //caso fizesse leitura dos dados diretamente do firebase
-          /*const data = []
+      let locationCurrent = await Location.getCurrentPositionAsync({});
+      setLocation({
+        latitude: locationCurrent.coords.latitude,
+        longitude: locationCurrent.coords.longitude,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      });
+
+      //caso fizesse leitura dos dados diretamente do firebase
+      /*const data = []
           const db = getDatabase();
           const dbRef = ref(db, 'caronas/');
         //ler dados
@@ -118,20 +130,25 @@ export function Detalhes() {
             .then((url) => {
               setImage(url)
             })*/
-        setImage(params.item.image) //ler imagem direto do params
-        setStart(params.item.partida) //set partida corrida
-        setDestino(params.item.destino) //set destino corrida
+      setImage(params.item.image); //ler imagem direto do params
+      setStart(params.item.partida); //set partida corrida
+      setDestino(params.item.destino); //set destino corrida
+
+      if (params.item.uid === userUID) {
+        console.log("verdade");
+        setDono(true);
+      } else {
+        console.log("falso");
       }
-      ler()
-     
-     
-      
+    }
+    ler();
+  }, []);
 
-
-    
-    
-  },[])
-
+  function apagarCorrida() {
+    remove(ref(db, "caronas/" + params.item.id));
+    console.log("carona removida");
+    navigation.goBack;
+  }
 
   return (
     <ScrollView style={{ backgroundColor: "#334A58" }}>
@@ -155,12 +172,15 @@ export function Detalhes() {
                 marginTop: 40,
               }}
             >
-              <TouchableOpacity 
+              <TouchableOpacity
                 onPress={() => {
-                  Linking.openURL(`http://api.whatsapp.com/send?phone=55 + ${params.item.telefone} + &text=Essa+carona+ainda+se+encontra+disponível? `);
+                  Linking.openURL(
+                    `http://api.whatsapp.com/send?phone=55 + ${params.item.telefone} + &text=Essa+carona+ainda+se+encontra+disponível? `
+                  );
                 }}
-                style={styles.botaoModal2}>
-              <Text style={styles.textBotao}>SIM!</Text>
+                style={styles.botaoModal2}
+              >
+                <Text style={styles.textBotao}>SIM!</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={NaoPax} style={styles.botaoModal1}>
                 <Text style={styles.textBotao}>NÃO</Text>
@@ -230,38 +250,40 @@ export function Detalhes() {
             </TouchableOpacity>
           </View>
         </Modal>
-        {image ? 
-                    <Image
-                    source={{ uri: params.item.image }}
-                    style={{
-                      width: 180,
-                      height: 180,
-                      alignSelf: "center",
-                      marginBottom: 0,
-                      marginTop: 20,
-                      borderRadius:50,
-                      borderWidth:2,
-                      borderColor:'#F6C445',
-                    }}/> :        
-                    <LottieView
-                    source={require("../../Assets/95740-profile-person.json")}
-                    autoPlay={true}
-                    loop={true}
-                    style={{ marginBottom: 355 }}
-                  />   
+        {image ? (
+          <Image
+            source={{ uri: params.item.image }}
+            style={{
+              width: 180,
+              height: 180,
+              alignSelf: "center",
+              marginBottom: 0,
+              marginTop: 20,
+              borderRadius: 50,
+              borderWidth: 2,
+              borderColor: "#F6C445",
+            }}
+          />
+        ) : (
+          <LottieView
+            source={require("../../Assets/95740-profile-person.json")}
+            autoPlay={true}
+            loop={true}
+            style={{ marginBottom: 390 }}
+          />
+        )}
 
-      
-        }
-        
         <View
           style={{
-            ...image ? {marginTop: 10,} : {marginTop:180, },
-            
+            ...(image ? { marginTop: 10 } : { marginTop: 180 }),
+
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <Text style={styles.title}>{params.item.name} {params.item.lastName}</Text>
+          <Text style={styles.title}>
+            {params.item.name} {params.item.lastName}
+          </Text>
           {/*<Text style={styles.texto}>AUDI R8</Text>
           <Text style={styles.texto}>COR: PRATA </Text>*/}
         </View>
@@ -278,64 +300,68 @@ export function Detalhes() {
         <Text
           style={styles.textoNúmero}
           onPress={() => {
-            Linking.openURL("http://api.whatsapp.com/send?phone=55" + params.item.telefone);
+            Linking.openURL(
+              "http://api.whatsapp.com/send?phone=55" + params.item.telefone
+            );
           }}
         >
-        {params.item.telefone}
+          {params.item.telefone}
         </Text>
 
         <KeyboardAvoidingView style={{ flexDirection: "row" }}>
           <Text style={styles.vagas}>VAGAS DISPONÍVEIS:</Text>
           <Text style={styles.vagasNumero}>{params.item.vagas}</Text>
         </KeyboardAvoidingView>
-          {start && <View>
-          <MapView
-            initialRegion={location}
-            ref={mapEl}
-            style={styles.map}
-            showsUserLocation={true}
-            zoomEnabled={false}
-            scrollEnabled={false}
-            loadingEnabled={true}
-          >
+        {start && (
+          <View>
+            <MapView
+              initialRegion={location}
+              ref={mapEl}
+              style={styles.map}
+              showsUserLocation={true}
+              zoomEnabled={false}
+              scrollEnabled={false}
+              loadingEnabled={true}
+            >
               <MapViewDirections
                 origin={start}
                 destination={destino}
                 apikey={GOOGLE_MAPS_APIKEY}
                 strokeWidth={3}
                 strokeColor="blue"
-                onReady={result=>{
-                    SetDistance(result.distance)
-                    mapEl.current.fitToCoordinates(
-                        result.coordinates,{
-                            edgePadding:{
-                                top:50,
-                                bottom:50,
-                                left:50,
-                                right:50,
-                            }
-                        }
-                    )
+                onReady={(result) => {
+                  SetDistance(result.distance);
+                  mapEl.current.fitToCoordinates(result.coordinates, {
+                    edgePadding: {
+                      top: 50,
+                      bottom: 50,
+                      left: 50,
+                      right: 50,
+                    },
+                  });
                 }}
               />
-              {start&& <Marker coordinate={destino} title='DESTINO' />}
-              {start&& <Marker coordinate={start} title='COMEÇO' pinColor={'#14BC9C'}/>}
-          </MapView>
-        </View> }
-
+              {start && <Marker coordinate={destino} title="DESTINO" />}
+              {start && (
+                <Marker
+                  coordinate={start}
+                  title="COMEÇO"
+                  pinColor={"#14BC9C"}
+                />
+              )}
+            </MapView>
+          </View>
+        )}
 
         <KeyboardAvoidingView style={{ flexDirection: "row" }}>
-          <Text style={styles.vagas}>DATA CARONA:</Text>
+          <Text style={styles.vagas}>DATA:</Text>
           <Text style={styles.vagasNumero}>{params.item.data}</Text>
         </KeyboardAvoidingView>
 
         <KeyboardAvoidingView style={{ flexDirection: "row" }}>
-          <Text style={styles.vagas}>HORÁRIO CARONA:</Text>
+          <Text style={styles.vagas}>HORÁRIO:</Text>
           <Text style={styles.vagasNumero}>{params.item.horario}</Text>
         </KeyboardAvoidingView>
-        
-
-
 
         <TouchableOpacity
           style={styles.botaoQueroACarona}
@@ -345,11 +371,24 @@ export function Detalhes() {
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={styles.botaoNaoEParaMim}
+          style={{... (dono ? {marginBottom:10}: {marginBottom:30}),
+          backgroundColor: "#FF3030",
+          height: 45,
+          width: 270,
+          marginTop: 10,
+          borderRadius: 8,
+          borderWidth: 0,
+          elevation: 10,}}
           onPress={() => navigation.navigate("CaronasDisponiveis")}
         >
           <Text style={styles.titleBotao}>NÃO É PARA MIM</Text>
         </TouchableOpacity>
+
+        {dono && (
+          <TouchableOpacity style={styles.botaoVerRota} onPress={apagarCorrida}>
+            <Text style={styles.titleBotao}>EXCLUIR CARONA</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </ScrollView>
   );
@@ -370,12 +409,12 @@ const styles = StyleSheet.create({
     color: "black",
     marginBottom: 8,
     fontFamily: "Inter_600SemiBold",
-    textTransform:"uppercase"
+    textTransform: "uppercase",
   },
   texto: {
     fontSize: 25,
     fontFamily: "Ubuntu_400Regular",
-    textTransform:'uppercase'
+    textTransform: "uppercase",
   },
   textoNúmero: {
     fontSize: 25,
@@ -424,29 +463,21 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   botaoQueroACarona: {
-    backgroundColor: "#fff",
-    height: 45,
-    width: 270,
-    marginTop: 10,
-    borderRadius: 8,
-    borderWidth: 0,
-    elevation: 10,
-  },
-  botaoNaoEParaMim: {
-    backgroundColor: "#FF3030",
-    height: 45,
-    width: 270,
-    marginTop: 10,
-    borderRadius: 8,
-    borderWidth: 0,
-    marginBottom: 30,
-    elevation: 10,
-  },
-  botaoVerRota: {
     backgroundColor: "#14BC9C",
     height: 45,
     width: 270,
     marginTop: 10,
+    borderRadius: 8,
+    borderWidth: 0,
+    elevation: 10,
+  },
+  botaoNaoEParaMim: {},
+  botaoVerRota: {
+    backgroundColor: "#fff",
+    height: 45,
+    width: 270,
+    marginTop: 20,
+    marginBottom: 30,
     borderRadius: 8,
     borderWidth: 0,
     elevation: 10,
@@ -542,9 +573,8 @@ const styles = StyleSheet.create({
     width: "80%",
     height: "50%",
   },
-  map:{
-    width:250,
-    height:300,
-  
-  }
+  map: {
+    width: 250,
+    height: 300,
+  },
 });

@@ -261,6 +261,7 @@ const styles = StyleSheet.create({
   middle: {
     fontSize: 20,
     fontFamily: "BalsamiqSans_400Regular",
+    textTransform:'capitalize'
   },
   link: {
     fontSize: 20,

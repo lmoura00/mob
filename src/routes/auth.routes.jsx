@@ -107,16 +107,34 @@ import {Teste2} from '../pages/Teste2'
 import {HomeMot} from '../pages/HomeMot'
 import { getAuth, signOut } from "firebase/auth";
 import { Detalhes } from "../pages/Pessoas/Detalhes";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function AuthRoutesTabBar() {
   const { setUser } = useAuth();
   const { Navigator, Screen } = createBottomTabNavigator();
   const auth = getAuth();
 
+
+  function removerAsync(){
+    const removeValue = async () => {
+        try {
+          await AsyncStorage.removeItem('@storage_Key')
+        } catch(e) {
+          // remove error
+        }
+      
+        console.log('removido.')
+        alert('removido')
+    }
+    removeValue()
+}
+
+
+
   function LogOut(){
     signOut(auth).then(() => {
       setUser(null);
-      console.log('LogOut efetuado com sucesso')
+      console.log('LogOut efetuado com sucesso');
     }).catch((error) => {
       Alert.alert('Ops...', 'Algo deu errado, tente novamente mais tarde.')
     });
@@ -201,6 +219,7 @@ function AuthRoutesTabBar() {
           ),
         }}
       />
+
 
 
 
