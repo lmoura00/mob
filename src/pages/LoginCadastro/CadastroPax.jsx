@@ -26,6 +26,7 @@ import {
 import { getDatabase, ref, set, onValue } from "firebase/database";
 import { getStorage, uploadBytes } from "firebase/storage";
 import { ref as sRef } from 'firebase/storage';
+import {DateTimePickerAndroid} from '@react-native-community/datetimepicker';
 
 
 export function CadastroPax() {
@@ -57,7 +58,7 @@ export function CadastroPax() {
   const [visible, setVisible] = useState(false);
   const [confirmar, setConfirmar] = useState(false);
   const [nome, setNome] = useState("");
-  const [date, setDate] = useState("");
+  //const [date, setDate] = useState("");
   const [cpf, setCpf] = useState("");
   const [email, setEmail] = useState("");
   const [telefone, setTelefone] = useState("");
@@ -163,6 +164,35 @@ export function CadastroPax() {
       }
     }
   }
+
+
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setShow(false);
+    setDate(currentDate);
+  };
+
+  const showMode = (currentMode) => {
+    if (Platform.OS === 'android') {
+      setShow(false);
+      // for iOS, add a button that closes the picker
+    }
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
+  const showTimepicker = () => {
+    showMode('time');
+  };
+
+
 
   return (
     <ScrollView style={styles.container}>
@@ -308,13 +338,17 @@ export function CadastroPax() {
         </View>
         <Text style={styles.title}>DATA DE NASCIMENTO</Text>
       </View>
-      <MaskInput
-        value={date}
-        style={styles.input}
-        keyboardType="number-pad"
-        onChangeText={setDate}
-        mask={Masks.DATE_DDMMYYYY}
-      />
+      <Button onPress={showDatepicker} title="Show date picker!" />
+      <Text>selected: {date.toLocaleString()}</Text>
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={mode}
+          is24Hour={true}
+          onChange={onChange}
+        />
+      )}
 
       <View>
         <View style={{ flexDirection: "row", alignItems: "center" }}>

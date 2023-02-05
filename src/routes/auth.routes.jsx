@@ -115,19 +115,6 @@ function AuthRoutesTabBar() {
   const auth = getAuth();
 
 
-  function removerAsync(){
-    const removeValue = async () => {
-        try {
-          await AsyncStorage.removeItem('@storage_Key')
-        } catch(e) {
-          // remove error
-        }
-      
-        console.log('removido.')
-        alert('removido')
-    }
-    removeValue()
-}
 
 
 

@@ -4037,6 +4037,11 @@ expo-constants@~13.2.2, expo-constants@~13.2.4:
     "@expo/config" "~7.0.0"
     uuid "^3.3.2"
 
+expo-datepicker@^1.0.23:
+  version "1.0.23"
+  resolved "https://registry.yarnpkg.com/expo-datepicker/-/expo-datepicker-1.0.23.tgz#892a2c8d7629d3f6a9581031e0502cb3262af448"
+  integrity sha512-LoOgrbd/SvU/gJN886LOxLy0FctyykyZ+hqpORyM6DqLw+c9v4HwgRragIjUdN+Qzf/HYlbr9S9gEnJNHPX79w==
+
 expo-dev-client@~1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/expo-dev-client/-/expo-dev-client-1.3.1.tgz#bcaf46bd4646354d8c6fd3b2270d5802d221ac8b"
@@ -7218,7 +7223,7 @@ react-native-date-picker@^4.2.5:
 
 react-native-datepicker@^1.7.2:
   version "1.7.2"
-  resolved "https://registry.npmjs.org/react-native-datepicker/-/react-native-datepicker-1.7.2.tgz"
+  resolved "https://registry.yarnpkg.com/react-native-datepicker/-/react-native-datepicker-1.7.2.tgz#58d0822591a0ac9b32aba082650222a0ee29669d"
   integrity sha512-ses0N1y44fYBmlejYwR2i+dGnQQ8v5/gacX2CrbFJiWxbcQaRuxexsZPB9YQuQkAy+uKz5Gti3Lrp3dh9BfkzA==
   dependencies:
     moment "^2.22.0"

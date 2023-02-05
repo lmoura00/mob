@@ -31,6 +31,7 @@ export function CaronasDisponiveis(){
     const auth = getAuth()
     const dbRef = ref(getDatabase());
     const userId = auth.currentUser.uid
+    const [imageUrl, setImageUrl] = useState(null);
 
 
 
@@ -45,6 +46,7 @@ export function CaronasDisponiveis(){
              get(child(dbRef, `users/${userId}/name`)).then((snapshot) => {
               if (snapshot.exists()) {
                 setname(snapshot.val());
+                console.log(userId)
               } else {
                 console.log("No data available");
               }
@@ -73,6 +75,17 @@ export function CaronasDisponiveis(){
             });
             
         }*/
+        const storage = getStorage();
+        getDownloadURL(sRef(storage, `${userId}`))
+        .then((url) => {
+          //console.log(url),
+          setImageUrl(url)
+
+        })
+        .catch((error)=>{
+          console.log(error)
+        })
+      
     lerNome();
     lerCaronas();
         
@@ -141,6 +154,7 @@ export function CaronasDisponiveis(){
                     id: childItem.val().id,
                     vagas: childItem.val().vagas,
                     telefone: childItem.val().telefone,
+                    email: childItem.val().email,
                     
                 }
                 
@@ -203,52 +217,64 @@ export function CaronasDisponiveis(){
             <RefreshControl style={{flex:1}} onRefresh={onRefresh} refreshing={refreshing}>
 
 
-            <View>
+            <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
                 <Text style={{color:'#f9f9f9', fontSize: 25, textAlign:'center', marginBottom:10, textDecorationLine:'underline'}}>Bem vindo(a) {name}</Text>
+                <Image source={{uri: imageUrl}} style={{width:35, height:35, marginLeft:15, borderRadius:8}}/>
             </View>
 
            
-            <FlatList
-                data={caronas}
-                renderItem={({item})=> (
-                    <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Detalhes', {item})}>
-                    <View style={{width:50, height:50}}>
-                    {item.image ? 
-                            <Image 
-                                source={{uri:item.image}} 
-                                style={{
-                                    width:50, 
-                                    height:50, 
-                                    borderRadius:25, 
-                                    borderWidth:2,
-                                    borderColor:'#252525'
-                                }}/>
-                            : 
-                            <LottieView 
-                                source={require('../Assets/28497-profile-icon.json')} 
-                                autoPlay={true} 
-                                loop={true} 
-                                style={{}} 
-                            />
-                        }
-                    </View>
-                    <View style={{flexDirection:'column'}}>
-                        <Text style={styles.name}>{item.name}</Text>
-                        <Text >{item.placa}</Text>
-                    
-                    </View>
+            { caronas ?
+                <FlatList
+                    data={caronas}
+                    renderItem={({item})=> (
+                        <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Detalhes', {item})}>
+                        <View style={{width:50, height:50}}>
+                        {item.image ? 
+                                <Image 
+                                    source={{uri:item.image}} 
+                                    style={{
+                                        width:50, 
+                                        height:50, 
+                                        borderRadius:25, 
+                                        borderWidth:2,
+                                        borderColor:'#252525'
+                                    }}/>
+                                : 
+                                <LottieView 
+                                    source={require('../Assets/28497-profile-icon.json')} 
+                                    autoPlay={true} 
+                                    loop={true} 
+                                    style={{}} 
+                                />
+                            }
+                        </View>
+                        <View style={{flexDirection:'column'}}>
+                            <Text style={styles.name}>{item.name}</Text>
+                            <Text >{item.placa}</Text>
+                        
+                        </View>
 
-                    <View style={{flexDirection:'column'}}>
-                        <Text>PARTIDA: {item.horario} h</Text>
-                        <Text>{item.data}</Text>
-                    </View>
-                    <View style={{height:50, width:50}}>
-                    <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} />
-                    </View>
-                </TouchableOpacity>
-                )} 
-             
-            />
+                        <View style={{flexDirection:'column'}}>
+                            <Text>PARTIDA: {item.horario} h</Text>
+                            <Text>{item.data}</Text>
+                        </View>
+                        <View style={{height:50, width:50}}>
+                        <LottieView source={require('../Assets/11515-swipe-right-arrows.json')} autoPlay={true} loop={true} />
+                        </View>
+                    </TouchableOpacity>
+                    )}               
+                />
+                :
+                <LottieView 
+                    source={require('../Assets/123841-empty-state-ghost.json')} 
+                    autoPlay={true} 
+                    loop={true} 
+                    style={{}} 
+                />
+                
+
+
+            }
             
 
 

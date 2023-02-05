@@ -147,12 +147,17 @@ export function Detalhes() {
   function apagarCorrida() {
     remove(ref(db, "caronas/" + params.item.id));
     console.log("carona removida");
-    navigation.goBack;
+    navigation.navigate('CaronasDisponiveis');
+    setVisible1(false)
   }
 
   return (
     <ScrollView style={{ backgroundColor: "#334A58" }}>
       <View style={styles.container}>
+
+
+
+
         <Modal
           animationType="fade"
           visible={visible}
@@ -189,6 +194,10 @@ export function Detalhes() {
           </View>
         </Modal>
 
+
+
+
+
         <Modal
           animationType="fade"
           visible={visible1}
@@ -198,31 +207,39 @@ export function Detalhes() {
         >
           <View style={styles.modal3}>
             <View style={styles.titleModal}>
-              <Text style={styles.titleModalText}>AGUARDE O MOTORISTA</Text>
+              <Text style={styles.titleModalText}>DESEJA EXCLUIR A CARONA?</Text>
             </View>
 
             <LottieView
-              source={require("../../Assets/92893-man-waiting-car.json")}
+              source={require("../../Assets/15120-delete.json")}
               autoPlay={true}
               loop={true}
               style={{
-                height: "72%",
-                width: "70%",
+                height: "75%",
+                width: "75%",
                 alignSelf: "center",
               }}
             />
-            <TouchableOpacity
-              onPress={() =>
-                ((setVisible1(false) === setVisible(false)) ===
-                  setAceito(true)) ===
-                console.log(aceito)
-              }
-              style={styles.botaoModal1}
-            >
-              <Text style={styles.textBotao}>FECHAR</Text>
-            </TouchableOpacity>
-          </View>
+            <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+              <TouchableOpacity
+                onPress={apagarCorrida }
+                style={styles.botaoModal1}
+              >
+                <Text style={styles.textBotao}>APAGAR</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>{setVisible1(false)}}
+                style={styles.botaoModal2}
+              >
+                <Text style={styles.textBotao}>CANCELAR</Text>
+              </TouchableOpacity>
+            </View>
+
+            </View>
         </Modal>
+
+
+
 
         <Modal
           animationType="fade"
@@ -250,6 +267,9 @@ export function Detalhes() {
             </TouchableOpacity>
           </View>
         </Modal>
+
+
+
         {image ? (
           <Image
             source={{ uri: params.item.image }}
@@ -273,6 +293,8 @@ export function Detalhes() {
           />
         )}
 
+
+
         <View
           style={{
             ...(image ? { marginTop: 10 } : { marginTop: 180 }),
@@ -288,6 +310,8 @@ export function Detalhes() {
           <Text style={styles.texto}>COR: PRATA </Text>*/}
         </View>
 
+
+
         {/*<Image
           source={{
             uri: "https://mediaservice.audi.com/media/fast/H4sIAAAAAAAAAFvzloG1tIiBOTrayfuvpGh6-m1zJgaGigIGBgZGoDhTtNOaz-I_2DhCHkCFGe8ysJSnJhUwAlW4MXFl5iamp-qDBPgZuYssdFMrSnTzUnPz2YHSfDxx82OvGmYdv7P9odeX-UEuL9jvPBNn4JG80c5idmnvwdZ5rgwT-Nb8-CLL6sPA80Ljz3ynLG9X55KNxmkmK6rP_I85ysDDa3x7zo9_LDP1Pj_UUr3v_Yxjg5s2A8-MJyEt65yrn0119Z3L518bciD7fCcDTxCz1fvu0JJWKYF9l_j8Dz1mmz9zIgNPBuPMFeeOTFT5uu3h5VpjA8cN328C3eBSWnq15cu9uD38u77f-HyweolJyCYGnrYY8XKRUnPBmOJb6e_al5lxiDFnMPDsrVD8zRJnIXDzyYnLnX9PyqZftxAE-mLb95P758kv3-XpdrKVa2rDfnGW7Qw8r6fW-q0pU3kZI7RXxsLVqtQuOnM3Aw_DA72seu0VTJP1jL5sV1p2aXfI8ucMPJ1X3V-mBMfM5JHmyfJ4N3leDNPScwyswIBl2g0kWOKABM8TIMFhwwAmQUG-AUgwLgTxWeuZGRi4HRgY2EIYQIBPuLQopyCxKDFXryi1uCA_rzizLFVQw4BIIMzq4xjpGgQAa47rIxACAAA?mimetype=image/png",
@@ -295,8 +319,20 @@ export function Detalhes() {
           style={{ width: 150, height: 90, marginBottom: 5, marginLeft: 15 }}
         />*/}
 
+
+
+
         <Text style={styles.texto}>PLACA: {params.item.placa}</Text>
         <Text style={styles.texto}>CONTATO:</Text>
+        <TouchableOpacity
+          style={styles.textoNúmero}
+          onPress={() => {
+            Linking.openURL(`mailto:${params.item.email}`)
+          }}
+        >
+          <Text style={styles.textoNúmero}>{params.item.email}</Text>
+        </TouchableOpacity>
+        
         <Text
           style={styles.textoNúmero}
           onPress={() => {
@@ -385,7 +421,7 @@ export function Detalhes() {
         </TouchableOpacity>
 
         {dono && (
-          <TouchableOpacity style={styles.botaoVerRota} onPress={apagarCorrida}>
+          <TouchableOpacity style={styles.botaoVerRota} onPress={()=>setVisible1(true)}>
             <Text style={styles.titleBotao}>EXCLUIR CARONA</Text>
           </TouchableOpacity>
         )}

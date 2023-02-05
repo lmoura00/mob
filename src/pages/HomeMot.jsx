@@ -114,6 +114,7 @@ export function HomeMot() {
             uid:userUid,
             imageUrl:imageUrl,
             name: nome,
+            email: email,
             lastname: sobrenome,
             telefone:telefone,
             partida:partida,

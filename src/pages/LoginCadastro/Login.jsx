@@ -74,51 +74,7 @@ export function Login(){
     }, [])
 
 
-     async function lerAsync(){
-            const getData = async () => {
-                try {
-                const value = await AsyncStorage.getItem('@storage_Key')
-                if(value === null) {
-                   return
-                  
-                }else{
-                    //console.log(value),
-                    //alert(value),
-                    //setUser(value)
-                }
-                } catch {
-                
-                }
-            }
-            getData()
-    }
-  
-    function gravarAsync(value){
-        const storeData = async () => {
-            try {
-              await AsyncStorage.setItem('@storage_Key', value)
-            } catch (e) {
-              // saving error
-            }
-          }
-          storeData()
-    }
-
-
-    function removerAsync(){
-        const removeValue = async () => {
-            try {
-              await AsyncStorage.removeItem('@storage_Key')
-            } catch(e) {
-              // remove error
-            }
-          
-            console.log('removido.')
-            alert('removido')
-        }
-        removeValue()
-    }
-
+    
     
     function keyboardDidShow(){
       Animated.parallel([
