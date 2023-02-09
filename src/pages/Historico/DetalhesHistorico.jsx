@@ -10,14 +10,12 @@ import {
   Modal,
   Alert,
   Linking,
-  ActivityIndicator
 } from "react-native";
 import LottieView from "lottie-react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import {
   getDatabase,
   ref,
-  set,
   child,
   get,
   onValue,
@@ -35,9 +33,9 @@ import {
   uploadBytes,
 } from "firebase/storage";
 
-export function Detalhes() {
+export function DetalhesHistorico() {
   const { params } = useRoute();
-  const [aguardando, setAguardando] = useState(false)
+  console.log(params);
   const [alerta, setAlerta] = useState(false);
   const [visible, setVisible] = useState(false);
   const [visible1, setVisible1] = useState(false);
@@ -57,42 +55,26 @@ export function Detalhes() {
   const mapEl = useRef(null);
   const [distance, SetDistance] = useState(null);
   const [location, setLocation] = useState(null);
-
-  const keyCarona = params.item.key
+  var n = 1;
   function PaxAceito() {
-    setAguardando(true)
-      Linking.openURL(
-        `http://api.whatsapp.com/send?phone=55 + ${params.item.telefone} + &text=Essa+carona+ainda+se+encontra+disponível? `
-      );
-    const db = getDatabase();
-    set(ref(db, 'Historico/' + userUID + "/" + keyCarona), {
-      caronasKey:params.item.key,
-      email: params.item.email,
-      image : params.item.image,
-      data: params.item.data,
-      destino: params.item.destino,
-      horario: params.item.horario,
-      partida: params.item.partida,
-      vagas: params.item.vagas,
-      key:params.item.key,
-      name: params.item.name,
-      lastName: params.item.lastName,
-      id: params.item.id,
-      placa: params.item.placa,
-    });
-    setAguardando(false)
-    navigation.navigate('CaronasDisponiveis')
-
+    if (aceito === true) {
+      Alert.alert("Ei...", "Você já tem uma corrida em andamento.") ||
+        setVisible(false);
+    } else {
+      (setPax(n - 1) === setVisible1(true)) === setAceito(true);
+    }
   }
 
+  function NaoPax() {
+    (setPax(n) === setVisible(false)) === setAceito(false);
+  }
 
-
-  
+  const [pax, setPax] = useState(n);
   const auth = getAuth();
   const userUID = auth.currentUser.uid;
   const db = getDatabase();
   const [dono, setDono] = useState(false);
-  console.log(params)
+  console.log(params.item.key)
   useEffect(() => {
     async function ler() {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -164,12 +146,10 @@ export function Detalhes() {
   }, []);
 
   function apagarCorrida() {
-    setAguardando(true)
     remove(ref(db, "caronas/" + params.item.id));
     console.log("carona removida");
     navigation.navigate('CaronasDisponiveis');
     setVisible1(false)
-    setAguardando(false)
   }
 
   return (
@@ -199,12 +179,16 @@ export function Detalhes() {
               }}
             >
               <TouchableOpacity
-                onPress={PaxAceito}
+                onPress={() => {
+                  Linking.openURL(
+                    `http://api.whatsapp.com/send?phone=55 + ${params.item.telefone} + &text=Essa+carona+ainda+se+encontra+disponível? `
+                  );
+                }}
                 style={styles.botaoModal2}
               >
                 <Text style={styles.textBotao}>SIM!</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={()=>setVisible(false)} style={styles.botaoModal1}>
+              <TouchableOpacity onPress={NaoPax} style={styles.botaoModal1}>
                 <Text style={styles.textBotao}>NÃO</Text>
               </TouchableOpacity>
             </View>

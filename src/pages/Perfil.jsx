@@ -18,6 +18,7 @@ import { getAuth, onAuthStateChanged, updateProfile, updateEmail, updatePassword
 import { useEffect } from "react";
 import { useAuth } from "../Hooks/Auth";
 import { getStorage, ref as sRef, getDownloadURL,  uploadBytes, deleteObject    } from "firebase/storage";
+import LottieView from "lottie-react-native";
 
 export function Perfil() {
   const [nome, setNome] = useState('');
@@ -195,105 +196,214 @@ export function Perfil() {
           </View>
         </Modal>
 
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={{ width: 40, height: 40 }}>
+          <LottieView
+            source={require("../Assets/9994-name-profile-icon-animation-circle.json")}
+            autoPlay={true}
+            loop={true}
+          />
+        </View>
         <Text style={styles.title}>NOME</Text>
-        <TextInput style={styles.input} placeholder="Nome" value={nome} onChangeText={setNome}></TextInput>
+      </View>
+      <TextInput
+        style={styles.input}
+        placeholder="Nome"
+        value={nome}
+        onChangeText={setNome}
+      ></TextInput>
 
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={{ width: 40, height: 40 }}>
+          <LottieView
+            source={require("../Assets/109029-writing.json")}
+            autoPlay={true}
+            loop={true}
+          />
+        </View>
         <Text style={styles.title}>SOBRENOME</Text>
-        <TextInput style={styles.input} placeholder="Sobrenome" value={lastname} onChangeText={setLastname}></TextInput>
+      </View>
+      <TextInput
+        style={styles.input}
+        placeholder="Sobrenome"
+        value={lastname}
+        onChangeText={setLastname}
+      ></TextInput>
 
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={{ width: 40, height: 40 }}>
+          <LottieView
+            source={require("../Assets/4399-schedule-date.json")}
+            autoPlay={true}
+            loop={true}
+            style={{}}
+          />
+        </View>
         <Text style={styles.title}>DATA DE NASCIMENTO</Text>
-        <MaskInput
+      </View>
+      <MaskInput
         value={date}
         style={styles.input}
-        keyboardType='number-pad'
+        keyboardType="number-pad"
         onChangeText={setDate}
         mask={Masks.DATE_DDMMYYYY}
       />
 
-        <Text style={styles.title}>CPF</Text>
+      <View>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View style={{ width: 40, height: 40 }}>
+            <LottieView
+              source={require("../Assets/5202-review-id (1).json")}
+              autoPlay={true}
+              loop={true}
+              style={{}}
+            />
+          </View>
+          <Text style={styles.title}> CPF</Text>
+        </View>
         <MaskInput
           value={cpf}
-          keyboardType='number-pad'
+          keyboardType="number-pad"
           style={styles.input}
           mask={Masks.BRL_CPF}
           showObfuscatedValue
           obfuscationCharacter="#"
           onChangeText={(masked, unmasked, obfuscated) => {
-            setCpf(obfuscated);}}
+            setCpf(obfuscated);
+          }}
         />
+      </View>
 
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={{ width: 45, height: 45 }}>
+          <LottieView
+            source={require("../Assets/29133-windows-10-icon-mail.json")}
+            autoPlay={true}
+            loop={true}
+            style={{}}
+          />
+        </View>
         <Text style={styles.title}>E-MAIL</Text>
-        <TextInput
-          style={styles.input}
-          keyboardType="email-address"
-          placeholder="E-mail"
-          value={email}
-          onChangeText={setEmail}
-        ></TextInput>
+      </View>
+      <TextInput
+        style={styles.input}
+        placeholder="E-mail"
+        keyboardType="email-address"
+        value={email}
+        onChangeText={setEmail}
+      ></TextInput>
 
-      <Text style={styles.title}>TELEFONE</Text>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={{ width: 40, height: 40 }}>
+          <LottieView
+            source={require("../Assets/97981-hand-holding-phone.json")}
+            autoPlay={true}
+            loop={true}
+            style={{}}
+          />
+        </View>
+        <Text style={styles.title}> TELEFONE</Text>
+      </View>
       <MaskInput
         style={styles.input}
         value={telefone}
-        keyboardType='numeric'
-        onChangeText={(unmasked) => {
+        keyboardType="numeric"
+        onChangeText={(mask,unmasked) => {
           setTelefone(unmasked);
         }}
-        mask={['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+        mask={[
+          "(",
+          /\d/,
+          /\d/,
+          ")",
+          " ",
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+          "-",
+          /\d/,
+          /\d/,
+          /\d/,
+          /\d/,
+        ]}
       />
-        
-              <Text style={styles.title}>NOVA SENHA</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Senha"
-                keyboardType="default"
-                value={senha}
-                maxLength={12}
-                onChangeText={setSenha}
-              ></TextInput>
-        
-              <Text style={styles.title}>CONFIRME SUA NOVA SENHA</Text>
-              <TextInput
-                style={styles.input}
-                placeholder="Confirme sua senha"
-                keyboardType="default"
-                value={confSenha}
-                maxLength={12}
-                onChangeText={setConfSenha}
-              ></TextInput>
 
-        <Text
-          style={{
-            fontSize: 19,
-            color: "#fff",
-            fontWeight: "350",
-            marginTop: 25,
-          }}
-        >
-          SELECIONE A SUA FOTO:
-        </Text>
-        {image && (
-          <Image
-            source={{ uri: image }}
-            style={{
-              width: 200,
-              height: 200,
-              alignSelf: "center",
-              marginBottom: 20,
-              marginTop: 20,
-              borderRadius:50,
-              borderWidth:2,
-              borderColor:'#F6C445',
-            }}
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={{ width: 40, height: 40 }}>
+          <LottieView
+            source={require("../Assets/74938-lock-blue.json")}
+            autoPlay={true}
+            loop={true}
+            style={{}}
           />
-        )}
-        <TouchableOpacity onPress={pickImage} style={styles.botao3}>
-          <Text style={styles.textBotao}>Selecione a sua foto</Text>
-        </TouchableOpacity>
+        </View>
+        <Text style={styles.title}>NOVA SENHA</Text>
+      </View>
+      <TextInput
+        style={styles.input}
+        placeholder="Senha"
+        keyboardType="default"
+        value={senha}
+        maxLength={12}
+        onChangeText={setSenha}
+      ></TextInput>
 
-        <TouchableOpacity style={styles.botao4} onPress={() => SetImage(null) || apagarFoto()}>
-          <Text style={styles.textBotao}>Apagar foto</Text>
-        </TouchableOpacity>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={{ width: 40, height: 40 }}>
+          <LottieView
+            source={require("../Assets/103837-checkmark.json")}
+            autoPlay={true}
+            loop={true}
+            style={{}}
+          />
+        </View>
+        <Text style={styles.title}> CONFIRME SUA SENHA</Text>
+      </View>
+      <TextInput
+        style={styles.input}
+        placeholder="Confirme sua senha"
+        keyboardType="default"
+        value={confSenha}
+        maxLength={12}
+        onChangeText={setConfSenha}
+      ></TextInput>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={{ width: 40, height: 40 }}>
+          <LottieView
+            source={require("../Assets/5704-choose-photo.json")}
+            autoPlay={true}
+            loop={true}
+            style={{}}
+          />
+        </View>
+        <Text style={styles.title}> SELECIONE SUA FOTO</Text>
+      </View>
+
+      {image && (
+        <Image
+          source={{ uri: image }}
+          style={{
+            width: 200,
+            height: 200,
+            alignSelf: "center",
+            marginBottom: 20,
+            marginTop: 20,
+            borderRadius:50,
+            borderWidth:2,
+            borderColor:'#F6C445',
+          }}
+        />
+      )}
+
+      <TouchableOpacity onPress={pickImage} style={styles.botao3}>
+        <Text style={styles.textBotao}>Selecione a sua foto</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => SetImage(null)} style={styles.botao3}>
+        <Text style={styles.textBotao}>Apagar foto selecionada</Text>
+      </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.botao1}

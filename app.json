@@ -2,7 +2,7 @@
   "expo": {
     "name": "MobTimon",
     "slug": "mob",
-    "version": "2.0.2",
+    "version": "2.0.4",
     "orientation": "portrait",
     "plugins": [
       [
@@ -49,7 +49,7 @@
         "android.permission.ACCESS_COARSE_LOCATION"
 
       ],
-      "versionCode": 25
+      "versionCode": 27
     },
     "web": {
       "favicon": "../src/images/modelo.png"

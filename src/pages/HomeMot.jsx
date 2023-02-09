@@ -62,6 +62,12 @@ export function HomeMot() {
   })
   
 
+  function checkModal(){
+    if(vagas === '' || placa === '' || data === '' )
+    {Alert.alert('Atenção', 'Os campos não podem ficar vazios.')}
+    else{setAberto1(true)||setAberto(false)}
+  }
+
   useEffect(()=>{
     async function ler(){
       const auth = getAuth()
@@ -161,11 +167,11 @@ export function HomeMot() {
                     </View>
                     <ScrollView style={{paddingBottom:15}}>
 
-                        <Text style={styles.title}>VAGAS</Text>
+                        <Text style={styles.titleMod}>VAGAS</Text>
                         <TextInput placeholder="Vagas" keyboardType="number-pad" value={vagas} onChangeText={setVagas} style={styles.input}></TextInput>
-                        <Text style={styles.title}>PLACA DO VEÍCULO</Text>
+                        <Text style={styles.titleMod}>PLACA DO VEÍCULO</Text>
                         <TextInput placeholder="Placa" keyboardType="default" value={placa} onChangeText={setPlaca} style={styles.input}></TextInput>
-                        <Text style={styles.title}>DATA PARTIDA</Text>
+                        <Text style={styles.titleMod}>DATA PARTIDA</Text>
                         <MaskInput
                           value={data}
                           style={styles.input}
@@ -173,7 +179,7 @@ export function HomeMot() {
                           onChangeText={setData}
                           mask={Masks.DATE_DDMMYYYY}
                           />
-                        <Text style={styles.title}>HORÁRIO PARTIDA</Text>
+                        <Text style={styles.titleMod}>HORÁRIO PARTIDA</Text>
                         <MaskInput
                           value={horario}
                           style={styles.input}
@@ -187,16 +193,14 @@ export function HomeMot() {
             <View style={{flexDirection:'row', justifyContent:'space-around'}}>
                 <TouchableOpacity 
                     style={styles.botaoContinuarModal}
-                    onPress={()=>{if(vagas === null || horario === null || data === null )
-                      {Alert.alert('Atenção', 'Os campos não podem ficar vazios.')}
-                      else{setAberto1(true)||setAberto(false)}}}
-                    >
+                    onPress={checkModal}
+                >
                     <Text>CONTINUAR</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity 
                     style={styles.botaoCancelarModal} 
-                    onPress={()=>setAberto}
+                    onPress={()=>setAberto(false)}
                 >
                     <Text>CANCELAR</Text>
                 </TouchableOpacity>
@@ -287,8 +291,22 @@ export function HomeMot() {
       
 
     <View style={{marginBottom:150}}>
-
+      
+     <View style={{flexDirection:'row', alignItems:'center'}}>
+      <View style={{height:50, width:50}} >
+          <LottieView 
+             source={require('../Assets/47956-area-map.json')} 
+             autoPlay={true} 
+             loop={true} 
+             style={{}} 
+          />
+      </View>
       <Text style={styles.title}>PARTIDA</Text>
+      </View>
+
+       
+     
+
     
       <GooglePlacesAutocomplete
         placeholder="De onde vamos sair?"
@@ -308,7 +326,7 @@ export function HomeMot() {
         enablePoweredByContainer={false}
         fetchDetails={true}
         disableScroll
-        styles={{ listView: {minHeight:150, marginTop:50 } }}
+        styles={{ listView: {minHeight:150, marginTop:50,  }}}
       />
       {start&& 
         <MapView 
@@ -326,7 +344,17 @@ export function HomeMot() {
     </View>
     <View style={{marginTop:50, marginBottom:45}}>
 
-      <Text style={styles.title}>DESTINO</Text>
+      <View style={{flexDirection:'row', alignItems:'center'}}>
+        <View style={{height:50, width:50}} >
+            <LottieView 
+              source={require('../Assets/119109-destination.json')} 
+              autoPlay={true} 
+              loop={true} 
+              style={{}} 
+            />
+        </View>
+        <Text style={styles.title}>DESTINO</Text>
+        </View>
       <GooglePlacesAutocomplete
         placeholder="Para onde vamos?"
         onPress={(data, details = null) => {
@@ -395,7 +423,15 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
   title: {
-    color: "#272727",
+    color: "#fff",
+    fontSize: 18,
+    marginTop: 10,
+    marginBottom: 5,
+    paddingHorizontal: 10,
+    textDecorationLine: "underline",
+  },
+  titleMod: {
+    color: "#000",
     fontSize: 18,
     marginTop: 10,
     marginBottom: 5,
@@ -487,7 +523,8 @@ const styles = StyleSheet.create({
     borderRadius:9, 
     justifyContent:'center',
     alignItems:'center',
-    alignSelf:'center'
+    alignSelf:'center',
+    elevation:10,
   },
   botaoCancelarModal:{
     backgroundColor:'#E85B24',
@@ -498,7 +535,8 @@ const styles = StyleSheet.create({
     borderRadius:9, 
     justifyContent:'center',
     alignItems:'center',
-    alignSelf:'center'
+    alignSelf:'center',
+    elevation:10
   },
   titleModal:{
     fontSize:20,

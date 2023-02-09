@@ -8,7 +8,7 @@ import { getDatabase, ref, child, get, onValue, push, set} from "firebase/databa
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { db } from '../../firebaseConfig';
 import { getStorage, ref as sRef, getDownloadURL,  uploadBytes, deleteObject    } from "firebase/storage";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 
 import { useState } from "react";
@@ -229,7 +229,7 @@ export function CaronasDisponiveis(){
                     renderItem={({item})=> (
                         <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Detalhes', {item})}>
                         <View style={{width:50, height:50}}>
-                        {item.image ? 
+                        {item.image ? (
                                 <Image 
                                     source={{uri:item.image}} 
                                     style={{
@@ -238,14 +238,16 @@ export function CaronasDisponiveis(){
                                         borderRadius:25, 
                                         borderWidth:2,
                                         borderColor:'#252525'
-                                    }}/>
-                                : 
+                                    }}/>)
+                                : (
                                 <LottieView 
                                     source={require('../Assets/28497-profile-icon.json')} 
                                     autoPlay={true} 
                                     loop={true} 
                                     style={{}} 
                                 />
+                                
+                                )
                             }
                         </View>
                         <View style={{flexDirection:'column'}}>
@@ -265,12 +267,15 @@ export function CaronasDisponiveis(){
                     )}               
                 />
                 :
-                <LottieView 
-                    source={require('../Assets/123841-empty-state-ghost.json')} 
-                    autoPlay={true} 
-                    loop={true} 
-                    style={{}} 
-                />
+                <View style={{flex:1}}>
+              
+                    <LottieView 
+                        source={require('../Assets/123841-empty-state-ghost.json')} 
+                        autoPlay={true} 
+                        loop={true} 
+                        style={{}} 
+                    />
+                </View>
                 
 
 
@@ -282,7 +287,12 @@ export function CaronasDisponiveis(){
 
            
                 <TouchableOpacity style={styles.botaoAdCarona} onPress={()=>navigation.navigate('HomeMot')}>
-                    <Text style={styles.textoBotaoAdCarona}>+</Text>
+                <LottieView 
+                    source={require('../Assets/13050-plus.json')} 
+                    autoPlay={true} 
+                    loop={true} 
+                    style={{}} 
+                />
                 </TouchableOpacity>
             </RefreshControl>
         </SafeAreaView>
@@ -306,6 +316,13 @@ const styles = StyleSheet.create({
         marginBottom:12,
         borderRadius:8, 
         elevation:10
+    },
+    titulo:{
+        fontSize:28,
+        color:'#f9f9f9',
+        textAlign:'center',
+        fontFamily:'BalsamiqSans_700Bold',
+        marginTop:80
     },
     title:{
         fontSize:25,
