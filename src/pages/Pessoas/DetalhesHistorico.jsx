@@ -10,8 +10,7 @@ import {
   Modal,
   Alert,
   Linking,
-  ActivityIndicator,
-  TextInput,
+  ActivityIndicator
 } from "react-native";
 import LottieView from "lottie-react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -23,7 +22,6 @@ import {
   get,
   onValue,
   remove,
-  update,
 } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import MapView, { Marker } from "react-native-maps";
@@ -36,49 +34,38 @@ import {
   getDownloadURL,
   uploadBytes,
 } from "firebase/storage";
-import MaskInput, {Masks, createNumberMask } from "react-native-mask-input";
 
-
-export function Detalhes() {
+export function DetalhesHistorico() {
   const { params } = useRoute();
   const [aguardando, setAguardando] = useState(false)
   const [alerta, setAlerta] = useState(false);
   const [visible, setVisible] = useState(false);
   const [visible1, setVisible1] = useState(false);
-  const [editar, setEditar] = useState(false);
   const [aceito, setAceito] = useState(false);
   const navigation = useNavigation();
-  const [name, setName] = useState(params.item.name);
+  const [name, setName] = useState(null);
   const [image, setImage] = useState(null);
-  const [lastname, setLastname] = useState(params.item.lastName);
-  const [telefone, setTelefone] = useState(params.item.telefone);
-  const [placa, setPlaca] = useState(params.item.placa);
-  const [vagas, setVagas] = useState(params.item.vagas);
-  const [data, setData] = useState(params.item.data);
-  const [horario, setHorario] = useState(params.item.horario);
+  const [lastname, setLastname] = useState();
+  const [telefone, setTelefone] = useState();
+  const [placa, setPlaca] = useState();
+  const [vagas, setVagas] = useState();
+  const [data, setData] = useState();
+  const [horario, setHorario] = useState();
   const GOOGLE_MAPS_APIKEY = api.googleApi;
   const [start, setStart] = useState(null);
   const [destino, setDestino] = useState(null);
   const mapEl = useRef(null);
   const [distance, SetDistance] = useState(null);
   const [location, setLocation] = useState(null);
+
   const keyCarona = params.item.key
-  const hourMask = createNumberMask({
-    prefix: [],
-    delimiter: '',
-    separator: ':',
-    precision: 2,
-  })
-
-
-
   function PaxAceito() {
     setAguardando(true)
       Linking.openURL(
         `http://api.whatsapp.com/send?phone=55 + ${params.item.telefone} + &text=Essa+carona+ainda+se+encontra+disponível? `
       );
     const db = getDatabase();
-    set(ref(db, 'HistoricoPax/' + userUID + "/" + keyCarona), {
+    set(ref(db, 'Historico/' + userUID + "/" + keyCarona), {
       caronasKey:params.item.key,
       email: params.item.email,
       image : params.item.image,
@@ -94,15 +81,11 @@ export function Detalhes() {
       id: params.item.id,
       placa: params.item.placa,
       uidMot: params.item.uid,
-      uidPax: userUID,
-      destinoString: params.item.destinoString,
-      partidaString: params.item.partidaString,
-      
     });
     setAguardando(false)
     navigation.navigate('CaronasDisponiveis')
+
   }
-  console.log(params.item)
 
 
 
@@ -111,9 +94,8 @@ export function Detalhes() {
   const userUID = auth.currentUser.uid;
   const db = getDatabase();
   const [dono, setDono] = useState(false);
-
+  console.log(params)
   useEffect(() => {
-    ler();
     async function ler() {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
@@ -181,7 +163,6 @@ export function Detalhes() {
       }
     }
     ler();
-    console.log(params.item.id)
   }, []);
 
   function apagarCorrida() {
@@ -191,20 +172,6 @@ export function Detalhes() {
     navigation.navigate('CaronasDisponiveis');
     setVisible1(false)
     setAguardando(false)
-  }
-
-  function updateCarona(vagas, horario, data, placa){
-    update(ref(db, "caronas/" + params.item.id),{
-      vagas: vagas,
-      horario:horario,
-      data:data,
-      placa:placa
-    })
-    .then(()=>
-      
-      setEditar(false)
-      
-  )
   }
 
   return (
@@ -222,9 +189,9 @@ export function Detalhes() {
           style={{}}
         >
           <View style={styles.modal}>
-          <View style={styles.titleModal}>
-              <Text style={styles.titleModalText}>ESSA É A CARONA QUE VOCÊ DESEJA?</Text>
-            </View>
+            <Text style={styles.titleModal}>
+              ESSA É A CARONA QUE VOCÊ DESEJA?
+            </Text>
             <View
               style={{
                 flexDirection: "row",
@@ -244,65 +211,6 @@ export function Detalhes() {
               </TouchableOpacity>
             </View>
           </View>
-        </Modal>
-
-
-        <Modal
-            animationType="fade"
-            visible={editar}
-            statusBarTranslucent={false}
-            transparent={true}
-            style={{}}
-        >
-            <View style={styles.modalEditar}>
-              
-
-                    <View style={{alignItems:'center', marginBottom:5}}>
-                        <Text style={styles.titleModalEditar}>EDITAR CARONA</Text>
-                    </View>
-                    <ScrollView style={{paddingBottom:15}}>
-
-                        <Text style={styles.titleMod}>VAGAS</Text>
-                        <TextInput placeholder="Vagas" keyboardType="number-pad" value={vagas} onChangeText={setVagas} style={styles.input}></TextInput>
-                        <Text style={styles.titleMod}>PLACA DO VEÍCULO</Text>
-                        <TextInput placeholder="Placa" keyboardType="default" value={placa} onChangeText={setPlaca} style={styles.input}></TextInput>
-                        <Text style={styles.titleMod}>DATA PARTIDA</Text>
-                        <MaskInput
-                          value={data}
-                          style={styles.input}
-                          keyboardType='number-pad'
-                          onChangeText={setData}
-                          mask={Masks.DATE_DDMMYYYY}
-                          />
-                        <Text style={styles.titleMod}>HORÁRIO PARTIDA</Text>
-                        <MaskInput
-                          value={horario}
-                          style={styles.inputLast}
-                          keyboardType='number-pad'
-                          onChangeText={setHorario}
-                          mask={hourMask}
-                          maxLength={5}
-                          />
-                      </ScrollView>
-          
-            <View style={{flexDirection:'row', justifyContent:'space-around'}}>
-                <TouchableOpacity 
-                    style={styles.botaoContinuarModal}
-                    onPress={()=>updateCarona(vagas, horario, data, placa)||navigation.navigate('CaronasDisponiveis')}
-                >
-                    <Text style={styles.textBotao}>ATUALIZAR</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity 
-                    style={styles.botaoCancelarModal} 
-                    onPress={()=>setEditar(false)}
-                >
-                    <Text style={styles.textBotao}>CANCELAR</Text>
-                </TouchableOpacity>
-            </View>
-
-            </View>
-            
         </Modal>
 
 
@@ -432,23 +340,17 @@ export function Detalhes() {
 
 
 
-        <View style={{flexDirection:'column', alignItems:'center', marginBottom:9,  width:'90%'}}>
-            <LottieView
-              source={require("../../Assets/46986-car-number-plate.json")}
-              autoPlay={true}
-              loop={true}
-              style={{ height:50, width:50, }}
-            />
+        <View style={{flexDirection:'row', alignItems:'center', marginBottom:9}}>
           <Text style={styles.texto}>PLACA: </Text>
           <Text style={styles.placa}>{params.item.placa}</Text>
         </View>
         <Text style={styles.texto}>CONTATO:</Text>
-        <View style={{flexDirection:'row', alignItems:'center',  width:'90%'}}>
+        <View style={{flexDirection:'row', alignItems:'center'}}>
           <LottieView
               source={require("../../Assets/95248-mailbox.json")}
               autoPlay={true}
               loop={true}
-              style={{ height:50, width:50, marginRight:25 }}
+              style={{ height:50, width:50, marginRight:8 }}
             />
           <TouchableOpacity
             style={styles.textoNúmero}
@@ -479,7 +381,10 @@ export function Detalhes() {
           </Text>
         </View>
 
-
+        <KeyboardAvoidingView style={{ flexDirection: "row", alignItems:'center' }}>
+          <Text style={styles.vagas}>VAGAS DISPONÍVEIS:</Text>
+          <Text style={styles.vagasNumero}>{params.item.vagas}</Text>
+        </KeyboardAvoidingView>
         {start && (
           <View>
             <MapView
@@ -501,10 +406,10 @@ export function Detalhes() {
                   SetDistance(result.distance);
                   mapEl.current.fitToCoordinates(result.coordinates, {
                     edgePadding: {
-                      top: 30,
-                      bottom: 30,
-                      left: 30,
-                      right: 30,
+                      top: 50,
+                      bottom: 50,
+                      left: 50,
+                      right: 50,
                     },
                   });
                 }}
@@ -521,21 +426,6 @@ export function Detalhes() {
           </View>
         )}
 
-        <KeyboardAvoidingView style={{ flexDirection: "column", alignItems:'center', width:'90%',  }}>
-          <Text style={styles.vagas}>PARTIDA:</Text>
-          <Text style={styles.partida}>{params.item.partidaString}</Text>
-        </KeyboardAvoidingView>
-
-        <KeyboardAvoidingView style={{ flexDirection: "column", alignItems:'center', width:'90%' }}>
-          <Text style={styles.vagas}>DESTINO:</Text>
-          <Text style={styles.destino}>{params.item.destinoString}</Text>
-        </KeyboardAvoidingView>
-
-        <KeyboardAvoidingView style={{ flexDirection: "row", alignItems:'center' }}>
-          <Text style={styles.vagas}>VAGAS DISPONÍVEIS:</Text>
-          <Text style={styles.vagasNumero}>{params.item.vagas}</Text>
-        </KeyboardAvoidingView>
-
         <KeyboardAvoidingView style={{ flexDirection: "row", alignItems:'center' }}>
           <Text style={styles.vagas}>DATA:</Text>
           <Text style={styles.vagasNumero}>{params.item.data}</Text>
@@ -545,45 +435,27 @@ export function Detalhes() {
           <Text style={styles.vagas}>HORÁRIO:</Text>
           <Text style={styles.vagasNumero}>{params.item.horario}</Text>
         </KeyboardAvoidingView>
-        
 
-        { dono ?
-            (<TouchableOpacity
-              style={styles.botaoQueroACarona}
-              onPress={() => setEditar(true)}
-            >
-              <Text style={styles.titleBotao}>EDITAR CARONA</Text>
-            </TouchableOpacity>)
-          : 
-          (
-            <TouchableOpacity
-            style={styles.botaoQueroACarona}
-            onPress={() => setVisible(true)}
-          >
-            <Text style={styles.titleBotao}>QUERO A CARONA</Text>
-          </TouchableOpacity>
-          )
-        }
+        <TouchableOpacity
+          style={styles.botaoQueroACarona}
+          onPress={() => setVisible(true)}
+        >
+          <Text style={styles.titleBotao}>QUERO A CARONA</Text>
+        </TouchableOpacity>
 
-
-        {
-          dono || (
-            <TouchableOpacity
-            style={{... (dono ? {marginBottom:10}: {marginBottom:30}),
-            backgroundColor: "#FF3030",
-            height: 45,
-            width: 270,
-            marginTop: 10,
-            borderRadius: 8,
-            borderWidth: 0,
-            elevation: 10,}}
-            onPress={() => navigation.navigate("CaronasDisponiveis")}
-          >
-            <Text style={styles.titleBotao}>NÃO É PARA MIM</Text>
-          </TouchableOpacity>
-          )
-        }
-
+        <TouchableOpacity
+          style={{... (dono ? {marginBottom:10}: {marginBottom:30}),
+          backgroundColor: "#FF3030",
+          height: 45,
+          width: 270,
+          marginTop: 10,
+          borderRadius: 8,
+          borderWidth: 0,
+          elevation: 10,}}
+          onPress={() => navigation.navigate("CaronasDisponiveis")}
+        >
+          <Text style={styles.titleBotao}>NÃO É PARA MIM</Text>
+        </TouchableOpacity>
 
         {dono && (
           <TouchableOpacity style={styles.botaoVerRota} onPress={()=>setVisible1(true)}>
@@ -606,12 +478,11 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 15,
-    fontSize: 30,
+    fontSize: 27,
     color: "black",
     marginBottom: 8,
     fontFamily: "Inter_600SemiBold",
     textTransform: "uppercase",
-    textDecorationLine:"underline"
   },
   texto: {
     fontSize: 25,
@@ -620,11 +491,10 @@ const styles = StyleSheet.create({
    
   },
   placa: {
-    fontSize: 18,
+    fontSize: 25,
     fontFamily: "Ubuntu_400Regular",
     textTransform: "uppercase",
     textDecorationLine:'underline',
-    marginBottom:25,
   },
   textoNúmero: {
     fontSize: 25,
@@ -640,16 +510,6 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "600",
     marginTop: 10,
-    marginBottom: 10,
-  },
-  partida: {
-    fontSize: 16,
-    fontFamily:'Ubuntu_400Regular',
-    marginBottom: 10,
-  },
-  destino: {
-    fontSize: 15,
-    fontFamily:'Ubuntu_400Regular',
     marginBottom: 10,
   },
   vagasNumero: {
@@ -748,8 +608,7 @@ const styles = StyleSheet.create({
   },
   titleModal: {
     textAlign: "center",
-    alignItems:'center',
-    justifyContent:'center',
+    justifyContent: "center",
     fontSize: 17,
     fontWeight: "bold",
     backgroundColor: "#fff",
@@ -803,71 +662,4 @@ const styles = StyleSheet.create({
     width: 250,
     height: 300,
   },
-  titleMod: {
-    color: "#000",
-    fontSize: 18,
-    marginTop: 10,
-    marginBottom: 5,
-    paddingHorizontal: 10,
-    textDecorationLine: "underline",
-    fontFamily:'BalsamiqSans_400Regular'
-  },
-  input:{
-    backgroundColor:'#b9b9b9',
-    height:40,
-    marginBottom:5,
-    borderRadius:8,
-    fontSize:16,
-    paddingHorizontal:8
-  },
-  inputLast:{
-    backgroundColor:'#b9b9b9',
-    height:40,
-    marginBottom:15,
-    borderRadius:8,
-    fontSize:16,
-    paddingHorizontal:8
-  },  
-  modalEditar: {
-    alignSelf: "center",
-    backgroundColor: "#f9f9f9",
-    padding: 20,
-    elevation: 10,
-    borderRadius: 20,
-    marginVertical: 190,
-    width: "80%",
-    height: "60%",
-  },  
-  botaoContinuarModal:{
-    backgroundColor:'#4DEA73',
-    marginBottom:10,
-    marginTop:10,
-    width:125,
-    height:45,
-    borderRadius:9, 
-    justifyContent:'center',
-    alignItems:'center',
-    alignSelf:'center',
-    elevation:10,
-    borderWidth:2
-  },
-  botaoCancelarModal:{
-    backgroundColor:'#E85B24',
-    marginBottom:10,
-    marginTop:10,
-    width:125,
-    height:45,
-    borderRadius:9, 
-    justifyContent:'center',
-    alignItems:'center',
-    alignSelf:'center',
-    elevation:10,
-    borderWidth:2,
-  },
-  titleModalEditar:{
-    fontSize:20,
-    textDecorationLine:'underline',
-    fontWeight:'bold'
-
-  }
 });

@@ -31,6 +31,9 @@ import { getStorage, ref as sRef, getDownloadURL,  uploadBytes, deleteObject    
 
 import { useNavigation } from "@react-navigation/native";
 import MaskInput, {Masks, createNumberMask } from "react-native-mask-input";
+import { Feather } from '@expo/vector-icons'; 
+import Geolocation from 'react-native-geolocation-service';
+
 
 export function HomeMot() {
   const GOOGLE_MAPS_APIKEY = api.googleApi;
@@ -46,11 +49,17 @@ export function HomeMot() {
   const mapEl = useRef(null);
   const [distance, SetDistance] = useState(null);
   const auth = getAuth();
-
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [parcialLocal, setParcialLocal] = useState('');
+  const [parcialLocalLat, setParcialLocalLat] = useState('');
+  const [parcialLocalLon, setParcialLocalLon] = useState('');
+  
 
   const [nome, setNome] = useState('');
   const [lastname, setLastname] = useState('');
-  
+  const [descriptionPartida, setDescriptionPartida] = useState('');
+  const [descriptionDestino, setDescriptionDestino] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
   const navigation = useNavigation();
@@ -65,8 +74,29 @@ export function HomeMot() {
   function checkModal(){
     if(vagas === '' || placa === '' || data === '' )
     {Alert.alert('Atenção', 'Os campos não podem ficar vazios.')}
-    else{setAberto1(true)||setAberto(false)}
+    else{checkData()}
   }
+
+
+
+  const hj = new Date();
+  let dataHj =
+    String(hj.getDate()).padStart(2, "0") +
+    "/" +
+    String(hj.getMonth() + 1).padStart(2, "0") +
+    "/" +
+    hj.getFullYear();
+    
+  function checkData(){
+    if(data<dataHj){
+      Alert.alert('Atenção', 'A data não pode ser anterior ao dia de hoje.')
+    }else{
+      setAberto1(true)||setAberto(false)
+    }
+  }
+
+
+
 
   useEffect(()=>{
     async function ler(){
@@ -101,18 +131,45 @@ export function HomeMot() {
         })
     }
     
-   
+    async function localizacaoUser(){
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permissão ao acesso a localização foi negado');
+        return;
+      }
+
+      let locationCurrent = await Location.getCurrentPositionAsync({});
+      setLocation({
+          latitude: locationCurrent.coords.latitude,
+          longitude: locationCurrent.coords.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+      })
+
+    }
+    async function esperar(){
+      if(location === null){
+        return
+      }else{
+        setParcialLocalLat(location.latitude);
+        setParcialLocalLon(location.longitude);
+        setParcialLocal(location.latitude, location.longitude);
+        console.log(parcialLocal)
+      }
+
+    }
+    localizacaoUser();
     ler()
-
+    
   },[])
-
+  
 
   
     //let CarMot = Math.floor(Math.random() * 1000) + 1 
 
     
     const userUid = auth.currentUser.uid
-    function enviarCarona(nome, sobrenome, telefone, partida, destino, placa, data, horario, vagas) {
+    function enviarCarona() {
         const db = getDatabase();
         const newCaronaKey = push(child(ref(db), 'caronas')).key;
         set(ref(db , "caronas/" + newCaronaKey  ), {
@@ -121,14 +178,16 @@ export function HomeMot() {
             imageUrl:imageUrl,
             name: nome,
             email: email,
-            lastname: sobrenome,
+            lastname: lastname,
             telefone:telefone,
-            partida:partida,
+            partida:start,
             destino:destino,
             placa: placa,
             data: data,
             vagas: vagas,
             horario: horario, 
+            descriptionDestino:descriptionDestino,
+            descriptionPartida:descriptionPartida
 
             }).then(() => {
               console.log("Dados enviados com sucesso");
@@ -182,7 +241,7 @@ export function HomeMot() {
                         <Text style={styles.titleMod}>HORÁRIO PARTIDA</Text>
                         <MaskInput
                           value={horario}
-                          style={styles.input}
+                          style={styles.inputLast}
                           keyboardType='number-pad'
                           onChangeText={setHorario}
                           mask={hourMask}
@@ -195,14 +254,14 @@ export function HomeMot() {
                     style={styles.botaoContinuarModal}
                     onPress={checkModal}
                 >
-                    <Text>CONTINUAR</Text>
+                    <Text style={styles.textBotao}>CONTINUAR</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity 
                     style={styles.botaoCancelarModal} 
                     onPress={()=>setAberto(false)}
                 >
-                    <Text>CANCELAR</Text>
+                    <Text style={styles.textBotao}>CANCELAR</Text>
                 </TouchableOpacity>
             </View>
 
@@ -225,7 +284,7 @@ export function HomeMot() {
                         <Text style={styles.titleModal}>CONFIRMA?</Text>
                     </View>
                     {start &&       <MapView 
-                    style={{flex:1, elevation:10, borderRadius:8}}
+                    style={{width:'100%', height:'50%', elevation:10, borderRadius:8}}
                     initialRegion={start}
                     showsUserLocation={false}
                     ref={mapEl}
@@ -242,10 +301,10 @@ export function HomeMot() {
                         mapEl.current.fitToCoordinates(
                             result.coordinates,{
                                 edgePadding:{
-                                    top:50,
-                                    bottom:50,
-                                    left:50,
-                                    right:50,
+                                    top:20,
+                                    bottom:20,
+                                    left:20,
+                                    right:20,
                                 }
                             }
                         )
@@ -260,14 +319,21 @@ export function HomeMot() {
                 pinColor={'#14BC9C'}
                 />
                 </MapView>}
-          
+            <ScrollView>
+              <Text>⬤ VAGAS: {vagas}</Text>           
+              <Text>⬤ PLACA: {placa}</Text>
+              <Text>⬤ HORÁRIO: {horario}</Text>
+              <Text>⬤ DATA: {data}</Text>
+              <Text>⬤ PARTIDA: {descriptionPartida}</Text>
+              <Text>⬤ DESTINO: {descriptionDestino}</Text>
+            </ScrollView>
               
 
           
             <View style={{flexDirection:'row', justifyContent:'space-around'}}>
                 <TouchableOpacity 
                     style={styles.botaoSimModal}
-                    onPress={()=>enviarCarona(nome, lastname, telefone, start, destino, placa, data, horario, vagas) || setAberto1(false) || navigation.navigate('CaronasDisponiveis') || Alert.alert('Só um aviso...', 'A sua carona foi criada com sucesso')}
+                    onPress={()=>enviarCarona() || setAberto1(false) || navigation.navigate('CaronasDisponiveis') || Alert.alert('Só um aviso...', 'A sua carona foi criada com sucesso')}
                 >
                     <Text>SIM</Text>
                 </TouchableOpacity>
@@ -307,33 +373,44 @@ export function HomeMot() {
        
      
 
+  
+
+        <GooglePlacesAutocomplete
+          placeholder="De onde vamos sair?"
+          onPress={(data, details = null) => {
+            setDescriptionPartida(data.description);
+            setStart({
+              latitude: details.geometry.location.lat,
+              longitude: details.geometry.location.lng,
+              latitudeDelta: 0.00922,
+              longitudeDelta: 0.00421,
+            });
+          }}
+          query={{
+            key: "AIzaSyDOAZI4PpuctFzMhAloX_Ugs_pl0hLeG_c",
+            language: "pt-br",
+            components: 'country:br'
+          }}
+          enablePoweredByContainer={false}
+          fetchDetails={true}
+          disableScroll
+          styles={{ listView: {minHeight:150, marginTop:50,  }}}
+        />
+
+
     
-      <GooglePlacesAutocomplete
-        placeholder="De onde vamos sair?"
-        onPress={(data, details = null) => {
-          setStart({
-            latitude: details.geometry.location.lat,
-            longitude: details.geometry.location.lng,
-            latitudeDelta: 0.000922,
-            longitudeDelta: 0.000421,
-          });
-        }}
-        query={{
-          key: "AIzaSyDOAZI4PpuctFzMhAloX_Ugs_pl0hLeG_c",
-          language: "pt-br",
-          components: 'country:br'
-        }}
-        enablePoweredByContainer={false}
-        fetchDetails={true}
-        disableScroll
-        styles={{ listView: {minHeight:150, marginTop:50,  }}}
-      />
+
+     
       {start&& 
         <MapView 
-          style={{height:120, width:'50%', position:"absolute", left: 100, top:100}}
+          style={{height:140, width:'80%', position:"absolute", left: 40, top:100}}
           initialRegion={start}
           showsUserLocation={false}
           loadingEnabled
+          cacheEnabled
+          pitchEnabled={false}
+          zoomEnabled={false}
+          
         >
           <Marker
             coordinate={start}
@@ -342,7 +419,9 @@ export function HomeMot() {
         </MapView>
       }
     </View>
-    <View style={{marginTop:50, marginBottom:45}}>
+
+
+    <KeyboardAvoidingView style={{marginTop:50, marginBottom:45}}>
 
       <View style={{flexDirection:'row', alignItems:'center'}}>
         <View style={{height:50, width:50}} >
@@ -361,9 +440,11 @@ export function HomeMot() {
           setDestino({
             latitude: details.geometry.location.lat,
             longitude: details.geometry.location.lng,
-            latitudeDelta: 0.000922,
-            longitudeDelta: 0.000421,
+            latitudeDelta: 0.00922,
+            longitudeDelta: 0.00421,
           });
+          setDescriptionDestino(data.description);
+          
         }}
         query={{
           key: "AIzaSyDOAZI4PpuctFzMhAloX_Ugs_pl0hLeG_c",
@@ -376,7 +457,7 @@ export function HomeMot() {
       />
             {destino&& 
         <MapView 
-          style={{height:120, width:'50%', position:"absolute", left: 100, top:100}}
+          style={{height:140, width:'80%', position:"absolute", left: 40, top:100}}
           initialRegion={destino}
           showsUserLocation={false}
           loadingEnabled
@@ -387,7 +468,7 @@ export function HomeMot() {
         </MapView>
       }
       
-    </View>
+    </KeyboardAvoidingView>
     <ScrollView style={{marginTop:150}}>
 
       
@@ -398,7 +479,7 @@ export function HomeMot() {
             if(start === null || destino === null )
             {Alert.alert('Atenção', 'Os campos não podem ficar vazios.')}
             else{setAberto(true)}}}>
-        <Text style={{fontSize:18}}>OK</Text>
+        <Text style={styles.textBotao}>CONTINUAR</Text>
     </TouchableOpacity>
     </ScrollView>
 
@@ -437,22 +518,48 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     paddingHorizontal: 10,
     textDecorationLine: "underline",
+    fontFamily:'BalsamiqSans_400Regular'
   },
   botao:{
     backgroundColor:'#4DEA73',
     marginBottom:50,
-    width:60,
+    width:130,
     height:45,
     borderRadius:9, 
     justifyContent:'center',
     alignItems:'center',
-    alignSelf:'center'
-
+    alignSelf:'center',
+    elevation:10,
+    borderWidth:1,
   },
+  botaoModal:{
+    backgroundColor:'#4DEA73',
+    marginBottom:50,
+    width:120,
+    height:45,
+    borderRadius:9, 
+    justifyContent:'center',
+    alignItems:'center',
+    alignSelf:'center',
+    elevation:10,
+    borderWidth:1,
+  },
+  textBotao:{
+    fontSize:18,
+    fontFamily:'BalsamiqSans_700Bold'
+  }, 
   input:{
     backgroundColor:'#b9b9b9',
     height:40,
     marginBottom:5,
+    borderRadius:8,
+    fontSize:16,
+    paddingHorizontal:8
+  },
+  inputLast:{
+    backgroundColor:'#b9b9b9',
+    height:40,
+    marginBottom:15,
     borderRadius:8,
     fontSize:16,
     paddingHorizontal:8
@@ -473,9 +580,9 @@ const styles = StyleSheet.create({
     padding: 20,
     elevation: 10,
     borderRadius: 20,
-    marginVertical: 190,
+    marginVertical: 100,
     width: "80%",
-    height: "60%",
+    height: "80%",
   },
   distance:{
     justifyContent: "flex-end",
@@ -496,47 +603,53 @@ const styles = StyleSheet.create({
     backgroundColor:'#4DEA73',
     marginBottom:10,
     marginTop:10,
-    width:60,
-    height:45,
-    borderRadius:9, 
-    justifyContent:'center',
-    alignItems:'center',
-    alignSelf:'center'
-  },
-  botaoNaoModal:{
-    backgroundColor:'#E85B24',
-    marginBottom:10,
-    marginTop:10,
-    width:60,
-    height:45,
-    borderRadius:9, 
-    justifyContent:'center',
-    alignItems:'center',
-    alignSelf:'center'
-  },
-  botaoContinuarModal:{
-    backgroundColor:'#4DEA73',
-    marginBottom:10,
-    marginTop:10,
-    width:85,
+    width:125,
     height:45,
     borderRadius:9, 
     justifyContent:'center',
     alignItems:'center',
     alignSelf:'center',
     elevation:10,
+    borderWidth:2
   },
-  botaoCancelarModal:{
+  botaoNaoModal:{
     backgroundColor:'#E85B24',
     marginBottom:10,
     marginTop:10,
-    width:85,
+    width:125,
     height:45,
     borderRadius:9, 
     justifyContent:'center',
     alignItems:'center',
     alignSelf:'center',
-    elevation:10
+    elevation:10,
+    borderWidth:2,
+  },
+  botaoContinuarModal:{
+    backgroundColor:'#4DEA73',
+    marginBottom:10,
+    marginTop:10,
+    width:125,
+    height:45,
+    borderRadius:9, 
+    justifyContent:'center',
+    alignItems:'center',
+    alignSelf:'center',
+    elevation:10,
+    borderWidth:2
+  },
+  botaoCancelarModal:{
+    backgroundColor:'#E85B24',
+    marginBottom:10,
+    marginTop:10,
+    width:125,
+    height:45,
+    borderRadius:9, 
+    justifyContent:'center',
+    alignItems:'center',
+    alignSelf:'center',
+    elevation:10,
+    borderWidth:2,
   },
   titleModal:{
     fontSize:20,

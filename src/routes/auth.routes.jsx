@@ -108,6 +108,11 @@ import {HomeMot} from '../pages/HomeMot'
 import { getAuth, signOut } from "firebase/auth";
 import { Detalhes } from "../pages/Pessoas/Detalhes";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { DetalhesHistorico } from "../pages/Historico/DetalhesHistorico";
+
+
+
+
 
 function AuthRoutesTabBar() {
   const { setUser } = useAuth();
@@ -207,7 +212,7 @@ function AuthRoutesTabBar() {
         }}
       />
 
-<Screen
+      <Screen
         name="Historico"
         component={Historico}
         options={{
@@ -1042,6 +1047,17 @@ export function AuthRoutes() {
         component={Detalhes}
         options={{
           headerTitle: "DETALHES",
+          headerShown:true,
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="DetalhesHistorico"
+        component={DetalhesHistorico}
+        options={{
+          headerTitle: "HISTÓRICO",
           headerShown:true,
           headerTitleAlign: "center",
           statusBarStyle: "dark",

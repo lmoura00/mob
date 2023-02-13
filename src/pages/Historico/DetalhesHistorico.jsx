@@ -10,12 +10,14 @@ import {
   Modal,
   Alert,
   Linking,
+  ActivityIndicator
 } from "react-native";
 import LottieView from "lottie-react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import {
   getDatabase,
   ref,
+  set,
   child,
   get,
   onValue,
@@ -35,7 +37,7 @@ import {
 
 export function DetalhesHistorico() {
   const { params } = useRoute();
-  console.log(params);
+  const [aguardando, setAguardando] = useState(false)
   const [alerta, setAlerta] = useState(false);
   const [visible, setVisible] = useState(false);
   const [visible1, setVisible1] = useState(false);
@@ -55,26 +57,47 @@ export function DetalhesHistorico() {
   const mapEl = useRef(null);
   const [distance, SetDistance] = useState(null);
   const [location, setLocation] = useState(null);
-  var n = 1;
+
+  const keyCarona = params.item.key
+
+
   function PaxAceito() {
-    if (aceito === true) {
-      Alert.alert("Ei...", "Você já tem uma corrida em andamento.") ||
-        setVisible(false);
-    } else {
-      (setPax(n - 1) === setVisible1(true)) === setAceito(true);
-    }
+    setAguardando(true)
+      Linking.openURL(
+        `http://api.whatsapp.com/send?phone=55 + ${params.item.telefone} + &text=Essa+carona+ainda+se+encontra+disponível? `
+      );
+    const db = getDatabase();
+    set(ref(db, 'Historico/' + userUID + "/" + keyCarona), {
+      caronasKey:params.item.key,
+      email: params.item.email,
+      image : params.item.image,
+      data: params.item.data,
+      destino: params.item.destino,
+      telefone: params.item.telefone,
+      horario: params.item.horario,
+      partida: params.item.partida,
+      vagas: params.item.vagas,
+      key:params.item.key,
+      name: params.item.name,
+      lastName: params.item.lastName,
+      id: params.item.id,
+      placa: params.item.placa,
+      uidMot: params.item.uid,
+      uidPax: userUID
+    });
+    setAguardando(false)
+    navigation.navigate('CaronasDisponiveis')
   }
+  console.log(params.item)
 
-  function NaoPax() {
-    (setPax(n) === setVisible(false)) === setAceito(false);
-  }
 
-  const [pax, setPax] = useState(n);
+
+  
   const auth = getAuth();
   const userUID = auth.currentUser.uid;
   const db = getDatabase();
   const [dono, setDono] = useState(false);
-  console.log(params.item.key)
+
   useEffect(() => {
     async function ler() {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -146,10 +169,12 @@ export function DetalhesHistorico() {
   }, []);
 
   function apagarCorrida() {
+    setAguardando(true)
     remove(ref(db, "caronas/" + params.item.id));
     console.log("carona removida");
     navigation.navigate('CaronasDisponiveis');
     setVisible1(false)
+    setAguardando(false)
   }
 
   return (
@@ -179,16 +204,12 @@ export function DetalhesHistorico() {
               }}
             >
               <TouchableOpacity
-                onPress={() => {
-                  Linking.openURL(
-                    `http://api.whatsapp.com/send?phone=55 + ${params.item.telefone} + &text=Essa+carona+ainda+se+encontra+disponível? `
-                  );
-                }}
+                onPress={PaxAceito}
                 style={styles.botaoModal2}
               >
                 <Text style={styles.textBotao}>SIM!</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={NaoPax} style={styles.botaoModal1}>
+              <TouchableOpacity onPress={()=>setVisible(false)} style={styles.botaoModal1}>
                 <Text style={styles.textBotao}>NÃO</Text>
               </TouchableOpacity>
             </View>
@@ -340,7 +361,7 @@ export function DetalhesHistorico() {
               Linking.openURL(`mailto:${params.item.email}`)
             }}
           >
-            <Text style={styles.textoNúmero}>{params.item.email}</Text>
+            <Text style={styles.textoEmail}>{params.item.email}</Text>
           </TouchableOpacity>
         </View>
         
@@ -480,6 +501,11 @@ const styles = StyleSheet.create({
   },
   textoNúmero: {
     fontSize: 25,
+    fontFamily: "Ubuntu_400Regular",
+    color: "#0e008a",
+  },
+  textoEmail: {
+    fontSize: 18,
     fontFamily: "Ubuntu_400Regular",
     color: "#0e008a",
   },
