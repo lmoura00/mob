@@ -55,7 +55,7 @@ export function CaronasDisponiveis() {
   const [datas, setDatas] = useState([]);
 
   useEffect(() => {
-    setRefreshing(true)
+    
     function lerNome() {
       const auth = getAuth();
       const dbRef = ref(getDatabase());
@@ -94,6 +94,7 @@ export function CaronasDisponiveis() {
             });
             
         }*/
+        //ler Image
     const storage = getStorage();
     getDownloadURL(sRef(storage, `${userId}`))
       .then((url) => {
@@ -177,8 +178,9 @@ export function CaronasDisponiveis() {
             partidaString: childItem.val().descriptionPartida,
             destinoString: childItem.val().descriptionDestino,
           };
-
+          
           userData.push(date);
+          
           setCaronas(userData);
           console.log('TUDO OK ATÉ AQUI. BORA TRABALHAR')
         });
@@ -232,6 +234,8 @@ export function CaronasDisponiveis() {
     lerCaronas();
     wait(500).then(() => setRefreshing(false));
   }, []);
+
+
 
   return (
     <SafeAreaView style={styles.container}>

@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from "react";
 import {View, Image, ScrollView, Text, StyleSheet, TouchableOpacity, RefreshControl, FlatList, Alert} from 'react-native'
-import { FontAwesome5, AntDesign } from '@expo/vector-icons'; 
+import { FontAwesome5, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons'; 
 import LottieView from 'lottie-react-native';
 import { getDatabase, ref, child, get, onValue, push, set} from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -66,14 +66,14 @@ function HistoricoMot() {
         const dados = []
         const db = getDatabase();
         setHistorico(null)
-        const historicoRef = ref(db, 'caronas/' + userUid );
+        const historicoRef = ref(db, 'Historico/' + userUid );
         onValue(historicoRef, (snapshot) => {
           snapshot.forEach((item)=>{
             let data = {
                 paxUid: userUid,
                 caronasKey:item.val().key,
                 email: item.val().email,
-                image : item.val().image,
+                image : item.val().imageUrl,
                 data: item.val().data,
                 destino:item.val().destino,
                 horario:item.val().horario,
@@ -81,14 +81,14 @@ function HistoricoMot() {
                 vagas: item.val().vagas,
                 uidMot:item.val().key,
                 name: item.val().name,
-                lastName: item.val().lastName,
+                lastName: item.val().lastname,
                 telefone: item.val().telefone,
                 uidMot: item.val().uidMot,
                 placa: item.val().placa,
             }
             dados.push(data)
             setHistorico(dados)
-            console.log(historico)
+            //console.log(historico)
           });
           
         });
@@ -183,18 +183,18 @@ function HistoricoMot() {
                     </TouchableOpacity>
                     )}               
                 />
-                :(
+                :
                 <View style={{flex:1}}>
                     
                     <LottieView 
-                        source={require('../Assets/53034-lost.json')} 
+                        source={require('../Assets/93134-not-found.json')} 
                         autoPlay={true} 
                         loop={true} 
                         style={{}} 
                     />
-                    <Text style={styles.titulo}>Você não fez nenhuma carona como motorista</Text>
+                    
                 </View>
-                )
+                
 
 
             }
@@ -278,7 +278,7 @@ function HistoricoPax() {
             }
             dados.push(data)
             setHistorico(dados)
-            console.log(historico)
+            //console.log(data)
           });
           
         });
@@ -373,18 +373,18 @@ function HistoricoPax() {
                     </TouchableOpacity>
                     )}               
                 />
-                :(
+                :
                 <View style={{flex:1}}>
                     
                     <LottieView 
-                        source={require('../Assets/53034-lost.json')} 
+                        source={require('../Assets/123841-empty-state-ghost.json')} 
                         autoPlay={true} 
                         loop={true} 
                         style={{}} 
                     />
-                    <Text style={styles.titulo}>Você não pegou nenhuma carona.</Text>
+                
                 </View>
-                )
+                
 
 
             }
@@ -404,23 +404,27 @@ function MyTabs() {
           if (route.name === "HistoricoPax") {
             return focused ? (
               <LottieView
-                source={require("../Assets/110169-profile.json")}
+                source={require("../Assets/125338-first.json")}
                 autoPlay={true}
                 loop={true}
               ></LottieView>
             ) : (
-              <AntDesign name="home" size={size} color={color} />
+                <MaterialCommunityIcons name="bag-personal" size={size} color={color} />
             );
           } else if (route.name === "HistoricoMot") {
             return focused ? (
               <LottieView
-                source={require("../Assets/109029-writing.json")}
+                source={require("../Assets/122456-driver-steering-wheel-car-map-road-location-marker-sign-preloader.json")}
                 autoPlay={true}
                 loop={true}
               ></LottieView>
             ):(
-                <AntDesign name="home" size={size} color={color} />
-            )}}})}>
+                <MaterialCommunityIcons name="steering" size={size} color={color} />
+            )}},
+            tabBarActiveTintColor: "blue",
+            tabBarInactiveTintColor: "grey",
+        })}
+            >
       <Tab.Screen name="HistoricoPax" component={HistoricoPax} options={{headerShown:false, tabBarLabel:'Passageiro'}}/>
       <Tab.Screen name="HistoricoMot" component={HistoricoMot} options={{headerShown:false, tabBarLabel:'Motorista'}}/>
     </Tab.Navigator>

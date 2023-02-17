@@ -158,13 +158,14 @@ export function DetalhesHistorico() {
       setStart(params.item.partida); //set partida corrida
       setDestino(params.item.destino); //set destino corrida
 
-      if (params.item.uid === userUID) {
+      if (params.item.uidMot === userUID) {
         console.log("verdade");
         setDono(true);
       } else {
         console.log("falso");
       }
     }
+    console.log(params)
     ler();
   }, []);
 
@@ -439,32 +440,13 @@ export function DetalhesHistorico() {
           <Text style={styles.vagasNumero}>{params.item.horario}</Text>
         </KeyboardAvoidingView>
 
-        <TouchableOpacity
-          style={styles.botaoQueroACarona}
-          onPress={() => setVisible(true)}
-        >
-          <Text style={styles.titleBotao}>QUERO A CARONA</Text>
-        </TouchableOpacity>
 
-        <TouchableOpacity
-          style={{... (dono ? {marginBottom:10}: {marginBottom:30}),
-          backgroundColor: "#FF3030",
-          height: 45,
-          width: 270,
-          marginTop: 10,
-          borderRadius: 8,
-          borderWidth: 0,
-          elevation: 10,}}
-          onPress={() => navigation.navigate("CaronasDisponiveis")}
-        >
-          <Text style={styles.titleBotao}>NÃO É PARA MIM</Text>
-        </TouchableOpacity>
 
-        {dono && (
+        
           <TouchableOpacity style={styles.botaoVerRota} onPress={()=>setVisible1(true)}>
-            <Text style={styles.titleBotao}>EXCLUIR CARONA</Text>
+            <Text style={styles.titleBotao}>EXCLUIR HISTÓRICO</Text>
           </TouchableOpacity>
-        )}
+        
       </View>
     </ScrollView>
   );

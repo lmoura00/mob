@@ -163,6 +163,36 @@ export function HomeMot() {
     
   },[])
   
+  console.log(imageUrl)
+
+  function enviarHistoricoMot(){
+    const userUid = auth.currentUser.uid
+        const db = getDatabase();
+        const newCaronaKey = push(child(ref(db), 'Historico')).key;
+        set(ref(db , "Historico/" + userUid + "/" + newCaronaKey ), {
+            id: newCaronaKey,
+            uid:userUid,
+            imageUrl:imageUrl,
+            name: nome,
+            email: email,
+            lastname: lastname,
+            telefone:telefone,
+            partida:start,
+            destino:destino,
+            placa: placa,
+            data: data,
+            vagas: vagas,
+            horario: horario, 
+            descriptionDestino:descriptionDestino,
+            descriptionPartida:descriptionPartida
+
+            }).then(() => {
+              console.log("Dados enviados com sucesso para o Historico");
+            }).catch(()=>{
+                console.log("Dados não enviados")
+            })
+          
+  }
 
   
     //let CarMot = Math.floor(Math.random() * 1000) + 1 
@@ -191,6 +221,7 @@ export function HomeMot() {
 
             }).then(() => {
               console.log("Dados enviados com sucesso");
+              enviarHistoricoMot();
               setAberto(false);
               setDestino('');
               setStart('');
@@ -198,7 +229,6 @@ export function HomeMot() {
               setPlaca('');
               setData('');
               setHorario('');
-              
             }).catch(()=>{
                 console.log("Dados não enviados")
             })

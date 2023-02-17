@@ -102,8 +102,24 @@ export function Detalhes() {
     setAguardando(false)
     navigation.navigate('CaronasDisponiveis')
   }
-  console.log(params.item)
+ 
 
+  function CheckData(){
+    const hj = new Date();
+    let output =
+      String(hj.getDate()).padStart(2, "0") +
+      "/" +
+      String(hj.getMonth() + 1).padStart(2, "0") +
+      "/" +
+      hj.getFullYear();
+     if( params.item.data < output){
+      Alert.alert('Atenção...', 'A carona não se encontra mais disponível');
+      navigation.navigate('CaronasDisponiveis');
+      apagarCorrida();
+     }else{
+      return
+     }
+  }
 
 
   
@@ -114,6 +130,7 @@ export function Detalhes() {
 
   useEffect(() => {
     ler();
+    CheckData();
     async function ler() {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
