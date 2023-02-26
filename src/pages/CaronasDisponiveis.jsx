@@ -264,7 +264,7 @@ export function CaronasDisponiveis() {
           </Text>
           <Image
             source={{ uri: imageUrl }}
-            style={{ width: 35, height: 35, marginLeft: 15, borderRadius: 8 }}
+            style={{ width: 35, height: 35, marginLeft: 15, borderRadius: 8, borderColor:'#F6C445',borderWidth:1 }}
           />
         </View>
 

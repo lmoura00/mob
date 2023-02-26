@@ -106,13 +106,18 @@ export function Detalhes() {
 
   function CheckData(){
     const hj = new Date();
+    const horas = hj.getHours()
+    const minutos = hj.getMinutes()
+    let hrs = horas.toLocaleString('pt-BR', { hour: 'numeric', hour12: true });
+    const hrAgora = `${horas}` + ':' + `${minutos}`
+    console.log(params.item.horario)
     let output =
       String(hj.getDate()).padStart(2, "0") +
       "/" +
       String(hj.getMonth() + 1).padStart(2, "0") +
       "/" +
       hj.getFullYear();
-     if( params.item.data < output){
+     if( params.item.data < output === params.item.horario < hrAgora){
       Alert.alert('Atenção...', 'A carona não se encontra mais disponível');
       navigation.navigate('CaronasDisponiveis');
       apagarCorrida();
@@ -219,7 +224,8 @@ export function Detalhes() {
     })
     .then(()=>
       
-      setEditar(false)
+      setEditar(false),
+      Alert.alert('Atenção', 'Atualize as corridas para ver a alteração.')
       
   )
   }

@@ -1,5 +1,5 @@
-import { TouchableOpacity } from "react-native";
-
+import { TouchableOpacity, Image, Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -109,18 +109,27 @@ import { getAuth, signOut } from "firebase/auth";
 import { Detalhes } from "../pages/Pessoas/Detalhes";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { DetalhesHistorico } from "../pages/Historico/DetalhesHistorico";
+import {
+  getStorage,
+  ref as sRef,
+  getDownloadURL,
+  uploadBytes,
+  deleteObject,
+} from "firebase/storage";
+import { useEffect, useState } from "react";
 
 
 
 
 
 function AuthRoutesTabBar() {
+  const navigation = useNavigation()
   const { setUser } = useAuth();
   const { Navigator, Screen } = createBottomTabNavigator();
   const auth = getAuth();
-
-
-
+  const [imageUrl, setImageUrl] = useState(null)
+  const Auth = getAuth();
+  const userId = Auth.currentUser.uid;
 
 
   function LogOut(){
@@ -131,6 +140,18 @@ function AuthRoutesTabBar() {
       Alert.alert('Ops...', 'Algo deu errado, tente novamente mais tarde.')
     });
   }
+
+  useEffect(()=>{
+    const storage = getStorage();
+    getDownloadURL(sRef(storage, `${userId}`))
+      .then((url) => {
+        //console.log(url),
+        setImageUrl(url);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },[])
 
   return (
     <Navigator
@@ -194,7 +215,7 @@ function AuthRoutesTabBar() {
           tabBarActiveBackgroundColor:'#B9B9B9',
           tabBarShowLabel:true,
           tabBarLabelStyle:{fontFamily:'Ubuntu_500Medium',color:'black'},
-          headerTitle: "CARONAS DISPONÍVEIS",
+          headerTitle: "CARONAS",
           headerTitleStyle: { fontFamily:'Ubuntu_700Bold' },
           headerRight: () => (
             <TouchableOpacity
@@ -209,6 +230,14 @@ function AuthRoutesTabBar() {
               />
             </TouchableOpacity>
           ),
+          headerLeft:()=>(
+          <TouchableOpacity onPress={()=>navigation.navigate('Perfil')}>
+            <Image
+              source={{ uri: imageUrl }}
+              style={{ width: 35, height: 35, marginLeft: 15, borderRadius: 8, borderWidth:1, borderColor:"#F6C445" }}
+            />
+          </TouchableOpacity>
+          )
         }}
       />
 
@@ -236,6 +265,14 @@ function AuthRoutesTabBar() {
               />
             </TouchableOpacity>
           ),
+          headerLeft:()=>(
+            <TouchableOpacity onPress={()=>navigation.navigate('Perfil')}>
+              <Image
+                source={{ uri: imageUrl }}
+                style={{ width: 35, height: 35, marginLeft: 15, borderRadius: 8, borderWidth:1, borderColor:"#F6C445" }}
+              />
+            </TouchableOpacity>
+            )
         }}
       />
 
@@ -265,6 +302,14 @@ function AuthRoutesTabBar() {
               />
             </TouchableOpacity>
           ),
+          headerLeft:()=>(
+            <TouchableOpacity onPress={()=>navigation.navigate('Perfil')}>
+              <Image
+                source={{ uri: imageUrl }}
+                style={{ width: 35, height: 35, marginLeft: 15, borderRadius: 8, borderWidth:1, borderColor:"#F6C445" }}
+              />
+            </TouchableOpacity>
+            )
         }}
       />
 
@@ -292,6 +337,14 @@ function AuthRoutesTabBar() {
               />
             </TouchableOpacity>
           ),
+          headerLeft:()=>(
+            <TouchableOpacity onPress={()=>Alert.alert('EI...','Você já está na tela de perfil. :)')}>
+              <Image
+                source={{ uri: imageUrl }}
+                style={{ width: 35, height: 35, marginLeft: 15, borderRadius: 8, borderWidth:1, borderColor:"#F6C445" }}
+              />
+            </TouchableOpacity>
+            )
         }}
       />
     </Navigator>

@@ -647,6 +647,7 @@ const styles = StyleSheet.create({
        left:0
     },
     scroll:{
+        backgroundColor:'#f9f9f9',
         width:'100%',
         maxHeight:250,
     },
