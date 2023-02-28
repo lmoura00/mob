@@ -37,8 +37,10 @@ import {
 
 import { useState } from "react";
 import { useEffect } from "react";
+import {useAuth} from "./../Hooks/Auth"
 
 export function CaronasDisponiveis() {
+  const {user, setUser} = useAuth()
   const navigation = useNavigation();
   const [name, setname] = useState();
   const [caronas, setCaronas] = useState({});
@@ -108,6 +110,7 @@ export function CaronasDisponiveis() {
     lerNome();
     lerCaronas();
     setRefreshing(false)
+    console.log(user)
   }, []);
 
   
@@ -262,10 +265,7 @@ export function CaronasDisponiveis() {
           >
             Bem vindo(a) {name}
           </Text>
-          <Image
-            source={{ uri: imageUrl }}
-            style={{ width: 35, height: 35, marginLeft: 15, borderRadius: 8, borderColor:'#F6C445',borderWidth:1 }}
-          />
+          
         </View>
 
         {caronas ? (

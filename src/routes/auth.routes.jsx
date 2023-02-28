@@ -8,7 +8,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, Octicons  } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -117,6 +117,7 @@ import {
   deleteObject,
 } from "firebase/storage";
 import { useEffect, useState } from "react";
+import { DetHistoricoMot } from "../pages/Pessoas/DetHistoricoMot";
 
 
 
@@ -195,7 +196,7 @@ function AuthRoutesTabBar() {
                 loop={true}
               ></LottieView>
             ) : (
-              <EvilIcons name="gear" size={size} color={color} />
+              <Octicons name="gear" size={size} color={color} />
             );
           }
         },
@@ -1109,6 +1110,17 @@ export function AuthRoutes() {
       <Screen
         name="DetalhesHistorico"
         component={DetalhesHistorico}
+        options={{
+          headerTitle: "HISTÓRICO",
+          headerShown:true,
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="DetHistoricoMot"
+        component={DetHistoricoMot}
         options={{
           headerTitle: "HISTÓRICO",
           headerShown:true,

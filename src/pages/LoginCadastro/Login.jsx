@@ -40,6 +40,7 @@ export function Login(){
             signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 
+                //const stringUserID = userCredential.user.getIdToken.toString()
                 setUser(userCredential.user.uid)
                 
             })

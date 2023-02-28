@@ -10,7 +10,8 @@ import {
   Modal,
   Alert,
   Linking,
-  ActivityIndicator
+  ActivityIndicator,
+  FlatList
 } from "react-native";
 import LottieView from "lottie-react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -35,7 +36,7 @@ import {
   uploadBytes,
 } from "firebase/storage";
 
-export function DetalhesHistorico() {
+export function DetHistoricoMot() {
   const { params } = useRoute();
   const [aguardando, setAguardando] = useState(false)
   const [alerta, setAlerta] = useState(false);
@@ -57,8 +58,10 @@ export function DetalhesHistorico() {
   const mapEl = useRef(null);
   const [distance, SetDistance] = useState(null);
   const [location, setLocation] = useState(null);
-
+  const [interessados, setInteressados]=useState([])
   const keyCarona = params.item.key
+
+
   function PaxAceito() {
     setAguardando(true)
       Linking.openURL(
@@ -94,7 +97,38 @@ export function DetalhesHistorico() {
   const userUID = auth.currentUser.uid;
   const db = getDatabase();
   const [dono, setDono] = useState(false);
-  console.log(params)
+  //console.log(params)
+  const dados = []
+  function lerInteressados(){
+    const dados = []
+    const dbRef = ref(getDatabase());
+      get(child(dbRef, `Historico/${params.item.uid}/${params.item.caronasKey}/interessados/`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          //console.log(snapshot)
+          snapshot.forEach((childItem)=>{
+            let date = {
+              key: childItem.key,
+              name: childItem.val().name,
+              lastName: childItem.val().lastName,
+              telefone:childItem.val().telefone,
+              image:childItem.val().image,
+              email:childItem.val().email,
+            }
+            dados.push(date)
+            setInteressados(dados)
+            console.log(snapshot)
+          })
+        } else {
+          console.log("No data available");
+          //alert("No data available");
+        }
+   
+      }).catch((error) => {
+        console.error(error);
+      });
+  }
+
   useEffect(() => {
     async function ler() {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -163,15 +197,19 @@ export function DetalhesHistorico() {
       }
     }
     ler();
+    lerInteressados();
+    console.log(params.item.id)
   }, []);
 
+  
+
   function apagarCorrida() {
-    setAguardando(true)
-    remove(ref(db, "caronas/" + params.item.id));
-    console.log("carona removida");
-    navigation.navigate('CaronasDisponiveis');
+    
+    remove(ref(db, "Historico/" + userUID +'/'+ params.item.caronasKey));
+    console.log("carona removida do historico");
+    navigation.navigate('Historico');
     setVisible1(false)
-    setAguardando(false)
+   
   }
 
   return (
@@ -269,20 +307,34 @@ export function DetalhesHistorico() {
         >
           <View style={styles.modal2}>
             <View style={styles.titleModal}>
-              <Text style={styles.titleModalText}>ALERTA</Text>
+              <Text style={styles.titleModalText}>PESSOAS INTERESSADAS</Text>
             </View>
-            <Text style={{ fontSize: 15, textAlign: "center", marginTop: 15 }}>
-              Mob Timon coleta dados de local para ativar trajetos, localização,
-              mesmo quando o app está fechado ou não está em uso.
-            </Text>
+              <FlatList
+                data={interessados}
+                renderItem={({item})=>(
+                  <View style={{height:100,  backgroundColor:'#b9b9b9', padding:5, marginTop:5, borderRadius:8, borderWidth:2}}>
+                    <View>
+                      <Image source={{uri:item.image}} style={{width:60, height:60, resizeMode:'contain'}}/>
+                    </View>
+                    <View style={{flexDirection:'row', position:'absolute', left:75}}>
+                      <Text style={{marginRight:5, fontSize:18}}>{item.name}</Text>
+                      <Text style={{fontSize:18}}>{item.lastName}</Text>
+                    </View>
+                    <View style={{position:'absolute', top:25, left:75}}>
+                      <Text style={{fontSize:17}}>{item.email}</Text>
+                      <Text style={{fontSize:17}}>{item.telefone}</Text>
+                    </View>
+                  </View>
+                )}
+              />
 
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("RotaYuri") || setAlerta(false)
+                setAlerta(false)
               }
               style={styles.botaoModalAlerta}
             >
-              <Text style={styles.textBotao}>CONTINUAR</Text>
+              <Text style={styles.textBotao}>FECHAR</Text>
             </TouchableOpacity>
           </View>
         </Modal>
@@ -438,24 +490,11 @@ export function DetalhesHistorico() {
 
         <TouchableOpacity
           style={styles.botaoQueroACarona}
-          onPress={() => setVisible(true)}
+          onPress={() => setAlerta(true)}
         >
-          <Text style={styles.titleBotao}>QUERO A CARONA</Text>
+          <Text style={styles.titleBotao}>INTERESSADOS</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={{... (dono ? {marginBottom:10}: {marginBottom:30}),
-          backgroundColor: "#FF3030",
-          height: 45,
-          width: 270,
-          marginTop: 10,
-          borderRadius: 8,
-          borderWidth: 0,
-          elevation: 10,}}
-          onPress={() => navigation.navigate("CaronasDisponiveis")}
-        >
-          <Text style={styles.titleBotao}>NÃO É PARA MIM</Text>
-        </TouchableOpacity>
 
         {dono && (
           <TouchableOpacity style={styles.botaoVerRota} onPress={()=>setVisible1(true)}>
@@ -548,7 +587,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   botaoQueroACarona: {
-    backgroundColor: "#14BC9C",
+    backgroundColor: "#b9b9b9",
     height: 45,
     width: 270,
     marginTop: 10,
@@ -644,9 +683,9 @@ const styles = StyleSheet.create({
     padding: 20,
     elevation: 10,
     borderRadius: 20,
-    marginVertical: 260,
-    width: "80%",
-    height: "30%",
+    marginVertical: 160,
+    width: "90%",
+    height: "70%",
   },
   modal3: {
     alignSelf: "center",

@@ -171,9 +171,9 @@ export function DetalhesHistorico() {
 
   function apagarCorrida() {
     setAguardando(true)
-    remove(ref(db, "caronas/" + params.item.id));
+    remove(ref(db, "HistoricoPax/" + userUID +'/'+ params.item.caronasKey ));
     console.log("carona removida");
-    navigation.navigate('CaronasDisponiveis');
+    navigation.navigate('Historico');
     setVisible1(false)
     setAguardando(false)
   }
@@ -181,46 +181,6 @@ export function DetalhesHistorico() {
   return (
     <ScrollView style={{ backgroundColor: "#334A58" }}>
       <View style={styles.container}>
-
-
-
-
-        <Modal
-          animationType="fade"
-          visible={visible}
-          statusBarTranslucent={false}
-          transparent={true}
-          style={{}}
-        >
-          <View style={styles.modal}>
-            <Text style={styles.titleModal}>
-              ESSA É A CARONA QUE VOCÊ DESEJA?
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                padding: 5,
-                justifyContent: "center",
-                marginTop: 40,
-              }}
-            >
-              <TouchableOpacity
-                onPress={PaxAceito}
-                style={styles.botaoModal2}
-              >
-                <Text style={styles.textBotao}>SIM!</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={()=>setVisible(false)} style={styles.botaoModal1}>
-                <Text style={styles.textBotao}>NÃO</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Modal>
-
-
-
-
-
         <Modal
           animationType="fade"
           visible={visible1}
@@ -263,36 +223,6 @@ export function DetalhesHistorico() {
 
 
 
-
-        <Modal
-          animationType="fade"
-          visible={alerta}
-          statusBarTranslucent={false}
-          transparent={true}
-          style={{}}
-        >
-          <View style={styles.modal2}>
-            <View style={styles.titleModal}>
-              <Text style={styles.titleModalText}>ALERTA</Text>
-            </View>
-            <Text style={{ fontSize: 15, textAlign: "center", marginTop: 15 }}>
-              Mob Timon coleta dados de local para ativar trajetos, localização,
-              mesmo quando o app está fechado ou não está em uso.
-            </Text>
-
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate("RotaYuri") || setAlerta(false)
-              }
-              style={styles.botaoModalAlerta}
-            >
-              <Text style={styles.textBotao}>CONTINUAR</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
-
-
-
         {image ? (
           <Image
             source={{ uri: params.item.image }}
@@ -329,18 +259,7 @@ export function DetalhesHistorico() {
           <Text style={styles.title}>
             {params.item.name} {params.item.lastName}
           </Text>
-          {/*<Text style={styles.texto}>AUDI R8</Text>
-          <Text style={styles.texto}>COR: PRATA </Text>*/}
         </View>
-
-
-
-        {/*<Image
-          source={{
-            uri: "https://mediaservice.audi.com/media/fast/H4sIAAAAAAAAAFvzloG1tIiBOTrayfuvpGh6-m1zJgaGigIGBgZGoDhTtNOaz-I_2DhCHkCFGe8ysJSnJhUwAlW4MXFl5iamp-qDBPgZuYssdFMrSnTzUnPz2YHSfDxx82OvGmYdv7P9odeX-UEuL9jvPBNn4JG80c5idmnvwdZ5rgwT-Nb8-CLL6sPA80Ljz3ynLG9X55KNxmkmK6rP_I85ysDDa3x7zo9_LDP1Pj_UUr3v_Yxjg5s2A8-MJyEt65yrn0119Z3L518bciD7fCcDTxCz1fvu0JJWKYF9l_j8Dz1mmz9zIgNPBuPMFeeOTFT5uu3h5VpjA8cN328C3eBSWnq15cu9uD38u77f-HyweolJyCYGnrYY8XKRUnPBmOJb6e_al5lxiDFnMPDsrVD8zRJnIXDzyYnLnX9PyqZftxAE-mLb95P758kv3-XpdrKVa2rDfnGW7Qw8r6fW-q0pU3kZI7RXxsLVqtQuOnM3Aw_DA72seu0VTJP1jL5sV1p2aXfI8ucMPJ1X3V-mBMfM5JHmyfJ4N3leDNPScwyswIBl2g0kWOKABM8TIMFhwwAmQUG-AUgwLgTxWeuZGRi4HRgY2EIYQIBPuLQopyCxKDFXryi1uCA_rzizLFVQw4BIIMzq4xjpGgQAa47rIxACAAA?mimetype=image/png",
-          }}
-          style={{ width: 150, height: 90, marginBottom: 5, marginLeft: 15 }}
-        />*/}
 
 
 
@@ -430,6 +349,15 @@ export function DetalhesHistorico() {
           </View>
         )}
 
+          <KeyboardAvoidingView style={{ flexDirection: "column", alignItems:'center', width:'90%',  }}>
+            <Text style={styles.vagas}>PARTIDA:</Text>
+            <Text style={styles.partida}>{params.item.partidaString}</Text>
+          </KeyboardAvoidingView>
+
+              <KeyboardAvoidingView style={{ flexDirection: "column", alignItems:'center', width:'90%' }}>
+                <Text style={styles.vagas}>DESTINO:</Text>
+                <Text style={styles.destino}>{params.item.destinoString}</Text>
+              </KeyboardAvoidingView>
         <KeyboardAvoidingView style={{ flexDirection: "row", alignItems:'center' }}>
           <Text style={styles.vagas}>DATA:</Text>
           <Text style={styles.vagasNumero}>{params.item.data}</Text>
@@ -441,8 +369,6 @@ export function DetalhesHistorico() {
         </KeyboardAvoidingView>
 
 
-
-        
           <TouchableOpacity style={styles.botaoVerRota} onPress={()=>setVisible1(true)}>
             <Text style={styles.titleBotao}>EXCLUIR HISTÓRICO</Text>
           </TouchableOpacity>

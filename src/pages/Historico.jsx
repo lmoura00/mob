@@ -71,20 +71,22 @@ function HistoricoMot() {
           snapshot.forEach((item)=>{
             let data = {
                 paxUid: userUid,
-                caronasKey:item.val().key,
+                caronasKey:item.val().id,
                 email: item.val().email,
                 image : item.val().imageUrl,
                 data: item.val().data,
                 destino:item.val().destino,
+                destinoString:item.val().destinoString,
                 horario:item.val().horario,
                 partida:item.val().partida,
+                partidaString:item.val().partidaString,
                 vagas: item.val().vagas,
-                uidMot:item.val().key,
                 name: item.val().name,
                 lastName: item.val().lastname,
                 telefone: item.val().telefone,
-                uidMot: item.val().uidMot,
                 placa: item.val().placa,
+                uid:item.val().uid,
+                interessados:item.val().interessados
             }
             dados.push(data)
             setHistorico(dados)
@@ -110,7 +112,7 @@ function HistoricoMot() {
                 <FlatList
                     data={historico}
                     renderItem={({item})=> (
-                        <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('DetalhesHistorico', {item})}>
+                        <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('DetHistoricoMot', {item})}>
                         <View style={{width:50, height:50, left:25}}>
                         {item.image ? (
                                 <Image 
@@ -266,8 +268,10 @@ function HistoricoPax() {
                 image : item.val().image,
                 data: item.val().data,
                 destino:item.val().destino,
+                destinoString:item.val().destinoString,
                 horario:item.val().horario,
                 partida:item.val().partida,
+                partidaString:item.val().partidaString,
                 vagas: item.val().vagas,
                 uidMot:item.val().key,
                 name: item.val().name,

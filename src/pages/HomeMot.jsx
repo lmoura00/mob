@@ -160,15 +160,14 @@ export function HomeMot() {
     }
     localizacaoUser();
     ler()
-    
   },[])
   
-  console.log(imageUrl)
-
+  const db = getDatabase();
+  const newCaronaKey = push(child(ref(db), 'caronas')).key;
   function enviarHistoricoMot(){
     const userUid = auth.currentUser.uid
         const db = getDatabase();
-        const newCaronaKey = push(child(ref(db), 'Historico')).key;
+        
         set(ref(db , "Historico/" + userUid + "/" + newCaronaKey ), {
             id: newCaronaKey,
             uid:userUid,
@@ -200,8 +199,8 @@ export function HomeMot() {
     
     const userUid = auth.currentUser.uid
     function enviarCarona() {
-        const db = getDatabase();
-        const newCaronaKey = push(child(ref(db), 'caronas')).key;
+        
+       
         set(ref(db , "caronas/" + newCaronaKey  ), {
             id: newCaronaKey,
             uid:userUid,
