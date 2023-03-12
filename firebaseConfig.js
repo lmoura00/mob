@@ -7,6 +7,8 @@ import {getDatabase} from "firebase/database";
 // import {...} from "firebase/functions";
 import { getStorage } from "firebase/storage";
 
+
+
 // Initialize Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyDUyp7OcPnMcwwQejUCRkqGL4hdKd3wq2k",
@@ -24,6 +26,8 @@ const firebaseConfig = {
   const auth = getAuth(app);
   const db =  getDatabase(app);
   const storage = getStorage(app);
+
+
 
   export {app, auth, db, storage}
 // For more information on how to access Firebase in your project,

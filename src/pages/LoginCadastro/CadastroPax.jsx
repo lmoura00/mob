@@ -144,7 +144,7 @@ export function CadastroPax() {
   }
 
   function CheckSenha(){
-    if (senha.length <=6){
+    if (senha.length <= 5){
       Alert.alert('Senha curta demais', 'O tamanho minimo da senha deve ser de 6 dígitos.')
     }else{
       completo()

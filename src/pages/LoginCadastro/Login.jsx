@@ -138,7 +138,7 @@ export function Login(){
                     ]}
                 >
             
-
+                <View style={{}}>
                 <View style={{flexDirection:'row'}}>
                     <View style={{width:50, height:50}}>
                         <LottieView 
@@ -209,7 +209,7 @@ export function Login(){
                     </TouchableOpacity>
                     
                 </KeyboardAvoidingView>
-
+                </View>
            
 
             </Animated.View>

@@ -40,11 +40,14 @@ import { useEffect } from "react";
 import {useAuth} from "./../Hooks/Auth"
 
 export function CaronasDisponiveis() {
+  const dataCaronasAtivas = [];
   const {user, setUser} = useAuth()
   const navigation = useNavigation();
   const [name, setname] = useState();
   const [caronas, setCaronas] = useState({});
-
+  const [caronasAtivas, setCaronasAtivas] = useState({});
+  const [AlgumaCaronasAtiva, setAlgumaCaronasAtiva] = useState(true);
+  const [programador, setProgramador] = useState(false)
   const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
   };
@@ -66,7 +69,7 @@ export function CaronasDisponiveis() {
         .then((snapshot) => {
           if (snapshot.exists()) {
             setname(snapshot.val());
-            console.log(userId);
+            //console.log(userId);
           } else {
             console.log("No data available");
           }
@@ -107,10 +110,13 @@ export function CaronasDisponiveis() {
         console.log(error);
       });
 
+
+      
     lerNome();
     lerCaronas();
     setRefreshing(false)
-    console.log(user)
+    console.log(user);
+    CheckProgramador();
   }, []);
 
   
@@ -157,8 +163,15 @@ export function CaronasDisponiveis() {
     },
   ];
 
+  function CheckProgramador(){
+    if(userId === 'Vh2TTXfjdtaEB36cH4oaCzthanD2'){
+      setProgramador(true)
+    }
+  }
+
   function lerCaronas() {
     const userData = [];
+
     setCaronas(null);
     get(child(dbRef, `caronas`))
       .then((snapshot) => {
@@ -191,6 +204,41 @@ export function CaronasDisponiveis() {
       .catch((error) => {
         console.error(error);
       });
+
+      get(child(dbRef, `CaronasAtivas/`+userId + '/'))
+      .then((snapshot) => {
+        snapshot.forEach((childItem) => {
+          let date = {
+            key: childItem.key,
+            name: childItem.val().name,
+            lastName: childItem.val().lastname,
+            data: childItem.val().data,
+            placa: childItem.val().placa,
+            horario: childItem.val().horario,
+            image: childItem.val().imageUrl,
+            partida: childItem.val().partida,
+            destino: childItem.val().destino,
+            uid: childItem.val().uid,
+            id: childItem.val().id,
+            vagas: childItem.val().vagas,
+            telefone: childItem.val().telefone,
+            email: childItem.val().email,
+            partidaString: childItem.val().descriptionPartida,
+            destinoString: childItem.val().descriptionDestino,
+          };
+          
+          dataCaronasAtivas.push(date);
+          
+          setCaronasAtivas(userData);
+          console.log('TUDO OK ATÉ AQUI. BORA TRABALHAR')
+          //console.log(date)
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+      
+      
   }
 
   const hj = new Date();
@@ -271,6 +319,7 @@ export function CaronasDisponiveis() {
         {caronas ? (
           <FlatList
             data={caronas}
+            refreshing
             renderItem={({ item }) => (
               <TouchableOpacity
                 style={styles.botao}
@@ -338,6 +387,11 @@ export function CaronasDisponiveis() {
             style={{}}
           />
         </TouchableOpacity>
+          {
+            programador &&
+              <TouchableOpacity onPress={()=>navigation.navigate('AcompanharRota')}><Text>Texo</Text></TouchableOpacity>
+            
+          }
       </RefreshControl>
     </SafeAreaView>
   );

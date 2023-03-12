@@ -118,6 +118,8 @@ import {
 } from "firebase/storage";
 import { useEffect, useState } from "react";
 import { DetHistoricoMot } from "../pages/Pessoas/DetHistoricoMot";
+import { AcompanharRota } from "../pages/AcompanharRota";
+import { Chat } from "../pages/Chat";
 
 
 
@@ -1123,6 +1125,28 @@ export function AuthRoutes() {
         component={DetHistoricoMot}
         options={{
           headerTitle: "HISTÓRICO",
+          headerShown:true,
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="AcompanharRota"
+        component={AcompanharRota}
+        options={{
+          headerTitle: "ACOMPANHAR",
+          headerShown:true,
+          headerTitleAlign: "center",
+          statusBarStyle: "dark",
+        }}
+      />
+
+      <Screen
+        name="Chat"
+        component={Chat}
+        options={{
+          headerTitle: "CHAT",
           headerShown:true,
           headerTitleAlign: "center",
           statusBarStyle: "dark",

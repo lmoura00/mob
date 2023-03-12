@@ -96,6 +96,7 @@ export function Todos(){
             statusBarTranslucent={false}
             transparent={true}
             style={{}}
+            
             >
             <View style={styles.modal}>
             <View
@@ -1203,13 +1204,15 @@ const styles = StyleSheet.create({
       },
       modal: {
         alignSelf: "center",
-        backgroundColor: "#f9f9f9",
+        backgroundColor: "#F2F3F3",
         padding: 15,
         elevation: 15,
-        borderRadius: 20,
-        marginVertical: 180,
-        width: "85%",
-        height: "55%",
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        position:'absolute',
+        bottom:0,
+        width: "99%",
+        height: 450,
       },
       botaoModal1: {
         backgroundColor: "#FF3030",
@@ -1231,9 +1234,14 @@ const styles = StyleSheet.create({
         textDecorationLine:'underline'
       },
       image:{
-        height:200,
+        height:250,
         width:'90%',
         alignSelf:'center',
-        marginTop:15
+        marginTop:15,
+        borderRadius:8,
+        borderWidth:1,
+        borderColor:'#222',
+        elevation:10,
+        opacity:0.9,
       }
 })
