@@ -345,7 +345,7 @@ export function PtsTur() {
           </TouchableOpacity>
         </View>
 
-        <View style={{ flexDirection: "row" }}>
+        <View style={{ flexDirection: "row", marginBottom:55 }}>
           <TouchableOpacity
             style={styles.tag}
             onPress={() => navigation.navigate("TemploCentral")}

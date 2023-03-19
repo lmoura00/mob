@@ -37,17 +37,17 @@ import {
 
 import { useState } from "react";
 import { useEffect } from "react";
-import {useAuth} from "./../Hooks/Auth"
+import { useAuth } from "./../Hooks/Auth";
 
 export function CaronasDisponiveis() {
   const dataCaronasAtivas = [];
-  const {user, setUser} = useAuth()
+  const { user, setUser } = useAuth();
   const navigation = useNavigation();
   const [name, setname] = useState();
   const [caronas, setCaronas] = useState({});
   const [caronasAtivas, setCaronasAtivas] = useState({});
   const [AlgumaCaronasAtiva, setAlgumaCaronasAtiva] = useState(true);
-  const [programador, setProgramador] = useState(false)
+  const [programador, setProgramador] = useState(false);
   const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
   };
@@ -60,7 +60,6 @@ export function CaronasDisponiveis() {
   const [datas, setDatas] = useState([]);
 
   useEffect(() => {
-    
     function lerNome() {
       const auth = getAuth();
       const dbRef = ref(getDatabase());
@@ -99,7 +98,7 @@ export function CaronasDisponiveis() {
             });
             
         }*/
-        //ler Image
+    //ler Image
     const storage = getStorage();
     getDownloadURL(sRef(storage, `${userId}`))
       .then((url) => {
@@ -110,16 +109,13 @@ export function CaronasDisponiveis() {
         console.log(error);
       });
 
-
-      
     lerNome();
     lerCaronas();
-    setRefreshing(false)
+    setRefreshing(false);
     console.log(user);
     CheckProgramador();
   }, []);
 
-  
   const data = [
     {
       key: "NM_B5pweIHX1gIydMap",
@@ -163,9 +159,9 @@ export function CaronasDisponiveis() {
     },
   ];
 
-  function CheckProgramador(){
-    if(userId === 'Vh2TTXfjdtaEB36cH4oaCzthanD2'){
-      setProgramador(true)
+  function CheckProgramador() {
+    if (userId === "Vh2TTXfjdtaEB36cH4oaCzthanD2") {
+      setProgramador(true);
     }
   }
 
@@ -194,18 +190,18 @@ export function CaronasDisponiveis() {
             partidaString: childItem.val().descriptionPartida,
             destinoString: childItem.val().descriptionDestino,
           };
-          
+
           userData.push(date);
-          
+
           setCaronas(userData);
-          console.log('TUDO OK ATÉ AQUI. BORA TRABALHAR')
+          console.log("TUDO OK ATÉ AQUI. BORA TRABALHAR");
         });
       })
       .catch((error) => {
         console.error(error);
       });
 
-      get(child(dbRef, `CaronasAtivas/`+userId + '/'))
+    get(child(dbRef, `CaronasAtivas/` + userId + "/"))
       .then((snapshot) => {
         snapshot.forEach((childItem) => {
           let date = {
@@ -226,19 +222,17 @@ export function CaronasDisponiveis() {
             partidaString: childItem.val().descriptionPartida,
             destinoString: childItem.val().descriptionDestino,
           };
-          
+
           dataCaronasAtivas.push(date);
-          
+
           setCaronasAtivas(userData);
-          console.log('TUDO OK ATÉ AQUI. BORA TRABALHAR')
+          console.log("TUDO OK ATÉ AQUI. BORA TRABALHAR");
           //console.log(date)
         });
       })
       .catch((error) => {
         console.error(error);
       });
-      
-      
   }
 
   const hj = new Date();
@@ -248,9 +242,9 @@ export function CaronasDisponiveis() {
     String(hj.getMonth() + 1).padStart(2, "0") +
     "/" +
     hj.getFullYear();
-   if( datas < output){
+  if (datas < output) {
     //alert('menor')
-   }
+  }
 
   /*const Item = ( name, horario, data, placa, image ) => [
                 <TouchableOpacity style={styles.botao} onPress={()=>navigation.navigate('Detalhes')}>
@@ -286,8 +280,6 @@ export function CaronasDisponiveis() {
     wait(500).then(() => setRefreshing(false));
   }, []);
 
-
-
   return (
     <SafeAreaView style={styles.container}>
       <RefreshControl
@@ -313,12 +305,12 @@ export function CaronasDisponiveis() {
           >
             Bem vindo(a) {name}
           </Text>
-          
         </View>
 
         {caronas ? (
           <FlatList
             data={caronas}
+            style={{marginBottom:125}}
             refreshing
             renderItem={({ item }) => (
               <TouchableOpacity
@@ -387,11 +379,14 @@ export function CaronasDisponiveis() {
             style={{}}
           />
         </TouchableOpacity>
-          {
-            programador &&
-              <TouchableOpacity onPress={()=>navigation.navigate('AcompanharRota')}><Text>Texo</Text></TouchableOpacity>
-            
-          }
+        {programador && (
+          <TouchableOpacity
+            onPress={() => navigation.navigate("AcompanharRota")}
+            style={{ position: "absolute", bottom: 75, left: 5 }}
+          >
+            <Text style={{ color: "#f9f9f9" }}>ROTA</Text>
+          </TouchableOpacity>
+        )}
       </RefreshControl>
     </SafeAreaView>
   );
@@ -451,7 +446,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     right: 18,
-    bottom: 15,
+    bottom: 75,
     opacity: 0.8,
     borderRadius: 30,
     textAlign: "center",

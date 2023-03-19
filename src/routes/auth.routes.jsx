@@ -8,7 +8,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-import { MaterialCommunityIcons, Octicons  } from "@expo/vector-icons";
+import { MaterialCommunityIcons, Octicons } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -16,7 +16,7 @@ import { CaronasDisponiveis } from "../pages/CaronasDisponiveis";
 import { PtsTur } from "../pages/PtsTur";
 import { Perfil } from "../pages/Perfil";
 import { Historico } from "../pages/Historico";
-import { Todos } from "../pages/PontosTuristicos/Todos"; 
+import { Todos } from "../pages/PontosTuristicos/Todos";
 
 import { Alice } from "../pages/PontosTuristicos/Alice";
 import { Chico } from "../pages/PontosTuristicos/Chico";
@@ -43,7 +43,6 @@ import { Velokart } from "../pages/PontosTuristicos/Velokart";
 import { LekLek } from "../pages/PontosTuristicos/LekLek";
 import { OsAmigos } from "../pages/PontosTuristicos/OsAmigos";
 import { TemploCentral } from "../pages/PontosTuristicos/TemploCentral";
-
 
 import { Jose } from "../pages/Pessoas/JoseV";
 import { Marina } from "../pages/Pessoas/Marina";
@@ -79,7 +78,6 @@ import { RotaLekLek } from "../pages/Rotas/RotaLekLek";
 import { RotaOsAmigos } from "../pages/Rotas/RotaOsAmigos";
 import { RotaTemploCentral } from "../pages/Rotas/RotaTemploCentral";
 
-
 import { RotaJose } from "../../src/pages/Rotas/RotaJose";
 import { RotaMarina } from "../pages/Rotas/RotaMarina";
 import { RotaOdaleia } from "../pages/Rotas/RotaOdaleia";
@@ -102,12 +100,12 @@ import { RotaJose2 } from "../pages/Historico/Rotas/RotaJose2";
 import { RotaMarina1 } from "../pages/Historico/Rotas/RotaMarina1";
 import { RotaMarina2 } from "../pages/Historico/Rotas/RotaMarina2";
 
-import {Teste} from '../pages/Teste'
-import {Teste2} from '../pages/Teste2'
-import {HomeMot} from '../pages/HomeMot'
+import { Teste } from "../pages/Teste";
+import { Teste2 } from "../pages/Teste2";
+import { HomeMot } from "../pages/HomeMot";
 import { getAuth, signOut } from "firebase/auth";
 import { Detalhes } from "../pages/Pessoas/Detalhes";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DetalhesHistorico } from "../pages/Historico/DetalhesHistorico";
 import {
   getStorage,
@@ -121,30 +119,27 @@ import { DetHistoricoMot } from "../pages/Pessoas/DetHistoricoMot";
 import { AcompanharRota } from "../pages/AcompanharRota";
 import { Chat } from "../pages/Chat";
 
-
-
-
-
 function AuthRoutesTabBar() {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const { setUser } = useAuth();
   const { Navigator, Screen } = createBottomTabNavigator();
   const auth = getAuth();
-  const [imageUrl, setImageUrl] = useState(null)
+  const [imageUrl, setImageUrl] = useState(null);
   const Auth = getAuth();
   const userId = Auth.currentUser.uid;
 
-
-  function LogOut(){
-    signOut(auth).then(() => {
-      setUser(null);
-      console.log('LogOut efetuado com sucesso');
-    }).catch((error) => {
-      Alert.alert('Ops...', 'Algo deu errado, tente novamente mais tarde.')
-    });
+  function LogOut() {
+    signOut(auth)
+      .then(() => {
+        setUser(null);
+        console.log("LogOut efetuado com sucesso");
+      })
+      .catch((error) => {
+        Alert.alert("Ops...", "Algo deu errado, tente novamente mais tarde.");
+      });
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     const storage = getStorage();
     getDownloadURL(sRef(storage, `${userId}`))
       .then((url) => {
@@ -154,7 +149,7 @@ function AuthRoutesTabBar() {
       .catch((error) => {
         console.log(error);
       });
-  },[])
+  }, []);
 
   return (
     <Navigator
@@ -205,6 +200,19 @@ function AuthRoutesTabBar() {
 
         tabBarActiveTintColor: "blue",
         tabBarInactiveTintColor: "grey",
+        tabBarStyle: {
+          marginBottom: 10,
+          marginTop:5,
+          marginHorizontal: 5,
+          borderRadius: 8,
+          elevation: 15,
+          position:'absolute',
+          left:15,
+          justifyContent: "space-between",
+          width: "90%",
+          alignSelf: "center"
+        },
+        tabBarItemStyle:{borderRadius:8, marginHorizontal:5, marginVertical:2}
       })}
     >
       <Screen
@@ -215,16 +223,13 @@ function AuthRoutesTabBar() {
           statusBarStyle: "dark",
           tabBarLabel: "INICIAL.",
           headerTitleAlign: "center",
-          tabBarActiveBackgroundColor:'#B9B9B9',
-          tabBarShowLabel:true,
-          tabBarLabelStyle:{fontFamily:'Ubuntu_500Medium',color:'black'},
+          tabBarActiveBackgroundColor: "#B9B9B9",
+          tabBarShowLabel: true,
+          tabBarLabelStyle: { fontFamily: "Ubuntu_500Medium", color: "black" },
           headerTitle: "CARONAS",
-          headerTitleStyle: { fontFamily:'Ubuntu_700Bold' },
+          headerTitleStyle: { fontFamily: "Ubuntu_700Bold" },
           headerRight: () => (
-            <TouchableOpacity
-              onPress={LogOut}
-              style={{ marginRight: 10 }}
-            >
+            <TouchableOpacity onPress={LogOut} style={{ marginRight: 10 }}>
               <LottieView
                 source={require("../Assets/38063-log-out.json")}
                 autoPlay={true}
@@ -233,14 +238,21 @@ function AuthRoutesTabBar() {
               />
             </TouchableOpacity>
           ),
-          headerLeft:()=>(
-          <TouchableOpacity onPress={()=>navigation.navigate('Perfil')}>
-            <Image
-              source={{ uri: imageUrl }}
-              style={{ width: 35, height: 35, marginLeft: 15, borderRadius: 8, borderWidth:1, borderColor:"#F6C445" }}
-            />
-          </TouchableOpacity>
-          )
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.navigate("Perfil")}>
+              <Image
+                source={{ uri: imageUrl }}
+                style={{
+                  width: 35,
+                  height: 35,
+                  marginLeft: 15,
+                  borderRadius: 8,
+                  borderWidth: 1,
+                  borderColor: "#F6C445",
+                }}
+              />
+            </TouchableOpacity>
+          ),
         }}
       />
 
@@ -250,11 +262,11 @@ function AuthRoutesTabBar() {
         options={{
           tabBarLabel: "HISTÓRICO",
           headerTitleAlign: "center",
-          tabBarActiveBackgroundColor:'#B9B9B9',
-          tabBarShowLabel:true,
-          tabBarLabelStyle:{fontFamily:'Ubuntu_500Medium', color:'black'},
+          tabBarActiveBackgroundColor: "#B9B9B9",
+          tabBarShowLabel: true,
+          tabBarLabelStyle: { fontFamily: "Ubuntu_500Medium", color: "black" },
           headerTitle: "HISTÓRICO",
-          headerTitleStyle: { fontFamily:'Ubuntu_700Bold' },
+          headerTitleStyle: { fontFamily: "Ubuntu_700Bold" },
           headerRight: () => (
             <TouchableOpacity
               onPress={() => setUser(null)}
@@ -268,35 +280,38 @@ function AuthRoutesTabBar() {
               />
             </TouchableOpacity>
           ),
-          headerLeft:()=>(
-            <TouchableOpacity onPress={()=>navigation.navigate('Perfil')}>
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.navigate("Perfil")}>
               <Image
                 source={{ uri: imageUrl }}
-                style={{ width: 35, height: 35, marginLeft: 15, borderRadius: 8, borderWidth:1, borderColor:"#F6C445" }}
+                style={{
+                  width: 35,
+                  height: 35,
+                  marginLeft: 15,
+                  borderRadius: 8,
+                  borderWidth: 1,
+                  borderColor: "#F6C445",
+                }}
               />
             </TouchableOpacity>
-            )
+          ),
         }}
       />
-
 
       <Screen
         name="PtsTur"
         component={PtsTur}
         options={{
           headerShown: true,
-          tabBarActiveBackgroundColor:'#B9B9B9',
-          tabBarShowLabel:true,
-          tabBarLabelStyle:{fontFamily:'Ubuntu_500Medium',color:'black'},
+          tabBarActiveBackgroundColor: "#B9B9B9",
+          tabBarShowLabel: true,
+          tabBarLabelStyle: { fontFamily: "Ubuntu_500Medium", color: "black" },
           tabBarLabel: "PONTOS TUR.",
           headerTitleAlign: "center",
           headerTitle: "PONTOS TURISTICOS",
-          headerTitleStyle: { fontFamily:'Ubuntu_700Bold' },
+          headerTitleStyle: { fontFamily: "Ubuntu_700Bold" },
           headerRight: () => (
-            <TouchableOpacity
-              onPress={LogOut}
-              style={{ marginRight: 10 }}
-            >
+            <TouchableOpacity onPress={LogOut} style={{ marginRight: 10 }}>
               <LottieView
                 source={require("../Assets/38063-log-out.json")}
                 autoPlay={true}
@@ -305,14 +320,21 @@ function AuthRoutesTabBar() {
               />
             </TouchableOpacity>
           ),
-          headerLeft:()=>(
-            <TouchableOpacity onPress={()=>navigation.navigate('Perfil')}>
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.navigate("Perfil")}>
               <Image
                 source={{ uri: imageUrl }}
-                style={{ width: 35, height: 35, marginLeft: 15, borderRadius: 8, borderWidth:1, borderColor:"#F6C445" }}
+                style={{
+                  width: 35,
+                  height: 35,
+                  marginLeft: 15,
+                  borderRadius: 8,
+                  borderWidth: 1,
+                  borderColor: "#F6C445",
+                }}
               />
             </TouchableOpacity>
-            )
+          ),
         }}
       />
 
@@ -322,16 +344,13 @@ function AuthRoutesTabBar() {
         options={{
           tabBarLabel: "PERFIL",
           headerTitleAlign: "center",
-          tabBarActiveBackgroundColor:'#B9B9B9',
-          tabBarShowLabel:true,
-          tabBarLabelStyle:{fontFamily:'Ubuntu_500Medium',color:'black'},
+          tabBarActiveBackgroundColor: "#B9B9B9",
+          tabBarShowLabel: true,
+          tabBarLabelStyle: { fontFamily: "Ubuntu_500Medium", color: "black" },
           headerTitle: "PERFIL",
-          headerTitleStyle: {fontFamily:'Ubuntu_700Bold' },
+          headerTitleStyle: { fontFamily: "Ubuntu_700Bold" },
           headerRight: () => (
-            <TouchableOpacity
-              onPress={LogOut}
-              style={{ marginRight: 10 }}
-            >
+            <TouchableOpacity onPress={LogOut} style={{ marginRight: 10 }}>
               <LottieView
                 source={require("../Assets/38063-log-out.json")}
                 autoPlay={true}
@@ -340,14 +359,25 @@ function AuthRoutesTabBar() {
               />
             </TouchableOpacity>
           ),
-          headerLeft:()=>(
-            <TouchableOpacity onPress={()=>Alert.alert('EI...','Você já está na tela de perfil. :)')}>
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() =>
+                Alert.alert("EI...", "Você já está na tela de perfil. :)")
+              }
+            >
               <Image
                 source={{ uri: imageUrl }}
-                style={{ width: 35, height: 35, marginLeft: 15, borderRadius: 8, borderWidth:1, borderColor:"#F6C445" }}
+                style={{
+                  width: 35,
+                  height: 35,
+                  marginLeft: 15,
+                  borderRadius: 8,
+                  borderWidth: 1,
+                  borderColor: "#F6C445",
+                }}
               />
             </TouchableOpacity>
-            )
+          ),
         }}
       />
     </Navigator>
@@ -372,7 +402,6 @@ export function AuthRoutes() {
           headerTitle: "DETALHES",
           headerTitleAlign: "center",
           statusBarStyle: "dark",
-
         }}
       />
       <Screen
@@ -1053,7 +1082,7 @@ export function AuthRoutes() {
           headerTitle: "DETALHES",
           headerTitleAlign: "center",
           statusBarStyle: "dark",
-          headerTitleStyle: {fontFamily:'Ubuntu_700Bold' },
+          headerTitleStyle: { fontFamily: "Ubuntu_700Bold" },
         }}
       />
 
@@ -1092,7 +1121,7 @@ export function AuthRoutes() {
         component={HomeMot}
         options={{
           headerTitle: "ADICIONAR CARONA",
-          headerShown:true,
+          headerShown: true,
           headerTitleAlign: "center",
           statusBarStyle: "dark",
         }}
@@ -1103,7 +1132,7 @@ export function AuthRoutes() {
         component={Detalhes}
         options={{
           headerTitle: "DETALHES",
-          headerShown:true,
+          headerShown: true,
           headerTitleAlign: "center",
           statusBarStyle: "dark",
         }}
@@ -1114,7 +1143,7 @@ export function AuthRoutes() {
         component={DetalhesHistorico}
         options={{
           headerTitle: "HISTÓRICO",
-          headerShown:true,
+          headerShown: true,
           headerTitleAlign: "center",
           statusBarStyle: "dark",
         }}
@@ -1125,7 +1154,7 @@ export function AuthRoutes() {
         component={DetHistoricoMot}
         options={{
           headerTitle: "HISTÓRICO",
-          headerShown:true,
+          headerShown: true,
           headerTitleAlign: "center",
           statusBarStyle: "dark",
         }}
@@ -1136,7 +1165,7 @@ export function AuthRoutes() {
         component={AcompanharRota}
         options={{
           headerTitle: "ACOMPANHAR",
-          headerShown:true,
+          headerShown: true,
           headerTitleAlign: "center",
           statusBarStyle: "dark",
         }}
@@ -1147,13 +1176,11 @@ export function AuthRoutes() {
         component={Chat}
         options={{
           headerTitle: "CHAT",
-          headerShown:true,
+          headerShown: true,
           headerTitleAlign: "center",
           statusBarStyle: "dark",
         }}
       />
-
-      
     </Navigator>
   );
 }

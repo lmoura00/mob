@@ -683,7 +683,7 @@ export function Detalhes() {
             source={require("../../Assets/95740-profile-person.json")}
             autoPlay={true}
             loop={true}
-            style={{ marginBottom: 390 }}
+            style={{ marginBottom: 440 }}
           />
         )}
 

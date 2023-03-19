@@ -3,12 +3,13 @@ import { GiftedChat } from 'react-native-gifted-chat'
 import { useRoute } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
-
+import { getAuth } from 'firebase/auth';
+import { auth } from '../../firebaseConfig';
 
 export function Chat() {
   const params = useRoute()
   const [messages, setMessages] = useState([]);
-
+  const Auth = getAuth()
   useEffect(() => {
     setMessages([
       {
@@ -22,6 +23,7 @@ export function Chat() {
         },
       },
     ]),
+    console.log(Auth.currentUser.displayName)
     console.log(messages)
   }, [])
 
@@ -34,10 +36,12 @@ export function Chat() {
       messages={messages}
       options={{}}
       placeholder={'Digite aqui a sua mensagem'}
-
+      showUserAvatar
       onSend={messages => onSend(messages) || console.log(messages)}
       user={{
         _id: 1,
+        name:auth.currentUser.displayName,
+        avatar: auth.currentUser.photoURL
       }}
     />
   )

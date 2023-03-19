@@ -56,6 +56,7 @@ export function Perfil() {
   const [confSenha, setConfSenha] = useState("");
   const [visible, setVisible] = useState(false);
   const [visible1, setVisible1] = useState(false);
+  const [visible2, setVisible2] = useState(false);
   const [image, SetImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const { setUser } = useAuth();
@@ -91,6 +92,7 @@ export function Perfil() {
           console.error(error);
         });
 
+
       //função para puxar imagem
       const storage = getStorage();
       getDownloadURL(sRef(storage, `${userId}`))
@@ -101,8 +103,13 @@ export function Perfil() {
         .catch((error) => {
           console.log(error);
         });
+        
+      updateProfile(auth.currentUser,{
+        displayName:nome,
+        photoURL:imageUrl
+      }).then(()=>console.log("dados alterados"))
     }
-
+    console.log(auth.currentUser.photoURL)
     ler();
   }, []);
 
@@ -238,6 +245,32 @@ export function Perfil() {
               style={styles.botaoModal2}
             >
               <Text style={styles.textBotao}>VOU CONTINUAR</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
+
+        <Modal
+          animationType="fade"
+          visible={visible2}
+          statusBarTranslucent={false}
+          transparent={true}
+          style={{}}
+        >
+          <View style={styles.modal}>
+            <Text style={styles.titleModal}>
+              DESEJA APAGAR SUA FOTO?
+            </Text>
+            <TouchableOpacity
+              onPress={{}}
+              style={styles.botaoModal1}
+            >
+              <Text style={styles.textBotao}>APAGAR</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={()=>setVisible2(false)}
+              style={styles.botaoModal2}
+            >
+              <Text style={styles.textBotao}>SAIR</Text>
             </TouchableOpacity>
           </View>
         </Modal>
@@ -492,7 +525,7 @@ export function Perfil() {
           <Text style={styles.textBotao}>Selecione a sua foto</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => SetImage(null)} style={styles.botao3}>
+        <TouchableOpacity onPress={()=>setVisible2(true)} style={styles.botao3}>
           <Text style={styles.textBotao}>Apagar foto selecionada</Text>
         </TouchableOpacity>
 
@@ -589,6 +622,7 @@ const styles = StyleSheet.create({
     width: "65%",
     padding: 5,
     margin: 12,
+    marginBottom:75,
     borderRadius: 15,
     borderWidth: 1,
     elevation: 10,
