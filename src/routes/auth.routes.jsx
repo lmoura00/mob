@@ -117,7 +117,7 @@ import {
 import { useEffect, useState } from "react";
 import { DetHistoricoMot } from "../pages/Pessoas/DetHistoricoMot";
 import { AcompanharRota } from "../pages/AcompanharRota";
-import { Chat } from "../pages/Chat";
+
 
 function AuthRoutesTabBar() {
   const navigation = useNavigation();
@@ -1165,17 +1165,6 @@ export function AuthRoutes() {
         component={AcompanharRota}
         options={{
           headerTitle: "ACOMPANHAR",
-          headerShown: true,
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="Chat"
-        component={Chat}
-        options={{
-          headerTitle: "CHAT",
           headerShown: true,
           headerTitleAlign: "center",
           statusBarStyle: "dark",

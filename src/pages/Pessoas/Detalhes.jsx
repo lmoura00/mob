@@ -891,23 +891,7 @@ export function Detalhes() {
           </TouchableOpacity>
         )}
 
-        
-          <TouchableOpacity
-            style={{
-              ...(dono ? { marginBottom: 10 } : { marginBottom: 30 }),
-              backgroundColor: "#FF3030",
-              height: 45,
-              width: 270,
-              marginTop: 10,
-              borderRadius: 8,
-              borderWidth: 0,
-              elevation: 10,
-            }}
-            onPress={() => navigation.navigate("Chat", params.item )}
-          >
-            <Text style={styles.titleBotao}>CHAT</Text>
-          </TouchableOpacity>
-        
+          
 
         {dono && (
           <TouchableOpacity

@@ -516,7 +516,7 @@ function MyTabs() {
           borderRadius: 8,
           left: 65,
         },
-        tabBarItemStyle: { borderRadius: 8 },
+        tabBarItemStyle: { borderRadius: 8, },
       })}
     >
       <Tab.Screen
