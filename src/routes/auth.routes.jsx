@@ -117,7 +117,8 @@ import {
 import { useEffect, useState } from "react";
 import { DetHistoricoMot } from "../pages/Pessoas/DetHistoricoMot";
 import { AcompanharRota } from "../pages/AcompanharRota";
-
+import {Auth} from 'firebase/auth'
+import { auth } from "../../firebaseConfig";
 
 function AuthRoutesTabBar() {
   const navigation = useNavigation();
@@ -386,790 +387,818 @@ function AuthRoutesTabBar() {
 
 export function AuthRoutes() {
   const { Navigator, Screen } = createNativeStackNavigator();
-  return (
-    <Navigator>
-      <Screen
-        name="home"
-        component={AuthRoutesTabBar}
-        options={{ headerShown: false, statusBarStyle: "dark" }}
-      />
+  //com o uso do if, eu consigo ter separação de rotas de acordo com o nivel do usuário
+  if(auth.currentUser.uid === "Vh2TTXfjdtaEB36cH4oaCzthanD2"){
+    return(
+    
+      <Navigator>
+        <Screen
+          name="home"
+          component={AuthRoutesTabBar}
+          options={{ headerShown: false, statusBarStyle: "dark" }}
+        />
+        <Screen
+          name="Sena"
+          component={Sena}
+          options={{
+            headerShown: true,
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+      </Navigator>
+    )
+  }
+  else{
 
-      <Screen
-        name="Sena"
-        component={Sena}
-        options={{
-          headerShown: true,
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="Yuri"
-        component={Yuri}
-        options={{
-          headerShown: true,
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="Thaiane"
-        component={Thaiane}
-        options={{
-          headerShown: true,
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="Jose"
-        component={Jose}
-        options={{
-          headerShown: true,
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="Vitoria"
-        component={Vitoria}
-        options={{
-          headerShown: true,
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="Marina"
-        component={Marina}
-        options={{
-          headerShown: true,
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="Odaleia"
-        component={Odaleia}
-        options={{
-          headerShown: true,
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="Cocais"
-        component={Cocais}
-        options={{
-          headerShown: true,
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="Chico"
-        component={Chico}
-        options={{
-          headerShown: true,
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="Alice"
-        component={Alice}
-        options={{
-          headerShown: true,
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="Jericoroa"
-        component={Jericoroa}
-        options={{
-          headerShown: true,
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaChico"
-        component={RotaChico}
-        options={{
-          headerTitle: "ROTA",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaSena"
-        component={RotaSena}
-        options={{
-          headerTitle: "ROTA",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaAlice"
-        component={RotaAlice}
-        options={{
-          headerTitle: "ROTA",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaCocais"
-        component={RotaCocais}
-        options={{
-          headerTitle: "ROTA",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaJericoroa"
-        component={RotaJericoroa}
-        options={{
-          headerTitle: "ROTA",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaJose"
-        component={RotaJose}
-        options={{
-          headerTitle: "ROTA",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaMarina"
-        component={RotaMarina}
-        options={{
-          headerTitle: "ROTA",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaOdaleia"
-        component={RotaOdaleia}
-        options={{
-          headerTitle: "ROTA",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaThaiane"
-        component={RotaThaiane}
-        options={{
-          headerTitle: "ROTA",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaVitoria"
-        component={RotaVitoria}
-        options={{
-          headerTitle: "ROTA",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaYuri"
-        component={RotaYuri}
-        options={{
-          headerTitle: "ROTA",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaPortalAmazonia"
-        component={RotaPortalAmazonia}
-        options={{
-          headerTitle: "ROTA",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaPortalSol"
-        component={RotaPortalSol}
-        options={{
-          headerTitle: "ROTA",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaPracaSaoJose"
-        component={RotaPracaSaoJose}
-        options={{
-          headerTitle: "ROTA",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaRoncador"
-        component={RotaRoncador}
-        options={{
-          headerTitle: "ROTA",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="PortalAmazonia"
-        component={PortalAmazonia}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="PortalSol"
-        component={PortalSol}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="PracaSaoJose"
-        component={PracaSaoJose}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="Roncador"
-        component={Roncador}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="HistoricoJose21"
-        component={HistoricoJose21}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="HistoricoJose26"
-        component={HistoricoJose26}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="HistoricoOdaleia"
-        component={HistoricoOdaleia}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="HistoricoMarina1"
-        component={HistoricoMarina1}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="HistoricoMarina2"
-        component={HistoricoMarina2}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaJose1"
-        component={RotaJose1}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaJose2"
-        component={RotaJose2}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaMarina1"
-        component={RotaMarina1}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaMarina2"
-        component={RotaMarina2}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="Convencoes"
-        component={Convencoes}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="Juventude"
-        component={Juventude}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="MiguelLima"
-        component={MiguelLima}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="PonteMetalica"
-        component={PonteMetalica}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="Rodoviaria"
-        component={Rodoviaria}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="Sucupira"
-        component={Sucupira}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaConvencoes"
-        component={RotaConvencoes}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaJuventude"
-        component={RotaJuventude}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaMiguelLima"
-        component={RotaMiguelLima}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaPonteMetalica"
-        component={RotaPonteMetalica}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaSucupira"
-        component={RotaSucupira}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-      <Screen
-        name="RotaRodoviaria"
-        component={RotaRodoviaria}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="Todos"
-        component={Todos}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="CentroArtesanato"
-        component={CentroArtesanato}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="MeninoJesus"
-        component={MeninoJesus}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="PonteAmizade"
-        component={PonteAmizade}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="Sambico"
-        component={Sambico}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="SantoAntonio"
-        component={SantoAntonio}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="SilvaBrito"
-        component={SilvaBrito}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="Velokart"
-        component={Velokart}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="LekLek"
-        component={LekLek}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="OsAmigos"
-        component={OsAmigos}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="RotaSantoAntonio"
-        component={RotaSantoAntonio}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="RotaVelokart"
-        component={RotaVelokart}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="RotaSilvaBrito"
-        component={RotaSilvaBrito}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="RotaSambico"
-        component={RotaSambico}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="RotaPonteAmizade"
-        component={RotaPonteAmizade}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="RotaMeninoJesus"
-        component={RotaMeninoJesus}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="RotaCentroArtesanato"
-        component={RotaCentroArtesanato}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="RotaLekLek"
-        component={RotaLekLek}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="RotaOsAmigos"
-        component={RotaOsAmigos}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="TemploCentral"
-        component={TemploCentral}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="RotaTemploCentral"
-        component={RotaTemploCentral}
-        options={{
-          headerTitle: "PONTOS TURISTICOS",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="Gabrielly"
-        component={Gabrielly}
-        options={{
-          headerTitle: "DETALHES",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-          headerTitleStyle: { fontFamily: "Ubuntu_700Bold" },
-        }}
-      />
-
-      <Screen
-        name="RotaGabrielly"
-        component={RotaGabrielly}
-        options={{
-          headerTitle: "ROTA",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="Teste"
-        component={Teste}
-        options={{
-          headerTitle: "TESTE",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="Teste2"
-        component={Teste2}
-        options={{
-          headerTitle: "TESTE",
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="HomeMot"
-        component={HomeMot}
-        options={{
-          headerTitle: "ADICIONAR CARONA",
-          headerShown: true,
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="Detalhes"
-        component={Detalhes}
-        options={{
-          headerTitle: "DETALHES",
-          headerShown: true,
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="DetalhesHistorico"
-        component={DetalhesHistorico}
-        options={{
-          headerTitle: "HISTÓRICO",
-          headerShown: true,
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="DetHistoricoMot"
-        component={DetHistoricoMot}
-        options={{
-          headerTitle: "HISTÓRICO",
-          headerShown: true,
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-
-      <Screen
-        name="AcompanharRota"
-        component={AcompanharRota}
-        options={{
-          headerTitle: "ACOMPANHAR",
-          headerShown: true,
-          headerTitleAlign: "center",
-          statusBarStyle: "dark",
-        }}
-      />
-    </Navigator>
-  );
+    return (
+      
+      <Navigator>
+        
+        <Screen
+          name="home"
+          component={AuthRoutesTabBar}
+          options={{ headerShown: false, statusBarStyle: "dark" }}
+        />
+  
+        <Screen
+          name="Sena"
+          component={Sena}
+          options={{
+            headerShown: true,
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="Yuri"
+          component={Yuri}
+          options={{
+            headerShown: true,
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="Thaiane"
+          component={Thaiane}
+          options={{
+            headerShown: true,
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="Jose"
+          component={Jose}
+          options={{
+            headerShown: true,
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="Vitoria"
+          component={Vitoria}
+          options={{
+            headerShown: true,
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="Marina"
+          component={Marina}
+          options={{
+            headerShown: true,
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="Odaleia"
+          component={Odaleia}
+          options={{
+            headerShown: true,
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="Cocais"
+          component={Cocais}
+          options={{
+            headerShown: true,
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="Chico"
+          component={Chico}
+          options={{
+            headerShown: true,
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="Alice"
+          component={Alice}
+          options={{
+            headerShown: true,
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="Jericoroa"
+          component={Jericoroa}
+          options={{
+            headerShown: true,
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaChico"
+          component={RotaChico}
+          options={{
+            headerTitle: "ROTA",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaSena"
+          component={RotaSena}
+          options={{
+            headerTitle: "ROTA",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaAlice"
+          component={RotaAlice}
+          options={{
+            headerTitle: "ROTA",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaCocais"
+          component={RotaCocais}
+          options={{
+            headerTitle: "ROTA",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaJericoroa"
+          component={RotaJericoroa}
+          options={{
+            headerTitle: "ROTA",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaJose"
+          component={RotaJose}
+          options={{
+            headerTitle: "ROTA",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaMarina"
+          component={RotaMarina}
+          options={{
+            headerTitle: "ROTA",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaOdaleia"
+          component={RotaOdaleia}
+          options={{
+            headerTitle: "ROTA",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaThaiane"
+          component={RotaThaiane}
+          options={{
+            headerTitle: "ROTA",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaVitoria"
+          component={RotaVitoria}
+          options={{
+            headerTitle: "ROTA",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaYuri"
+          component={RotaYuri}
+          options={{
+            headerTitle: "ROTA",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaPortalAmazonia"
+          component={RotaPortalAmazonia}
+          options={{
+            headerTitle: "ROTA",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaPortalSol"
+          component={RotaPortalSol}
+          options={{
+            headerTitle: "ROTA",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaPracaSaoJose"
+          component={RotaPracaSaoJose}
+          options={{
+            headerTitle: "ROTA",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaRoncador"
+          component={RotaRoncador}
+          options={{
+            headerTitle: "ROTA",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="PortalAmazonia"
+          component={PortalAmazonia}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="PortalSol"
+          component={PortalSol}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="PracaSaoJose"
+          component={PracaSaoJose}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="Roncador"
+          component={Roncador}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="HistoricoJose21"
+          component={HistoricoJose21}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="HistoricoJose26"
+          component={HistoricoJose26}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="HistoricoOdaleia"
+          component={HistoricoOdaleia}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="HistoricoMarina1"
+          component={HistoricoMarina1}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="HistoricoMarina2"
+          component={HistoricoMarina2}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaJose1"
+          component={RotaJose1}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaJose2"
+          component={RotaJose2}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaMarina1"
+          component={RotaMarina1}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaMarina2"
+          component={RotaMarina2}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="Convencoes"
+          component={Convencoes}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="Juventude"
+          component={Juventude}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="MiguelLima"
+          component={MiguelLima}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="PonteMetalica"
+          component={PonteMetalica}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="Rodoviaria"
+          component={Rodoviaria}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="Sucupira"
+          component={Sucupira}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaConvencoes"
+          component={RotaConvencoes}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaJuventude"
+          component={RotaJuventude}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaMiguelLima"
+          component={RotaMiguelLima}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaPonteMetalica"
+          component={RotaPonteMetalica}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaSucupira"
+          component={RotaSucupira}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+        <Screen
+          name="RotaRodoviaria"
+          component={RotaRodoviaria}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="Todos"
+          component={Todos}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="CentroArtesanato"
+          component={CentroArtesanato}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="MeninoJesus"
+          component={MeninoJesus}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="PonteAmizade"
+          component={PonteAmizade}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="Sambico"
+          component={Sambico}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="SantoAntonio"
+          component={SantoAntonio}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="SilvaBrito"
+          component={SilvaBrito}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="Velokart"
+          component={Velokart}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="LekLek"
+          component={LekLek}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="OsAmigos"
+          component={OsAmigos}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="RotaSantoAntonio"
+          component={RotaSantoAntonio}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="RotaVelokart"
+          component={RotaVelokart}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="RotaSilvaBrito"
+          component={RotaSilvaBrito}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="RotaSambico"
+          component={RotaSambico}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="RotaPonteAmizade"
+          component={RotaPonteAmizade}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="RotaMeninoJesus"
+          component={RotaMeninoJesus}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="RotaCentroArtesanato"
+          component={RotaCentroArtesanato}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="RotaLekLek"
+          component={RotaLekLek}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="RotaOsAmigos"
+          component={RotaOsAmigos}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="TemploCentral"
+          component={TemploCentral}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="RotaTemploCentral"
+          component={RotaTemploCentral}
+          options={{
+            headerTitle: "PONTOS TURISTICOS",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="Gabrielly"
+          component={Gabrielly}
+          options={{
+            headerTitle: "DETALHES",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+            headerTitleStyle: { fontFamily: "Ubuntu_700Bold" },
+          }}
+        />
+  
+        <Screen
+          name="RotaGabrielly"
+          component={RotaGabrielly}
+          options={{
+            headerTitle: "ROTA",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="Teste"
+          component={Teste}
+          options={{
+            headerTitle: "TESTE",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="Teste2"
+          component={Teste2}
+          options={{
+            headerTitle: "TESTE",
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="HomeMot"
+          component={HomeMot}
+          options={{
+            headerTitle: "ADICIONAR CARONA",
+            headerShown: true,
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="Detalhes"
+          component={Detalhes}
+          options={{
+            headerTitle: "DETALHES",
+            headerShown: true,
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="DetalhesHistorico"
+          component={DetalhesHistorico}
+          options={{
+            headerTitle: "HISTÓRICO",
+            headerShown: true,
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="DetHistoricoMot"
+          component={DetHistoricoMot}
+          options={{
+            headerTitle: "HISTÓRICO",
+            headerShown: true,
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+  
+        <Screen
+          name="AcompanharRota"
+          component={AcompanharRota}
+          options={{
+            headerTitle: "ACOMPANHAR",
+            headerShown: true,
+            headerTitleAlign: "center",
+            statusBarStyle: "dark",
+          }}
+        />
+      </Navigator>
+    );
+  }
 }
