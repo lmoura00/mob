@@ -388,29 +388,29 @@ function AuthRoutesTabBar() {
 export function AuthRoutes() {
   const { Navigator, Screen } = createNativeStackNavigator();
   //com o uso do if, eu consigo ter separação de rotas de acordo com o nivel do usuário
-  if(auth.currentUser.uid === "Vh2TTXfjdtaEB36cH4oaCzthanD2"){
-    return(
+  // if(auth.currentUser.uid === "Vh2TTXfjdtaEB36cH4oaCzthanD2"){
+  //   return(
     
-      <Navigator>
-        <Screen
-          name="home"
-          component={AuthRoutesTabBar}
-          options={{ headerShown: false, statusBarStyle: "dark" }}
-        />
-        <Screen
-          name="Sena"
-          component={Sena}
-          options={{
-            headerShown: true,
-            headerTitle: "DETALHES",
-            headerTitleAlign: "center",
-            statusBarStyle: "dark",
-          }}
-        />
-      </Navigator>
-    )
-  }
-  else{
+  //     <Navigator>
+  //       <Screen
+  //         name="home"
+  //         component={AuthRoutesTabBar}
+  //         options={{ headerShown: false, statusBarStyle: "dark" }}
+  //       />
+  //       <Screen
+  //         name="Sena"
+  //         component={Sena}
+  //         options={{
+  //           headerShown: true,
+  //           headerTitle: "DETALHES",
+  //           headerTitleAlign: "center",
+  //           statusBarStyle: "dark",
+  //         }}
+  //       />
+  //     </Navigator>
+  //   )
+  // }
+  // else{
 
     return (
       
@@ -895,7 +895,7 @@ export function AuthRoutes() {
   
         <Screen
           name="Todos"
-          component={Todos}
+          component={Teste}
           options={{
             headerTitle: "PONTOS TURISTICOS",
             headerTitleAlign: "center",
@@ -1200,5 +1200,5 @@ export function AuthRoutes() {
         />
       </Navigator>
     );
-  }
+  //}
 }
