@@ -36,7 +36,7 @@
       },
       "config": {
         "googleMaps": {
-          "apiKey": "AIzaSyDOAZI4PpuctFzMhAloX_Ugs_pl0hLeG_c"
+          "apiKey": 
         }
       },
       "package": "com.mobapp.mobv1",
